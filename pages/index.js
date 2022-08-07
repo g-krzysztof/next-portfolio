@@ -1,10 +1,10 @@
-import { Box } from '../styles'
+import { Box, Background } from '../styles'
 import useBetterMediaQuery from '../hooks/useBetterMediaQuery'
 
 const Home = () => {
   const modificationPage = useBetterMediaQuery('(min-width: 768px)')
 
-  return <Box>Home page</Box>
+  return <Background>Home page</Background>
 }
 
 export default Home

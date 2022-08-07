@@ -2,8 +2,8 @@ import breakpoints from './breakpoints'
 
 export const theme = {
   colors: {
-    primary: 'orangered',
-    secondary: 'red',
+    primary: '#50a3a2',
+    secondary: '#78CC6D',
   },
   gradients: {},
   fontWeights: {
