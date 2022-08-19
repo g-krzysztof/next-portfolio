@@ -15,8 +15,12 @@ export const Background = () => {
 
 const StyledBackground = styled.div`
   overflow: hidden;
-  height: 100vh;
-  position: relative;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
   ${({ theme: { colors } }) => `
       background: linear-gradient(90deg, ${colors.primary}, ${colors.secondary});
   `};
