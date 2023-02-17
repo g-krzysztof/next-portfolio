@@ -14,7 +14,7 @@ const Home = () => {
         <Card />
         <ContentContainer>jeden</ContentContainer>
       </StyledBox>
-      <Background>Home page</Background>
+      <Background />
     </>
   )
 }
