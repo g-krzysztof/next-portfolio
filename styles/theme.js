@@ -1,4 +1,4 @@
-import breakpoints from './breakpoints'
+import breakpoints from './breakpoints';
 
 export const theme = {
   colors: {
@@ -27,4 +27,4 @@ export const theme = {
     border0: '0px',
     border5: '5px',
   },
-}
+};

@@ -1,6 +1,6 @@
-import '../styles/globals.css'
-import { ThemeProvider } from 'styled-components'
-import { Box, GlobalStyle, theme } from '../styles'
+import '../styles/globals.css';
+import { ThemeProvider } from 'styled-components';
+import { Box, GlobalStyle, theme } from '../styles';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
         </Box>
       </ThemeProvider>
     </>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

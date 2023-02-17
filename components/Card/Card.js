@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import { Box } from '../../styles'
-import { Icon } from '../Icons'
+import styled from 'styled-components';
+import { Box } from '../../styles';
+import { Icon } from '../Icons';
 
 const Card = () => (
   <CardContainer
@@ -56,9 +56,9 @@ const Card = () => (
       </CardButton>
     </CardButtons>
   </CardContainer>
-)
+);
 
-export default Card
+export default Card;
 
 const CardContainer = styled(Box)`
   position: relative;
@@ -80,7 +80,7 @@ const CardContainer = styled(Box)`
       transition: .5s;
     }
   `};
-`
+`;
 
 const CardBackground = styled(Box)`
   background-image: url('images/card-background.jpg');
@@ -113,7 +113,7 @@ const CardBackground = styled(Box)`
     background: #fff;
     transform: rotate(-8deg);
   }
-`
+`;
 
 const AvatarPhoto = styled(Box)`
   position: relative;
@@ -134,13 +134,13 @@ const AvatarPhoto = styled(Box)`
     height: 100%;
     border-radius: 50%;
   }
-`
+`;
 
 const AvatarImage = styled.img`
   border-radius: 50%;
   position: relative;
   width: 140px;
-`
+`;
 
 const Title = styled(Box)`
   font-size: 32px;
@@ -148,14 +148,14 @@ const Title = styled(Box)`
   ${({ theme: { colors } }) => `
     color: ${colors.grey};
   `};
-`
+`;
 
 const SubTitle = styled(Box)`
   font-weight: 400;
   ${({ theme: { colors } }) => `
     color: ${colors.secondary};
   `};
-`
+`;
 
 const Socials = styled(Box)`
   display: flex;
@@ -172,7 +172,7 @@ const Socials = styled(Box)`
       color: ${colors.secondary};
     `};
   }
-`
+`;
 
 const CardButtons = styled(Box)`
   position: absolute;
@@ -198,7 +198,7 @@ const CardButtons = styled(Box)`
       rgba(255, 255, 255, 0) 70%
     );
   }
-`
+`;
 
 const CardButton = styled(Box)`
   width: 100%;
@@ -242,4 +242,4 @@ const CardButton = styled(Box)`
   a:hover {
     color: ${({ theme: { colors } }) => colors.secondary};
   }
-`
+`;

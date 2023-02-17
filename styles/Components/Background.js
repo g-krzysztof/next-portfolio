@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Background = () => {
   return (
@@ -10,8 +10,8 @@ export const Background = () => {
         ))}
       </Squares>
     </StyledBackground>
-  )
-}
+  );
+};
 
 const StyledBackground = styled.div`
   overflow: hidden;
@@ -37,7 +37,7 @@ const StyledBackground = styled.div`
       background-position: 0 50%;
     }
   }
-`
+`;
 
 const Squares = styled.div`
   position: relative;
@@ -150,4 +150,4 @@ const Squares = styled.div`
       transform: translateY(-2400px) rotate(600deg);
     }
   }
-`
+`;

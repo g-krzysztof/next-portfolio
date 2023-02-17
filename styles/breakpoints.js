@@ -8,16 +8,16 @@ const breakpoints = [
   '1140px',
   '1366px',
   '1680px',
-]
+];
 
-breakpoints.mobile = breakpoints[0]
-breakpoints.mobileM = breakpoints[1]
-breakpoints.mobileXM = breakpoints[2]
-breakpoints.mobileL = breakpoints[3]
-breakpoints.tablet = breakpoints[4]
-breakpoints.tabletL = breakpoints[5]
-breakpoints.laptopS = breakpoints[6]
-breakpoints.laptop = breakpoints[7]
-breakpoints.desktop = breakpoints[8]
+breakpoints.mobile = breakpoints[0];
+breakpoints.mobileM = breakpoints[1];
+breakpoints.mobileXM = breakpoints[2];
+breakpoints.mobileL = breakpoints[3];
+breakpoints.tablet = breakpoints[4];
+breakpoints.tabletL = breakpoints[5];
+breakpoints.laptopS = breakpoints[6];
+breakpoints.laptop = breakpoints[7];
+breakpoints.desktop = breakpoints[8];
 
-export default breakpoints
+export default breakpoints;
