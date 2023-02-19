@@ -9,7 +9,7 @@ const ContentContainer = ({title, paragraphs}) => {
         {/*<Scrollbars>*/}
           <Box pr="space20" width="100%">
             <Title>{title}</Title>
-            {paragraphs.map(({text})=><Paragraph>{parse(text)}</Paragraph>)}
+            {paragraphs.map(({text})=><Paragraph key={text.slice(0,10)}>{parse(text)}</Paragraph>)}
           </Box>
         {/*</Scrollbars>*/}
     </Container>
