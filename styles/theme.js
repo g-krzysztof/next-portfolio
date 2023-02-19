@@ -10,7 +10,7 @@ export const theme = {
   gradients: {},
   fontWeights: {
     regular: `400`,
-    bold: `700`,
+    bold: `600`,
   },
   fontSizes: {},
   lineHeight: {},
@@ -21,6 +21,7 @@ export const theme = {
     space15: '15px',
     space20: '20px',
     space30: '30px',
+    space50: '50px',
     space100: '100px',
   },
   radii: {

@@ -1,5 +1,5 @@
-import '../styles/globals.css';
 import { ThemeProvider } from 'styled-components';
+import '../styles/globals.css';
 import { Box, GlobalStyle, theme } from '../styles';
 
 function MyApp({ Component, pageProps }) {

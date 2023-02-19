@@ -3,6 +3,8 @@ import useBetterMediaQuery from '../hooks/useBetterMediaQuery';
 import styled from 'styled-components';
 
 import { Card } from '../components/Card';
+import { Menu } from '../components/Menu';
+import { ContentContainer } from '../components/ContentContainer'
 
 const Home = () => {
   const modificationPage = useBetterMediaQuery('(min-width: 768px)');
@@ -10,9 +12,16 @@ const Home = () => {
   return (
     <>
       <StyledBox display="flex" justifyContent="center" alignItems="center">
-        <Box>jeden</Box>
+        <Menu />
         <Card />
-        <ContentContainer>jeden</ContentContainer>
+        <ContentContainer
+          title={<Box display="flex"><Box color="secondary">Senior React</Box><Box ml="space5">Developer</Box></Box>}
+          paragraphs={[
+            { text: 'Cześć. Na imię mam Krzysiek, mieszkam w Tychach. <br/> Od ponad dziesięciu lat moja praca jest związana z projektowaniem i tworzeniem stron www.' },
+            { text: 'Pracuję na stanowisku front-end developer. <br /> Zajmuję się tworzeniem oraz rozwijaniem projektów web i aplikacji.' },
+            { text: 'W ostatnim czasie rozwijam front dużego projektu z backendem Symfony, <br /> korzystam między innymi z: <br /> React / Styled components / Sass / Twig / Cypress' },
+          ]}
+        />
       </StyledBox>
       <Background />
     </>
@@ -27,7 +36,3 @@ const StyledBox = styled(Box)`
   margin: 0 auto;
 `;
 
-const ContentContainer = styled(Box)`
-  flex-grow: 1;
-  max-width: 1000px;
-`;

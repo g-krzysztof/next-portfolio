@@ -1,6 +1,6 @@
-This is a [Next.js](https://nextjs.org/) boilerplate.
+## This is a personal website created with [Next.js](https://nextjs.org/)
 
-## added stack
+### simple stack used:
 
 - next
 - styled components

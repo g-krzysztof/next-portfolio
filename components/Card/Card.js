@@ -4,7 +4,7 @@ import { Icon } from '../Icons';
 
 const Card = () => (
   <CardContainer
-    height={{ _: '100vh', tablet: '600px' }}
+    height={{ _: '100vh', tablet: '800px' }}
     width={{ _: '100vw', tablet: '380px' }}
     borderRadius={{ _: 'border0', tablet: 'border5' }}
   >
@@ -19,7 +19,7 @@ const Card = () => (
     </AvatarPhoto>
     <Title mt={{ _: 'space30' }}>Krzysztof Gryc</Title>
     <SubTitle mt={{ _: 'space10' }} mb={{ _: 'space20' }}>
-      React Developer
+      Senior React Developer
     </SubTitle>
     <Socials>
       <a
@@ -144,14 +144,14 @@ const AvatarImage = styled.img`
 
 const Title = styled(Box)`
   font-size: 32px;
-  font-weight: 400;
+  font-weight: 600;
   ${({ theme: { colors } }) => `
     color: ${colors.grey};
   `};
 `;
 
 const SubTitle = styled(Box)`
-  font-weight: 400;
+  font-weight: 600;
   ${({ theme: { colors } }) => `
     color: ${colors.secondary};
   `};

@@ -8,7 +8,7 @@ const Icon = ({ iconName, size = '26px', ...props }) => {
   return (
     <IconWrapper size={size} {...props}>
       <svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox={viewBox}>
-        <path fill="currentColor" d={path}></path>
+        <path fill="currentColor" d={path} />
       </svg>
     </IconWrapper>
   );
