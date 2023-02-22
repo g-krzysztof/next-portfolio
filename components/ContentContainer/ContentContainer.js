@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import Markdown from 'markdown-to-jsx';
+import ReactLoading from 'react-loading';
 import { useQuery } from 'react-query';
 import { Box } from '../../styles';
 import { useEffect, useState } from 'react';
+import { theme } from '../../styles';
 
 const fetchMainData = async () => {
   const res = await fetch(
@@ -16,6 +18,8 @@ const ContentContainer = ({ slugNext }) => {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+
+  const secondary = theme.colors.secondary;
 
   useEffect(() => {
     if (data && data.data) {
@@ -34,6 +38,7 @@ const ContentContainer = ({ slugNext }) => {
     <Container color="grey">
       {/*<Scrollbars>*/}
       <Box pr="space20" width="100%">
+        {!data && <Box mt="space10"><ReactLoading type="spin" color={secondary} height={60} width={60} /></Box>}
         <Markdown
           options={{
             overrides: {
