@@ -6,7 +6,7 @@ import { Card } from '../components/Card';
 import { Menu } from '../components/Menu';
 import { ContentContainer } from '../components/ContentContainer';
 
-const Home = () => {
+const Resume = () => {
   const modificationPage = useBetterMediaQuery('(min-width: 768px)');
 
   return (
@@ -14,14 +14,14 @@ const Home = () => {
       <StyledBox display="flex" justifyContent="center" alignItems="center">
         <Menu />
         <Card />
-        <ContentContainer slugNext="main" />
+        <ContentContainer slugNext="resume" />
       </StyledBox>
       <Background />
     </>
   );
 };
 
-export default Home;
+export default Resume;
 
 const StyledBox = styled(Box)`
   min-height: 100vh;
