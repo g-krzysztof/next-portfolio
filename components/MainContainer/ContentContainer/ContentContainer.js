@@ -4,8 +4,7 @@ import SimpleBar from 'simplebar-react';
 import ReactLoading from 'react-loading';
 import { useQuery } from 'react-query';
 import { useEffect, useState } from 'react';
-import { Box } from '../../styles';
-import { theme } from '../../styles';
+import { Box, theme } from '../../../styles';
 import 'simplebar-react/dist/simplebar.min.css';
 
 const fetchMainData = async () => {
@@ -15,7 +14,7 @@ const fetchMainData = async () => {
   return res.json();
 };
 
-const ContentContainer = ({ slugNext }) => {
+const ContentContainer = ({ slugNext, laptopS }) => {
   const { data } = useQuery('mainPage', fetchMainData);
 
   const [title, setTitle] = useState('');
@@ -66,39 +65,49 @@ const ContentContainer = ({ slugNext }) => {
   };
 
   return (
-    <Container color="grey">
-      <Box pr="space20" width="100%">
-        {!data && (
-          <Box mt="space10">
-            <ReactLoading
-              type="spin"
-              color={secondary}
-              height={60}
-              width={60}
-            />
+    <Container
+      color="grey"
+      width={{ _: '100%', laptopS: '500px', desktop: '1000px' }}
+      height={{ _: 'auto', laptopS: '600px' }}
+      laptopS={laptopS}
+    >
+      <StyledSimpleBar style={{ maxHeight: laptopS ? 650 : 'unset' }}>
+        <Box display="flex" flexDirection={{ _: 'column', desktop: 'row' }}>
+          <Box
+            pr={laptopS ? 'space20' : 'space10'}
+            width={{ _: '100%', desktop: '70%' }}
+          >
+            {!data && (
+              <Box mt="space10">
+                <ReactLoading
+                  type="spin"
+                  color={secondary}
+                  height={60}
+                  width={60}
+                />
+              </Box>
+            )}
+            {data && (
+              <>
+                <Markdown options={markdownOptions}>{title}</Markdown>
+                <Paragraph mr="space20">
+                  <Markdown options={markdownOptions}>{content}</Markdown>
+                </Paragraph>
+              </>
+            )}
           </Box>
-        )}
-        {data && (
-          <>
-            <Markdown options={markdownOptions}>{title}</Markdown>
-            <StyledSimpleBar style={{ maxHeight: 600 }}>
-              <Paragraph>
-                <Markdown options={markdownOptions}>{content}</Markdown>
-              </Paragraph>
-            </StyledSimpleBar>
-          </>
-        )}
-      </Box>
-      <Box width="70%">
-        {data && (
-          <>
-            <Markdown options={markdownOptions}>{skillsTitle}</Markdown>
-            <Paragraph backgroundColor="backgroundLight" px="space20">
-              <Markdown options={markdownOptions}>{skillsContent}</Markdown>
-            </Paragraph>
-          </>
-        )}
-      </Box>
+          <Box width={{ _: '100%', desktop: '30%' }}>
+            {data && (
+              <Box mr={laptopS ? 'space20' : 'space10'}>
+                <Markdown options={markdownOptions}>{skillsTitle}</Markdown>
+                <Paragraph backgroundColor="backgroundLight" px="space20">
+                  <Markdown options={markdownOptions}>{skillsContent}</Markdown>
+                </Paragraph>
+              </Box>
+            )}
+          </Box>
+        </Box>
+      </StyledSimpleBar>
     </Container>
   );
 };
@@ -121,14 +130,17 @@ const Container = styled(Box)`
   flex-grow: 1;
   max-width: 1000px;
   display: flex;
-  height: auto;
   min-height: 680px;
   background-color: white;
-  border-radius: 0 5px 5px 0;
-  margin: -16px 0 0 0;
-  padding: 10px 20px 20px 20px;
-  box-shadow: inset 20px 0 20px -20px rgba(0, 0, 0, 0.1);
+  padding: 10px 10px 20px 20px;
   transition: 0.5s;
+  ${({ laptopS }) => `
+      box-shadow: ${
+        laptopS ? 'inset 20px 0 20px -20px rgba(0, 0, 0, 0.1)' : 'none'
+      };
+      margin: ${laptopS ? '-16px 0 0 0' : '-16px 0 20px 0'};
+      border-radius: ${laptopS ? '0 5px 5px 0' : '0'};
+    `};
 `;
 
 const Title = styled.h1`
@@ -193,7 +205,7 @@ const StyledSpanSecondary = styled.span`
 `;
 
 const StyledSimpleBar = styled(SimpleBar)`
-  position: relative;
+  width: 100%;
   .simplebar-track.simplebar-vertical {
     width: 8px;
     background-color: ${({ theme }) => theme.colors.backgroundLight};

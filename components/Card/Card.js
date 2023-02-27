@@ -5,7 +5,7 @@ import { Icon } from '../Icons';
 const Card = () => (
   <CardContainer
     height={{ _: '100vh', tablet: '800px' }}
-    width={{ _: '100vw', tablet: '380px' }}
+    width={{ _: '100vw', mobileL: '480px', laptopS: '380px' }}
     borderRadius={{ _: 'border0', tablet: 'border5' }}
   >
     <CardBackground
