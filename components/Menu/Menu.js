@@ -29,8 +29,8 @@ const Menu = () => {
     <MenuWrapper borderRadius="border5" mt="-290px" mr="space10">
       <MenuList>
         {menuData.map(({ label, icon, iconSize, url }) => (
-          <MenuItem>
-            <Link key={url} href={url}>
+          <MenuItem key={url}>
+            <Link href={url}>
               <LinkContainer>
                 <Icon iconName={icon} size={iconSize} />
                 <br />

@@ -20,4 +20,6 @@ breakpoints.laptopS = breakpoints[6];
 breakpoints.laptop = breakpoints[7];
 breakpoints.desktop = breakpoints[8];
 
+breakpoints.minHeight = '800px';
+
 export default breakpoints;

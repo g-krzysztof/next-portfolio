@@ -5,12 +5,11 @@ import ReactLoading from 'react-loading';
 import { Box, theme } from '../../../styles';
 import 'simplebar-react/dist/simplebar.min.css';
 
-const ContentContainer = ({
+const MobileContentContainer = ({
   title,
   content,
   skillsTitle,
   skillsContent,
-  laptopS,
 }) => {
   const secondary = theme.colors.secondary;
 
@@ -38,18 +37,10 @@ const ContentContainer = ({
   };
 
   return (
-    <Container
-      color="grey"
-      width={{ _: '100%', laptopS: '500px', desktop: '1000px' }}
-      height={{ _: 'auto', laptopS: '600px' }}
-      laptopS={laptopS}
-    >
-      <StyledSimpleBar style={{ maxHeight: laptopS ? 650 : 'unset' }}>
-        <Box display="flex" flexDirection={{ _: 'column', desktop: 'row' }}>
-          <Box
-            pr={laptopS ? 'space20' : 'space10'}
-            width={{ _: '100%', desktop: '70%' }}
-          >
+    <Container color="grey" width="100%" height="auto">
+      <StyledSimpleBar style={{ maxHeight: 'unset' }}>
+        <Box display="flex" flexDirection="column">
+          <Box pr="space10" width="100%">
             {!content && (
               <Box mt="space10">
                 <ReactLoading
@@ -69,9 +60,9 @@ const ContentContainer = ({
               </>
             )}
           </Box>
-          <Box width={{ _: '100%', desktop: '30%' }}>
+          <Box width="100%">
             {content && (
-              <Box mr={laptopS ? 'space20' : 'space10'}>
+              <Box mr="space10">
                 <Markdown options={markdownOptions}>{skillsTitle}</Markdown>
                 <Paragraph backgroundColor="backgroundLight" px="space20">
                   <Markdown options={markdownOptions}>{skillsContent}</Markdown>
@@ -85,7 +76,7 @@ const ContentContainer = ({
   );
 };
 
-export default ContentContainer;
+export default MobileContentContainer;
 
 const SubtitleWrapper = ({ children }) => (
   <Box display="flex">
@@ -107,13 +98,7 @@ const Container = styled(Box)`
   background-color: white;
   padding: 10px 10px 20px 20px;
   transition: 0.5s;
-  ${({ laptopS }) => `
-      box-shadow: ${
-        laptopS ? 'inset 20px 0 20px -20px rgba(0, 0, 0, 0.1)' : 'none'
-      };
-      margin: ${laptopS ? '-16px 0 0 0' : '-16px 0 20px 0'};
-      border-radius: ${laptopS ? '0 5px 5px 0' : '0'};
-    `};
+  margin: -16px 0 20px 0;
 `;
 
 const Title = styled.h1`
