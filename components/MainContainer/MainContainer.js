@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useQuery } from 'react-query';
+// import { useQuery } from 'react-query';
 import { Box, theme } from '../../styles';
 import { Menu, MobileMenu } from '../../components/Menu';
 import { Card, MobileCard } from '../../components/Card';
@@ -7,15 +7,15 @@ import { ContentContainer, MobileContentContainer } from './ContentContainer';
 import useBetterMediaQuery from '../../hooks/useBetterMediaQuery';
 import { useEffect, useState } from 'react';
 
-const fetchMainData = async () => {
-  const res = await fetch(
-    'https://strapi-portfolio-krzysztofg.herokuapp.com/api/page-contents',
-  );
-  return res.json();
-};
+// const fetchMainData = async () => {
+//   const res = await fetch(
+//     'https://strapi-portfolio-krzysztofg.herokuapp.com/api/page-contents',
+//   );
+//   return res.json();
+// };
 
-const MainContainer = ({ slugNext }) => {
-  const { data } = useQuery('mainPage', fetchMainData);
+const MainContainer = ({ data, slugNext }) => {
+  // const { data } = useQuery('mainPage', fetchMainData);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
