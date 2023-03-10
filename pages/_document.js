@@ -32,6 +32,7 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="shortcut icon" href="/favicon.svg" />
+          <title>React Developer - krzysztofg.pl</title>
         </Head>
         <body>
           <Main />
