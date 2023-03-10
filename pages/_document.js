@@ -33,14 +33,16 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="shortcut icon" href="/favicon.svg" />
           <title>React Developer - krzysztofg.pl</title>
-          <script type='text/javascript'>
-            window.smartlook||(function(d) {
-            var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
-            var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
-            c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
-          })(document);
-            smartlook('init', '5a5bf9641ad538d51cd3de917634f4db2e2a675e', { region: 'eu' });
-          </script>
+          <script type='text/javascript'
+            dangerouslySetInnerHTML={{
+              __html: `window.smartlook||(function(d) {
+                  var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+                  var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+                  c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+                })(document);
+                smartlook('init', '5a5bf9641ad538d51cd3de917634f4db2e2a675e', { region: 'eu' });`,
+            }}
+          />
         </Head>
         <body>
           <Main />
