@@ -14,7 +14,6 @@ const Contact = ({ data }) => {
 export default Contact;
 
 export const getStaticProps = async () => {
-
   let data;
 
   const fetchMainData = async () => {

@@ -14,7 +14,6 @@ const Home = ({ data }) => {
 export default Home;
 
 export const getStaticProps = async () => {
-
   let data;
 
   const fetchMainData = async () => {

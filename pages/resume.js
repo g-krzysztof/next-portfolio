@@ -14,7 +14,6 @@ const Resume = ({ data }) => {
 export default Resume;
 
 export const getStaticProps = async () => {
-
   let data;
 
   const fetchMainData = async () => {
