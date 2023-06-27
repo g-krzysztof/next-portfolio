@@ -49,7 +49,7 @@ const MainContainer = ({ data, slugNext }) => {
 
   return (
     <>
-      {laptopS && minHeight &&
+      {laptopS !== null && minHeight !== null &&
         <StyledBox
           display="flex"
           justifyContent="center"
