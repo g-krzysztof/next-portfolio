@@ -48,38 +48,42 @@ const MainContainer = ({ data, slugNext }) => {
   );
 
   return (
-    <StyledBox
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      flexDirection={!laptopS || !minHeight ? 'column' : 'row'}
-    >
-      {(!laptopS || !minHeight) && (
-        <>
-          <MobileMenu />
-          <MobileCard />
-          <MobileContentContainer
-            title={title}
-            content={content}
-            skillsTitle={skillsTitle}
-            skillsContent={skillsContent}
-          />
-        </>
-      )}
-      {laptopS && minHeight && (
-        <>
-          <Menu />
-          <Card />
-          <ContentContainer
-            title={title}
-            content={content}
-            skillsTitle={skillsTitle}
-            skillsContent={skillsContent}
-            laptopS={laptopS}
-          />
-        </>
-      )}
-    </StyledBox>
+    <>
+      {laptopS && minHeight &&
+        <StyledBox
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection={!laptopS || !minHeight ? 'column' : 'row'}
+        >
+          {(!laptopS || !minHeight) && (
+            <>
+              <MobileMenu />
+              <MobileCard />
+              <MobileContentContainer
+                title={title}
+                content={content}
+                skillsTitle={skillsTitle}
+                skillsContent={skillsContent}
+              />
+            </>
+          )}
+          {laptopS && minHeight && (
+            <>
+              <Menu />
+              <Card />
+              <ContentContainer
+                title={title}
+                content={content}
+                skillsTitle={skillsTitle}
+                skillsContent={skillsContent}
+                laptopS={laptopS}
+              />
+            </>
+          )}
+        </StyledBox>
+      }
+    </>
   );
 };
 
