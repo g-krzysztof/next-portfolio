@@ -3,8 +3,11 @@ import Link from 'next/link';
 import { Box } from '../../styles';
 import { Icon } from '../Icons';
 import { menuData } from '../Menu/Menu';
+import { useRouter } from 'next/router';
 
 const MobileMenu = () => {
+  const router = useRouter();
+  const { pathname } = router;
   return (
     <MenuWrapper px="space30">
       <MenuContainer>
@@ -18,7 +21,7 @@ const MobileMenu = () => {
                     flexDirection="column"
                     justifyContent="flex-end"
                   >
-                    <Icon iconName={icon} size={iconSize} />
+                    <Icon iconName={icon} size={iconSize} color={pathname === url && 'secondary'}/>
                   </Box>
                   <Box mt="space5">{label}</Box>
                 </LinkContainer>

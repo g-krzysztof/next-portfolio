@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Box } from '../../styles';
 import { Icon } from '../Icons';
@@ -25,6 +26,9 @@ export const menuData = [
 ];
 
 const Menu = () => {
+  const router = useRouter();
+  const { pathname } = router;
+
   return (
     <MenuWrapper borderRadius="border5" mt="-290px" mr="space10">
       <MenuList>
@@ -32,7 +36,7 @@ const Menu = () => {
           <MenuItem key={url}>
             <Link href={url}>
               <LinkContainer>
-                <Icon iconName={icon} size={iconSize} />
+                <Icon iconName={icon} size={iconSize} color={pathname === url && 'secondary'} />
                 <br />
                 {label}
               </LinkContainer>
