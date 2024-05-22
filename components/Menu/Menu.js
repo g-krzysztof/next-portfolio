@@ -3,22 +3,36 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Box } from '../../styles';
 import { Icon } from '../Icons';
+import { LangContext } from '../../pages/_app';
+import { useContext } from 'react';
+import EnFlag from '../Flags/EnFlag';
+import PlFlag from '../Flags/PlFlag';
 
 export const menuData = [
   {
-    label: 'o mnie',
+    labelPl: 'o mnie',
+    labelEn: 'About me',
     icon: 'avatar',
     iconSize: '24px',
     url: '/',
   },
   {
-    label: 'CV',
+    labelPl: 'CV',
+    labelEn: 'CV',
     icon: 'document',
     iconSize: '20px',
     url: '/resume',
   },
+  // {
+  //   labelPl: 'opinie',
+  //   labelEn: 'opinions',
+  //   icon: 'nodes',
+  //   iconSize: '26px',
+  //   url: '/recommendation',
+  // },
   {
-    label: 'kontakt',
+    labelPl: 'kontakt',
+    labelEn: 'Contact',
     icon: 'email',
     iconSize: '26px',
     url: '/contact',
@@ -29,22 +43,34 @@ const Menu = () => {
   const router = useRouter();
   const { pathname } = router;
 
+  const [lang, setLang] = useContext(LangContext);
+
   return (
-    <MenuWrapper borderRadius="border5" mt="-290px" mr="space10">
-      <MenuList>
-        {menuData.map(({ label, icon, iconSize, url }) => (
-          <MenuItem key={url}>
-            <Link href={url}>
-              <LinkContainer>
-                <Icon iconName={icon} size={iconSize} color={pathname === url && 'secondary'} />
-                <br />
-                {label}
-              </LinkContainer>
-            </Link>
-          </MenuItem>
-        ))}
-      </MenuList>
-    </MenuWrapper>
+    <Box display="flex" flexDirection="column">
+      <MenuWrapper borderRadius="border5" mt="-130px" mr="space10">
+        <MenuList>
+          {menuData.map(({ labelPl, labelEn, icon, iconSize, url }) => (
+            <MenuItem key={url}>
+              <Link href={url}>
+                <LinkContainer>
+                  <Icon
+                    iconName={icon}
+                    size={iconSize}
+                    color={pathname === url && 'secondary'}
+                  />
+                  <br />
+                  {`${lang === 'pl' ? labelPl : labelEn}`}
+                </LinkContainer>
+              </Link>
+            </MenuItem>
+          ))}
+        </MenuList>
+      </MenuWrapper>
+      <Box pt="15px" pr="5px" display="flex" flexDirection="column" alignItems="center">
+        {lang === 'pl' && <EnFlag onClick={() => setLang('en')} width="60px" />}
+        {lang === 'en' && <PlFlag onClick={() => setLang('pl')} width="54px" />}
+      </Box>
+    </Box>
   );
 };
 
@@ -85,7 +111,7 @@ const MenuItem = styled(Box)`
     );
   }
 
-  :nth-child(3)::before {
+  :last-child::before {
     height: 0;
   }
 `;

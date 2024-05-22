@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { Background } from '../styles';
 import { MainContainer } from '../components/MainContainer';
-import { fetchData } from '../helpers/fetchData';
 import { LangContext } from './_app';
+import { fetchData } from '../helpers/fetchData';
 
-const Resume = ({ dataPl, dataEn }) => {
+const Recommendation = ({ dataPl, dataEn }) => {
   const [lang] = useContext(LangContext);
   const [data, setData] = useState(dataPl);
 
@@ -19,13 +19,13 @@ const Resume = ({ dataPl, dataEn }) => {
 
   return (
     <>
-      <MainContainer data={data} slugNext="resume" />
+      <MainContainer data={data} slugNext="recommendation" />
       <Background />
     </>
   );
 };
 
-export default Resume;
+export default Recommendation;
 
 export const getStaticProps = async () => {
   let dataPl;

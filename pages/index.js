@@ -1,8 +1,22 @@
+import React, { useContext, useEffect, useState } from 'react';
 import { Background } from '../styles';
-
 import { MainContainer } from '../components/MainContainer';
+import { LangContext } from './_app';
+import { fetchData } from '../helpers/fetchData';
 
-const Home = ({ data }) => {
+const Home = ({ dataPl, dataEn }) => {
+  const [lang] = useContext(LangContext);
+  const [data, setData] = useState(dataPl);
+
+  useEffect(() => {
+    if (lang === 'en') {
+      setData(dataEn);
+    }
+    if (lang === 'pl') {
+      setData(dataPl);
+    }
+  }, [lang]);
+
   return (
     <>
       <MainContainer data={data} slugNext="main" />
@@ -14,24 +28,21 @@ const Home = ({ data }) => {
 export default Home;
 
 export const getStaticProps = async () => {
-  let data;
-
-  const fetchMainData = async () => {
-    const res = await fetch(
-      'https://strapi-portfolio-krzysztofg.herokuapp.com/api/page-contents',
-    );
-    return res.json();
-  };
+  let dataPl;
+  let dataEn;
 
   try {
-    data = await fetchMainData();
+    dataPl = await fetchData('pl');
+    dataEn = await fetchData('en');
   } catch (e) {
-    data = [];
+    dataPl = [];
+    dataEn = [];
   }
 
   return {
     props: {
-      data,
+      dataPl,
+      dataEn,
     },
     revalidate: 1,
   };

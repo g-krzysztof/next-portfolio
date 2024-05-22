@@ -1,18 +1,28 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import { Box } from '../../styles';
+import { Box, theme } from '../../styles';
 import { Icon } from '../Icons';
 import { menuData } from '../Menu/Menu';
 import { useRouter } from 'next/router';
+import useBetterMediaQuery from '../../hooks/useBetterMediaQuery';
+import { LangContext } from '../../pages/_app';
+import { useContext } from 'react';
 
 const MobileMenu = () => {
   const router = useRouter();
   const { pathname } = router;
+
+  const isSmallDevice = useBetterMediaQuery(
+    `(max-width: ${theme.breakpoints.mobileXM})`,
+  );
+
+  const [lang] = useContext(LangContext);
+
   return (
     <MenuWrapper px="space30">
       <MenuContainer>
         <MenuList>
-          {menuData.map(({ label, icon, iconSize, url }) => (
+          {menuData.map(({ labelPl, labelEn, icon, iconSize, url }) => (
             <MenuItem key={url}>
               <Link href={url}>
                 <LinkContainer>
@@ -21,9 +31,17 @@ const MobileMenu = () => {
                     flexDirection="column"
                     justifyContent="flex-end"
                   >
-                    <Icon iconName={icon} size={iconSize} color={pathname === url && 'secondary'}/>
+                    <Icon
+                      iconName={icon}
+                      size={iconSize}
+                      color={pathname === url && 'secondary'}
+                    />
                   </Box>
-                  <Box mt="space5">{label}</Box>
+                  {!isSmallDevice && (
+                    <Box mt="space5">{`${
+                      lang === 'pl' ? labelPl : labelEn
+                    }`}</Box>
+                  )}
                 </LinkContainer>
               </Link>
             </MenuItem>

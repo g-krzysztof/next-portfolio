@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 import { Box } from '../../styles';
 import { Icon } from '../Icons';
+import { LangContext } from '../../pages/_app';
+import { useContext } from 'react';
 
-const Card = () => (
+const Card = () => {
+  const [lang] = useContext(LangContext);
+
+  return (
   <CardContainer
     height={{ _: '100vh', tablet: '800px' }}
     width={{ _: '100vw', mobileL: '480px', laptopS: '380px' }}
@@ -37,6 +42,9 @@ const Card = () => (
         <Icon iconName="linkedin" ml={{ _: 'space10' }} />
       </a>
     </Socials>
+    <CardEmail>
+      <a href="mailto:hello@krzysztofg.pl">hello@krzysztofg.pl</a>
+    </CardEmail>
     <CardButtons>
       <CardButton borderRadius={{ _: 'border0', tablet: 'border5' }}>
         <a
@@ -44,19 +52,19 @@ const Card = () => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          pobierz cv
+          {lang === 'pl' ? 'pobierz cv' : 'download cv'}
           <Icon iconName="download" size="16px" ml={{ _: 'space5' }} />
         </a>
       </CardButton>
       <CardButton borderRadius={{ _: 'border0', tablet: 'border5' }}>
         <a href="tel:+4853-538-3727">
           <Icon iconName="phone" size="16px" mr={{ _: 'space5' }} />
-          535 383 727
+          +48 535 383 727
         </a>
       </CardButton>
     </CardButtons>
   </CardContainer>
-);
+)};
 
 export default Card;
 
@@ -197,6 +205,25 @@ const CardButtons = styled(Box)`
       #ddd 0%,
       rgba(255, 255, 255, 0) 70%
     );
+  }
+`;
+
+const CardEmail = styled(Box)`
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  z-index: 10;
+  margin: 26px 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  a { 
+    color: ${({ theme: { colors } }) => colors.primary};
   }
 `;
 
