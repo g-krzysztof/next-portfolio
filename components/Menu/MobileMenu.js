@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 import useBetterMediaQuery from '../../hooks/useBetterMediaQuery';
 import { LangContext } from '../../pages/_app';
 import { useContext } from 'react';
+import EnFlag from '../Flags/EnFlag';
+import PlFlag from '../Flags/PlFlag';
 
 const MobileMenu = () => {
   const router = useRouter();
@@ -16,7 +18,7 @@ const MobileMenu = () => {
     `(max-width: ${theme.breakpoints.mobileXM})`,
   );
 
-  const [lang] = useContext(LangContext);
+  const [lang, setLang] = useContext(LangContext);
 
   return (
     <MenuWrapper px="space30">
@@ -46,6 +48,14 @@ const MobileMenu = () => {
               </Link>
             </MenuItem>
           ))}
+          <Box my="auto" ml="10px">
+            {lang === 'pl' && (
+              <EnFlag onClick={() => setLang('en')} width="50px" />
+            )}
+            {lang === 'en' && (
+              <PlFlag onClick={() => setLang('pl')} width="50px" />
+            )}
+          </Box>
         </MenuList>
         <Box height="70px" display="flex" justifyContent="space-between">
           <CardButton borderRadius={{ _: 'border0', tablet: 'border5' }}>

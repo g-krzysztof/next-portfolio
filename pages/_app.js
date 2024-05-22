@@ -8,7 +8,7 @@ const queryClient = new QueryClient();
 export const LangContext = React.createContext();
 
 function MyApp({ Component, pageProps }) {
-  const [lang, setLang] = useState('en');
+  const [lang, setLang] = useState('pl');
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
