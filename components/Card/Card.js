@@ -48,7 +48,7 @@ const Card = () => {
     <CardButtons>
       <CardButton borderRadius={{ _: 'border0', tablet: 'border5' }}>
         <a
-          href="/utils/krzysztofgryc.pdf"
+          href={`/utils/krzysztofgryc${lang === 'pl' ? '_pl' : '_en'}.pdf`}
           target="_blank"
           rel="noopener noreferrer"
         >
