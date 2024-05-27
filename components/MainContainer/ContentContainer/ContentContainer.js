@@ -4,6 +4,7 @@ import SimpleBar from 'simplebar-react';
 import ReactLoading from 'react-loading';
 import { Box, theme } from '../../../styles';
 import 'simplebar-react/dist/simplebar.min.css';
+import RecommendationSlider from '../../RecommendationSlider/RecommendationSlider';
 
 const ContentContainer = ({
   title,
@@ -11,6 +12,7 @@ const ContentContainer = ({
   skillsTitle,
   skillsContent,
   laptopS,
+  recommendations,
 }) => {
   const secondary = theme.colors.secondary;
 
@@ -66,6 +68,7 @@ const ContentContainer = ({
                 <Paragraph mr="space20">
                   <Markdown options={markdownOptions}>{content}</Markdown>
                 </Paragraph>
+                {recommendations && <RecommendationSlider recommendations={recommendations} />}
               </>
             )}
           </Box>
@@ -147,7 +150,7 @@ const SkillsTitle = styled.h4`
   color: inherit;
 `;
 
-const Paragraph = styled(Box)`
+export const Paragraph = styled(Box)`
   font-size: 14px;
   line-height: 22px;
   font-weight: 500;
@@ -167,12 +170,12 @@ const StyledBox = styled(Box)`
   padding-top: ${({ theme: { space } }) => space.space20};
 `;
 
-const StyledSpanPrimary = styled.span`
+export const StyledSpanPrimary = styled.span`
   color: ${({ theme: { colors } }) => colors.primary};
   font-weight: 600;
 `;
 
-const StyledSpanSecondary = styled.span`
+export const StyledSpanSecondary = styled.span`
   color: ${({ theme: { colors } }) => colors.secondary};
   font-weight: 600;
 `;

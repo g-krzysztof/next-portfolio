@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 //   return res.json();
 // };
 
-const MainContainer = ({ data, slugNext }) => {
+const MainContainer = ({ data, slugNext, recommendations }) => {
   // const { data } = useQuery('mainPage', fetchMainData);
 
   const [title, setTitle] = useState('');
@@ -49,7 +49,7 @@ const MainContainer = ({ data, slugNext }) => {
 
   return (
     <>
-      {laptopS !== null && minHeight !== null &&
+      {laptopS !== null && minHeight !== null && (
         <StyledBox
           display="flex"
           justifyContent="center"
@@ -78,11 +78,12 @@ const MainContainer = ({ data, slugNext }) => {
                 skillsTitle={skillsTitle}
                 skillsContent={skillsContent}
                 laptopS={laptopS}
+                recommendations={recommendations}
               />
             </>
           )}
         </StyledBox>
-      }
+      )}
     </>
   );
 };
