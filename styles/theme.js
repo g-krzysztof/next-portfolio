@@ -6,6 +6,7 @@ export const theme = {
     secondary: '#78CC6D',
     background: '#a1bdbc',
     backgroundLight: '#eef9ee',
+    backgroundLightGrey: '#eeeeee',
     white100: '#ffffff',
     grey: '#333333',
   },

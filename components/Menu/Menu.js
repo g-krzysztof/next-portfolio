@@ -23,13 +23,13 @@ export const menuData = [
     iconSize: '20px',
     url: '/resume',
   },
-  // {
-  //   labelPl: 'opinie',
-  //   labelEn: 'opinions',
-  //   icon: 'nodes',
-  //   iconSize: '26px',
-  //   url: '/recommendation',
-  // },
+  {
+    labelPl: 'opinie',
+    labelEn: 'opinions',
+    icon: 'nodes',
+    iconSize: '26px',
+    url: '/recommendation',
+  },
   {
     labelPl: 'kontakt',
     labelEn: 'Contact',

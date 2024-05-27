@@ -65,6 +65,8 @@ const MainContainer = ({ data, slugNext, recommendations }) => {
                 content={content}
                 skillsTitle={skillsTitle}
                 skillsContent={skillsContent}
+                recommendations={recommendations}
+                slug={slugNext}
               />
             </>
           )}
@@ -79,6 +81,7 @@ const MainContainer = ({ data, slugNext, recommendations }) => {
                 skillsContent={skillsContent}
                 laptopS={laptopS}
                 recommendations={recommendations}
+                slug={slugNext}
               />
             </>
           )}

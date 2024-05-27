@@ -4,12 +4,20 @@ import SimpleBar from 'simplebar-react';
 import ReactLoading from 'react-loading';
 import { Box, theme } from '../../../styles';
 import 'simplebar-react/dist/simplebar.min.css';
+import {
+  AuthorBox,
+  ContentBox,
+  RecommendationTitle,
+  Space,
+} from '../../RecommendationSlider/RecommendationSlider';
 
 const MobileContentContainer = ({
   title,
   content,
   skillsTitle,
   skillsContent,
+  recommendations,
+  slug,
 }) => {
   const secondary = theme.colors.secondary;
 
@@ -26,6 +34,29 @@ const MobileContentContainer = ({
       },
       h4: {
         component: SkillsTitleWrapper,
+      },
+      primary: {
+        component: StyledSpanPrimary,
+      },
+      secondary: {
+        component: StyledSpanSecondary,
+      },
+    },
+  };
+
+  const markdownRecommendationsOptions = {
+    overrides: {
+      h1: {
+        component: RecommendationTitle,
+      },
+      h2: {
+        component: Space,
+      },
+      h3: {
+        component: ContentBox,
+      },
+      h4: {
+        component: AuthorBox,
       },
       primary: {
         component: StyledSpanPrimary,
@@ -59,6 +90,22 @@ const MobileContentContainer = ({
                 </Paragraph>
               </>
             )}
+            {recommendations &&
+              slug === 'recommendation' &&
+              recommendations.data.map((recommendation, index) => (
+                <Box
+                  key={recommendation.id}
+                  backgroundColor={
+                    index % 2 === 0 ? 'backgroundLight' : 'backgroundLightGrey'
+                  }
+                >
+                  <Paragraph mx="space20" mb="space20">
+                    <Markdown options={markdownRecommendationsOptions}>
+                      {recommendation.attributes.text}
+                    </Markdown>
+                  </Paragraph>
+                </Box>
+              ))}
           </Box>
           <Box width="100%">
             {content && (

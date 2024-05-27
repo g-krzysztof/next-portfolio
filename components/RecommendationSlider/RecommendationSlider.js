@@ -49,7 +49,7 @@ const RecommendationSlider = ({ recommendations }) => {
   const markdownOptions = {
     overrides: {
       h1: {
-        component: Title,
+        component: RecommendationTitle,
       },
       h2: {
         component: Space,
@@ -70,24 +70,27 @@ const RecommendationSlider = ({ recommendations }) => {
   };
 
   return (
-    <Paragraph mr="space20">
+    <Paragraph mr="space20" mt="space30">
       <Box position="relative">
         <ButtonsWrapper>
           <CounterWrapper>{counter + 1}</CounterWrapper>
           <PlayButton onClick={() => handleOnPlayClick()}>
             {isPaused ? 'START' : 'STOP'}
           </PlayButton>
-          <DotButton
-            onClick={() => setActiveRecommendation(0)}
-            isActive={activeRecommendation === 0}
-          />
-          <DotButton
-            onClick={() => setActiveRecommendation(1)}
-            isActive={activeRecommendation === 1}
-          />
+          {recommendations.data.map((recommendation, index) => (
+            <DotButton
+              key={recommendation.id}
+              onClick={() => setActiveRecommendation(index)}
+              isActive={activeRecommendation === index}
+            />
+          ))}
         </ButtonsWrapper>
         <Markdown options={markdownOptions}>
-          {`# ${lang === 'pl' ? 'Rekomendacje' : 'Recommendations'}`}
+          {`# ${
+            lang === 'pl'
+              ? 'Opinie i rekomendacje'
+              : 'Opinions and recommendations'
+          }`}
         </Markdown>
       </Box>
       <Markdown options={markdownOptions}>
@@ -155,7 +158,7 @@ const ButtonsWrapper = styled(Box)`
   right: 0;
 `;
 
-const Title = styled.h1`
+export const RecommendationTitle = styled.h1`
   font-weight: 800;
   font-size: 18px;
   line-height: 1.2;
@@ -167,16 +170,16 @@ const Title = styled.h1`
   width: 100%;
 `;
 
-const ContentBox = styled(Box)`
+export const ContentBox = styled(Box)`
   font-style: italic;
   padding-bottom: ${({ theme: { space } }) => space.space5};
 `;
 
-const AuthorBox = styled(Box)`
+export const AuthorBox = styled(Box)`
   padding-top: 3px;
   text-align: right;
 `;
 
-const Space = styled(Box)`
+export const Space = styled(Box)`
   height: 20px;
 `;

@@ -5,6 +5,12 @@ import ReactLoading from 'react-loading';
 import { Box, theme } from '../../../styles';
 import 'simplebar-react/dist/simplebar.min.css';
 import RecommendationSlider from '../../RecommendationSlider/RecommendationSlider';
+import {
+  RecommendationTitle,
+  AuthorBox,
+  ContentBox,
+  Space,
+} from '../../RecommendationSlider/RecommendationSlider';
 
 const ContentContainer = ({
   title,
@@ -13,6 +19,7 @@ const ContentContainer = ({
   skillsContent,
   laptopS,
   recommendations,
+  slug,
 }) => {
   const secondary = theme.colors.secondary;
 
@@ -39,6 +46,29 @@ const ContentContainer = ({
     },
   };
 
+  const markdownRecommendationsOptions = {
+    overrides: {
+      h1: {
+        component: RecommendationTitle,
+      },
+      h2: {
+        component: Space,
+      },
+      h3: {
+        component: ContentBox,
+      },
+      h4: {
+        component: AuthorBox,
+      },
+      primary: {
+        component: StyledSpanPrimary,
+      },
+      secondary: {
+        component: StyledSpanSecondary,
+      },
+    },
+  };
+
   return (
     <Container
       color="grey"
@@ -50,7 +80,10 @@ const ContentContainer = ({
         <Box display="flex" flexDirection={{ _: 'column', desktop: 'row' }}>
           <Box
             pr={laptopS ? 'space20' : 'space10'}
-            width={{ _: '100%', desktop: '70%' }}
+            width={{
+              _: '100%',
+              desktop: slug !== 'recommendation' ? '70%' : '100%',
+            }}
           >
             {!content && (
               <Box mt="space10">
@@ -68,20 +101,44 @@ const ContentContainer = ({
                 <Paragraph mr="space20">
                   <Markdown options={markdownOptions}>{content}</Markdown>
                 </Paragraph>
-                {recommendations && <RecommendationSlider recommendations={recommendations} />}
+                {recommendations && slug !== 'recommendation' && (
+                  <RecommendationSlider recommendations={recommendations} />
+                )}
+                {recommendations &&
+                  slug === 'recommendation' &&
+                  recommendations.data.map((recommendation, index) => (
+                    <Box
+                      key={recommendation.id}
+                      backgroundColor={
+                        index % 2 === 0
+                          ? 'backgroundLight'
+                          : 'backgroundLightGrey'
+                      }
+                    >
+                      <Paragraph mx="space20" mb="space20">
+                        <Markdown options={markdownRecommendationsOptions}>
+                          {recommendation.attributes.text}
+                        </Markdown>
+                      </Paragraph>
+                    </Box>
+                  ))}
               </>
             )}
           </Box>
-          <Box width={{ _: '100%', desktop: '30%' }}>
-            {content && (
-              <Box mr={laptopS ? 'space20' : 'space10'}>
-                <Markdown options={markdownOptions}>{skillsTitle}</Markdown>
-                <Paragraph backgroundColor="backgroundLight" px="space20">
-                  <Markdown options={markdownOptions}>{skillsContent}</Markdown>
-                </Paragraph>
-              </Box>
-            )}
-          </Box>
+          {slug !== 'recommendation' && (
+            <Box width={{ _: '100%', desktop: '30%' }}>
+              {content && (
+                <Box mr={laptopS ? 'space20' : 'space10'}>
+                  <Markdown options={markdownOptions}>{skillsTitle}</Markdown>
+                  <Paragraph backgroundColor="backgroundLight" px="space20">
+                    <Markdown options={markdownOptions}>
+                      {skillsContent}
+                    </Markdown>
+                  </Paragraph>
+                </Box>
+              )}
+            </Box>
+          )}
         </Box>
       </StyledSimpleBar>
     </Container>
