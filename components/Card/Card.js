@@ -75,7 +75,7 @@ const CardContainer = styled(Box)`
   align-items: center;
   ${({ theme: { colors, space, radii } }) => `
     background-color: ${colors.white100};
-    ::before {
+    &::before {
       margin-left: -${space.space15};
       margin-top: -${space.space15};
       border-radius: ${radii.border5};
@@ -100,7 +100,7 @@ const CardBackground = styled(Box)`
   top: 0;
   width: 100%;
   overflow: hidden;
-  ::before {
+  &::before {
     content: '';
     position: absolute;
     left: -25%;
@@ -110,7 +110,7 @@ const CardBackground = styled(Box)`
     background: #fff;
     transform: rotate(12deg);
   }
-  ::after {
+  &::after {
     content: '';
     position: absolute;
     left: auto;
@@ -128,7 +128,7 @@ const AvatarPhoto = styled(Box)`
   margin-top: -25%;
   width: 140px;
   height: 140px;
-  ::before {
+  &::before {
     background: linear-gradient(
       135deg,
       rgba(120, 204, 109, 0.4) 0%,
@@ -193,7 +193,7 @@ const CardButtons = styled(Box)`
   justify-content: space-between;
   z-index: 10;
   border-radius: 0 0 5px 5px;
-  ::before {
+  &::before {
     content: '';
     position: absolute;
     left: 0;
@@ -241,10 +241,10 @@ const CardButton = styled(Box)`
   justify-content: center;
   align-items: center;
   color: ${({ theme: { colors } }) => colors.grey};
-  :hover {
+  &:hover {
     color: ${({ theme: { colors } }) => colors.secondary};
   }
-  :nth-child(1)::before {
+  &:nth-child(1)::before {
     content: '';
     position: absolute;
     right: 50%;

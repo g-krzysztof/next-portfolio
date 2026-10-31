@@ -7,8 +7,8 @@ export default function useBetterMediaQuery(mediaQueryString) {
     const mediaQueryList = window.matchMedia(mediaQueryString);
     const listener = () => setMatches(!!mediaQueryList.matches);
     listener();
-    mediaQueryList.addListener(listener);
-    return () => mediaQueryList.removeListener(listener);
+    mediaQueryList.addEventListener('change', listener);
+    return () => mediaQueryList.removeEventListener('change', listener);
   }, [mediaQueryString]);
 
   return matches;

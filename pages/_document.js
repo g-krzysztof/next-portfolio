@@ -32,7 +32,6 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="shortcut icon" href="/favicon.svg" />
-          <title>React Developer - krzysztofg.pl</title>
           <script type='text/javascript'
             dangerouslySetInnerHTML={{
               __html: `window.smartlook||(function(d) {

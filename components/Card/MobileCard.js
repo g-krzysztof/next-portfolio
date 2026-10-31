@@ -59,7 +59,7 @@ const AvatarPhoto = styled(Box)`
   position: relative;
   width: 140px;
   height: 140px;
-  ::before {
+  &::before {
     background: linear-gradient(
       135deg,
       rgba(120, 204, 109, 0.4) 0%,

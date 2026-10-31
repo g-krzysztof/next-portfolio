@@ -56,7 +56,7 @@ const Menu = () => {
                   <Icon
                     iconName={icon}
                     size={iconSize}
-                    color={pathname === url && 'secondary'}
+                    color={pathname === url ? 'secondary' : undefined}
                   />
                   <br />
                   {`${lang === 'pl' ? labelPl : labelEn}`}
@@ -97,7 +97,7 @@ const MenuItem = styled(Box)`
   a {
     text-decoration: none;
   }
-  ::before {
+  &::before {
     content: '';
     position: absolute;
     left: 0;
@@ -111,7 +111,7 @@ const MenuItem = styled(Box)`
     );
   }
 
-  :last-child::before {
+  &:last-child::before {
     height: 0;
   }
 `;
@@ -125,7 +125,7 @@ const LinkContainer = styled(Box)`
   font-size: 12px;
   color: #333;
   transition: 0.2s;
-  :hover {
+  &:hover {
     color: ${({ theme: { colors } }) => colors.secondary};
   }
 `;

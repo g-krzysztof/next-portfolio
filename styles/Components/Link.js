@@ -3,12 +3,12 @@ import NextLink from 'next/link';
 import styled from 'styled-components';
 
 export const Link = ({ children, href, ...rest }) => (
-  <NextLink href={href}>
-    <LinkText {...rest}>{children}</LinkText>
-  </NextLink>
+  <LinkText href={href} {...rest}>
+    {children}
+  </LinkText>
 );
 
-const LinkText = styled.a`
+const LinkText = styled(NextLink)`
   display: inherit;
   text-decoration: none;
   cursor: pointer;

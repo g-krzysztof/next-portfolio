@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { Background } from '../styles';
 import { MainContainer } from '../components/MainContainer';
 import { fetchData } from '../helpers/fetchData';
@@ -6,16 +6,7 @@ import { LangContext } from './_app';
 
 const Resume = ({ dataPl, dataEn }) => {
   const [lang] = useContext(LangContext);
-  const [data, setData] = useState(dataPl);
-
-  useEffect(() => {
-    if (lang === 'en') {
-      setData(dataEn);
-    }
-    if (lang === 'pl') {
-      setData(dataPl);
-    }
-  }, [lang]);
+  const data = lang === 'en' ? dataEn : dataPl;
 
   return (
     <>

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import Markdown from 'markdown-to-jsx';
+import Markdown from '../Markdown/Markdown';
 import { Paragraph } from '../MainContainer/ContentContainer/ContentContainer';
 import { Box } from '../../styles';
 import {
   StyledSpanPrimary,
   StyledSpanSecondary,
 } from '../MainContainer/ContentContainer/ContentContainer';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { LangContext } from '../../pages/_app';
 import { useState } from 'react';
 import useInterval from '../../hooks/useInterval';
@@ -18,10 +18,6 @@ const RecommendationSlider = ({ recommendations }) => {
   const [activeRecommendation, setActiveRecommendation] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [counter, setCounter] = useState(COUNTER_SECONDS);
-
-  useEffect(() => {
-    setActiveRecommendation(activeRecommendation);
-  }, [recommendations, activeRecommendation]);
 
   useInterval(() => {
     if (isPaused) return;
@@ -130,7 +126,7 @@ const PlayButton = styled(Box)`
   border-radius: 6px;
   margin-top: -2px;
   height: 22px;
-  :hover {
+  &:hover {
     color: #111;
   }
 `;
@@ -145,7 +141,7 @@ const DotButton = styled(Box)`
   border-radius: 50%;
   margin-left: 10px;
   transition: 0.2s;
-  :hover {
+  &:hover {
     background: ${({ theme: { colors } }) => colors.secondary};
   }
 `;

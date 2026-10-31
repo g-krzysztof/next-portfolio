@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Markdown from 'markdown-to-jsx';
+import Markdown from '../../Markdown/Markdown';
 import SimpleBar from 'simplebar-react';
 import ReactLoading from 'react-loading';
 import { Box, theme } from '../../../styles';
@@ -220,7 +220,7 @@ const StyledSimpleBar = styled(SimpleBar)`
     border: 1px solid grey;
     border-radius: 4px;
     color: white;
-    :before {
+    &:before {
       color: white;
       background: white;
     }

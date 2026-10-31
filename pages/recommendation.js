@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { Background } from '../styles';
 import { MainContainer } from '../components/MainContainer';
 import { LangContext } from './_app';
@@ -11,19 +11,9 @@ const Recommendation = ({
   recommendationsEn,
 }) => {
   const [lang] = useContext(LangContext);
-  const [data, setData] = useState(dataPl);
-  const [recommendations, setRecommendations] = useState(recommendationsPl);
-
-  useEffect(() => {
-    if (lang === 'en') {
-      setData(dataEn);
-      setRecommendations(recommendationsEn);
-    }
-    if (lang === 'pl') {
-      setData(dataPl);
-      setRecommendations(recommendationsPl);
-    }
-  }, [lang]);
+  const data = lang === 'en' ? dataEn : dataPl;
+  const recommendations =
+    lang === 'en' ? recommendationsEn : recommendationsPl;
 
   return (
     <>

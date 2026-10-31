@@ -36,7 +36,7 @@ const MobileMenu = () => {
                     <Icon
                       iconName={icon}
                       size={iconSize}
-                      color={pathname === url && 'secondary'}
+                      color={pathname === url ? 'secondary' : undefined}
                     />
                   </Box>
                   {!isSmallDevice && (
@@ -137,7 +137,7 @@ const LinkContainer = styled(Box)`
   font-size: 12px;
   color: #333;
   transition: 0.2s;
-  :hover {
+  &:hover {
     color: ${({ theme: { colors } }) => colors.secondary};
   }
 `;
@@ -154,7 +154,7 @@ const CardButton = styled(Box)`
   justify-content: center;
   align-items: center;
   color: ${({ theme: { colors } }) => colors.grey};
-  :hover {
+  &:hover {
     color: ${({ theme: { colors } }) => colors.secondary};
   }
   a {
