@@ -175,10 +175,12 @@ const Socials = styled(Box)`
       color: ${colors.grey};
   `};
   }
-  a:hover {
-    ${({ theme: { colors } }) => `
-      color: ${colors.secondary};
-    `};
+  @media (hover: hover) {
+    a:hover {
+      ${({ theme: { colors } }) => `
+        color: ${colors.secondary};
+      `};
+    }
   }
 `;
 
@@ -241,8 +243,10 @@ const CardButton = styled(Box)`
   justify-content: center;
   align-items: center;
   color: ${({ theme: { colors } }) => colors.grey};
-  &:hover {
-    color: ${({ theme: { colors } }) => colors.secondary};
+  @media (hover: hover) {
+    &:hover {
+      color: ${({ theme: { colors } }) => colors.secondary};
+    }
   }
   &:nth-child(1)::before {
     content: '';
@@ -266,7 +270,9 @@ const CardButton = styled(Box)`
     align-items: center;
     color: ${({ theme: { colors } }) => colors.grey};
   }
-  a:hover {
-    color: ${({ theme: { colors } }) => colors.secondary};
+  @media (hover: hover) {
+    a:hover {
+      color: ${({ theme: { colors } }) => colors.secondary};
+    }
   }
 `;

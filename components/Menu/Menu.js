@@ -125,7 +125,9 @@ const LinkContainer = styled(Box)`
   font-size: 12px;
   color: #333;
   transition: 0.2s;
-  &:hover {
-    color: ${({ theme: { colors } }) => colors.secondary};
+  @media (hover: hover) {
+    &:hover {
+      color: ${({ theme: { colors } }) => colors.secondary};
+    }
   }
 `;

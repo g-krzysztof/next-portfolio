@@ -4,7 +4,7 @@ import { Box, theme } from '../../styles';
 import { Menu, MobileMenu } from '../../components/Menu';
 import { Card, MobileCard } from '../../components/Card';
 import { ContentContainer, MobileContentContainer } from './ContentContainer';
-import useBetterMediaQuery from '../../hooks/useBetterMediaQuery';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import { useEffect, useState } from 'react';
 
 // const fetchMainData = async () => {
@@ -39,11 +39,9 @@ const MainContainer = ({ data, slugNext, recommendations }) => {
     }
   }, [data, slugNext]);
 
-  const laptopS = useBetterMediaQuery(
-    `(min-width: ${theme.breakpoints.laptopS})`,
-  );
+  const laptopS = useMediaQuery(`(min-width: ${theme.breakpoints.laptopS})`);
 
-  const minHeight = useBetterMediaQuery(
+  const minHeight = useMediaQuery(
     `(min-height: ${theme.breakpoints.minHeight})`,
   );
 

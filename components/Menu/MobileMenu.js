@@ -4,7 +4,7 @@ import { Box, theme } from '../../styles';
 import { Icon } from '../Icons';
 import { menuData } from '../Menu/Menu';
 import { useRouter } from 'next/router';
-import useBetterMediaQuery from '../../hooks/useBetterMediaQuery';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import { LangContext } from '../../pages/_app';
 import { useContext } from 'react';
 import EnFlag from '../Flags/EnFlag';
@@ -14,7 +14,7 @@ const MobileMenu = () => {
   const router = useRouter();
   const { pathname } = router;
 
-  const isSmallDevice = useBetterMediaQuery(
+  const isSmallDevice = useMediaQuery(
     `(max-width: ${theme.breakpoints.mobileXM})`,
   );
 
@@ -137,8 +137,10 @@ const LinkContainer = styled(Box)`
   font-size: 12px;
   color: #333;
   transition: 0.2s;
-  &:hover {
-    color: ${({ theme: { colors } }) => colors.secondary};
+  @media (hover: hover) {
+    &:hover {
+      color: ${({ theme: { colors } }) => colors.secondary};
+    }
   }
 `;
 
@@ -154,8 +156,10 @@ const CardButton = styled(Box)`
   justify-content: center;
   align-items: center;
   color: ${({ theme: { colors } }) => colors.grey};
-  &:hover {
-    color: ${({ theme: { colors } }) => colors.secondary};
+  @media (hover: hover) {
+    &:hover {
+      color: ${({ theme: { colors } }) => colors.secondary};
+    }
   }
   a {
     text-decoration: none;
@@ -166,7 +170,9 @@ const CardButton = styled(Box)`
     align-items: center;
     color: ${({ theme: { colors } }) => colors.grey};
   }
-  a:hover {
-    color: ${({ theme: { colors } }) => colors.secondary};
+  @media (hover: hover) {
+    a:hover {
+      color: ${({ theme: { colors } }) => colors.secondary};
+    }
   }
 `;

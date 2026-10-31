@@ -126,8 +126,10 @@ const PlayButton = styled(Box)`
   border-radius: 6px;
   margin-top: -2px;
   height: 22px;
-  &:hover {
-    color: #111;
+  @media (hover: hover) {
+    &:hover {
+      color: #111;
+    }
   }
 `;
 
@@ -141,8 +143,10 @@ const DotButton = styled(Box)`
   border-radius: 50%;
   margin-left: 10px;
   transition: 0.2s;
-  &:hover {
-    background: ${({ theme: { colors } }) => colors.secondary};
+  @media (hover: hover) {
+    &:hover {
+      background: ${({ theme: { colors } }) => colors.secondary};
+    }
   }
 `;
 

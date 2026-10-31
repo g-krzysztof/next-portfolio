@@ -110,9 +110,11 @@ const Socials = styled(Box)`
       color: ${colors.grey};
   `};
   }
-  a:hover {
-    ${({ theme: { colors } }) => `
-      color: ${colors.secondary};
-    `};
+  @media (hover: hover) {
+    a:hover {
+      ${({ theme: { colors } }) => `
+        color: ${colors.secondary};
+      `};
+    }
   }
 `;
