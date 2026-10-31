@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { LangContext } from '../../pages/_app';
 import { t } from './copy';
@@ -23,7 +23,7 @@ const FAN = [
   { r: -1.6, y: 12 },
 ];
 
-const RecCard = ({ item, index, copy }) => {
+const RecCard = ({ item, index, offset, active, near, onPick, copy }) => {
   const [open, setOpen] = useState(false);
   const [lead, ...rest] = item.paragraphs;
   const fan = FAN[index % FAN.length];
@@ -32,8 +32,15 @@ const RecCard = ({ item, index, copy }) => {
 
   return (
     <Card
-      style={{ '--r': `${fan.r}deg`, '--y': `${fan.y}px`, '--i': index }}
-      $open={open}
+      style={{
+        '--r': `${fan.r}deg`,
+        '--y': `${fan.y}px`,
+        '--o': offset,
+        '--z': 10 - Math.abs(offset),
+      }}
+      $active={active}
+      $near={near}
+      onClick={active ? undefined : onPick}
     >
       <Band aria-hidden="true" />
       <Disc aria-hidden="true">{initials(item.author)}</Disc>
@@ -68,14 +75,55 @@ const Recommendations = ({ page, items }) => {
   const copy = t(lang);
   const track = useRef(null);
   const [deckRef, inView] = useInView({ threshold: 0.15 });
+  // Start od środka talii, żeby karty wystawały symetrycznie z obu stron
+  const start = Math.floor((items.length - 1) / 2);
+  const [active, setActive] = useState(start);
 
-  const scrollBy = (dir) => {
+  const cardAt = (index) => track.current?.querySelectorAll('article')[index];
+
+  const centerOn = (index, behavior = 'smooth') => {
     const el = track.current;
-    if (!el) return;
-    const card = el.querySelector('article');
-    const step = card ? card.getBoundingClientRect().width + 24 : 400;
-    el.scrollBy({ left: dir * step, behavior: 'smooth' });
+    const card = cardAt(index);
+    if (!el || !card) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollTo({
+      left: card.offsetLeft + card.offsetWidth / 2 - el.clientWidth / 2,
+      behavior: reduced ? 'auto' : behavior,
+    });
   };
+
+  useEffect(() => {
+    centerOn(start, 'auto');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items.length]);
+
+  // Aktywna jest karta, której środek leży najbliżej środka toru
+  useEffect(() => {
+    const el = track.current;
+    if (!el) return undefined;
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const mid = el.scrollLeft + el.clientWidth / 2;
+        let best = 0;
+        let bestDist = Infinity;
+        el.querySelectorAll('article').forEach((card, index) => {
+          const dist = Math.abs(card.offsetLeft + card.offsetWidth / 2 - mid);
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = index;
+          }
+        });
+        setActive(best);
+      });
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      el.removeEventListener('scroll', onScroll);
+    };
+  }, []);
 
   if (items.length === 0) return null;
 
@@ -91,17 +139,7 @@ const Recommendations = ({ page, items }) => {
             copy.recTitle
           )}
         </Title>
-        <Aside>
-          {page?.content && <Intro>{page.content}</Intro>}
-          <Arrows>
-            <Arrow type="button" onClick={() => scrollBy(-1)} aria-label={copy.prev} $flip>
-              <LineIcon name="arrow" size={20} />
-            </Arrow>
-            <Arrow type="button" onClick={() => scrollBy(1)} aria-label={copy.next}>
-              <LineIcon name="arrow" size={20} />
-            </Arrow>
-          </Arrows>
-        </Aside>
+        {page?.content && <Intro>{page.content}</Intro>}
       </Head>
 
       <Track
@@ -114,9 +152,51 @@ const Recommendations = ({ page, items }) => {
         aria-label={copy.recPicker}
       >
         {items.map((item, index) => (
-          <RecCard key={item.id} item={item} index={index} copy={copy} />
+          <RecCard
+            key={item.id}
+            item={item}
+            index={index}
+            offset={index - start}
+            active={index === active}
+            near={Math.abs(index - active) === 1}
+            onPick={() => centerOn(index)}
+            copy={copy}
+          />
         ))}
       </Track>
+
+      <Controls>
+        <Arrow
+          type="button"
+          onClick={() => centerOn(active - 1)}
+          disabled={active === 0}
+          aria-label={copy.prev}
+          $flip
+        >
+          <LineIcon name="arrow" size={20} />
+        </Arrow>
+        <Picks>
+          {items.map((item, index) => (
+            <Pick
+              key={item.id}
+              type="button"
+              onClick={() => centerOn(index)}
+              aria-label={item.author}
+              aria-current={index === active ? 'true' : undefined}
+            >
+              {initials(item.author)}
+            </Pick>
+          ))}
+        </Picks>
+        <Arrow
+          type="button"
+          onClick={() => centerOn(active + 1)}
+          disabled={active === items.length - 1}
+          aria-label={copy.next}
+        >
+          <LineIcon name="arrow" size={20} />
+        </Arrow>
+      </Controls>
     </Field>
   );
 };
@@ -135,16 +215,15 @@ const Field = styled.section`
 `;
 
 const Head = styled(Wrap)`
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  align-items: end;
-  gap: 20px clamp(28px, 5vw, 80px);
-  @media (max-width: ${({ theme }) => theme.breakpoints.tabletL}) {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
 `;
 
 const Title = styled.h2`
+  max-width: 22ch;
   font-family: ${({ theme }) => theme.fonts.display};
   font-weight: 800;
   font-size: clamp(2rem, 3.2vw, 4rem);
@@ -153,25 +232,50 @@ const Title = styled.h2`
   text-wrap: balance;
 `;
 
-const Aside = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-`;
-
 const Intro = styled.p`
-  max-width: 40ch;
+  max-width: 52ch;
   font-size: 15px;
   color: ${({ theme }) => theme.colors.onFieldSoft};
+  text-wrap: balance;
 `;
 
-const Arrows = styled.div`
+const Controls = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2vw, 24px);
+  padding-inline: ${({ theme }) => theme.layout.gutter};
+`;
+
+const Picks = styled.div`
   display: flex;
   gap: 8px;
-  flex: none;
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
-    display: none;
+`;
+
+const Pick = styled.button`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(243, 246, 241, 0.28);
+  color: ${({ theme }) => theme.colors.onFieldSoft};
+  font-family: ${({ theme }) => theme.fonts.display};
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  transition:
+    background-color 0.3s ${({ theme }) => theme.ease.out},
+    border-color 0.3s ${({ theme }) => theme.ease.out},
+    color 0.3s ${({ theme }) => theme.ease.out};
+  @media (hover: hover) {
+    &:hover {
+      border-color: ${({ theme }) => theme.colors.mint};
+      color: ${({ theme }) => theme.colors.mint};
+    }
+  }
+  &[aria-current='true'] {
+    background: ${({ theme }) => theme.colors.mint};
+    border-color: ${({ theme }) => theme.colors.mint};
+    color: ${({ theme }) => theme.colors.ink};
   }
 `;
 
@@ -186,32 +290,46 @@ const Arrow = styled.button`
   color: ${({ theme }) => theme.colors.mint};
   transition:
     background-color 0.25s ${({ theme }) => theme.ease.out},
-    color 0.25s ${({ theme }) => theme.ease.out};
+    color 0.25s ${({ theme }) => theme.ease.out},
+    opacity 0.25s ${({ theme }) => theme.ease.out};
   svg {
     transform: ${({ $flip }) => ($flip ? 'scaleX(-1)' : 'none')};
   }
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
   @media (hover: hover) {
-    &:hover {
+    &:hover:not(:disabled) {
       background: ${({ theme }) => theme.colors.mint};
       color: ${({ theme }) => theme.colors.ink};
     }
   }
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    display: none;
+  }
 `;
 
-// Tor z kartami wyrównany do lewej krawędzi kontenera, ucieka w prawo poza ekran
+// Tor na pełną szerokość ekranu: aktywna karta stoi na środku,
+// sąsiednie wystają symetrycznie zza obu krawędzi
 const Track = styled.div`
-  --gutter: max(
-    ${({ theme }) => theme.layout.gutter},
-    calc((100vw - ${({ theme }) => theme.layout.maxWidth}) / 2 + ${({ theme }) => theme.layout.gutter})
-  );
+  --gap: clamp(20px, 2.4vw, 36px);
+  --card: clamp(280px, 78vw, 500px);
+  /* od laptopa trzy środkowe karty mieszczą się w kontenerze */
+  @media (min-width: ${({ theme }) => theme.breakpoints.laptopS}) {
+    --card: min(
+      500px,
+      (min(100vw, ${({ theme }) => theme.layout.maxWidth}) - 2 * ${({ theme }) => theme.layout.gutter} - 2 * var(--gap)) / 3
+    );
+  }
+  position: relative;
   margin-top: clamp(28px, 3.5vw, 44px);
   display: flex;
   align-items: flex-start;
-  gap: 24px;
+  gap: var(--gap);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--gutter);
-  padding: 24px var(--gutter) 40px;
+  padding: 24px calc(50% - var(--card) / 2) 48px;
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
@@ -220,17 +338,19 @@ const Track = styled.div`
     outline-offset: -4px;
   }
 
-  /* talia rozkłada się z kupki, gdy wjedzie w widok */
+  /* talia rozkłada się z kupki na środku, gdy wjedzie w widok */
   article {
     transition:
-      transform 0.9s ${({ theme }) => theme.ease.out} calc(var(--i) * 70ms),
+      transform 0.9s ${({ theme }) => theme.ease.out}
+        calc(var(--z) * -40ms + 400ms),
+      opacity 0.5s ${({ theme }) => theme.ease.out},
       box-shadow 0.4s ${({ theme }) => theme.ease.out};
   }
   ${({ $in }) =>
     !$in &&
     css`
       article {
-        transform: translateX(calc(var(--i) * -88%)) rotate(calc(var(--r) * 3))
+        transform: translateX(calc(var(--o) * -100%)) rotate(calc(var(--r) * 3))
           translateY(var(--y));
       }
     `}
@@ -244,9 +364,9 @@ const Track = styled.div`
 
 const Card = styled.article`
   position: relative;
-  z-index: calc(10 - var(--i));
-  flex: 0 0 clamp(300px, 84vw, 460px);
-  scroll-snap-align: start;
+  z-index: var(--z);
+  flex: 0 0 var(--card);
+  scroll-snap-align: center;
   display: flex;
   flex-direction: column;
   border-radius: ${({ theme }) => theme.radii.card};
@@ -254,19 +374,33 @@ const Card = styled.article`
   color: ${({ theme }) => theme.colors.ink};
   padding: 0 28px 24px;
   overflow: hidden;
-  transform: rotate(var(--r)) translateY(var(--y));
+  transform: rotate(var(--r)) translateY(var(--y)) scale(0.94);
+  opacity: 0.4;
+  cursor: pointer;
   box-shadow: 0 30px 50px -24px rgba(3, 18, 17, 0.7);
 
   @media (hover: hover) {
     &:hover {
-      transform: rotate(0deg) translateY(-6px);
-      box-shadow: 0 40px 60px -24px rgba(3, 18, 17, 0.8);
+      opacity: 0.75;
     }
   }
-  ${({ $open }) =>
-    $open &&
+  ${({ $near }) =>
+    $near &&
     css`
-      transform: rotate(0deg) translateY(0);
+      && {
+        transform: rotate(var(--r)) translateY(var(--y)) scale(0.97);
+        opacity: 1;
+      }
+    `}
+  ${({ $active }) =>
+    $active &&
+    css`
+      && {
+        transform: rotate(0deg) translateY(0) scale(1);
+        opacity: 1;
+        cursor: auto;
+        box-shadow: 0 44px 70px -28px rgba(3, 18, 17, 0.85);
+      }
     `}
 `;
 
