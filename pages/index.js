@@ -7,6 +7,8 @@ import Recommendations from '../components/Home/Recommendations';
 import Experience from '../components/Home/Experience';
 import AboutStack from '../components/Home/AboutStack';
 import Contact from '../components/Home/Contact';
+import FloatingSquares from '../components/Home/FloatingSquares';
+import styled from 'styled-components';
 import {
   parseRecommendations,
   parseSkills,
@@ -24,11 +26,14 @@ const Home = ({ content, recommendations }) => {
     <>
       <Nav />
       <main>
-        <Hero stack={stack} recommendations={recs} />
-        <Recommendations
-          page={pickPage(data, 'recommendation')}
-          items={recs}
-        />
+        <Opening>
+          <FloatingSquares />
+          <Hero stack={stack} recommendations={recs} />
+          <Recommendations
+            page={pickPage(data, 'recommendation')}
+            items={recs}
+          />
+        </Opening>
         <Experience page={pickPage(data, 'resume')} />
         <AboutStack page={pickPage(data, 'main')} groups={stack} />
       </main>
@@ -38,6 +43,14 @@ const Home = ({ content, recommendations }) => {
 };
 
 export default Home;
+
+// Hero i talia opinii to jedno turkusowe pole: wspólne tło pozwala kwadratom
+// przepływać przez granicę sekcji bez ucięcia
+const Opening = styled.div`
+  position: relative;
+  isolation: isolate;
+  background: ${({ theme }) => theme.colors.field};
+`;
 
 const safely = async (request) => {
   try {

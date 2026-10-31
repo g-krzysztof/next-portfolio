@@ -130,7 +130,6 @@ const Mint = styled.span`
 const Field = styled.section`
   position: relative;
   padding: clamp(24px, 3vw, 40px) 0 clamp(48px, 6vw, 80px);
-  background: ${({ theme }) => theme.colors.field};
   color: ${({ theme }) => theme.colors.onField};
   overflow: hidden;
 `;

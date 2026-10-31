@@ -97,7 +97,7 @@ const Hero = ({ stack, recommendations = [] }) => {
           <FloorShadow aria-hidden="true" />
           <Tilt ref={tiltRef} $interactive={interactive} $flipped={flipped}>
             <Flipper id="business-card" $flipped={flipped}>
-              <Front inert={flipped} aria-hidden={flipped}>
+              <Front inert={flipped} aria-hidden={flipped} $away={flipped}>
                 <Band aria-hidden="true">
                   <BandLines />
                 </Band>
@@ -135,7 +135,7 @@ const Hero = ({ stack, recommendations = [] }) => {
                 <Glare aria-hidden="true" />
               </Front>
 
-              <Back inert={!flipped} aria-hidden={!flipped}>
+              <Back inert={!flipped} aria-hidden={!flipped} $away={!flipped}>
                 <BackTitle>{copy.cardBackTitle}</BackTitle>
                 <StackList>
                   {current.map((item) => (
@@ -179,8 +179,7 @@ const HeroField = styled.div`
         60% 70% at 74% 56%,
         rgba(143, 227, 136, 0.16),
         transparent 70%
-      ),
-      ${colors.field};
+      );
     color: ${colors.onField};
   `}
 `;
@@ -391,7 +390,10 @@ const Tilt = styled.div`
     border: 1px solid rgba(143, 227, 136, 0.28);
     transform: translateZ(-36px);
     opacity: ${({ $flipped }) => ($flipped ? 0 : 1)};
-    transition: opacity 0.4s ${({ theme }) => theme.ease.out};
+    /* karta w obrocie przecina płaszczyznę płyty: płyta znika od razu
+       i wraca dopiero, gdy awers znów leży płasko */
+    transition: ${({ $flipped }) =>
+      $flipped ? 'opacity 0.12s linear' : 'opacity 0.4s ease-out 0.75s'};
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -417,6 +419,14 @@ const face = css`
   overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  /* własna warstwa 3D na każdej ścianie: bez tego WebKit (i blend-mode
+     odblasku) spłaszcza ściany i rewers prześwituje przez awers */
+  transform: rotateY(0deg) translateZ(1px);
+  isolation: isolate;
+  /* asekuracja, gdy backface-visibility zawiedzie: odwrócona ściana gaśnie
+     w chwili, gdy karta mija 90° (~0.09s przy tej krzywej i 0.9s obrotu) */
+  visibility: ${({ $away }) => ($away ? 'hidden' : 'visible')};
+  transition: visibility 0s linear ${({ $away }) => ($away ? '0.09s' : '0s')};
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.7) inset,
     0 30px 60px -20px rgba(3, 18, 17, 0.6);
@@ -431,7 +441,7 @@ const Front = styled.article`
 
 const Back = styled.article`
   ${face};
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

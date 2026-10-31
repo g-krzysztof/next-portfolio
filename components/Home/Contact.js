@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { LangContext } from '../../pages/_app';
 import { CONTACT, cvHref, t } from './copy';
 import { CmsInline, Glyph, MintButton, Wrap } from './ui';
+import FloatingSquares from './FloatingSquares';
 
 const Mint = styled.span`
   color: ${({ theme }) => theme.colors.mint};
@@ -14,6 +15,7 @@ const Contact = ({ page }) => {
 
   return (
     <Field id="kontakt" aria-labelledby="kontakt-title">
+      <FloatingSquares count={7} />
       <Wrap>
         <Title id="kontakt-title">
           {page ? (
@@ -61,6 +63,9 @@ const Contact = ({ page }) => {
 export default Contact;
 
 const Field = styled.section`
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   padding-top: clamp(72px, 8vw, 112px);
   padding-bottom: 40px;
   background:
