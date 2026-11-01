@@ -4,6 +4,7 @@ import type { Project, ProjectsSection } from '../../content/types';
 import EditorDemo from './EditorDemo';
 import { useLang } from './lang';
 import MapDemo from './MapDemo';
+import PlayerDemo from './PlayerDemo';
 import { CmsInline, Section, SectionTitle, Wrap } from './ui';
 
 // Case study na papierze: bez cieni i ramek, kolumny oddziela linia u góry
@@ -26,25 +27,27 @@ const Projects = ({ section }: { section: ProjectsSection }) => {
           <Featured key={project.id} project={project} flip={index % 2 === 1} />
         ))}
 
-        <Grid>
-          {/* TODO(Moon): czwarta karta, projekt własny (np. dociekai.pl) – opis i link */}
-          {rest.map(({ id, name, context, role, text, stack }) => (
-            <Item key={id}>
-              <Name>{name}</Name>
-              <Context>{context}</Context>
-              <Detail>
-                <Label>{copy.projectRole}</Label>
-                <p>{role}</p>
-                <Label>{copy.projectWork}</Label>
-                {text.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-                <Label>{copy.expStack}</Label>
-                <p>{stack}</p>
-              </Detail>
-            </Item>
-          ))}
-        </Grid>
+        {/* TODO(Moon): karta projektu własnego (np. dociekai.pl) – opis i link */}
+        {rest.length > 0 && (
+          <Grid>
+            {rest.map(({ id, name, context, role, text, stack }) => (
+              <Item key={id}>
+                <Name>{name}</Name>
+                <Context>{context}</Context>
+                <Detail>
+                  <Label>{copy.projectRole}</Label>
+                  <p>{role}</p>
+                  <Label>{copy.projectWork}</Label>
+                  {text.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                  <Label>{copy.expStack}</Label>
+                  <p>{stack}</p>
+                </Detail>
+              </Item>
+            ))}
+          </Grid>
+        )}
       </Wrap>
     </Section>
   );
@@ -53,6 +56,7 @@ const Projects = ({ section }: { section: ProjectsSection }) => {
 const VISUALS: Record<string, (() => React.JSX.Element) | undefined> = {
   map: MapDemo,
   editor: EditorDemo,
+  players: PlayerDemo,
 };
 
 // Wyróżniony case study: opis z liczbami obok ilustracji (co drugi na odwrót).
@@ -69,7 +73,7 @@ const Featured = ({ project, flip }: { project: Project; flip: boolean }) => {
     facts,
     factsSource,
     stack,
-    link,
+    links,
     visual,
   } = project;
   const Visual = visual && VISUALS[visual];
@@ -120,16 +124,17 @@ const Featured = ({ project, flip }: { project: Project; flip: boolean }) => {
               {open ? copy.readLess : copy.projectMore}
             </More>
           )}
-          {link && (
+          {links?.map(({ href, label }) => (
             <CaseLink
-              href={link.href}
+              key={href}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {link.label}
+              {label}
               <span aria-hidden="true">↗</span>
             </CaseLink>
-          )}
+          ))}
         </Actions>
         {facts && (
           <FactsWrap>

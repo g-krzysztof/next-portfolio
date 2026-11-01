@@ -41,9 +41,11 @@ const AboutStack = ({ about, groups, tone }: AboutStackProps) => {
           <Wall aria-labelledby="stack-title">
             <WallTitle id="stack-title">{current.title}</WallTitle>
             <Words>
-              {current.lines.flat().map(({ name, detail, strong }) => (
+              {current.lines.flat().map(({ name, detail, strong, minor }) => (
                 <li key={name}>
-                  <Word $strong={strong}>{name}</Word>
+                  <Word $strong={strong} $minor={minor}>
+                    {name}
+                  </Word>
                   {detail && <Detail>{detail}</Detail>}
                 </li>
               ))}
@@ -132,16 +134,23 @@ const Words = styled.ul`
   }
 `;
 
-const Word = styled.span<{ $strong?: boolean }>`
+const Word = styled.span<{ $strong?: boolean; $minor?: boolean }>`
   font-family: ${({ theme }) => theme.fonts.display};
   line-height: 1.15;
   letter-spacing: -0.03em;
-  ${({ $strong, theme }) =>
+  ${({ $strong, $minor, theme }) =>
     $strong
       ? `
     font-weight: 800;
     font-size: clamp(1.8rem, 2.8vw, 3.4rem);
     color: ${theme.colors.field};
+  `
+      : $minor
+      ? `
+    font-weight: 500;
+    font-size: clamp(1rem, 1.15vw, 1.3rem);
+    letter-spacing: -0.01em;
+    color: ${theme.colors.inkSoft};
   `
       : `
     font-weight: 600;

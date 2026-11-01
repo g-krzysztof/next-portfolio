@@ -83,44 +83,43 @@
     "_todo": "TODO(Moon): projekt własny (np. dociekai.pl) – opis i link; czwarta karta czeka na treść",
     "items": [
       {
-        "id": "geo-platform",
+        "id": "zpr-media",
         "featured": true,
-        "name": "Mapa złóż dla geologów",
-        "context": "Kadme (Norwegia, branża oil & gas) · przez Autentikę",
-        "role": "Senior React Frontend Developer: system design i wdrożenie frontendu",
-        "_todo": "TODO(Moon): biblioteka map (Leaflet / Mapbox / OpenLayers?) i lata projektu – dopisać do stacku",
-        "problem": "Geolodzy i specjaliści terenowi korzystali z narzędzi do danych zaprojektowanych z myślą o analitykach. Złożony interfejs sprawiał, że każde wyszukiwanie zależało od dostępności data managerów, a to spowalniało analizy.",
+        "visual": "players",
+        "name": "Playery wideo i radia dla serwisów ZPR Media",
+        "context": "Grupa ZPR Media · zespół Multimedia · 2024–obecnie",
+        "role": "Senior React Frontend Developer: wydzielenie playerów do osobnego repozytorium, refaktoryzacja i wdrożenie",
+        "_todo": "TODO(Moon): sprawdzić opis problemu i liczby (stacje, serwisy) – są wyczytane ze stron demo, dopisać skalę (odtworzenia?) jeśli możesz",
+        "problem": "Playery wideo i radiowe były wplecione w kod poszczególnych serwisów grupy. Każda poprawka oznaczała wdrożenia w wielu miejscach, a reklamy, statystyki i obsługa błędów działały w każdym serwisie trochę inaczej.",
+        "product": [
+          "Player wideo osadza się jednym skryptem i znacznikiem z atrybutami data-*. Odtwarza strumienie HLS, obsługuje reklamy preroll, kolejne wideo, tryb sticky, transmisje LIVE z zaplanowanym końcem i pionowe rolki z feedem dla newsroomu. Tryb AutoMatch sam dobiera wideo do treści artykułu.",
+          "Player radiowy gra na żywo stacje grupy (Eska, Eska Rock, Vox FM, Radio Plus i kolejne), pobiera z API „teraz gramy” i bieżący program, a w trakcie reklamy blokuje przełączanie stacji. Ma osobne warianty na desktop i mobile."
+        ],
         "text": [
-          "Nowa aplikacja typu „mapplication”: mapa jest jej centrum, a obok niej działa wyszukiwarka nieustrukturyzowanych danych z wielu źródeł. Obsługuje zapytania logiczne i quasi-regex, filtry oraz historię wyszukiwań.",
-          "Na mapę nakładane są warstwy danych, które pokazują wyłącznie to, co dotyczy bieżącego wyszukiwania. Do tego moduły analityczne i widok szczegółów wyniku.",
-          "Aplikacja działa na komputerach w biurze i na wzmocnionych tabletach na platformach wiertniczych. Ma motyw ciemny do pracy w słabym świetle i motyw dla osób z deuteranopią i protanopią.",
-          "Komponenty powstawały w izolacji w Storybooku, równolegle z iteracyjnym projektowaniem UI, i dopiero z nich składaliśmy całe widoki."
+          "Wydzieliłem playery z serwisów do osobnego repozytorium w React i TypeScript, z jednym procesem budowania i wdrażania na CDN. Serwisy dostają gotowy skrypt i kod osadzania zamiast własnych kopii playera.",
+          "Refaktoryzacja playerów wideo, audio, radiowych (streaming na żywo) i podcastowych, integracje reklamowe Google IMA i VAST oraz statystyki Gemius.",
+          "Strony demo do prezentacji i testów: panel ustawień generuje kod osadzania dla bieżącej konfiguracji, a mocki MSW symulują błędy API i brak zewnętrznych skryptów (IMA, HLS, video.js), żeby dało się sprawdzić każdy stan playera.",
+          "Testy E2E w Playwright. Poza playerami: moduły CMS w React do zarządzania aplikacjami radiowymi i odsłuch artykułów oparty na text-to-speech."
         ],
         "facts": [
           {
-            "value": "10",
-            "label": "dwutygodniowych sprintów projektowych, bez opóźnień i dodatkowych kosztów"
-          },
-          {
-            "value": "143",
-            "label": "komponenty w Storybooku"
-          },
-          {
             "value": "2",
-            "label": "środowiska pracy: biuro i tablety na platformach"
+            "label": "playery w jednym repozytorium: wideo i radio"
           },
           {
-            "value": "3",
-            "label": "motywy: jasny, ciemny, dla daltonistów"
+            "value": "1",
+            "label": "skrypt i znacznik, żeby osadzić player w dowolnym serwisie grupy"
+          },
+          {
+            "value": "6",
+            "label": "stacji radiowych w jednym playerze"
+          },
+          {
+            "value": "4",
+            "label": "tryby wideo: klasyczny, sticky, LIVE i pionowe rolki"
           }
         ],
-        "stack": "TypeScript, React, Next.js, Storybook",
-        "link": {
-          "href": "https://autentika.com/projects/kadme",
-          "label": "Case study na autentika.com"
-        },
-        "visual": "map",
-        "factsSource": "Liczby z case study Autentiki, etap projektowania (do lutego 2022)."
+        "stack": "TypeScript, React, Styled Components, HLS.js, video.js, Google IMA / VAST, MSW, Playwright"
       },
       {
         "id": "wp-editor",
@@ -159,52 +158,95 @@
         ],
         "factsSource": "Liczby z case study całego projektu, prowadzonego przez WP i Autentikę od 2018 roku.",
         "stack": "TypeScript, React, Redux, Redux-Saga, TanStack Query, GraphQL (Apollo), Storybook, Jest, React Testing Library, Cypress, NX",
-        "link": {
-          "href": "https://autentika.com/projects/wp",
-          "label": "Case study ekosystemu WP na autentika.com"
-        }
+        "links": [
+          {
+            "href": "https://autentika.com/projects/wp",
+            "label": "Case study ekosystemu WP na autentika.com"
+          }
+        ]
       },
       {
-        "id": "zpr-media",
-        "name": "Playery multimedialne i CMS",
-        "context": "Grupa ZPR Media",
-        "role": "Senior React Frontend Developer",
-        "_todo": "TODO(Moon): efekt refaktoryzacji / skala (odtworzenia, liczba stacji) – opcjonalnie",
+        "id": "geo-platform",
+        "featured": true,
+        "name": "Mapa złóż dla geologów",
+        "context": "Kadme (Norwegia, branża oil & gas) · przez Autentikę",
+        "role": "Senior React Frontend Developer: system design i wdrożenie frontendu",
+        "_todo": "TODO(Moon): biblioteka map (Leaflet / Mapbox / OpenLayers?) i lata projektu – dopisać do stacku",
+        "problem": "Geolodzy i specjaliści terenowi korzystali z narzędzi do danych zaprojektowanych z myślą o analitykach. Złożony interfejs sprawiał, że każde wyszukiwanie zależało od dostępności data managerów, a to spowalniało analizy.",
         "text": [
-          "Refaktoryzacja playerów wideo, audio, radiowych (live streaming) i podcastowych w serwisach grupy medialnej; integracje reklamowe Google IMA i VAST; moduły CMS w React do zarządzania aplikacjami radiowymi; odsłuch artykułów oparty na text-to-speech."
+          "Nowa aplikacja typu „mapplication”: mapa jest jej centrum, a obok niej działa wyszukiwarka nieustrukturyzowanych danych z wielu źródeł. Obsługuje zapytania logiczne i quasi-regex, filtry oraz historię wyszukiwań.",
+          "Na mapę nakładane są warstwy danych, które pokazują wyłącznie to, co dotyczy bieżącego wyszukiwania. Do tego moduły analityczne i widok szczegółów wyniku.",
+          "Aplikacja działa na komputerach w biurze i na wzmocnionych tabletach na platformach wiertniczych. Ma motyw ciemny do pracy w słabym świetle i motyw dla osób z deuteranopią i protanopią.",
+          "Komponenty powstawały w izolacji w Storybooku, równolegle z iteracyjnym projektowaniem UI, i dopiero z nich składaliśmy całe widoki."
         ],
-        "stack": "TypeScript, React, Playwright, Django templates, SASS/BEM"
+        "facts": [
+          {
+            "value": "10",
+            "label": "dwutygodniowych sprintów projektowych, bez opóźnień i dodatkowych kosztów"
+          },
+          {
+            "value": "143",
+            "label": "komponenty w Storybooku"
+          },
+          {
+            "value": "2",
+            "label": "środowiska pracy: biuro i tablety na platformach"
+          },
+          {
+            "value": "3",
+            "label": "motywy: jasny, ciemny, dla daltonistów"
+          }
+        ],
+        "stack": "TypeScript, React, Next.js, Storybook",
+        "visual": "map",
+        "factsSource": "Liczby z case study Autentiki, etap projektowania (do lutego 2022).",
+        "links": [
+          {
+            "href": "https://autentika.com/projects/kadme",
+            "label": "Case study na autentika.com"
+          }
+        ]
       }
     ]
   },
   "stack": [
     {
       "title": "Aktualnie pracuję w stacku",
-      "_todo": "TODO(Moon): Tailwind – zostawić? (brief wspomina go na stronie, ale w repo go nie było, więc nie został dodany)",
       "lines": [
         [
           {
             "name": "React",
-            "detail": "Redux, Redux-Saga, TanStack Query",
             "strong": true
+          },
+          {
+            "name": "Redux"
+          },
+          {
+            "name": "Redux-Saga",
+            "minor": true
+          },
+          {
+            "name": "TanStack Query"
           }
         ],
         [
           {
             "name": "TypeScript",
             "strong": true
+          },
+          {
+            "name": "JavaScript",
+            "minor": true
           }
         ],
         [
           {
             "name": "Next.js",
             "strong": true
-          }
-        ],
-        [
+          },
           {
-            "name": "REST API & GraphQL",
-            "detail": "Apollo"
+            "name": "Server-Side Rendering",
+            "minor": true
           }
         ],
         [
@@ -213,29 +255,141 @@
             "strong": true
           },
           {
-            "name": "Cypress E2E"
+            "name": "Cypress"
           },
           {
             "name": "Jest"
           },
           {
             "name": "React Testing Library"
+          },
+          {
+            "name": "Vitest",
+            "minor": true
           }
         ],
         [
           {
-            "name": "Storybook"
-          },
-          {
-            "name": "Styled Components",
+            "name": "Agenci AI",
             "strong": true
           },
           {
-            "name": "Styled System"
+            "name": "Claude Code"
+          },
+          {
+            "name": "Cursor",
+            "minor": true
+          },
+          {
+            "name": "GitHub Copilot",
+            "minor": true
+          }
+        ],
+        [
+          {
+            "name": "Styled Components"
+          },
+          {
+            "name": "Tailwind"
           },
           {
             "name": "Sass",
-            "detail": "BEM"
+            "detail": "BEM",
+            "minor": true
+          },
+          {
+            "name": "Storybook"
+          },
+          {
+            "name": "Framer Motion",
+            "minor": true
+          }
+        ],
+        [
+          {
+            "name": "GraphQL",
+            "detail": "Apollo"
+          },
+          {
+            "name": "REST API",
+            "minor": true
+          }
+        ],
+        [
+          {
+            "name": "playery wideo / audio / radio / podcast"
+          }
+        ],
+        [
+          {
+            "name": "Vite",
+            "minor": true
+          },
+          {
+            "name": "Webpack",
+            "minor": true
+          },
+          {
+            "name": "Git",
+            "minor": true
+          }
+        ],
+        [
+          {
+            "name": "Python",
+            "minor": true
+          },
+          {
+            "name": "Node.js",
+            "minor": true
+          }
+        ],
+        [
+          {
+            "name": "Figma",
+            "minor": true
+          },
+          {
+            "name": "UI Design Systems",
+            "minor": true
+          },
+          {
+            "name": "mentoring",
+            "minor": true
+          },
+          {
+            "name": "code review",
+            "minor": true
+          }
+        ]
+      ]
+    },
+    {
+      "title": "Pracowałem między innymi z:",
+      "lines": [
+        [
+          {
+            "name": "Google IMA"
+          },
+          {
+            "name": "VAST"
+          }
+        ],
+        [
+          {
+            "name": "Video.js"
+          }
+        ],
+        [
+          {
+            "name": "Text-to-Speech",
+            "detail": "AI"
+          }
+        ],
+        [
+          {
+            "name": "moduły CMS",
+            "detail": "React"
           }
         ],
         [
@@ -246,113 +400,20 @@
         ],
         [
           {
-            "name": "Google IMA / VAST"
-          },
-          {
-            "name": "text-to-speech"
+            "name": "edytor treści dla redakcji"
           }
         ],
         [
           {
-            "name": "Agenci AI",
-            "detail": "skille, instrukcje, review kodu"
+            "name": "Nx Monorepo"
           }
         ],
         [
           {
-            "name": "Figma"
+            "name": "Web Performance"
           },
           {
-            "name": "NX monorepo"
-          }
-        ],
-        [
-          {
-            "name": "Husky"
-          },
-          {
-            "name": "Lerna"
-          },
-          {
-            "name": "Prettier"
-          },
-          {
-            "name": "ESLint"
-          }
-        ],
-        [
-          {
-            "name": "GitLab"
-          },
-          {
-            "name": "Jira"
-          },
-          {
-            "name": "Slack"
-          },
-          {
-            "name": "MS Teams"
-          }
-        ]
-      ]
-    },
-    {
-      "title": "Pracowałem między innymi z:",
-      "lines": [
-        [
-          {
-            "name": "Strapi"
-          },
-          {
-            "name": "Sanity",
-            "detail": "headless CMS"
-          }
-        ],
-        [
-          {
-            "name": "Gatsby"
-          }
-        ],
-        [
-          {
-            "name": "React Native"
-          }
-        ],
-        [
-          {
-            "name": "Docker"
-          }
-        ],
-        [
-          {
-            "name": "Symfony + Twig"
-          }
-        ],
-        [
-          {
-            "name": "GitHub"
-          },
-          {
-            "name": "Bitbucket"
-          }
-        ],
-        [
-          {
-            "name": "PM2"
-          },
-          {
-            "name": "Vercel"
-          },
-          {
-            "name": "Heroku"
-          }
-        ],
-        [
-          {
-            "name": "WordPress"
-          },
-          {
-            "name": "Joomla"
+            "name": "Core Web Vitals"
           }
         ]
       ]

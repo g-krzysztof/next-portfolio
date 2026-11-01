@@ -3,7 +3,9 @@
 export interface Tech {
   name: string;
   detail?: string;
+  // ważność w chmurze stacku: strong = duże, minor = małe, brak = średnie
   strong?: boolean;
+  minor?: boolean;
 }
 
 // Linia stacku to kilka technologii, które w CV stoją obok siebie
@@ -75,7 +77,7 @@ export interface ProjectLink {
 export interface Project {
   id: string;
   featured?: boolean;
-  // ilustracja przy wyróżnionym projekcie: 'map' | 'editor' (JSON daje string)
+  // ilustracja przy wyróżnionym projekcie: 'map' | 'editor' | 'players' (JSON daje string)
   visual?: string;
   name: string;
   context: string;
@@ -87,7 +89,8 @@ export interface Project {
   facts?: ProjectFact[];
   factsSource?: string;
   stack: string;
-  link?: ProjectLink;
+  // linki do case study albo stron demo
+  links?: ProjectLink[];
 }
 
 export interface ProjectsSection {

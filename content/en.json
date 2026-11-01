@@ -64,55 +64,207 @@
       "lines": [
         [
           {
-            "name": "REACT",
-            "detail": "redux, saga, react-query",
+            "name": "React",
             "strong": true
+          },
+          {
+            "name": "Redux"
+          },
+          {
+            "name": "Redux-Saga",
+            "minor": true
+          },
+          {
+            "name": "TanStack Query"
           }
         ],
-        [{ "name": "TypeScript", "strong": true }],
         [
-          { "name": "REST API & GraphQL", "detail": "Apollo server" },
-          { "name": "TanStack Query" }
+          {
+            "name": "TypeScript",
+            "strong": true
+          },
+          {
+            "name": "JavaScript",
+            "minor": true
+          }
         ],
         [
-          { "name": "Styled Components", "strong": true },
-          { "name": "Styled System" },
-          { "name": "Sass", "detail": "BEM" }
-        ],
-        [{ "name": "Storybook" }, { "name": "Figma" }],
-        [
-          { "name": "Next.js", "strong": true },
-          { "name": "NX monorepo" },
-          { "name": "Strapi" }
-        ],
-        [
-          { "name": "Husky" },
-          { "name": "Lerna" },
-          { "name": "Prettier" },
-          { "name": "Eslint" }
+          {
+            "name": "Next.js",
+            "strong": true
+          },
+          {
+            "name": "Server-Side Rendering",
+            "minor": true
+          }
         ],
         [
-          { "name": "Gitlab" },
-          { "name": "Jira" },
-          { "name": "Slack" },
-          { "name": "MS Teams" }
+          {
+            "name": "Playwright",
+            "strong": true
+          },
+          {
+            "name": "Cypress"
+          },
+          {
+            "name": "Jest"
+          },
+          {
+            "name": "React Testing Library"
+          },
+          {
+            "name": "Vitest",
+            "minor": true
+          }
         ],
         [
-          { "name": "Cypress e2e", "strong": true },
-          { "name": "Jest" },
-          { "name": "React Testing Library" }
+          {
+            "name": "AI agents",
+            "strong": true
+          },
+          {
+            "name": "Claude Code"
+          },
+          {
+            "name": "Cursor",
+            "minor": true
+          },
+          {
+            "name": "GitHub Copilot",
+            "minor": true
+          }
+        ],
+        [
+          {
+            "name": "Styled Components"
+          },
+          {
+            "name": "Tailwind"
+          },
+          {
+            "name": "Sass",
+            "detail": "BEM",
+            "minor": true
+          },
+          {
+            "name": "Storybook"
+          },
+          {
+            "name": "Framer Motion",
+            "minor": true
+          }
+        ],
+        [
+          {
+            "name": "GraphQL",
+            "detail": "Apollo"
+          },
+          {
+            "name": "REST API",
+            "minor": true
+          }
+        ],
+        [
+          {
+            "name": "video / audio / radio / podcast players"
+          }
+        ],
+        [
+          {
+            "name": "Vite",
+            "minor": true
+          },
+          {
+            "name": "Webpack",
+            "minor": true
+          },
+          {
+            "name": "Git",
+            "minor": true
+          }
+        ],
+        [
+          {
+            "name": "Python",
+            "minor": true
+          },
+          {
+            "name": "Node.js",
+            "minor": true
+          }
+        ],
+        [
+          {
+            "name": "Figma",
+            "minor": true
+          },
+          {
+            "name": "UI Design Systems",
+            "minor": true
+          },
+          {
+            "name": "mentoring",
+            "minor": true
+          },
+          {
+            "name": "code review",
+            "minor": true
+          }
         ]
       ]
     },
     {
       "title": "I have worked with, among others:",
       "lines": [
-        [{ "name": "Strapi" }, { "name": "Sanity", "detail": "headless CMS" }],
-        [{ "name": "Gatsby" }],
-        [{ "name": "Docker" }],
-        [{ "name": "Symfony" }, { "name": "twig templates" }],
-        [{ "name": "Github" }, { "name": "Bitbucket" }, { "name": "Gitlab" }],
-        [{ "name": "PM2" }, { "name": "Vercel" }, { "name": "Heroku" }]
+        [
+          {
+            "name": "Google IMA"
+          },
+          {
+            "name": "VAST"
+          }
+        ],
+        [
+          {
+            "name": "Video.js"
+          }
+        ],
+        [
+          {
+            "name": "Text-to-Speech",
+            "detail": "AI"
+          }
+        ],
+        [
+          {
+            "name": "CMS modules",
+            "detail": "React"
+          }
+        ],
+        [
+          {
+            "name": "Django",
+            "detail": "templates"
+          }
+        ],
+        [
+          {
+            "name": "newsroom content editor"
+          }
+        ],
+        [
+          {
+            "name": "Nx Monorepo"
+          }
+        ],
+        [
+          {
+            "name": "Web Performance"
+          },
+          {
+            "name": "Core Web Vitals"
+          }
+        ]
       ]
     }
   ],
