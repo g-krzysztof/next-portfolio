@@ -75,12 +75,17 @@ export interface ProjectLink {
 export interface Project {
   id: string;
   featured?: boolean;
+  // ilustracja przy wyróżnionym projekcie: 'map' | 'editor' (JSON daje string)
+  visual?: string;
   name: string;
   context: string;
   role: string;
   problem?: string;
+  // opis produktu, gdy praca była przy rozwoju istniejącego narzędzia
+  product?: string[];
   text: string[];
   facts?: ProjectFact[];
+  factsSource?: string;
   stack: string;
   link?: ProjectLink;
 }

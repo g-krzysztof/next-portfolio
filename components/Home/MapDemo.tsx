@@ -190,7 +190,7 @@ const MapDemo = () => {
           ))}
         </Group>
       </Controls>
-      <Caption>{copy.mapCaption}</Caption>
+      <Caption>{copy.demoCaption}</Caption>
     </Figure>
   );
 };

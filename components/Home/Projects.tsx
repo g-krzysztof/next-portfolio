@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import type { Project, ProjectsSection } from '../../content/types';
+import EditorDemo from './EditorDemo';
 import { useLang } from './lang';
 import MapDemo from './MapDemo';
 import { CmsInline, Section, SectionTitle, Wrap } from './ui';
@@ -20,8 +21,8 @@ const Projects = ({ section }: { section: ProjectsSection }) => {
         </SectionTitle>
         {intro && <Intro>{intro}</Intro>}
 
-        {featured.map((project) => (
-          <Featured key={project.id} project={project} />
+        {featured.map((project, index) => (
+          <Featured key={project.id} project={project} flip={index % 2 === 1} />
         ))}
 
         <Grid>
@@ -48,13 +49,32 @@ const Projects = ({ section }: { section: ProjectsSection }) => {
   );
 };
 
-// Wyróżniony case study: opis po lewej, ilustracja mapy po prawej, liczby pod spodem
-const Featured = ({ project }: { project: Project }) => {
+const VISUALS: Record<string, (() => React.JSX.Element) | undefined> = {
+  map: MapDemo,
+  editor: EditorDemo,
+};
+
+// Wyróżniony case study: opis i ilustracja obok siebie (co drugi na odwrót),
+// liczby pod spodem
+const Featured = ({ project, flip }: { project: Project; flip: boolean }) => {
   const { copy } = useLang();
-  const { name, context, role, problem, text, facts, stack, link } = project;
+  const {
+    name,
+    context,
+    role,
+    problem,
+    product,
+    text,
+    facts,
+    factsSource,
+    stack,
+    link,
+    visual,
+  } = project;
+  const Visual = visual && VISUALS[visual];
 
   return (
-    <FeaturedItem>
+    <FeaturedItem $flip={flip}>
       <FeaturedText>
         <Name as="h3">{name}</Name>
         <Context>{context}</Context>
@@ -65,6 +85,14 @@ const Featured = ({ project }: { project: Project }) => {
             <>
               <Label>{copy.projectProblem}</Label>
               <p>{problem}</p>
+            </>
+          )}
+          {product && (
+            <>
+              <Label>{copy.projectProduct}</Label>
+              {product.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </>
           )}
           <Label>{copy.projectWork}</Label>
@@ -82,19 +110,24 @@ const Featured = ({ project }: { project: Project }) => {
         )}
       </FeaturedText>
 
-      <FeaturedVisual>
-        <MapDemo />
-      </FeaturedVisual>
+      {Visual && (
+        <FeaturedVisual>
+          <Visual />
+        </FeaturedVisual>
+      )}
 
       {facts && (
-        <Facts aria-label={copy.projectFacts}>
-          {facts.map(({ value, label }) => (
-            <Fact key={label}>
-              <FactValue>{value}</FactValue>
-              <FactLabel>{label}</FactLabel>
-            </Fact>
-          ))}
-        </Facts>
+        <FactsWrap>
+          <Facts aria-label={copy.projectFacts}>
+            {facts.map(({ value, label }) => (
+              <Fact key={label}>
+                <FactValue>{value}</FactValue>
+                <FactLabel>{label}</FactLabel>
+              </Fact>
+            ))}
+          </Facts>
+          {factsSource && <FactsSource>{factsSource}</FactsSource>}
+        </FactsWrap>
       )}
     </FeaturedItem>
   );
@@ -155,16 +188,32 @@ const Label = styled.h4`
   color: ${({ theme }) => theme.colors.tealInk};
 `;
 
-const FeaturedItem = styled.article`
+const FeaturedItem = styled.article<{ $flip: boolean }>`
   margin-top: clamp(36px, 5vw, 56px);
   padding-top: 18px;
   border-top: 2px solid ${({ theme }) => theme.colors.field};
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-columns: ${({ $flip }) =>
+    $flip ? 'minmax(0, 7fr) minmax(0, 5fr)' : 'minmax(0, 5fr) minmax(0, 7fr)'};
   gap: clamp(28px, 4vw, 64px);
   align-items: start;
+  & + & {
+    margin-top: clamp(64px, 8vw, 112px);
+  }
+  ${({ $flip }) =>
+    $flip &&
+    css`
+      > :nth-child(2) {
+        grid-row: 1;
+        grid-column: 1;
+      }
+    `}
   @media (max-width: ${({ theme }) => theme.breakpoints.laptopS}) {
     grid-template-columns: 1fr;
+    > :nth-child(2) {
+      grid-row: auto;
+      grid-column: auto;
+    }
   }
 `;
 
@@ -202,8 +251,17 @@ const CaseLink = styled.a`
   }
 `;
 
-const Facts = styled.dl`
+const FactsWrap = styled.div`
   grid-column: 1 / -1;
+`;
+
+const FactsSource = styled.p`
+  margin-top: 14px;
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.inkMuted};
+`;
+
+const Facts = styled.dl`
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(20px, 3vw, 48px);

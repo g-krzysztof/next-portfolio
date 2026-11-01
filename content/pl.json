@@ -118,6 +118,50 @@
         "link": {
           "href": "https://autentika.com/projects/kadme",
           "label": "Case study na autentika.com"
+        },
+        "visual": "map",
+        "factsSource": "Liczby z case study Autentiki, etap projektowania (do lutego 2022)."
+      },
+      {
+        "id": "wp-editor",
+        "featured": true,
+        "visual": "editor",
+        "name": "Edytor treści dla redakcji Wirtualnej Polski",
+        "context": "Wirtualna Polska · zespół frontendowy narzędzi back-office · 2022–2024",
+        "role": "Senior React Frontend Developer w zespole WP (kontrakt przez Autentikę)",
+        "problem": "Przez 25 lat WP zbudowała i przejęła dziesiątki narzędzi back-office. Każde wyglądało i działało inaczej, a procesy redakcyjne były rozproszone po wielu systemach. Utrzymanie było trudne, rozwój powolny, a redaktorzy tracili czas.",
+        "product": [
+          "Edytor to główne narzędzie dziennikarzy WP, część spójnego ekosystemu aplikacji opartego na wspólnym Design Systemie. Artykuły składa się z gotowych elementów: zdjęć, wideo, galerii, cytatów, tabel, notowań giełdowych, osi czasu czy recenzji.",
+          "Edytor ma szablony pod typy treści i autozapis w local storage. Podpowiada zdjęcia, linki, tagi i kategorie na podstawie treści (AI/ML), ocenia czytelność tekstu i wyłapuje błędy techniczne. Pokazuje podgląd artykułu w layoucie portalu, z makietą mobilną i siatką reklam, a filtrować można listą komend z klawiatury."
+        ],
+        "text": [
+          "Implementacja zaawansowanych funkcji narzędzi wydawniczych, od analizy wymagań do wdrożenia, w ścisłej współpracy z backendem.",
+          "Optymalizacja wydajności aplikacji, która obsługuje bazę do 4 mln artykułów, tysiące tagów i setki autorów.",
+          "Testy jednostkowe, code review i rozwój komponentów w monorepo NX."
+        ],
+        "facts": [
+          {
+            "value": "4 mln",
+            "label": "artykułów w bazie, tysiące tagów, setki autorów"
+          },
+          {
+            "value": "81%",
+            "label": "użytkowników uznaje edytor za intuicyjny od pierwszego kontaktu"
+          },
+          {
+            "value": "90%",
+            "label": "komponentów edytora pochodzi z Design Systemu"
+          },
+          {
+            "value": "2",
+            "label": "pierwsze nagrody DesignWays 2022: Develop & Deliver i People’s Choice"
+          }
+        ],
+        "factsSource": "Liczby z case study całego projektu, prowadzonego przez WP i Autentikę od 2018 roku.",
+        "stack": "TypeScript, React, Redux, Redux-Saga, TanStack Query, GraphQL (Apollo), Storybook, Jest, React Testing Library, Cypress, NX",
+        "link": {
+          "href": "https://autentika.com/projects/wp",
+          "label": "Case study ekosystemu WP na autentika.com"
         }
       },
       {
@@ -130,16 +174,6 @@
           "Refaktoryzacja playerów wideo, audio, radiowych (live streaming) i podcastowych w serwisach grupy medialnej; integracje reklamowe Google IMA i VAST; moduły CMS w React do zarządzania aplikacjami radiowymi; odsłuch artykułów oparty na text-to-speech."
         ],
         "stack": "TypeScript, React, Playwright, Django templates, SASS/BEM"
-      },
-      {
-        "id": "wp-editor",
-        "name": "Edytor treści dla redakcji",
-        "context": "Wirtualna Polska (przez Autentikę)",
-        "role": "Senior React Frontend Developer",
-        "text": [
-          "Narzędzie back-office, w którym redaktorzy WP tworzą i publikują treści. Zaawansowane funkcje wydawnicze, optymalizacja wydajności, współpraca z backendem, testy i code review w monorepo NX."
-        ],
-        "stack": "TypeScript, React, Redux, Redux-Saga, TanStack Query, GraphQL (Apollo), Storybook, Jest, RTL, Cypress"
       }
     ]
   },
