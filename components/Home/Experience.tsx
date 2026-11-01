@@ -1,14 +1,11 @@
-import { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import type { ExperienceSection } from '../../content/types';
-import { LangContext } from '../../pages/_app';
-import { t } from './copy';
-import { CmsInline, Section, SectionTitle, Wrap } from './ui';
+import { useLang } from './lang';
+import { CmsInline, Section, SectionTitle, Wrap, bulletList } from './ui';
 import useInView from './useInView';
 
 const Experience = ({ section }: { section: ExperienceSection }) => {
-  const [lang] = useContext(LangContext);
-  const copy = t(lang);
+  const { copy } = useLang();
   const { intro, entries } = section;
   const [lineRef, inView] = useInView<HTMLOListElement>({ threshold: 0.25 });
 
@@ -188,20 +185,7 @@ const Detail = styled.div`
     display: grid;
     gap: 6px;
   }
-  li {
-    position: relative;
-    padding-left: 16px;
-  }
-  li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.62em;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: ${({ theme }) => theme.colors.teal};
-  }
+  ${bulletList}
 `;
 
 const Label = styled.h4`

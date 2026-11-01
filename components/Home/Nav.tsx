@@ -1,17 +1,17 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { LangContext } from '../../pages/_app';
-import { SECTIONS, t } from './copy';
+import { SECTIONS } from './copy';
+import { useLang } from './lang';
+import { theme } from '../../styles/theme';
 
 // Pasek nad turkusowym hero jest przezroczysty; gdy hero zniknie spod
 // paska, przechodzi w jasny papier. Aktywną sekcję śledzi IntersectionObserver.
 const Nav = () => {
-  const [lang, setLang] = useContext(LangContext);
+  const { lang, setLang, copy } = useLang();
   const [solid, setSolid] = useState(false);
   const [active, setActive] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const copy = t(lang);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -25,7 +25,7 @@ const Nav = () => {
     if (!hero) return undefined;
     const observer = new IntersectionObserver(
       ([entry]) => setSolid(!entry.isIntersecting),
-      { rootMargin: '-76px 0px 0px 0px', threshold: 0 },
+      { rootMargin: `-${theme.layout.navHeight} 0px 0px 0px`, threshold: 0 },
     );
     observer.observe(hero);
     return () => observer.disconnect();

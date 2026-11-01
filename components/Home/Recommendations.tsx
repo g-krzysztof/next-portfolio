@@ -1,12 +1,19 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import type {
   Recommendation,
   RecommendationsSection,
 } from '../../content/types';
-import { LangContext } from '../../pages/_app';
-import { t, type Copy } from './copy';
-import { CmsInline, Wrap } from './ui';
+import { useLang } from './lang';
+import type { Copy } from './copy';
+import {
+  CmsInline,
+  Wrap,
+  bandContours,
+  bandFill,
+  bulletList,
+  mintOverrides,
+} from './ui';
 import { LineIcon } from './icons';
 import useInView from './useInView';
 
@@ -106,8 +113,7 @@ const RecCard = ({
 
 const Recommendations = ({ section }: { section: RecommendationsSection }) => {
   const { items } = section;
-  const [lang] = useContext(LangContext);
-  const copy = t(lang);
+  const { copy } = useLang();
   const track = useRef<HTMLDivElement | null>(null);
   const [deckRef, inView] = useInView<HTMLDivElement>({ threshold: 0.15 });
   // Start od środka talii, żeby karty wystawały symetrycznie z obu stron
@@ -169,14 +175,7 @@ const Recommendations = ({ section }: { section: RecommendationsSection }) => {
     <Field id="opinie" aria-labelledby="opinie-title">
       <Head>
         <Title id="opinie-title">
-          <CmsInline
-            overrides={{
-              secondary: { component: Mint },
-              primary: { component: Mint },
-            }}
-          >
-            {section.title}
-          </CmsInline>
+          <CmsInline overrides={mintOverrides}>{section.title}</CmsInline>
         </Title>
         {section.intro && <Intro>{section.intro}</Intro>}
       </Head>
@@ -241,10 +240,6 @@ const Recommendations = ({ section }: { section: RecommendationsSection }) => {
 };
 
 export default Recommendations;
-
-const Mint = styled.span`
-  color: ${({ theme }) => theme.colors.mint};
-`;
 
 const Field = styled.section`
   position: relative;
@@ -451,13 +446,7 @@ const Card = styled.article<{ $active: boolean; $near: boolean }>`
 const Band = styled.div`
   margin: 0 -28px;
   height: 64px;
-  background:
-    repeating-radial-gradient(
-      circle at 92% 160%,
-      transparent 0 18px,
-      rgba(15, 59, 58, 0.14) 18px 19.5px
-    ),
-    linear-gradient(118deg, #50a3a2 0%, #6cc39a 55%, #8fe388 100%);
+  background: ${bandContours('92% 160%', 18)}, ${bandFill};
 `;
 
 const Disc = styled.div`
@@ -529,20 +518,7 @@ const List = styled.ul`
   gap: 6px;
   font-size: 15px;
   color: ${({ theme }) => theme.colors.inkSoft};
-  li {
-    position: relative;
-    padding-left: 16px;
-  }
-  li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.62em;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: ${({ theme }) => theme.colors.teal};
-  }
+  ${bulletList}
 `;
 
 const Foot = styled.div`

@@ -1,8 +1,6 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
 import type { About as AboutContent, StackGroup } from '../../content/types';
-import { LangContext } from '../../pages/_app';
-import { t } from './copy';
+import { useLang } from './lang';
 import { lineLabel } from './stack';
 import { CmsInline, Section, SectionTitle, Wrap } from './ui';
 
@@ -12,8 +10,7 @@ interface AboutStackProps {
 }
 
 const AboutStack = ({ about, groups }: AboutStackProps) => {
-  const [lang] = useContext(LangContext);
-  const copy = t(lang);
+  const { copy } = useLang();
   const [current, ...others] = groups;
 
   return (

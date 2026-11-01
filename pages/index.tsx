@@ -1,8 +1,7 @@
-import { useContext } from 'react';
 import type { GetStaticProps } from 'next';
 import type { Content } from '../content/types';
 import type { Lang } from '../components/Home/copy';
-import { LangContext } from './_app';
+import { useLang } from '../components/Home/lang';
 import contentPl from '../content/pl.json';
 import contentEn from '../content/en.json';
 import Nav from '../components/Home/Nav';
@@ -20,7 +19,7 @@ interface HomeProps {
 }
 
 const Home = ({ content, buildYear }: HomeProps) => {
-  const [lang] = useContext(LangContext);
+  const { lang } = useLang();
   const { about, experience, stack, recommendations, contact } = content[lang];
 
   return (

@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components';
-import type { MarkdownToJSX } from 'markdown-to-jsx';
-import Markdown from '../Markdown/Markdown';
-import { LineIcon, type IconName } from './icons';
+import Markdown, { type MarkdownToJSX } from 'markdown-to-jsx';
 
 // Tagi w treściach: <secondary> to akcent turkusowy, <primary> to podkreślenie miętą.
 const Accent = styled.span`
@@ -34,7 +32,7 @@ export const CmsInline = ({ children, overrides = {} }: CmsInlineProps) => (
       overrides: { ...cmsOverrides, ...overrides },
     }}
   >
-    {(children || '').replace(/^#+\s*/, '')}
+    {children || ''}
   </Markdown>
 );
 
@@ -98,11 +96,49 @@ export const MintButton = styled.a`
   `}
 `;
 
-interface GlyphProps {
-  name: IconName;
-  size?: string;
-}
+// Tytuły na turkusowym polu: oba tagi akcentu renderują się miętą
+const Mint = styled.span`
+  color: ${({ theme }) => theme.colors.mint};
+`;
 
-export const Glyph = ({ name, size = '18px' }: GlyphProps) => (
-  <LineIcon name={name} size={parseInt(size, 10)} />
-);
+export const mintOverrides: MarkdownToJSX.Overrides = {
+  primary: { component: Mint },
+  secondary: { component: Mint },
+};
+
+// Pasek wizytówki: turkus przechodzący w miętę
+export const bandFill = css`
+  linear-gradient(
+    118deg,
+    ${({ theme }) => theme.colors.teal} 0%,
+    #6cc39a 55%,
+    ${({ theme }) => theme.colors.mint} 100%
+  )
+`;
+
+// Cienkie łuki nawiązujące do warstwic na pasku dawnej wizytówki
+export const bandContours = (at: string, step: number) => `
+  repeating-radial-gradient(
+    circle at ${at},
+    transparent 0 ${step}px,
+    rgba(15, 59, 58, 0.14) ${step}px ${step + 1.5}px
+  )
+`;
+
+// Lista z turkusowymi kropkami (opinie, opisy doświadczenia)
+export const bulletList = css`
+  li {
+    position: relative;
+    padding-left: 16px;
+  }
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: ${({ theme }) => theme.colors.teal};
+  }
+`;

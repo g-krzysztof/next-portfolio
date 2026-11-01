@@ -10,18 +10,9 @@ import {
 import '../styles/globals.css';
 import { GlobalStyle, theme } from '../styles';
 import { ClarityAnalytics } from '../components/ClarityAnalytics';
-import {
-  createContext,
-  useEffect,
-  useState,
-  type Dispatch,
-  type SetStateAction,
-} from 'react';
+import { useEffect, useState } from 'react';
 import type { Lang } from '../components/Home/copy';
-
-export const LangContext = createContext<
-  [Lang, Dispatch<SetStateAction<Lang>>]
->(['pl', () => {}]);
+import { LangContext } from '../components/Home/lang';
 
 const displayFont = Bricolage_Grotesque({
   subsets: ['latin', 'latin-ext'],
@@ -36,7 +27,7 @@ const bodyFont = Onest({
 });
 
 // styled-components v6 forwards all props to the DOM by default;
-// keep v5 behaviour so styled-system props don't end up as HTML attributes
+// keep v5 behaviour so unknown props don't end up as HTML attributes
 const shouldForwardProp: ShouldForwardProp<'web'> = (propName, target) =>
   typeof target === 'string' ? isPropValid(propName) : true;
 

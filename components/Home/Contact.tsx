@@ -1,14 +1,11 @@
-import { useContext, useSyncExternalStore } from 'react';
+import { useSyncExternalStore } from 'react';
 import styled from 'styled-components';
 import type { ContactSection } from '../../content/types';
-import { LangContext } from '../../pages/_app';
-import { CONTACT, cvHref, t } from './copy';
-import { CmsInline, Glyph, MintButton, Wrap } from './ui';
+import { useLang } from './lang';
+import { CONTACT, cvHref } from './copy';
+import { CmsInline, MintButton, Wrap, mintOverrides } from './ui';
+import { LineIcon } from './icons';
 import FloatingSquares from './FloatingSquares';
-
-const Mint = styled.span`
-  color: ${({ theme }) => theme.colors.mint};
-`;
 
 const noSubscribe = () => () => {};
 
@@ -18,8 +15,7 @@ interface ContactProps {
 }
 
 const Contact = ({ section, buildYear }: ContactProps) => {
-  const [lang] = useContext(LangContext);
-  const copy = t(lang);
+  const { lang, copy } = useLang();
   // HTML niesie rok z builda; React hydratuje z nim, a potem bierze bieżący,
   // więc stara statyczna strona nie zgłasza błędu hydracji
   const year = useSyncExternalStore(
@@ -33,14 +29,7 @@ const Contact = ({ section, buildYear }: ContactProps) => {
       <FloatingSquares count={7} />
       <Wrap>
         <Title id="kontakt-title">
-          <CmsInline
-            overrides={{
-              secondary: { component: Mint },
-              primary: { component: Mint },
-            }}
-          >
-            {section.title}
-          </CmsInline>
+          <CmsInline overrides={mintOverrides}>{section.title}</CmsInline>
         </Title>
         <Lead>{copy.contactLead}</Lead>
 
@@ -48,7 +37,7 @@ const Contact = ({ section, buildYear }: ContactProps) => {
 
         <Channels>
           <Channel href={CONTACT.phoneHref}>
-            <Glyph name="phone" size="18px" />
+            <LineIcon name="phone" size={18} />
             {CONTACT.phone}
           </Channel>
           <Channel
@@ -56,7 +45,7 @@ const Contact = ({ section, buildYear }: ContactProps) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Glyph name="linkedin" size="18px" />
+            <LineIcon name="linkedin" size={18} />
             LinkedIn
           </Channel>
           <Channel
@@ -64,7 +53,7 @@ const Contact = ({ section, buildYear }: ContactProps) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Glyph name="github" size="18px" />
+            <LineIcon name="github" size={18} />
             GitHub
           </Channel>
           <MintButton
@@ -73,7 +62,7 @@ const Contact = ({ section, buildYear }: ContactProps) => {
             rel="noopener noreferrer"
           >
             {copy.downloadCv}
-            <Glyph name="download" size="16px" />
+            <LineIcon name="download" size={16} />
           </MintButton>
         </Channels>
 

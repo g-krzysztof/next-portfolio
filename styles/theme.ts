@@ -23,22 +23,7 @@ export const theme = {
     display: 'var(--font-display), system-ui, sans-serif',
     body: 'var(--font-body), system-ui, sans-serif',
   },
-  fontWeights: {
-    regular: `400`,
-    medium: `500`,
-    bold: `600`,
-    black: `800`,
-  },
   breakpoints,
-  space: {
-    space5: '5px',
-    space10: '10px',
-    space15: '15px',
-    space20: '20px',
-    space30: '30px',
-    space50: '50px',
-    space100: '100px',
-  },
   radii: {
     control: '14px',
     card: '28px',

@@ -1,18 +1,12 @@
-import {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  type PointerEvent,
-} from 'react';
+import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import type { Recommendation, StackGroup } from '../../content/types';
-import { LangContext } from '../../pages/_app';
+import { useLang } from './lang';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { useCanHover } from '../../hooks/useDevice';
-import { CONTACT, cvHref, t } from './copy';
+import { CONTACT, cvHref } from './copy';
 import { lineLabel } from './stack';
-import { Glyph, Wrap } from './ui';
+import { Wrap, bandContours, bandFill } from './ui';
 import { LineIcon } from './icons';
 import { initials } from './Recommendations';
 
@@ -30,8 +24,7 @@ interface HeroProps {
 }
 
 const Hero = ({ stack, recommendations = [] }: HeroProps) => {
-  const [lang] = useContext(LangContext);
-  const copy = t(lang);
+  const { lang, copy } = useLang();
   const [flipped, setFlipped] = useState(false);
   const canHover = useCanHover();
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
@@ -130,7 +123,7 @@ const Hero = ({ stack, recommendations = [] }: HeroProps) => {
                     rel="noopener noreferrer"
                     aria-label="GitHub"
                   >
-                    <Glyph name="github" size="20px" />
+                    <LineIcon name="github" size={20} />
                   </SocialLink>
                   <SocialLink
                     href={CONTACT.linkedin}
@@ -138,7 +131,7 @@ const Hero = ({ stack, recommendations = [] }: HeroProps) => {
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
                   >
-                    <Glyph name="linkedin" size="20px" />
+                    <LineIcon name="linkedin" size={20} />
                   </SocialLink>
                 </Socials>
                 <Who>
@@ -152,14 +145,14 @@ const Hero = ({ stack, recommendations = [] }: HeroProps) => {
                     rel="noopener noreferrer"
                   >
                     {copy.downloadCv}
-                    <Glyph name="download" size="16px" />
+                    <LineIcon name="download" size={16} />
                   </RowPrimary>
                   <Row href={CONTACT.phoneHref}>
-                    <Glyph name="phone" size="16px" />
+                    <LineIcon name="phone" size={16} />
                     {CONTACT.phone}
                   </Row>
                   <Row href={`mailto:${CONTACT.email}`} $wide>
-                    <Glyph name="email" size="18px" />
+                    <LineIcon name="email" size={18} />
                     {CONTACT.email}
                   </Row>
                 </Rows>
@@ -431,7 +424,7 @@ const Tilt = styled.div<{ $interactive: boolean; $flipped: boolean }>`
     border-radius: ${({ theme }) => theme.radii.card};
     background: linear-gradient(
       160deg,
-      #23706f,
+      ${({ theme }) => theme.colors.tealInk},
       ${({ theme }) => theme.colors.fieldDeep}
     );
     border: 1px solid rgba(143, 227, 136, 0.28);
@@ -529,19 +522,14 @@ const Band = styled.div`
   position: relative;
   margin: 0 calc(-1 * clamp(22px, 4vw, 44px));
   height: clamp(110px, 14vw, 150px);
-  background: linear-gradient(118deg, #50a3a2 0%, #6cc39a 55%, #8fe388 100%);
+  background: ${bandFill};
   overflow: hidden;
 `;
 
-// Cienkie łuki nawiązują do warstwic na pasku dawnej wizytówki
 const BandLines = styled.span`
   position: absolute;
   inset: 0;
-  background: repeating-radial-gradient(
-    circle at 92% 140%,
-    transparent 0 22px,
-    rgba(15, 59, 58, 0.14) 22px 23.5px
-  );
+  background: ${bandContours('92% 140%', 22)};
 `;
 
 const Avatar = styled.img`
