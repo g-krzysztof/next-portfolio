@@ -4,7 +4,7 @@ import type { Project, ProjectsSection } from '../../content/types';
 import EditorDemo from './EditorDemo';
 import { useLang } from './lang';
 import MapDemo from './MapDemo';
-import PlayerDemo from './PlayerDemo';
+import MediaFacts from './MediaFacts';
 import { CmsInline, Section, SectionTitle, Wrap } from './ui';
 
 // Case study na papierze: bez cieni i ramek, kolumny oddziela linia u góry
@@ -56,7 +56,7 @@ const Projects = ({ section }: { section: ProjectsSection }) => {
 const VISUALS: Record<string, (() => React.JSX.Element) | undefined> = {
   map: MapDemo,
   editor: EditorDemo,
-  players: PlayerDemo,
+  players: MediaFacts,
 };
 
 // Wyróżniony case study: opis z liczbami obok ilustracji (co drugi na odwrót).

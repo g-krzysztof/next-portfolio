@@ -97,7 +97,7 @@
         "name": "Playery wideo i radia dla serwisów ZPR Media",
         "context": "Grupa ZPR Media · zespół Multimedia · 2024–obecnie",
         "role": "Senior React Frontend Developer: wydzielenie playerów do osobnego repozytorium, refaktoryzacja i wdrożenie",
-        "_todo": "TODO(Moon): sprawdzić opis problemu i liczby (stacje, serwisy) – są wyczytane ze stron demo, dopisać skalę (odtworzenia?) jeśli możesz",
+        "_todo": "TODO(Moon): sprawdzić opis problemu; liczby branżowe ze źródłami są w copy.ts (factsItems), dane ZPR do odświeżania raz na jakiś czas",
         "problem": "Playery wideo i radiowe były wplecione w kod poszczególnych serwisów grupy. Każda poprawka oznaczała wdrożenia w wielu miejscach, a reklamy, statystyki i obsługa błędów działały w każdym serwisie trochę inaczej.",
         "product": [
           "Player wideo osadza się jednym skryptem i znacznikiem z atrybutami data-*. Odtwarza strumienie HLS, obsługuje reklamy preroll, kolejne wideo, tryb sticky, transmisje LIVE z zaplanowanym końcem i pionowe rolki z feedem dla newsroomu. Tryb AutoMatch sam dobiera wideo do treści artykułu.",
@@ -108,24 +108,6 @@
           "Refaktoryzacja playerów wideo, audio, radiowych (streaming na żywo) i podcastowych, integracje reklamowe Google IMA i VAST oraz statystyki Gemius.",
           "Strony demo do prezentacji i testów: panel ustawień generuje kod osadzania dla bieżącej konfiguracji, a mocki MSW symulują błędy API i brak zewnętrznych skryptów (IMA, HLS, video.js), żeby dało się sprawdzić każdy stan playera.",
           "Testy E2E w Playwright. Poza playerami: moduły CMS w React do zarządzania aplikacjami radiowymi i odsłuch artykułów oparty na text-to-speech."
-        ],
-        "facts": [
-          {
-            "value": "2",
-            "label": "playery w jednym repozytorium: wideo i radio"
-          },
-          {
-            "value": "1",
-            "label": "skrypt i znacznik, żeby osadzić player w dowolnym serwisie grupy"
-          },
-          {
-            "value": "6",
-            "label": "stacji radiowych w jednym playerze"
-          },
-          {
-            "value": "4",
-            "label": "tryby wideo: klasyczny, sticky, LIVE i pionowe rolki"
-          }
         ],
         "stack": "TypeScript, React, Styled Components, HLS.js, video.js, Google IMA / VAST, MSW, Playwright"
       },
