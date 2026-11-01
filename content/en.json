@@ -433,7 +433,24 @@
           "Krzysztof was a front-end developer at Autentika for 3 years. Throughout the entire period of cooperation, he proved to be a reliable and hard-working member of the team. His commitment and competence allowed him to impeccably fulfill his duties and responsibilities in the projects in which he participated.",
           "We highly value his culture and positive, yet unobtrusive, attitude.",
           "I sincerely recommend Krzysztof as a front-end developer for any IT team."
-        ]
+        ],
+        "reel": {
+          "fact": {
+            "value": "3 years",
+            "label": "at Autentika as a front-end developer"
+          },
+          "quotes": [
+            {
+              "text": "a reliable and hard-working member of the team",
+              "mark": "hard-working"
+            },
+            {
+              "text": "We highly value his culture and positive, yet unobtrusive, attitude.",
+              "mark": "positive"
+            }
+          ],
+          "closing": "I sincerely recommend Krzysztof as a front-end developer for any IT team."
+        }
       },
       {
         "id": "mariusz",
@@ -447,7 +464,24 @@
           "His work in the team is admirable. Krzysztof is an excellent collaborator who can inspire and motivate other team members. He is open to suggestions and willingly shares his knowledge, which significantly improves the level of work of the entire team.",
           "Krzysztof also stands out for his initiative and proactivity. He often comes up with proposals for new solutions that not only improve the efficiency but also the quality of implemented projects. His commitment and passion for work are visible in every task he undertakes.",
           "I am convinced that Krzysztof will be a valuable asset to any company in which he decides to continue his career. His skills, knowledge and attitude make him an exceptional employee who you can always count on."
-        ]
+        ],
+        "reel": {
+          "fact": {
+            "value": "2 years",
+            "label": "in the back-office tools front-end team"
+          },
+          "quotes": [
+            {
+              "text": "an extremely talented and committed programmer",
+              "mark": "extremely talented"
+            },
+            {
+              "text": "can inspire and motivate other team members",
+              "mark": "inspire"
+            }
+          ],
+          "closing": "Krzysztof will be a valuable asset to any company"
+        }
       },
       {
         "id": "grzegorz",
@@ -458,7 +492,24 @@
         "text": [
           "I rate my cooperation with Krzysztof Gryc very positively. He conscientiously carried out the assigned tasks and showed independence and commitment to solving them. He was a long-time member of the team working for a regular client of our company.",
           "During many years of cooperation, we have implemented joint frontend projects using React/Next.js, supporting each other with new solutions and techniques. Here, Krzysztof has repeatedly demonstrated his extensive knowledge and experience."
-        ]
+        ],
+        "reel": {
+          "fact": {
+            "value": "React / Next.js",
+            "label": "many years of joint frontend projects"
+          },
+          "quotes": [
+            {
+              "text": "showed independence and commitment",
+              "mark": "independence"
+            },
+            {
+              "text": "Krzysztof has repeatedly demonstrated his extensive knowledge and experience.",
+              "mark": "extensive knowledge"
+            }
+          ],
+          "closing": "I rate my cooperation with Krzysztof Gryc very positively."
+        }
       },
       {
         "id": "piotr",
@@ -470,7 +521,24 @@
           "I had the pleasure of working with Krzysztof when he was a Frontend Developer in our team. We worked together on an editor to create content for the Wirtualna Polska editorial office. Krzysztof has excellent knowledge of technologies such as TypeScript, React, Redux and TanStack Query.",
           "He is incredibly hard-working, independent and always found solutions to complex problems.",
           "Krzysztof is also a great teammate. Always willing to help, which made working with him really enjoyable. I definitely recommend Krzysztof as a competent and committed front-end developer."
-        ]
+        ],
+        "reel": {
+          "fact": {
+            "value": "TypeScript, React, Redux, TanStack Query",
+            "label": "technologies Krzysztof knows inside out"
+          },
+          "quotes": [
+            {
+              "text": "He is incredibly hard-working, independent and always found solutions to complex problems.",
+              "mark": "always found solutions"
+            },
+            {
+              "text": "Krzysztof is also a great teammate.",
+              "mark": "great teammate"
+            }
+          ],
+          "closing": "I definitely recommend Krzysztof as a competent and committed front-end developer."
+        }
       },
       {
         "id": "daria",
@@ -491,7 +559,24 @@
           "During our cooperation, Krzysztof demonstrated excellent analytical skills. He played an important role in requirements analysis, implementation of new solutions, and work related to application performance optimization.",
           "He found himself very comfortable in projects conducted using the Agile methodology. Krzysztof is a person who is always willing to help, communicative and creative. Combined with great commitment and technical skills, he will certainly be an irreplaceable member of the team of any IT project.",
           "I have no hesitation in recommending Krzysztof as a specialist in his field and I am convinced that the new employer will be as pleased with the cooperation as we are."
-        ]
+        ],
+        "reel": {
+          "fact": {
+            "value": "2 years",
+            "label": "on Wirtualna Polska publishing tools"
+          },
+          "quotes": [
+            {
+              "text": "excellent analytical skills",
+              "mark": "analytical"
+            },
+            {
+              "text": "always willing to help, communicative and creative",
+              "mark": "creative"
+            }
+          ],
+          "closing": "I have no hesitation in recommending Krzysztof as a specialist in his field"
+        }
       }
     ]
   },

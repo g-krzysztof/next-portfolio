@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import styled, { css } from 'styled-components';
 import type {
   Recommendation,
@@ -16,6 +16,14 @@ import {
 } from './ui';
 import { LineIcon } from './icons';
 import useInView from './useInView';
+import RecReel from './RecReel';
+
+const REDUCED = '(prefers-reduced-motion: reduce)';
+const subscribeReduced = (onChange: () => void) => {
+  const query = window.matchMedia(REDUCED);
+  query.addEventListener('change', onChange);
+  return () => query.removeEventListener('change', onChange);
+};
 
 export const initials = (name = ''): string =>
   name
@@ -41,6 +49,9 @@ interface RecCardProps {
   active: boolean;
   near: boolean;
   onPick: () => void;
+  playing: boolean;
+  onTogglePlay: (play: boolean) => void;
+  onEnded: () => void;
   copy: Copy;
 }
 
@@ -51,6 +62,9 @@ const RecCard = ({
   active,
   near,
   onPick,
+  playing,
+  onTogglePlay,
+  onEnded,
   copy,
 }: RecCardProps) => {
   const [open, setOpen] = useState(false);
@@ -78,9 +92,22 @@ const RecCard = ({
           <b>{item.company}</b>
         </Role>
       </Who>
-      <Quote>
+      {item.reel && !open && (
+        <RecReel
+          key={active ? 'active' : 'idle'}
+          item={item}
+          reel={item.reel}
+          active={active}
+          playing={playing && !open}
+          onTogglePlay={onTogglePlay}
+          onEnded={onEnded}
+          copy={copy}
+        />
+      )}
+      {/* przy rolce pełny tekst zostaje w DOM dla czytników, widać go po rozwinięciu */}
+      <Quote $hidden={Boolean(item.reel) && !open}>
         {typeof lead === 'string' && <Lead>{lead}</Lead>}
-        {open &&
+        {(open || item.reel) &&
           rest.map((block, i) =>
             typeof block === 'string' ? (
               <Para key={i}>{block}</Para>
@@ -94,7 +121,7 @@ const RecCard = ({
           )}
       </Quote>
       <Foot>
-        {rest.length > 0 ? (
+        {rest.length > 0 || item.reel ? (
           <More
             type="button"
             onClick={() => setOpen(!open)}
@@ -119,6 +146,36 @@ const Recommendations = ({ section }: { section: RecommendationsSection }) => {
   // Start od środka talii, żeby karty wystawały symetrycznie z obu stron
   const start = Math.floor((items.length - 1) / 2);
   const [active, setActive] = useState(start);
+  // Rolka gra sama, dopóki talia jest w widoku; pauza użytkownika obowiązuje
+  // dla całej talii, a przy ograniczonym ruchu nic nie startuje samo
+  const reduced = useSyncExternalStore(
+    subscribeReduced,
+    () => window.matchMedia(REDUCED).matches,
+    () => false,
+  );
+  // null: użytkownik jeszcze nie wybrał, decyduje ustawienie ruchu
+  const [paused, setPaused] = useState<boolean | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = track.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return undefined;
+    let onScreen = false;
+    const sync = () => setVisible(onScreen && !document.hidden);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        sync();
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(el);
+    document.addEventListener('visibilitychange', sync);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', sync);
+    };
+  }, []);
 
   const cardAt = (index: number) =>
     track.current?.querySelectorAll('article')[index];
@@ -198,6 +255,11 @@ const Recommendations = ({ section }: { section: RecommendationsSection }) => {
             active={index === active}
             near={Math.abs(index - active) === 1}
             onPick={() => centerOn(index)}
+            playing={visible && !(paused ?? reduced)}
+            onTogglePlay={(play) => setPaused(!play)}
+            onEnded={() => {
+              if (index < items.length - 1) centerOn(index + 1);
+            }}
             copy={copy}
           />
         ))}
@@ -492,10 +554,23 @@ const Role = styled.p`
   }
 `;
 
-const Quote = styled.blockquote`
+const Quote = styled.blockquote<{ $hidden: boolean }>`
   margin-top: 18px;
   padding-top: 18px;
   border-top: 1px solid ${({ theme }) => theme.colors.line};
+  ${({ $hidden }) =>
+    $hidden &&
+    css`
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    `}
 `;
 
 const Lead = styled.p`

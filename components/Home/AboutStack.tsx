@@ -146,13 +146,13 @@ const Word = styled.span<{ $strong?: boolean; $minor?: boolean }>`
     color: ${theme.colors.field};
   `
       : $minor
-      ? `
+        ? `
     font-weight: 500;
     font-size: clamp(1rem, 1.15vw, 1.3rem);
     letter-spacing: -0.01em;
     color: ${theme.colors.inkSoft};
   `
-      : `
+        : `
     font-weight: 600;
     font-size: clamp(1.2rem, 1.6vw, 1.9rem);
     color: ${theme.colors.tealInk};

@@ -45,6 +45,15 @@ const shapes = {
       <path d="M20 4v4.5h-4.5" />
     </>
   ),
+  play: (
+    <path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z" />
+  ),
+  pause: (
+    <>
+      <path d="M8 4v16" />
+      <path d="M16 4v16" />
+    </>
+  ),
 } satisfies Record<string, ReactNode>;
 
 export type IconName = keyof typeof shapes;

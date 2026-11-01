@@ -433,7 +433,24 @@
           "Krzysztof przez 3 lata pełnił rolę front-end developera w Autentice. W całym okresie współpracy dał się poznać jako solidny i pracowity członek zespołu. Jego zaangażowanie i kompetencje pozwalały nienagannie wywiązywać się z obowiązków i odpowiedzialności w projektach w jakich brał udział.",
           "Wysoko cenimy jego kulturę i pozytywne, acz nienachalne, nastawienie.",
           "Szczerze rekomenduję Krzysztofa na stanowisko front-end developera do każdego zespołu IT."
-        ]
+        ],
+        "reel": {
+          "fact": {
+            "value": "3 lata",
+            "label": "w Autentice jako front-end developer"
+          },
+          "quotes": [
+            {
+              "text": "solidny i pracowity członek zespołu",
+              "mark": "pracowity"
+            },
+            {
+              "text": "Wysoko cenimy jego kulturę i pozytywne, acz nienachalne, nastawienie.",
+              "mark": "pozytywne"
+            }
+          ],
+          "closing": "Szczerze rekomenduję Krzysztofa na stanowisko front-end developera do każdego zespołu IT."
+        }
       },
       {
         "id": "mariusz",
@@ -447,7 +464,24 @@
           "Jego praca w zespole jest godna podziwu. Krzysztof jest doskonałym współpracownikiem, który potrafi zainspirować i zmotywować innych członków zespołu. Jest otwarty na sugestie i chętnie dzieli się swoją wiedzą, co znacząco podnosi poziom pracy całego zespołu.",
           "Krzysztof wyróżnia się również swoją inicjatywą i proaktywnością. Często wychodzi z propozycjami nowych rozwiązań, które nie tylko poprawiają efektywność, ale także jakość realizowanych projektów. Jego zaangażowanie i pasja do pracy są widoczne w każdym zadaniu, które podejmuje.",
           "Jestem przekonany, że Krzysztof będzie cennym nabytkiem dla każdej firmy, w której zdecyduje się kontynuować swoją karierę. Jego umiejętności, wiedza i postawa czynią go wyjątkowym pracownikiem, na którego zawsze można liczyć."
-        ]
+        ],
+        "reel": {
+          "fact": {
+            "value": "2 lata",
+            "label": "w zespole frontendowym narzędzi backoffice"
+          },
+          "quotes": [
+            {
+              "text": "niezwykle utalentowanym i zaangażowanym programistą",
+              "mark": "niezwykle utalentowanym"
+            },
+            {
+              "text": "potrafi zainspirować i zmotywować innych członków zespołu",
+              "mark": "zainspirować"
+            }
+          ],
+          "closing": "Krzysztof będzie cennym nabytkiem dla każdej firmy"
+        }
       },
       {
         "id": "grzegorz",
@@ -458,7 +492,24 @@
         "text": [
           "Współpracę z Krzysztofem Grycem oceniam bardzo dobrze. Realizował on sumiennie zlecane zadania, wykazywał się przy tym samodzielnością i zaangażowaniem w ich rozwiązanie. Był on wieloletnim członkiem zespołu pracującego dla stałego klienta naszej firmy.",
           "W trakcie wieloletniej współpracy realizowaliśmy wspólnie projekty frontend wykorzystując React/Next.js, wspomagając się nowymi rozwiązaniami, technikami. Tu Krzysztof wielokrotnie udowodnił szeroką wiedzę i doświadczenie."
-        ]
+        ],
+        "reel": {
+          "fact": {
+            "value": "React / Next.js",
+            "label": "wieloletnia współpraca przy projektach frontend"
+          },
+          "quotes": [
+            {
+              "text": "wykazywał się przy tym samodzielnością i zaangażowaniem",
+              "mark": "samodzielnością"
+            },
+            {
+              "text": "Krzysztof wielokrotnie udowodnił szeroką wiedzę i doświadczenie.",
+              "mark": "szeroką wiedzę"
+            }
+          ],
+          "closing": "Współpracę z Krzysztofem Grycem oceniam bardzo dobrze."
+        }
       },
       {
         "id": "piotr",
@@ -470,7 +521,24 @@
           "Miałem przyjemność współpracować z Krzysztofem, gdy pełnił rolę Frontend Developera w naszym zespole. Pracowaliśmy razem nad edytorem do tworzenia treści dla redakcji Wirtualnej Polski. Krzysztof świetnie zna technologie takie jak TypeScript, React, Redux oraz TanStack Query.",
           "Jest niesamowicie pracowity, samodzielny i zawsze znajdował rozwiązania skomplikowanych problemów.",
           "Krzysztof to także świetny kolega z zespołu. Zawsze chętny do pomocy, co sprawiało, że praca z nim była naprawdę przyjemna. Zdecydowanie polecam Krzysztofa jako kompetentnego i zaangażowanego frontendowca."
-        ]
+        ],
+        "reel": {
+          "fact": {
+            "value": "TypeScript, React, Redux, TanStack Query",
+            "label": "technologie, które Krzysztof świetnie zna"
+          },
+          "quotes": [
+            {
+              "text": "Jest niesamowicie pracowity, samodzielny i zawsze znajdował rozwiązania skomplikowanych problemów.",
+              "mark": "zawsze znajdował rozwiązania"
+            },
+            {
+              "text": "Krzysztof to także świetny kolega z zespołu.",
+              "mark": "świetny kolega"
+            }
+          ],
+          "closing": "Zdecydowanie polecam Krzysztofa jako kompetentnego i zaangażowanego frontendowca."
+        }
       },
       {
         "id": "daria",
@@ -491,7 +559,24 @@
           "W trakcie współpracy Krzysztof wykazał się doskonałymi umiejętnościami analitycznymi. Odegrał ważną rolę w analizach wymagań, wdrożeniach nowych rozwiązań, czy pracach związanych z optymalizacją wydajności aplikacji.",
           "Bardzo dobrze odnalazł się w projektach prowadzonych metodologią Agile. Krzysztof jest osobą zawsze chętną do pomocy, komunikatywną i kreatywną. W połączeniu z dużym zaangażowaniem i umiejętnościami technicznymi z pewnością będzie niezastąpionym członkiem zespołu każdego projektu IT.",
           "Bez wahania rekomenduję Krzysztofa jako specjalistę w swojej dziedzinie i jestem przekonana, że nowy pracodawca będzie równie zadowolony ze współpracy jak my."
-        ]
+        ],
+        "reel": {
+          "fact": {
+            "value": "2 lata",
+            "label": "przy narzędziach wydawniczych Wirtualnej Polski"
+          },
+          "quotes": [
+            {
+              "text": "doskonałymi umiejętnościami analitycznymi",
+              "mark": "analitycznymi"
+            },
+            {
+              "text": "zawsze chętną do pomocy, komunikatywną i kreatywną",
+              "mark": "kreatywną"
+            }
+          ],
+          "closing": "Bez wahania rekomenduję Krzysztofa jako specjalistę w swojej dziedzinie"
+        }
       }
     ]
   },

@@ -47,6 +47,13 @@ export interface ExperienceSection {
 // Akapit opinii to tekst albo wypunktowanie
 export type RecommendationBlock = string | { list: string[] };
 
+// Rolka na karcie opinii: cytaty i zdanie polecające to dosłowne fragmenty `text`
+export interface RecommendationReel {
+  fact?: { value: string; label: string };
+  quotes: { text: string; mark?: string }[];
+  closing: string;
+}
+
 export interface Recommendation {
   id: string;
   author: string;
@@ -54,6 +61,7 @@ export interface Recommendation {
   company: string;
   date?: string;
   text: RecommendationBlock[];
+  reel?: RecommendationReel;
 }
 
 export interface RecommendationsSection {
