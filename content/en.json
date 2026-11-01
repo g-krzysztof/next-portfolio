@@ -97,7 +97,7 @@
         "name": "Video and radio players for ZPR Media websites",
         "context": "Grupa ZPR Media · Multimedia team · 2024–present",
         "role": "Senior React Frontend Developer: moving the players into a separate repository, refactoring and rollout",
-        "_todo": "TODO(Moon): sprawdzić opis problemu; liczby branżowe ze źródłami są w copy.ts (factsItems), dane ZPR do odświeżania raz na jakiś czas",
+        "_todo": "TODO(Moon): sprawdzić opis problemu; liczby ZPR (facts) odświeżać raz na jakiś czas; wizualizacje playerów to mockupy w kodzie (VideoPlayerMock), bez zrzutów ze stagingu",
         "problem": "The video and radio players were woven into the code of each of the group’s websites. Every fix meant deployments in many places, and ads, analytics and error handling worked slightly differently on every site.",
         "product": [
           "The video player is embedded with a single script and a tag with data-* attributes. It plays HLS streams and supports preroll ads, up-next videos, sticky mode, LIVE broadcasts with a scheduled end, and vertical reels with a feed for the newsroom. AutoMatch mode picks a video to match the article’s content on its own.",
@@ -109,6 +109,17 @@
           "Demo pages for presentations and testing: a settings panel generates embed code for the current configuration, and MSW mocks simulate API errors and missing third-party scripts (IMA, HLS, video.js), so every player state can be checked.",
           "E2E tests in Playwright. Beyond the players: React CMS modules for managing radio apps, and article audio based on text-to-speech."
         ],
+        "facts": [
+          {
+            "value": "9.9 million",
+            "label": "internet users a month on the group’s websites where the players run, and 183 million page views"
+          },
+          {
+            "value": "11.3 million",
+            "label": "Poles listen to the group’s radio stations every week"
+          }
+        ],
+        "factsSource": "Mediapanel, Gemius/PBI, January 2026; Radio Track, Kantar, Nov 2025 – Jan 2026.",
         "stack": "TypeScript, React, Styled Components, HLS.js, video.js, Google IMA / VAST, MSW, Playwright"
       },
       {

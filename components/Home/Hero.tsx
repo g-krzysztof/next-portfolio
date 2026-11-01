@@ -6,7 +6,7 @@ import type { Recommendation, StackGroup } from '../../content/types';
 import { useLang } from './lang';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { useCanHover } from '../../hooks/useDevice';
-import { CONTACT, cvHref } from './copy';
+import { CONTACT, REACT_SINCE, WORKPLACES, cvHref } from './copy';
 import { lineLabel } from './stack';
 import { Wrap, bandContours, bandFill } from './ui';
 import { LineIcon } from './icons';
@@ -23,9 +23,11 @@ const REST = { rx: 6, ry: -14 };
 interface HeroProps {
   stack: StackGroup[];
   recommendations?: Recommendation[];
+  // rok z builda, żeby serwer i klient policzyli te same lata
+  buildYear: number;
 }
 
-const Hero = ({ stack, recommendations = [] }: HeroProps) => {
+const Hero = ({ stack, recommendations = [], buildYear }: HeroProps) => {
   const { lang, copy } = useLang();
   const [flipped, setFlipped] = useState(false);
   const canHover = useCanHover();
@@ -75,10 +77,22 @@ const Hero = ({ stack, recommendations = [] }: HeroProps) => {
     <HeroField id="start">
       <HeroWrap>
         <Intro>
+          <OpenTo href="#kontakt">
+            <Pulse aria-hidden="true" />
+            {copy.openTo}
+          </OpenTo>
           <Hello>
             {copy.helloA} <em>{copy.helloB}</em>
           </Hello>
           <Lede>{copy.lede}</Lede>
+          <Worked href="#doswiadczenie">
+            <span>
+              <b>{copy.expYears(buildYear - REACT_SINCE)}</b> {copy.reactYears}
+            </span>
+            {WORKPLACES.map((place) => (
+              <span key={place}>{place}</span>
+            ))}
+          </Worked>
           {recommendations.length > 0 && (
             <Proof href="#opinie">
               <Discs aria-hidden="true">
@@ -240,6 +254,45 @@ const Intro = styled.div`
   max-width: 640px;
 `;
 
+const pulse = keyframes`
+  0% { box-shadow: 0 0 0 0 rgba(143, 227, 136, 0.6); }
+  70%, 100% { box-shadow: 0 0 0 8px rgba(143, 227, 136, 0); }
+`;
+
+// Status „czego szukam” – ma być widoczny od razu, nad powitaniem
+const OpenTo = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding: 8px 16px 8px 12px;
+  border: 1px solid rgba(143, 227, 136, 0.45);
+  border-radius: 999px;
+  background: rgba(143, 227, 136, 0.1);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: ${({ theme }) => theme.colors.onField};
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  &:hover {
+    background: rgba(143, 227, 136, 0.18);
+    border-color: ${({ theme }) => theme.colors.mint};
+  }
+`;
+
+const Pulse = styled.span`
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: ${({ theme }) => theme.colors.mint};
+  animation: ${pulse} 2s ease-out infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`;
+
 const Hello = styled.h1`
   font-family: ${({ theme }) => theme.fonts.display};
   font-weight: 800;
@@ -263,6 +316,40 @@ const Lede = styled.p`
   font-size: clamp(1.1rem, 1.3vw, 1.45rem);
   line-height: 1.5;
   color: ${({ theme }) => theme.colors.onFieldSoft};
+`;
+
+const Worked = styled.a`
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 12px;
+  row-gap: 4px;
+  max-width: 44ch;
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.onField};
+  span + span::before {
+    content: '·';
+    /* inline-block: kropka nie łapie podkreślenia z hovera */
+    display: inline-block;
+    margin-right: 12px;
+    color: ${({ theme }) => theme.colors.mint};
+  }
+  b {
+    font-family: ${({ theme }) => theme.fonts.display};
+    font-weight: 800;
+    font-size: 1.15em;
+    color: ${({ theme }) => theme.colors.mint};
+  }
+  @media (hover: hover) {
+    &:hover span {
+      text-decoration: underline;
+      text-decoration-color: ${({ theme }) => theme.colors.mint};
+      text-underline-offset: 4px;
+    }
+  }
 `;
 
 const Proof = styled.a`

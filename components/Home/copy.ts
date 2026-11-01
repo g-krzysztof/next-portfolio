@@ -20,6 +20,14 @@ export const CONTACT = {
 export const cvHref = (lang: Lang) =>
   `/utils/krzysztofgryc${lang === 'pl' ? '_pl' : '_en'}.pdf`;
 
+// Linia „gdzie pracowałem” w hero: komercyjny React od KATO, firmy od najnowszej
+export const REACT_SINCE = 2019;
+export const WORKPLACES = [
+  'Grupa ZPR Media',
+  'Wirtualna Polska (Autentika)',
+  'KATO Software House',
+];
+
 export const SECTIONS = [
   { id: 'opinie', pl: 'Rekomendacje', en: 'Recommendations' },
   { id: 'doswiadczenie', pl: 'Doświadczenie', en: 'Experience' },
@@ -36,6 +44,7 @@ const COPY = {
     switchLang: 'Switch to English',
     metaDescription:
       'Krzysztof Gryc – Senior React Frontend Developer. React, TypeScript, Next.js, produkty medialne: playery wideo i audio, CMS, narzędzia redakcyjne.',
+    openTo: 'Szukam nowych wyzwań w roli React Developera',
     helloA: 'Cześć,',
     helloB: 'tu Krzysiek.',
     lede: 'Senior React Frontend Developer z ponad dziesięcioletnim stażem w webie. Zaczynałem jako grafik, dlatego frontend robię okiem projektanta.',
@@ -48,6 +57,7 @@ const COPY = {
     aboutTitle: 'O mnie',
     recPicker: 'Rekomendacje, przewijane w poziomie',
     recCount: 'rekomendacji od przełożonych i współpracowników',
+    reactYears: 'komercyjnie w React',
     prev: 'Poprzednia rekomendacja',
     next: 'Następna rekomendacja',
     reelAbout: 'o Krzysztofie',
@@ -99,80 +109,24 @@ const COPY = {
       stocks: 'Notowania',
       timeline: 'Oś czasu',
     },
-    factsDemo:
-      'Wideo i audio w internecie w sześciu liczbach, przewijane jak relacja',
-    factsTitle: 'Wideo i audio w sieci: o co toczy się gra',
-    factsPrev: 'Poprzednia liczba',
-    factsNext: 'Następna liczba',
-    factsPause: 'Zatrzymaj przewijanie',
-    factsPlay: 'Wznów przewijanie',
-    factsSlide: (n: number, total: number) => `${n} z ${total}`,
-    factsInPractice: 'W praktyce',
-    factsSource: 'Źródło',
-    factsItems: [
-      {
-        kind: 'share',
-        value: '75%',
-        label:
-          'danych w sieciach komórkowych na świecie to wideo. Tak było na koniec 2025 roku.',
-        takeaway:
-          'Wideo to dziś główny sposób korzystania z internetu, a player jest jednym z najważniejszych elementów serwisu, nie dodatkiem do artykułu.',
-        source: 'Ericsson Mobility Report, 2026',
+    playersDemo:
+      'Playery wideo i radiowe w działaniu: nagrania i zrzuty ze stron demo',
+    playersTitle: 'Playery w działaniu',
+    playersPrev: 'Poprzednie ujęcie',
+    playersNext: 'Następne ujęcie',
+    playersPause: 'Zatrzymaj przewijanie',
+    playersPlay: 'Wznów przewijanie',
+    playersSlide: (n: number, total: number) => `${n} z ${total}`,
+    playersShots: {
+      portrait: {
+        title: 'Pionowe wideo',
+        text: 'Format 9:16 pod telefon, z udostępnianiem i pełnym ekranem.',
       },
-      {
-        kind: 'reels',
-        value: '70–80%',
-        label:
-          'wideo oglądanego na smartfonach pochodzi z mediów społecznościowych, głównie krótkie formy.',
-        takeaway:
-          'Widzowie przyzwyczaili się do pionowych rolek, więc serwis informacyjny też musi je mieć. Dlatego player ma tryb pionowych rolek z feedem.',
-        source: 'Ericsson Mobility Report, listopad 2025',
+      player: {
+        title: 'Player Video',
+        text: 'Ekran startowy z dużym przyciskiem odtwarzania, udostępnianiem i pełnym ekranem. Głośność rozwija się po najechaniu na ikonę dźwięku.',
       },
-      {
-        kind: 'adblock',
-        value: '34%',
-        label: 'internautów w Polsce blokuje reklamy.',
-        takeaway:
-          'To reklamy finansują darmowe treści. Gdy blokada wytnie ich skrypty, widz i tak musi zobaczyć wideo, a nie czarny prostokąt.',
-        source: 'eyeo, 2026 Ad-Blocking Report (dane za 2025)',
-      },
-      {
-        kind: 'radio',
-        value: '2,5 mln',
-        label: 'Polaków słucha radia przez internet.',
-        extra: {
-          value: 'blisko 400 tys.',
-          label: 'więcej słuchaczy w sieci niż w 2022 roku',
-        },
-        takeaway:
-          'Radio przenosi się do przeglądarki. Player radiowy gra stacje na żywo i na bieżąco pokazuje, co leci.',
-        source: 'Komitet Badań Radiowych, raport Radio 2025',
-      },
-      {
-        kind: 'law',
-        value: '28.06.2025',
-        label:
-          'Od tego dnia w całej Unii obowiązuje Europejski Akt o Dostępności. Obejmuje między innymi dostęp do usług audiowizualnych.',
-        takeaway:
-          'Dostępność to już obowiązek prawny, a nie dodatek. Odsłuch artykułów oparty na text-to-speech, który wdrażałem, otwiera treść dla osób, które nie mogą czytać z ekranu.',
-        source:
-          'Dyrektywa (UE) 2019/882; w Polsce ustawa z 26 kwietnia 2024 r.',
-      },
-      {
-        kind: 'scale',
-        value: '9,9 mln',
-        label:
-          'internautów miesięcznie odwiedza serwisy Grupy ZPR Media, w których działają te playery. To 183 mln odsłon.',
-        extra: {
-          value: '11,3 mln',
-          label: 'Polaków co tydzień słucha stacji radiowych grupy',
-        },
-        takeaway:
-          'Przy takiej skali błąd widzi naraz bardzo wielu ludzi, dlatego awarie symulujemy i testujemy, zanim zdarzą się na produkcji.',
-        source:
-          'Mediapanel, Gemius/PBI, styczeń 2026; Radio Track, Kantar, XI 2025 – I 2026',
-      },
-    ],
+    },
     readMore: 'Czytaj całość',
     readLess: 'Zwiń',
     contactLead: 'E-mail, telefon albo LinkedIn, jak Ci wygodniej.',
@@ -185,6 +139,7 @@ const COPY = {
     switchLang: 'Przełącz na polski',
     metaDescription:
       'Krzysztof Gryc – Senior React Frontend Developer. React, TypeScript, Next.js, media products: video and audio players, CMS, editorial tools.',
+    openTo: 'Looking for new challenges as a React Developer',
     helloA: 'Hi,',
     helloB: 'I’m Krzysiek.',
     lede: 'Senior React Frontend Developer with over ten years in web. I started out as a graphic designer, so I build front ends with a designer’s eye.',
@@ -197,6 +152,7 @@ const COPY = {
     aboutTitle: 'About me',
     recPicker: 'Recommendations, scroll horizontally',
     recCount: 'recommendations from managers and colleagues',
+    reactYears: 'of commercial React',
     prev: 'Previous recommendation',
     next: 'Next recommendation',
     reelAbout: 'on Krzysztof',
@@ -244,79 +200,24 @@ const COPY = {
       stocks: 'Market quotes',
       timeline: 'Timeline',
     },
-    factsDemo: 'Online video and audio in six numbers, playing like a story',
-    factsTitle: 'Online video and audio: what’s at stake',
-    factsPrev: 'Previous number',
-    factsNext: 'Next number',
-    factsPause: 'Pause',
-    factsPlay: 'Resume',
-    factsSlide: (n: number, total: number) => `${n} of ${total}`,
-    factsInPractice: 'In practice',
-    factsSource: 'Source',
-    factsItems: [
-      {
-        kind: 'share',
-        value: '75%',
-        label:
-          'of all mobile network data worldwide is video. That was the share at the end of 2025.',
-        takeaway:
-          'Video is now the main way people use the internet, and the player is one of the most important parts of a news site, not an add-on to the article.',
-        source: 'Ericsson Mobility Report, 2026',
+    playersDemo:
+      'Video and radio players in action: recordings and screenshots from the demo pages',
+    playersTitle: 'The players in action',
+    playersPrev: 'Previous shot',
+    playersNext: 'Next shot',
+    playersPause: 'Pause',
+    playersPlay: 'Resume',
+    playersSlide: (n: number, total: number) => `${n} of ${total}`,
+    playersShots: {
+      portrait: {
+        title: 'Vertical video',
+        text: 'A 9:16 format made for phones, with sharing and full screen.',
       },
-      {
-        kind: 'reels',
-        value: '70–80%',
-        label:
-          'of video watched on smartphones comes from social media, mostly short-form.',
-        takeaway:
-          'Viewers are used to vertical reels, so a news site needs them too. That is why the player has a vertical reels mode with a feed.',
-        source: 'Ericsson Mobility Report, November 2025',
+      player: {
+        title: 'Video Player',
+        text: 'The start screen with a big play button, sharing and full screen. Volume slides out when you hover over the sound icon.',
       },
-      {
-        kind: 'adblock',
-        value: '34%',
-        label: 'of internet users in Poland block ads.',
-        takeaway:
-          'Ads pay for free content. When a blocker cuts out their scripts, the viewer still has to see the video, not a black rectangle.',
-        source: 'eyeo, 2026 Ad-Blocking Report (2025 data)',
-      },
-      {
-        kind: 'radio',
-        value: '2.5 million',
-        label: 'Poles listen to the radio online.',
-        extra: {
-          value: 'nearly 400k',
-          label: 'more online listeners than in 2022',
-        },
-        takeaway:
-          'Radio is moving into the browser. The radio player streams stations live and shows what is playing as it happens.',
-        source:
-          'Komitet Badań Radiowych (Polish Radio Research Committee), Radio 2025 report',
-      },
-      {
-        kind: 'law',
-        value: '28.06.2025',
-        label:
-          'From this day the European Accessibility Act applies across the EU. Among other things, it covers access to audiovisual media services.',
-        takeaway:
-          'Accessibility is now a legal duty, not an extra. Article audio based on text-to-speech, which I rolled out, opens content to people who cannot read from a screen.',
-        source: 'Directive (EU) 2019/882; in Poland, the act of 26 April 2024',
-      },
-      {
-        kind: 'scale',
-        value: '9.9 million',
-        label:
-          'internet users a month visit the Grupa ZPR Media websites where these players run. That is 183 million page views.',
-        extra: {
-          value: '11.3 million',
-          label: 'Poles listen to the group’s radio stations every week',
-        },
-        takeaway:
-          'At this scale, a bug is seen by a lot of people at once, so we simulate and test failures before they happen in production.',
-        source:
-          'Mediapanel, Gemius/PBI, January 2026; Radio Track, Kantar, Nov 2025 – Jan 2026',
-      },
-    ],
+    },
     readMore: 'Read in full',
     readLess: 'Show less',
     contactLead: 'E-mail, phone or LinkedIn, whichever suits you.',

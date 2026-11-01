@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Bricolage_Grotesque, Onest } from 'next/font/google';
+import { Bricolage_Grotesque, Inter, Onest } from 'next/font/google';
 import '../../styles/globals.css';
 import { theme } from '../../styles/theme';
 import { Providers } from '../../components/Providers';
@@ -15,6 +15,14 @@ const displayFont = Bricolage_Grotesque({
 const bodyFont = Onest({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-body',
+  display: 'swap',
+});
+
+// tylko licznik czasu w mockupie playera wideo (wzór używa Inter)
+const interFont = Inter({
+  subsets: ['latin'],
+  weight: '700',
+  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -58,7 +66,7 @@ const RootLayout = async ({ children, params }: LayoutProps<'/[lang]'>) => {
   return (
     <html
       lang={current}
-      className={`${displayFont.variable} ${bodyFont.variable}`}
+      className={`${displayFont.variable} ${bodyFont.variable} ${interFont.variable}`}
     >
       <body>
         <Providers lang={current}>{children}</Providers>

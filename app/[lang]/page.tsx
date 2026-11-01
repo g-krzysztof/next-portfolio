@@ -27,7 +27,11 @@ const Home = async ({ params }: PageProps<'/[lang]'>) => {
       <main>
         <Opening>
           <FloatingSquares />
-          <Hero stack={stack} recommendations={recommendations.items} />
+          <Hero
+            stack={stack}
+            recommendations={recommendations.items}
+            buildYear={buildYear}
+          />
           <Recommendations section={recommendations} />
         </Opening>
         <Experience section={experience} />
