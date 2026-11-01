@@ -227,7 +227,9 @@ const HeroWrap = styled(Wrap)`
   gap: clamp(32px, 5vw, 80px);
 
   @media (max-width: ${({ theme }) => theme.breakpoints.laptopS}) {
-    grid-template-columns: 1fr;
+    /* minmax(0, …): szeroki nagłówek nie może rozepchać kolumny (i karty)
+       poza ekran na wąskich telefonach */
+    grid-template-columns: minmax(0, 1fr);
     padding-top: 32px;
   }
 `;
@@ -243,6 +245,10 @@ const Hello = styled.h1`
   line-height: 0.92;
   letter-spacing: -0.04em;
   text-wrap: balance;
+  /* „tu Krzysiek.” musi się zmieścić w jednej linii na 320–425 px */
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    font-size: clamp(2.5rem, 13vw, 3.25rem);
+  }
   em {
     font-style: normal;
     color: ${({ theme }) => theme.colors.mint};
@@ -261,6 +267,7 @@ const Proof = styled.a`
   margin-top: 32px;
   display: flex;
   width: fit-content;
+  max-width: 100%;
   align-items: center;
   gap: 14px;
   padding: 8px 18px 8px 8px;
@@ -272,6 +279,7 @@ const Proof = styled.a`
     background-color 0.25s ${({ theme }) => theme.ease.out},
     border-color 0.25s ${({ theme }) => theme.ease.out};
   svg {
+    flex-shrink: 0;
     color: ${({ theme }) => theme.colors.mint};
     transition: transform 0.35s ${({ theme }) => theme.ease.out};
   }
@@ -288,6 +296,7 @@ const Proof = styled.a`
 
 const Discs = styled.span`
   display: flex;
+  flex-shrink: 0;
   span {
     width: 36px;
     height: 36px;
@@ -308,9 +317,16 @@ const Discs = styled.span`
     margin-left: 0;
     background: ${({ theme }) => theme.colors.mint};
   }
+  /* na telefonie trzy kółka, żeby tekst obok nie łamał się co słowo */
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    span:nth-child(n + 4) {
+      display: none;
+    }
+  }
 `;
 
 const ProofText = styled.span`
+  min-width: 0;
   font-size: 15px;
   line-height: 1.3;
   font-weight: 500;
