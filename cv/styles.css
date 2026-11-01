@@ -1,0 +1,408 @@
+/* CV – Krzysztof Gryc
+   Kolory i fonty z DESIGN.md strony krzysztofg.pl.
+   Każda <section class="page"> to jedna strona A4. Jeśli treść się nie mieści,
+   build.mjs wypisze ostrzeżenie – przenieś wtedy blok na kolejną stronę. */
+
+@font-face {
+  font-family: 'Onest';
+  src: url('fonts/onest-latin-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Onest';
+  src: url('fonts/onest-latin-ext-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2');
+  font-weight: 200 800;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('fonts/bricolage-grotesque-latin-ext-wght-normal.woff2') format('woff2');
+  font-weight: 200 800;
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  /* paleta strony */
+  --field: #0f3b3a;
+  --field-deep: #0a2c2b;
+  --teal: #50a3a2;
+  --teal-ink: #23706f;
+  --band-mid: #6cc39a;
+  --mint: #8fe388;
+  --paper: #f3f6f1;
+  --paper-deep: #e3ece7;
+  --line: #cfdcd6;
+  --ink: #10201f;
+  --ink-soft: #2d4644;
+  --ink-muted: #4f6965;
+  --on-field: #f3f6f1;
+  --on-field-soft: #c6dad5;
+
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Onest', system-ui, sans-serif;
+
+  --sidebar: 62mm;
+  --strip: 7mm;
+  --pad-x: 11mm;
+  --pad-top: 10mm;
+  --footer-h: 13mm;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 8.5pt;
+  line-height: 1.42;
+  color: var(--ink-soft);
+  background: #8a9a96;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- strona ---------- */
+
+.page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 10mm auto;
+  background: #fff;
+  display: grid;
+  grid-template-columns: var(--strip) 1fr;
+  grid-template-rows: 1fr var(--footer-h);
+  overflow: hidden;
+  break-after: page;
+}
+
+.page--first {
+  grid-template-columns: var(--sidebar) 1fr;
+}
+
+@media print {
+  body {
+    background: none;
+  }
+  .page {
+    margin: 0;
+  }
+}
+
+.page__side {
+  grid-row: 1 / 3;
+  background: linear-gradient(180deg, var(--field) 0%, var(--teal-ink) 100%);
+  color: var(--on-field);
+}
+
+.page__main {
+  padding: var(--pad-top) var(--pad-x) 0 var(--pad-x);
+  overflow: hidden; /* build.mjs sprawdza przepełnienie */
+}
+
+.page__footer {
+  grid-column: 2;
+  padding: 2.4mm var(--pad-x) 0;
+  border-top: 0.3mm solid var(--line);
+  margin: 0 var(--pad-x);
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 6.3pt;
+  line-height: 1.35;
+  color: var(--ink-muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 6mm;
+}
+
+.page__number {
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* ---------- pasek boczny (strona 1) ---------- */
+
+.side {
+  padding: 12mm 7mm 10mm;
+  display: flex;
+  flex-direction: column;
+  gap: 6.5mm;
+}
+
+.side__avatar {
+  width: 40mm;
+  height: 40mm;
+  border-radius: 50%;
+  border: 1.2mm solid var(--mint);
+  object-fit: cover;
+  align-self: center;
+  background: var(--paper);
+}
+
+.side h2 {
+  font-family: var(--font-display);
+  font-size: 9.5pt;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-bottom: 2mm;
+}
+
+.side ul {
+  list-style: none;
+  display: grid;
+  gap: 1.6mm;
+}
+
+.side li {
+  display: grid;
+  grid-template-columns: 4.2mm 1fr;
+  gap: 2mm;
+  align-items: start;
+  overflow-wrap: anywhere;
+}
+
+.side li.plain {
+  display: block;
+}
+
+.side svg {
+  width: 3.6mm;
+  height: 3.6mm;
+  margin-top: 0.3mm;
+  stroke: var(--mint);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.side strong {
+  color: var(--on-field);
+  font-weight: 600;
+}
+
+.side .muted {
+  color: var(--on-field-soft);
+  display: block;
+  font-size: 7.8pt;
+}
+
+/* ---------- nagłówek ---------- */
+
+.header {
+  background: var(--paper-deep);
+  margin: 0 calc(-1 * var(--pad-x)) 4.5mm;
+  padding: 5mm var(--pad-x) 4.5mm;
+  border-left: 1.4mm solid var(--band-mid);
+}
+
+.header__name {
+  font-family: var(--font-display);
+  font-size: 27pt;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+
+.header__role {
+  font-family: var(--font-display);
+  font-size: 12.5pt;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--teal-ink);
+  margin-top: 1.6mm;
+}
+
+.lead {
+  font-size: 9pt;
+  line-height: 1.46;
+  color: var(--ink-soft);
+  margin-bottom: 4.5mm;
+}
+
+.lead p + p {
+  margin-top: 1.6mm;
+}
+
+/* ---------- sekcje ---------- */
+
+.section + .section {
+  margin-top: 5mm;
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: 11.5pt;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  background: var(--paper-deep);
+  margin: 0 calc(-1 * var(--pad-x)) 3.2mm;
+  padding: 1.6mm var(--pad-x);
+  border-left: 1.4mm solid var(--band-mid);
+}
+
+/* ---------- doświadczenie ---------- */
+
+.job + .job {
+  margin-top: 4mm;
+}
+
+.job__head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 4mm;
+  border-bottom: 0.3mm solid var(--line);
+  padding-bottom: 1mm;
+  margin-bottom: 1.6mm;
+}
+
+.job__role {
+  font-family: var(--font-display);
+  font-size: 10.3pt;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.job__company {
+  color: var(--teal-ink);
+}
+
+.job__period {
+  font-size: 8pt;
+  font-weight: 600;
+  color: var(--teal-ink);
+  white-space: nowrap;
+}
+
+.job__intro {
+  margin-bottom: 1.2mm;
+}
+
+.job ul {
+  padding-left: 3.6mm;
+  display: grid;
+  gap: 0.7mm;
+}
+
+.job li::marker {
+  color: var(--band-mid);
+}
+
+.job li strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.stack {
+  margin-top: 1.6mm;
+  font-size: 7.8pt;
+  color: var(--ink-muted);
+}
+
+.stack b {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.job--compact .job__head {
+  margin-bottom: 1mm;
+}
+
+/* ---------- umiejętności ---------- */
+
+.skills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.6mm 7mm;
+}
+
+.skills__group h3 {
+  font-family: var(--font-display);
+  font-size: 9pt;
+  font-weight: 700;
+  color: var(--teal-ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6mm;
+}
+
+.skills__group p {
+  font-size: 8.2pt;
+  line-height: 1.45;
+}
+
+/* ---------- referencje ---------- */
+
+.refs__intro {
+  margin-bottom: 3.5mm;
+}
+
+.ref + .ref {
+  margin-top: 3mm;
+}
+
+.ref {
+  padding-left: 3.4mm;
+  border-left: 0.8mm solid var(--band-mid);
+}
+
+.ref__author {
+  font-family: var(--font-display);
+  font-size: 9.6pt;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.ref__meta {
+  font-size: 7.6pt;
+  color: var(--teal-ink);
+  font-weight: 600;
+  margin-bottom: 1mm;
+}
+
+.ref p {
+  font-size: 7.9pt;
+  line-height: 1.42;
+}
+
+.ref p + p,
+.ref ul + p,
+.ref p + ul {
+  margin-top: 0.9mm;
+}
+
+.ref ul {
+  padding-left: 3.6mm;
+  font-size: 7.9pt;
+  line-height: 1.42;
+}
