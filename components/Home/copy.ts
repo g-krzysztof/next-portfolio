@@ -53,6 +53,12 @@ const COPY = {
     reelPause: 'Zatrzymaj rolkę z opinią',
     reelReplay: 'Odtwórz rolkę jeszcze raz',
     expStack: 'Stack:',
+    expYears: (n: number) => {
+      const last = n % 10;
+      const teen = n % 100 >= 12 && n % 100 <= 14;
+      if (n === 1) return '1 rok';
+      return `${n} ${last >= 2 && last <= 4 && !teen ? 'lata' : 'lat'}`;
+    },
     projectRole: 'Moja rola',
     projectWork: 'Co zrobiłem',
     projectProblem: 'Problem',
@@ -171,6 +177,7 @@ const COPY = {
     reelPause: 'Pause the recommendation reel',
     reelReplay: 'Replay the recommendation reel',
     expStack: 'Stack:',
+    expYears: (n: number) => `${n} ${n === 1 ? 'year' : 'years'}`,
     projectRole: 'My role',
     projectWork: 'What I did',
     projectProblem: 'Problem',
