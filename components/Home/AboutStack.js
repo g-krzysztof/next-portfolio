@@ -2,35 +2,10 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import { LangContext } from '../../pages/_app';
 import { t } from './copy';
-import { plainSkill } from './parse';
-import { CmsBlock, EmptyNote, Section, SectionTitle, Wrap } from './ui';
+import { lineLabel } from './stack';
+import { CmsInline, Section, SectionTitle, Wrap } from './ui';
 
-// Stack ma tu własną ścianę, więc akapit o nim z CMS pomijamy
-const withoutStack = (content = '') =>
-  content
-    .split(/\n(?=### )/)
-    .filter((chunk) => !/^###.*(stack|technolog)/i.test(chunk.split('\n')[0]))
-    .join('\n');
-
-// Pozycja z CMS to grupa ("**Styled Components**, Styled System, Sass [BEM]").
-// Rozbijamy ją na pojedyncze technologie; wyróżnione w CMS idą większym krojem.
-const splitWords = (item) =>
-  item
-    .split(/,(?![^[]*\])/)
-    .map((piece) => piece.trim())
-    .filter(Boolean)
-    .map((piece) => {
-      const strong = /<primary>|\*\*/.test(piece);
-      const text = plainSkill(piece);
-      const match = text.match(/^(.*?)\s*\[(.*)\]\s*$/);
-      return {
-        name: match ? match[1] : text,
-        detail: match ? match[2] : '',
-        strong,
-      };
-    });
-
-const AboutStack = ({ page, groups }) => {
+const AboutStack = ({ about, groups }) => {
   const [lang] = useContext(LangContext);
   const copy = t(lang);
   const [current, ...others] = groups;
@@ -41,13 +16,15 @@ const AboutStack = ({ page, groups }) => {
         <About>
           <SectionTitle id="o-mnie-title">{copy.aboutTitle}</SectionTitle>
           <Body>
-            {page ? (
-              <CmsBlock overrides={{ h3: { component: Statement } }}>
-                {withoutStack(page.content)}
-              </CmsBlock>
-            ) : (
-              <EmptyNote>{copy.empty}</EmptyNote>
-            )}
+            <p>
+              <CmsInline>{about.lead}</CmsInline>
+            </p>
+            <Statement>
+              <CmsInline>{about.statement}</CmsInline>
+            </Statement>
+            <p>
+              <CmsInline>{about.body}</CmsInline>
+            </p>
           </Body>
         </About>
 
@@ -55,17 +32,17 @@ const AboutStack = ({ page, groups }) => {
           <Wall aria-labelledby="stack-title">
             <WallTitle id="stack-title">{current.title}</WallTitle>
             <Words>
-              {current.items.flatMap(splitWords).map(({ name, detail, strong }) => (
+              {current.lines.flat().map(({ name, detail, strong }) => (
                 <li key={name}>
                   <Word $strong={strong}>{name}</Word>
                   {detail && <Detail>{detail}</Detail>}
                 </li>
               ))}
             </Words>
-            {others.map(({ title, items }) => (
+            {others.map(({ title, lines }) => (
               <Others key={title}>
                 <WallTitle as="h4">{title}</WallTitle>
-                <p>{items.map((item) => plainSkill(item)).join(' · ')}</p>
+                <p>{lines.map(lineLabel).join(' · ')}</p>
               </Others>
             ))}
           </Wall>

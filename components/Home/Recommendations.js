@@ -25,10 +25,8 @@ const FAN = [
 
 const RecCard = ({ item, index, offset, active, near, onPick, copy }) => {
   const [open, setOpen] = useState(false);
-  const [lead, ...rest] = item.paragraphs;
+  const [lead, ...rest] = item.text;
   const fan = FAN[index % FAN.length];
-  const company = item.roles[item.roles.length - 1];
-  const role = item.roles.length > 1 ? item.roles.slice(0, -1).join(' · ') : '';
 
   return (
     <Card
@@ -47,14 +45,24 @@ const RecCard = ({ item, index, offset, active, near, onPick, copy }) => {
       <Who>
         <Name>{item.author}</Name>
         <Role>
-          {role && <span>{role}</span>}
-          <b>{company}</b>
+          {item.position && <span>{item.position}</span>}
+          <b>{item.company}</b>
         </Role>
       </Who>
       <Quote>
         <Lead>{lead}</Lead>
         {open &&
-          rest.map((paragraph) => <Para key={paragraph}>{paragraph}</Para>)}
+          rest.map((block, i) =>
+            typeof block === 'string' ? (
+              <Para key={i}>{block}</Para>
+            ) : (
+              <List key={i}>
+                {block.list.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </List>
+            ),
+          )}
       </Quote>
       <Foot>
         {rest.length > 0 ? (
@@ -70,7 +78,8 @@ const RecCard = ({ item, index, offset, active, near, onPick, copy }) => {
   );
 };
 
-const Recommendations = ({ page, items }) => {
+const Recommendations = ({ section }) => {
+  const { items } = section;
   const [lang] = useContext(LangContext);
   const copy = t(lang);
   const track = useRef(null);
@@ -131,15 +140,11 @@ const Recommendations = ({ page, items }) => {
     <Field id="opinie" aria-labelledby="opinie-title">
       <Head>
         <Title id="opinie-title">
-          {page ? (
-            <CmsInline overrides={{ secondary: { component: Mint }, primary: { component: Mint } }}>
-              {page.title}
-            </CmsInline>
-          ) : (
-            copy.recTitle
-          )}
+          <CmsInline overrides={{ secondary: { component: Mint }, primary: { component: Mint } }}>
+            {section.title}
+          </CmsInline>
         </Title>
-        {page?.content && <Intro>{page.content}</Intro>}
+        {section.intro && <Intro>{section.intro}</Intro>}
       </Head>
 
       <Track
@@ -477,6 +482,28 @@ const Para = styled.p`
   margin-top: 12px;
   font-size: 15px;
   color: ${({ theme }) => theme.colors.inkSoft};
+`;
+
+const List = styled.ul`
+  margin-top: 12px;
+  display: grid;
+  gap: 6px;
+  font-size: 15px;
+  color: ${({ theme }) => theme.colors.inkSoft};
+  li {
+    position: relative;
+    padding-left: 16px;
+  }
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: ${({ theme }) => theme.colors.teal};
+  }
 `;
 
 const Foot = styled.div`

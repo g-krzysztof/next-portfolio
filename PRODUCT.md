@@ -22,7 +22,7 @@ A senior React developer who came from graphic design and DTP (pre-2014) and fre
 
 - Next.js (pages router) with styled-components; styled-components must stay.
 - PL/EN language switch must stay (Polish is the default).
-- Content (about, resume, skills, contact, recommendations) currently comes from a Strapi CMS on Heroku as markdown with custom `<primary>` / `<secondary>` tags; keeping Strapi was not marked as required.
+- Content (about, resume, skills, contact, recommendations) lives in `content/pl.json` and `content/en.json` as markdown with custom `<primary>` / `<secondary>` tags (formerly a Strapi CMS on Heroku).
 - Separate URLs (/resume, /recommendation, /contact) were not marked as required.
 - CV PDFs: `public/utils/krzysztofgryc_pl.pdf`, `public/utils/krzysztofgryc_en.pdf`.
 - Microsoft Clarity analytics is installed.

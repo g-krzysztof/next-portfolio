@@ -9,7 +9,7 @@ const Mint = styled.span`
   color: ${({ theme }) => theme.colors.mint};
 `;
 
-const Contact = ({ page }) => {
+const Contact = ({ section }) => {
   const [lang] = useContext(LangContext);
   const copy = t(lang);
 
@@ -18,15 +18,9 @@ const Contact = ({ page }) => {
       <FloatingSquares count={7} />
       <Wrap>
         <Title id="kontakt-title">
-          {page ? (
-            <CmsInline overrides={{ secondary: { component: Mint }, primary: { component: Mint } }}>
-              {page.title}
-            </CmsInline>
-          ) : lang === 'pl' ? (
-            'Kontakt'
-          ) : (
-            'Contact'
-          )}
+          <CmsInline overrides={{ secondary: { component: Mint }, primary: { component: Mint } }}>
+            {section.title}
+          </CmsInline>
         </Title>
         <Lead>{copy.contactLead}</Lead>
 

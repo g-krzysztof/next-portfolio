@@ -4,7 +4,7 @@ import { LangContext } from '../../pages/_app';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { useCanHover } from '../../hooks/useDevice';
 import { CONTACT, cvHref, t } from './copy';
-import { plainSkill } from './parse';
+import { lineLabel } from './stack';
 import { Glyph, Wrap } from './ui';
 import { LineIcon } from './icons';
 import { initials } from './Recommendations';
@@ -57,8 +57,8 @@ const Hero = ({ stack, recommendations = [] }) => {
 
   useEffect(() => () => cancelAnimationFrame(frame.current), []);
 
-  const current = (stack[0]?.items || []).slice(0, BACK_ITEMS);
-  const more = stack[1]?.items || [];
+  const current = (stack[0]?.lines || []).slice(0, BACK_ITEMS).map(lineLabel);
+  const more = (stack[1]?.lines || []).map(lineLabel);
 
   return (
     <HeroField id="start">
@@ -139,14 +139,14 @@ const Hero = ({ stack, recommendations = [] }) => {
                 <BackTitle>{copy.cardBackTitle}</BackTitle>
                 <StackList>
                   {current.map((item) => (
-                    <li key={item}>{plainSkill(item)}</li>
+                    <li key={item}>{item}</li>
                   ))}
                 </StackList>
                 {more.length > 0 && (
                   <div>
                     <BackSub>{copy.cardBackMore}</BackSub>
                     <MoreList>
-                      {more.map((item) => plainSkill(item)).join(' · ')}
+                      {more.join(' · ')}
                     </MoreList>
                   </div>
                 )}

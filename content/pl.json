@@ -1,0 +1,196 @@
+{
+  "about": {
+    "lead": "Na imię mam Krzysiek, mieszkam w Tychach. Od ponad dziesięciu lat moja praca jest związana z projektowaniem, tworzeniem stron www oraz programowaniem w java script / type script.",
+    "statement": "Aktualnie pracuję na stanowisku <primary>Senior React Developer</primary>.",
+    "body": "Zajmuję się tworzeniem, rozwojem oraz utrzymaniem projektów web na bazie React. W ostatnim czasie rozwijam <secondary>projekt edytora</secondary>, stanowiącego część back-office systemu firmy medialnej."
+  },
+  "experience": {
+    "title": "<secondary>Doświadczenie</secondary> zawodowe",
+    "intro": "Chętnie przedstawię referencje.",
+    "entries": [
+      {
+        "period": "2021 do obecnie",
+        "role": "Senior React Developer - Autentika",
+        "text": [
+          "Tworzenie, rozwój oraz utrzymanie projektów web na bazie React.",
+          "Najważniejsze projekty:"
+        ],
+        "projects": [
+          "utrzymanie i rozwój edytora, stanowiącego część back-office systemu firmy medialnej",
+          "system design oraz wdrożenie projektu, pozwalającego wyszukiwać tereny surowców wraz z zaawansowaną prezentacją wyników na mapach"
+        ],
+        "stack": [
+          "Typescript, React, Redux, Next.js, Storybook, Styled components, Cypress,",
+          "REST & graphQL"
+        ]
+      },
+      {
+        "period": "2019 do 2021",
+        "role": "React Developer – KATO Software House",
+        "text": ["Tworzenie oraz rozwijanie warstwy front-end projektów:"],
+        "projects": [
+          "strona www i panel administracyjny dla aplikacji parenting control",
+          "serwis crypto currency wraz z panelem administracyjnym, zakup, inwestycje, prezentacja inwestycji"
+        ],
+        "stack": [
+          "React, CyPress, HTML (twig), CSS (sass, bem, styled components)",
+          "Symfony, IOS, Bootstrap, jQuery",
+          "Git, Jira, Slack"
+        ]
+      },
+      {
+        "period": "2014-2019",
+        "role": "Front-end Developer – freelancer",
+        "text": [
+          "Tworzenie stron internetowych: HTML, Sass, React.js.",
+          "Budowanie stron CMS: Joomla, WordPress.",
+          "Projektowanie layoutów stron www oraz elementów graficznych."
+        ]
+      },
+      {
+        "period": "do 2014",
+        "text": [
+          "Pracowałem jako grafik komputerowy.",
+          "Tworzyłem projekty na potrzeby www oraz związane z poligrafią [DTP]."
+        ]
+      }
+    ]
+  },
+  "stack": [
+    {
+      "title": "Aktualnie pracuję w stacku",
+      "lines": [
+        [
+          {
+            "name": "REACT",
+            "detail": "redux, saga, react-query",
+            "strong": true
+          }
+        ],
+        [{ "name": "TypeScript", "strong": true }],
+        [
+          { "name": "REST API & GraphQL", "detail": "Apollo server" },
+          { "name": "TanStack Query" }
+        ],
+        [
+          { "name": "Styled Components", "strong": true },
+          { "name": "Styled System" },
+          { "name": "Sass", "detail": "BEM" }
+        ],
+        [{ "name": "Storybook" }, { "name": "Figma" }],
+        [
+          { "name": "Next.js", "strong": true },
+          { "name": "NX monorepo" },
+          { "name": "Strapi" }
+        ],
+        [
+          { "name": "Husky" },
+          { "name": "Lerna" },
+          { "name": "Prettier" },
+          { "name": "Eslint" }
+        ],
+        [
+          { "name": "Gitlab" },
+          { "name": "Jira" },
+          { "name": "Slack" },
+          { "name": "MS Teams" }
+        ],
+        [
+          { "name": "Cypress e2e", "strong": true },
+          { "name": "Jest" },
+          { "name": "React Testing Library" }
+        ]
+      ]
+    },
+    {
+      "title": "Pracowałem między innymi z:",
+      "lines": [
+        [{ "name": "Strapi" }, { "name": "Sanity", "detail": "headless CMS" }],
+        [{ "name": "Gatsby" }],
+        [{ "name": "Docker" }],
+        [{ "name": "Symphony" }, { "name": "twig templates" }],
+        [{ "name": "Github" }, { "name": "Bitbucket" }, { "name": "Gitlab" }],
+        [{ "name": "PM2" }, { "name": "Vercel" }, { "name": "Heroku" }]
+      ]
+    }
+  ],
+  "recommendations": {
+    "title": "<secondary>Opinie i rekomendacje,</secondary> od pracodawców i współpracowników",
+    "intro": "Do każdej z niżej wymienionych osób mogę udostępnić dane kontaktowe (e-mail / numer telefonu) w celu potwierdzenia referencji.",
+    "items": [
+      {
+        "id": "michal",
+        "author": "Michał Samojlik",
+        "position": "Prezes zarządu",
+        "company": "Autentika Sp. z o.o.",
+        "date": "27.05.2024",
+        "text": [
+          "Krzysztof przez 3 lata pełnił rolę front-end developera w Autentice. W całym okresie współpracy dał się poznać jako solidny i pracowity członek zespołu. Jego zaangażowanie i kompetencje pozwalały nienagannie wywiązywać się z obowiązków i odpowiedzialności w projektach w jakich brał udział.",
+          "Wysoko cenimy jego kulturę i pozytywne, acz nienachalne, nastawienie.",
+          "Szczerze rekomenduję Krzysztofa na stanowisko front-end developera do każdego zespołu IT."
+        ]
+      },
+      {
+        "id": "mariusz",
+        "author": "Mariusz Byrtek",
+        "position": "Team Leader zespołu frontendowego narzędzi backoffice",
+        "company": "Wirtualna Polska Media",
+        "date": "27.05.2024",
+        "text": [
+          "Mam przyjemność napisać referencje dla Krzysztofa, który pracuje jako programista w naszym zespole od dwóch lat. W czasie swojej pracy Krzysztof wykazał się wysoką skutecznością, dużą wiedzą oraz znakomitymi umiejętnościami pracy w zespole.",
+          "Krzysztof jest niezwykle utalentowanym i zaangażowanym programistą. Jego umiejętność szybkiego i skutecznego rozwiązywania problemów programistycznych znacznie przyczyniła się do sukcesów naszych projektów. Jego solidne podstawy teoretyczne i praktyczne umiejętności pozwalają mu na efektywne radzenie sobie z nawet najbardziej skomplikowanymi zadaniami.",
+          "Jego praca w zespole jest godna podziwu. Krzysztof jest doskonałym współpracownikiem, który potrafi zainspirować i zmotywować innych członków zespołu. Jest otwarty na sugestie i chętnie dzieli się swoją wiedzą, co znacząco podnosi poziom pracy całego zespołu.",
+          "Krzysztof wyróżnia się również swoją inicjatywą i proaktywnością. Często wychodzi z propozycjami nowych rozwiązań, które nie tylko poprawiają efektywność, ale także jakość realizowanych projektów. Jego zaangażowanie i pasja do pracy są widoczne w każdym zadaniu, które podejmuje.",
+          "Jestem przekonany, że Krzysztof będzie cennym nabytkiem dla każdej firmy, w której zdecyduje się kontynuować swoją karierę. Jego umiejętności, wiedza i postawa czynią go wyjątkowym pracownikiem, na którego zawsze można liczyć."
+        ]
+      },
+      {
+        "id": "grzegorz",
+        "author": "Grzegorz Kiersznowski",
+        "position": "Chief Technology Officer",
+        "company": "Autentika Sp. z o.o.",
+        "date": "28.05.2024",
+        "text": [
+          "Współpracę z Krzysztofem Grycem oceniam bardzo dobrze. Realizował on sumiennie zlecane zadania, wykazywał się przy tym samodzielnością i zaangażowaniem w ich rozwiązanie. Był on wieloletnim członkiem zespołu pracującego dla stałego klienta naszej firmy.",
+          "W trakcie wieloletniej współpracy realizowaliśmy wspólnie projekty frontend wykorzystując React/Next.js, wspomagając się nowymi rozwiązaniami, technikami. Tu Krzysztof wielokrotnie udowodnił szeroką wiedzę i doświadczenie."
+        ]
+      },
+      {
+        "id": "piotr",
+        "author": "Piotr Lasota",
+        "position": "Frontend Tech Lead",
+        "company": "Wirtualna Polska Media",
+        "date": "28.05.2024",
+        "text": [
+          "Miałem przyjemność współpracować z Krzysztofem, gdy pełnił rolę Frontend Developera w naszym zespole. Pracowaliśmy razem nad edytorem do tworzenia treści dla redakcji Wirtualnej Polski. Krzysztof świetnie zna technologie takie jak TypeScript, React, Redux oraz TanStack Query.",
+          "Jest niesamowicie pracowity, samodzielny i zawsze znajdował rozwiązania skomplikowanych problemów.",
+          "Krzysztof to także świetny kolega z zespołu. Zawsze chętny do pomocy, co sprawiało, że praca z nim była naprawdę przyjemna. Zdecydowanie polecam Krzysztofa jako kompetentnego i zaangażowanego frontendowca."
+        ]
+      },
+      {
+        "id": "daria",
+        "author": "Daria Neckelius",
+        "position": "Team Leader | Senior IT Project Manager",
+        "company": "Wirtualna Polska Media",
+        "date": "29.05.2024",
+        "text": [
+          "Z przyjemnością udzielam referencji dla Krzysztofa Gryca, który pracował na stanowisku Frontend Developer w firmie Wirtualna Polska Media S.A. przez dwa lata. Krzysztof był częścią zespołu odpowiedzialnego za rozwój narzędzi wydawniczych, które umożliwiały redaktorom efektywne tworzenie i publikowanie treści.",
+          "Do głównych obowiązków Krzysztofa należała:",
+          {
+            "list": [
+              "implementacja zaawansowanych rozwiązań dla narzędzi wydawniczych z wykorzystaniem nowoczesnych technologii frontendowych,",
+              "ścisła współpraca z zespołem backendowym,",
+              "zapewnienie wysokiej jakości kodu poprzez pisanie testów jednostkowych oraz udział w code review"
+            ]
+          },
+          "W trakcie współpracy Krzysztof wykazał się doskonałymi umiejętnościami analitycznymi. Odegrał ważną rolę w analizach wymagań, wdrożeniach nowych rozwiązań, czy pracach związanych z optymalizacją wydajności aplikacji.",
+          "Bardzo dobrze odnalazł się w projektach prowadzonych metodologią Agile. Krzysztof jest osobą zawsze chętną do pomocy, komunikatywną i kreatywną. W połączeniu z dużym zaangażowaniem i umiejętnościami technicznymi z pewnością będzie niezastąpionym członkiem zespołu każdego projektu IT.",
+          "Bez wahania rekomenduję Krzysztofa jako specjalistę w swojej dziedzinie i jestem przekonana, że nowy pracodawca będzie równie zadowolony ze współpracy jak my."
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "<secondary>Kontakt,</secondary> odzywaj się śmiało"
+  }
+}

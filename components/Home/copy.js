@@ -1,5 +1,5 @@
 // Stałe dane i teksty interfejsu. Treść merytoryczna (doświadczenie, stack,
-// opinie) przychodzi ze Strapi; tutaj tylko to, co należy do samego layoutu.
+// opinie) leży w content/{pl,en}.json; tutaj tylko to, co należy do samego layoutu.
 
 export const CONTACT = {
   email: 'hello@krzysztofg.pl',
@@ -37,16 +37,15 @@ const COPY = {
     cardBackMore: 'Pracowałem też z',
     aboutTitle: 'O mnie',
     recPicker: 'Rekomendacje, przewijane w poziomie',
-    recTitle: 'Rekomendacje',
     recCount: 'rekomendacji od przełożonych i współpracowników',
     prev: 'Poprzednia rekomendacja',
     next: 'Następna rekomendacja',
     stackLabel: 'Na co dzień pracuję w',
+    expStack: 'Stack:',
     readMore: 'Czytaj całość',
     readLess: 'Zwiń',
     contactLead: 'E-mail, telefon albo LinkedIn, jak Ci wygodniej.',
     footer: 'Zbudowane w Next.js i styled-components.',
-    empty: 'Nie udało się wczytać tej sekcji. Odśwież stronę albo napisz bezpośrednio.',
   },
   en: {
     skip: 'Skip to content',
@@ -65,16 +64,15 @@ const COPY = {
     cardBackMore: 'Also worked with',
     aboutTitle: 'About me',
     recPicker: 'Recommendations, scroll horizontally',
-    recTitle: 'Recommendations',
     recCount: 'recommendations from managers and colleagues',
     prev: 'Previous recommendation',
     next: 'Next recommendation',
     stackLabel: 'Day to day I work with',
+    expStack: 'Stack:',
     readMore: 'Read in full',
     readLess: 'Show less',
     contactLead: 'E-mail, phone or LinkedIn, whichever suits you.',
     footer: 'Built with Next.js and styled-components.',
-    empty: 'This section failed to load. Refresh the page or write to me directly.',
   },
 };
 

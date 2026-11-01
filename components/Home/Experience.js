@@ -2,14 +2,13 @@ import { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { LangContext } from '../../pages/_app';
 import { t } from './copy';
-import { parseResume } from './parse';
-import { CmsBlock, CmsInline, EmptyNote, Section, SectionTitle, Wrap } from './ui';
+import { CmsInline, Section, SectionTitle, Wrap } from './ui';
 import useInView from './useInView';
 
-const Experience = ({ page }) => {
+const Experience = ({ section }) => {
   const [lang] = useContext(LangContext);
   const copy = t(lang);
-  const { intro, entries } = parseResume(page?.content);
+  const { intro, entries } = section;
   const [lineRef, inView] = useInView({ threshold: 0.25 });
 
   return (
@@ -17,27 +16,36 @@ const Experience = ({ page }) => {
       <Wrap>
         <Head>
           <SectionTitle id="doswiadczenie-title">
-            {page ? (
-              <CmsInline>{page.title}</CmsInline>
-            ) : lang === 'pl' ? (
-              'Doświadczenie'
-            ) : (
-              'Experience'
-            )}
+            <CmsInline>{section.title}</CmsInline>
           </SectionTitle>
           {intro && <Intro>{intro}</Intro>}
         </Head>
 
-        {!page && <EmptyNote>{copy.empty}</EmptyNote>}
-
         <Timeline ref={lineRef} $in={inView} style={{ '--n': entries.length }}>
-          {entries.map(({ period, role, body }, index) => (
+          {entries.map(({ period, role, text, projects, stack }, index) => (
             <Entry key={period}>
               <Dot aria-hidden="true" $current={index === 0} />
               <Period>{period}</Period>
               {role && <Role>{role}</Role>}
               <Detail>
-                <CmsBlock overrides={{ h3: { component: Label } }}>{body}</CmsBlock>
+                {text.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+                {projects && (
+                  <ul>
+                    {projects.map((project) => (
+                      <li key={project}>{project}</li>
+                    ))}
+                  </ul>
+                )}
+                {stack && (
+                  <>
+                    <Label>{copy.expStack}</Label>
+                    {stack.map((line) => (
+                      <p key={line}>{line}</p>
+                    ))}
+                  </>
+                )}
               </Detail>
             </Entry>
           ))}

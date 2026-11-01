@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import Markdown from '../Markdown/Markdown';
 import { LineIcon } from './icons';
 
-// Tagi z CMS: <secondary> to akcent turkusowy, <primary> to podkreślenie miętą.
+// Tagi w treściach: <secondary> to akcent turkusowy, <primary> to podkreślenie miętą.
 const Accent = styled.span`
   color: ${({ theme }) => theme.colors.tealInk};
 `;
@@ -26,14 +26,6 @@ export const CmsInline = ({ children, overrides = {} }) => (
     options={{ forceInline: true, overrides: { ...cmsOverrides, ...overrides } }}
   >
     {(children || '').replace(/^#+\s*/, '')}
-  </Markdown>
-);
-
-export const CmsBlock = ({ children, overrides = {} }) => (
-  <Markdown
-    options={{ forceBlock: true, overrides: { ...cmsOverrides, ...overrides } }}
-  >
-    {children || ''}
   </Markdown>
 );
 
@@ -100,9 +92,3 @@ export const MintButton = styled.a`
 export const Glyph = ({ name, size = '18px' }) => (
   <LineIcon name={name} size={parseInt(size, 10)} />
 );
-
-export const EmptyNote = styled.p`
-  margin-top: 24px;
-  max-width: 60ch;
-  color: ${({ theme }) => theme.colors.inkMuted};
-`;
