@@ -2,7 +2,9 @@
   "about": {
     "lead": "My name is Krzysiek, I live in Tychy. For over ten years, my work has been related to designing, creating websites, and programming in Java Script / Type Script.",
     "statement": "I am currently working in a position <primary>Senior React Developer</primary>.",
-    "body": "I create, develop and maintain web projects based on React. Recently, I have been developing an <secondary>editor project</secondary>, which is part of the back-office system of a media company."
+    "body": [
+      "I create, develop and maintain web projects based on React. Recently, I have been developing an <secondary>editor project</secondary>, which is part of the back-office system of a media company."
+    ]
   },
   "experience": {
     "title": "<secondary>Experience</secondary>",
@@ -108,7 +110,7 @@
         [{ "name": "Strapi" }, { "name": "Sanity", "detail": "headless CMS" }],
         [{ "name": "Gatsby" }],
         [{ "name": "Docker" }],
-        [{ "name": "Symphony" }, { "name": "twig templates" }],
+        [{ "name": "Symfony" }, { "name": "twig templates" }],
         [{ "name": "Github" }, { "name": "Bitbucket" }, { "name": "Gitlab" }],
         [{ "name": "PM2" }, { "name": "Vercel" }, { "name": "Heroku" }]
       ]

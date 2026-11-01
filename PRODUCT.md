@@ -16,7 +16,7 @@ Personal portfolio / contact site at krzysztofg.pl. Success: a recruiter leaves 
 
 ## Positioning
 
-A senior React developer who came from graphic design and DTP (pre-2014) and freelance web design, so he builds front ends with a designer's eye. Ten-plus years in web; current work centres on a large editor in a media company's back-office system. Five signed recommendations from employers and colleagues, with references available on request.
+A senior React developer who came from graphic design and DTP (pre-2014) and freelance web design, so he builds front ends with a designer's eye. Ten-plus years in web; since 2024 at Grupa ZPR Media (multimedia team: video/audio/radio/podcast players, radio-app CMS modules, ad integrations, text-to-speech), before that Autentika with Wirtualna Polska's newsroom editor as the main project. AI coding agents are presented as a deliberate tool, not a change of direction. Five signed recommendations from employers and colleagues, with references available on request.
 
 ## Capabilities and Constraints
 
@@ -30,14 +30,14 @@ A senior React developer who came from graphic design and DTP (pre-2014) and fre
 ## Brand Commitments
 
 - Refresh of the existing identity, not a replacement: keep recognisable traits of the current site (teal/green family, the personal "business card" presence with avatar).
-- Name: Krzysztof Gryc. Title: Senior React Developer. Domain: krzysztofg.pl.
+- Name: Krzysztof Gryc. Title: Senior React Frontend Developer (matches LinkedIn). Domain: krzysztofg.pl.
 
 ## Evidence on Hand
 
 - Avatar photo: `public/images/avatar-kriss.png`; card header photo: `public/images/card-background.jpg`.
-- Career history 2014–present (Autentika, KATO Software House, freelance, earlier graphic design/DTP), stack lists, contact details: in CMS.
+- Career history 2007–present (Grupa ZPR Media, Autentika/WP, KATO Software House, freelance, graphic design/DTP), stack lists, contact details: in `content/pl.json`. The EN content still ends at Autentika and is out of date.
 - Five recommendations (Michał Samojlik – Autentika CEO, Mariusz Byrtek – team leader at Wirtualna Polska Media, Grzegorz, Piotr, Daria), dated May 2024, PL and EN.
-- No case studies, project screenshots, metrics or client logos exist; do not invent them.
+- Three text-only case studies (ZPR Media players/CMS, WP editor, geospatial platform) in the Projects section. No screenshots, metrics or client logos exist; do not invent them. Privacy: no birth date or home address anywhere.
 
 ## Product Principles
 

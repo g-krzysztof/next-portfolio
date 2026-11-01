@@ -1,116 +1,326 @@
 {
   "about": {
-    "lead": "Na imię mam Krzysiek, mieszkam w Tychach. Od ponad dziesięciu lat moja praca jest związana z projektowaniem, tworzeniem stron www oraz programowaniem w java script / type script.",
-    "statement": "Aktualnie pracuję na stanowisku <primary>Senior React Developer</primary>.",
-    "body": "Zajmuję się tworzeniem, rozwojem oraz utrzymaniem projektów web na bazie React. W ostatnim czasie rozwijam <secondary>projekt edytora</secondary>, stanowiącego część back-office systemu firmy medialnej."
+    "lead": "Jestem <primary>Senior React Frontend Developerem</primary> z Tychów. Od ponad 10 lat tworzę aplikacje webowe, a od kilku lat specjalizuję się w React i TypeScript, głównie w produktach medialnych.",
+    "body": [
+      "Obecnie w <secondary>Grupie ZPR Media</secondary> (zespół Multimedia) rozwijam playery wideo, audio, radiowe i podcastowe, moduły CMS dla aplikacji radiowych, integracje reklamowe i rozwiązania text-to-speech. Pracuję też w repozytoriach opartych na Pythonie i Django, gdzie odpowiadam za warstwę frontendową. Wcześniej, z ramienia Autentiki, przez dwa lata współtworzyłem narzędzia wydawnicze Wirtualnej Polski, czyli edytor, w którym redakcja tworzy i publikuje treści.",
+      "AI traktuję jako narzędzie, a nie autopilota. Na co dzień pracuję z agentami kodującymi: piszę dla nich własne skille i instrukcje oparte na konwencjach projektu, a sam pilnuję architektury i spójności kodu oraz przeglądam wszystko, co generują.",
+      "Zaczynałem jako grafik, więc mam oko do UI i dobrze dogaduję się z designerami."
+    ]
   },
   "experience": {
     "title": "<secondary>Doświadczenie</secondary> zawodowe",
     "intro": "Chętnie przedstawię referencje.",
     "entries": [
       {
-        "period": "2021 do obecnie",
-        "role": "Senior React Developer - Autentika",
+        "period": "2024 – obecnie",
+        "role": "Senior React Frontend Developer – Grupa ZPR Media",
         "text": [
-          "Tworzenie, rozwój oraz utrzymanie projektów web na bazie React.",
+          "Zespół Multimedia: rozwiązania audio i wideo oraz narzędzia redakcyjne w serwisach grupy."
+        ],
+        "projects": [
+          "refaktoryzacja playerów wideo, audio, radiowych (streaming na żywo) i podcastowych",
+          "budowa modułów w CMS opartym na React do zarządzania aplikacjami radiowymi i innymi aplikacjami grupy",
+          "wdrożenie text-to-speech opartego na AI: odsłuch artykułów w serwisach",
+          "wdrożenia i integracje systemów reklamowych w playerach i serwisach (Google IMA, VAST)",
+          "integracje z backendem; frontend w repozytoriach Python/Django (szablony Django, SASS + BEM)",
+          "testy E2E w Playwright",
+          "development wspierany przez AI: własne skille i instrukcje dla agentów kodujących, kontrola architektury i review generowanego kodu"
+        ],
+        "stack": [
+          "TypeScript, React, Playwright, Python/Django (templates), SASS/BEM, REST, Google IMA/VAST"
+        ]
+      },
+      {
+        "period": "2021 – 2024",
+        "role": "Senior React Frontend Developer – Autentika (projekt dla Wirtualnej Polski)",
+        "text": [
+          "Software house. Projektowanie, rozwój i utrzymanie aplikacji webowych w React / TypeScript dla klientów firmy.",
           "Najważniejsze projekty:"
         ],
         "projects": [
-          "utrzymanie i rozwój edytora, stanowiącego część back-office systemu firmy medialnej",
-          "system design oraz wdrożenie projektu, pozwalającego wyszukiwać tereny surowców wraz z zaawansowaną prezentacją wyników na mapach"
+          "Wirtualna Polska (2022–2024): praca w zespole frontendowym narzędzi back-office WP. Rozwój edytora, w którym redakcje tworzą i publikują treści: implementacja zaawansowanych funkcji narzędzi wydawniczych, ścisła współpraca z backendem i udział w analizie wymagań, optymalizacja wydajności aplikacji, testy jednostkowe i code review, monorepo NX.",
+          "Platforma geoprzestrzenna do analizy złóż surowców: zaprojektowanie architektury (system design) i wdrożenie narzędzia, które nakłada na mapę wiele warstw danych, udostępnia moduły analityczne i zaawansowane wyszukiwanie z filtrowaniem wyników."
         ],
         "stack": [
-          "Typescript, React, Redux, Next.js, Storybook, Styled components, Cypress,",
-          "REST & graphQL"
+          "TypeScript, React, Redux, Redux-Saga, TanStack Query, Next.js, GraphQL (Apollo), REST, Storybook, Styled Components, Cypress, Jest, React Testing Library, NX"
         ]
       },
       {
-        "period": "2019 do 2021",
-        "role": "React Developer – KATO Software House",
+        "period": "2019 – 2021",
+        "role": "React Developer – KATO Software House (Katowice)",
         "text": ["Tworzenie oraz rozwijanie warstwy front-end projektów:"],
         "projects": [
-          "strona www i panel administracyjny dla aplikacji parenting control",
-          "serwis crypto currency wraz z panelem administracyjnym, zakup, inwestycje, prezentacja inwestycji"
+          "strona WWW i panel administracyjny aplikacji do kontroli rodzicielskiej",
+          "serwis kryptowalutowy z panelem administracyjnym: zakup, inwestycje, prezentacja inwestycji"
         ],
         "stack": [
-          "React, CyPress, HTML (twig), CSS (sass, bem, styled components)",
-          "Symfony, IOS, Bootstrap, jQuery",
-          "Git, Jira, Slack"
+          "React, React Native, Cypress, HTML (Twig), CSS (Sass, BEM, Styled Components), Symfony, Docker, Bootstrap, jQuery"
         ]
       },
       {
-        "period": "2014-2019",
-        "role": "Front-end Developer – freelancer",
-        "text": [
-          "Tworzenie stron internetowych: HTML, Sass, React.js.",
-          "Budowanie stron CMS: Joomla, WordPress.",
-          "Projektowanie layoutów stron www oraz elementów graficznych."
+        "period": "2007 – 2019",
+        "parts": [
+          {
+            "period": "2014 – 2019",
+            "role": "Front-end Developer – freelance",
+            "text": [
+              "Strony i aplikacje: HTML, Sass, React.js; WordPress, Joomla; projektowanie layoutów i grafiki."
+            ]
+          },
+          {
+            "period": "2007 – 2014",
+            "role": "Grafik komputerowy (WWW i DTP)",
+            "text": [
+              "Projekty do druku i do sieci, przygotowanie plików do druku offsetowego."
+            ]
+          }
         ]
+      }
+    ]
+  },
+  "projects": {
+    "title": "Wybrane <secondary>projekty</secondary>",
+    "_todo": "TODO(Moon): projekt własny (np. dociekai.pl) – opis i link; czwarta karta czeka na treść",
+    "items": [
+      {
+        "id": "geo-platform",
+        "featured": true,
+        "name": "Mapa złóż dla geologów",
+        "context": "Kadme (Norwegia, branża oil & gas) · przez Autentikę",
+        "role": "Senior React Frontend Developer: system design i wdrożenie frontendu",
+        "_todo": "TODO(Moon): biblioteka map (Leaflet / Mapbox / OpenLayers?) i lata projektu – dopisać do stacku",
+        "problem": "Geolodzy i specjaliści terenowi korzystali z narzędzi do danych zaprojektowanych z myślą o analitykach. Złożony interfejs sprawiał, że każde wyszukiwanie zależało od dostępności data managerów, a to spowalniało analizy.",
+        "text": [
+          "Nowa aplikacja typu „mapplication”: mapa jest jej centrum, a obok niej działa wyszukiwarka nieustrukturyzowanych danych z wielu źródeł. Obsługuje zapytania logiczne i quasi-regex, filtry oraz historię wyszukiwań.",
+          "Na mapę nakładane są warstwy danych, które pokazują wyłącznie to, co dotyczy bieżącego wyszukiwania. Do tego moduły analityczne i widok szczegółów wyniku.",
+          "Aplikacja działa na komputerach w biurze i na wzmocnionych tabletach na platformach wiertniczych. Ma motyw ciemny do pracy w słabym świetle i motyw dla osób z deuteranopią i protanopią.",
+          "Komponenty powstawały w izolacji w Storybooku, równolegle z iteracyjnym projektowaniem UI, i dopiero z nich składaliśmy całe widoki."
+        ],
+        "facts": [
+          {
+            "value": "10",
+            "label": "dwutygodniowych sprintów projektowych, bez opóźnień i dodatkowych kosztów"
+          },
+          {
+            "value": "143",
+            "label": "komponenty w Storybooku"
+          },
+          {
+            "value": "2",
+            "label": "środowiska pracy: biuro i tablety na platformach"
+          },
+          {
+            "value": "3",
+            "label": "motywy: jasny, ciemny, dla daltonistów"
+          }
+        ],
+        "stack": "TypeScript, React, Next.js, Storybook",
+        "link": {
+          "href": "https://autentika.com/projects/kadme",
+          "label": "Case study na autentika.com"
+        }
       },
       {
-        "period": "do 2014",
+        "id": "zpr-media",
+        "name": "Playery multimedialne i CMS",
+        "context": "Grupa ZPR Media",
+        "role": "Senior React Frontend Developer",
+        "_todo": "TODO(Moon): efekt refaktoryzacji / skala (odtworzenia, liczba stacji) – opcjonalnie",
         "text": [
-          "Pracowałem jako grafik komputerowy.",
-          "Tworzyłem projekty na potrzeby www oraz związane z poligrafią [DTP]."
-        ]
+          "Refaktoryzacja playerów wideo, audio, radiowych (live streaming) i podcastowych w serwisach grupy medialnej; integracje reklamowe Google IMA i VAST; moduły CMS w React do zarządzania aplikacjami radiowymi; odsłuch artykułów oparty na text-to-speech."
+        ],
+        "stack": "TypeScript, React, Playwright, Django templates, SASS/BEM"
+      },
+      {
+        "id": "wp-editor",
+        "name": "Edytor treści dla redakcji",
+        "context": "Wirtualna Polska (przez Autentikę)",
+        "role": "Senior React Frontend Developer",
+        "text": [
+          "Narzędzie back-office, w którym redaktorzy WP tworzą i publikują treści. Zaawansowane funkcje wydawnicze, optymalizacja wydajności, współpraca z backendem, testy i code review w monorepo NX."
+        ],
+        "stack": "TypeScript, React, Redux, Redux-Saga, TanStack Query, GraphQL (Apollo), Storybook, Jest, RTL, Cypress"
       }
     ]
   },
   "stack": [
     {
       "title": "Aktualnie pracuję w stacku",
+      "_todo": "TODO(Moon): Tailwind – zostawić? (brief wspomina go na stronie, ale w repo go nie było, więc nie został dodany)",
       "lines": [
         [
           {
-            "name": "REACT",
-            "detail": "redux, saga, react-query",
+            "name": "React",
+            "detail": "Redux, Redux-Saga, TanStack Query",
             "strong": true
           }
         ],
-        [{ "name": "TypeScript", "strong": true }],
         [
-          { "name": "REST API & GraphQL", "detail": "Apollo server" },
-          { "name": "TanStack Query" }
+          {
+            "name": "TypeScript",
+            "strong": true
+          }
         ],
         [
-          { "name": "Styled Components", "strong": true },
-          { "name": "Styled System" },
-          { "name": "Sass", "detail": "BEM" }
-        ],
-        [{ "name": "Storybook" }, { "name": "Figma" }],
-        [
-          { "name": "Next.js", "strong": true },
-          { "name": "NX monorepo" },
-          { "name": "Strapi" }
+          {
+            "name": "Next.js",
+            "strong": true
+          }
         ],
         [
-          { "name": "Husky" },
-          { "name": "Lerna" },
-          { "name": "Prettier" },
-          { "name": "Eslint" }
+          {
+            "name": "REST API & GraphQL",
+            "detail": "Apollo"
+          }
         ],
         [
-          { "name": "Gitlab" },
-          { "name": "Jira" },
-          { "name": "Slack" },
-          { "name": "MS Teams" }
+          {
+            "name": "Playwright",
+            "strong": true
+          },
+          {
+            "name": "Cypress E2E"
+          },
+          {
+            "name": "Jest"
+          },
+          {
+            "name": "React Testing Library"
+          }
         ],
         [
-          { "name": "Cypress e2e", "strong": true },
-          { "name": "Jest" },
-          { "name": "React Testing Library" }
+          {
+            "name": "Storybook"
+          },
+          {
+            "name": "Styled Components",
+            "strong": true
+          },
+          {
+            "name": "Styled System"
+          },
+          {
+            "name": "Sass",
+            "detail": "BEM"
+          }
+        ],
+        [
+          {
+            "name": "Django",
+            "detail": "templates"
+          }
+        ],
+        [
+          {
+            "name": "Google IMA / VAST"
+          },
+          {
+            "name": "text-to-speech"
+          }
+        ],
+        [
+          {
+            "name": "Agenci AI",
+            "detail": "skille, instrukcje, review kodu"
+          }
+        ],
+        [
+          {
+            "name": "Figma"
+          },
+          {
+            "name": "NX monorepo"
+          }
+        ],
+        [
+          {
+            "name": "Husky"
+          },
+          {
+            "name": "Lerna"
+          },
+          {
+            "name": "Prettier"
+          },
+          {
+            "name": "ESLint"
+          }
+        ],
+        [
+          {
+            "name": "GitLab"
+          },
+          {
+            "name": "Jira"
+          },
+          {
+            "name": "Slack"
+          },
+          {
+            "name": "MS Teams"
+          }
         ]
       ]
     },
     {
       "title": "Pracowałem między innymi z:",
       "lines": [
-        [{ "name": "Strapi" }, { "name": "Sanity", "detail": "headless CMS" }],
-        [{ "name": "Gatsby" }],
-        [{ "name": "Docker" }],
-        [{ "name": "Symphony" }, { "name": "twig templates" }],
-        [{ "name": "Github" }, { "name": "Bitbucket" }, { "name": "Gitlab" }],
-        [{ "name": "PM2" }, { "name": "Vercel" }, { "name": "Heroku" }]
+        [
+          {
+            "name": "Strapi"
+          },
+          {
+            "name": "Sanity",
+            "detail": "headless CMS"
+          }
+        ],
+        [
+          {
+            "name": "Gatsby"
+          }
+        ],
+        [
+          {
+            "name": "React Native"
+          }
+        ],
+        [
+          {
+            "name": "Docker"
+          }
+        ],
+        [
+          {
+            "name": "Symfony + Twig"
+          }
+        ],
+        [
+          {
+            "name": "GitHub"
+          },
+          {
+            "name": "Bitbucket"
+          }
+        ],
+        [
+          {
+            "name": "PM2"
+          },
+          {
+            "name": "Vercel"
+          },
+          {
+            "name": "Heroku"
+          }
+        ],
+        [
+          {
+            "name": "WordPress"
+          },
+          {
+            "name": "Joomla"
+          }
+        ]
       ]
     }
   ],

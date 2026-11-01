@@ -7,7 +7,7 @@ import { theme } from '../../styles/theme';
 
 // Pasek nad turkusowym hero jest przezroczysty; gdy hero zniknie spod
 // paska, przechodzi w jasny papier. Aktywną sekcję śledzi IntersectionObserver.
-const Nav = () => {
+const Nav = ({ sections = SECTIONS }: { sections?: typeof SECTIONS }) => {
   const { lang, copy } = useLang();
   const other = lang === 'pl' ? 'en' : 'pl';
   const [solid, setSolid] = useState(false);
@@ -68,7 +68,7 @@ const Nav = () => {
           krzysztof<b>g</b>.pl
         </Mark>
         <Links id="site-menu" $open={open}>
-          {SECTIONS.map(({ id, pl, en }) => (
+          {sections.map(({ id, pl, en }) => (
             <li key={id}>
               <NavLink
                 href={`#${id}`}

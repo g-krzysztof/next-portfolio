@@ -22,12 +22,16 @@ const AboutStack = ({ about, groups }: AboutStackProps) => {
             <p>
               <CmsInline>{about.lead}</CmsInline>
             </p>
-            <Statement>
-              <CmsInline>{about.statement}</CmsInline>
-            </Statement>
-            <p>
-              <CmsInline>{about.body}</CmsInline>
-            </p>
+            {about.statement && (
+              <Statement>
+                <CmsInline>{about.statement}</CmsInline>
+              </Statement>
+            )}
+            {about.body.map((paragraph) => (
+              <p key={paragraph}>
+                <CmsInline>{paragraph}</CmsInline>
+              </p>
+            ))}
           </Body>
         </About>
 

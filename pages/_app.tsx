@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <StyleSheetManager shouldForwardProp={shouldForwardProp}>
       <ThemeProvider theme={theme}>
         <Head>
-          <title>Krzysztof Gryc · Senior React Developer</title>
+          <title>Krzysztof Gryc – Senior React Frontend Developer</title>
           <meta name="description" content={copy.metaDescription} />
           <link rel="canonical" href={urlFor(lang)} />
           {LOCALES.map((locale) => (

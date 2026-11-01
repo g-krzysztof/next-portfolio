@@ -20,33 +20,46 @@ const Experience = ({ section }: { section: ExperienceSection }) => {
         </Head>
 
         <Timeline ref={lineRef} $in={inView} style={{ '--n': entries.length }}>
-          {entries.map(({ period, role, text, projects, stack }, index) => (
-            <Entry key={period}>
-              <Dot aria-hidden="true" $current={index === 0} />
-              <Period>{period}</Period>
-              {role && <Role>{role}</Role>}
-              <Detail>
-                {text.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+          {entries.map(
+            ({ period, role, text, projects, stack, parts }, index) => (
+              <Entry key={period}>
+                <Dot aria-hidden="true" $current={index === 0} />
+                <Period>{period}</Period>
+                {role && <Role>{role}</Role>}
+                <Detail>
+                  {text?.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                  {projects && (
+                    <ul>
+                      {projects.map((project) => (
+                        <li key={project}>{project}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {stack && (
+                    <>
+                      <Label>{copy.expStack}</Label>
+                      {stack.map((line) => (
+                        <p key={line}>{line}</p>
+                      ))}
+                    </>
+                  )}
+                </Detail>
+                {parts?.map((part) => (
+                  <Part key={part.period}>
+                    <PartPeriod>{part.period}</PartPeriod>
+                    {part.role && <Role as="h4">{part.role}</Role>}
+                    <Detail>
+                      {part.text.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                    </Detail>
+                  </Part>
                 ))}
-                {projects && (
-                  <ul>
-                    {projects.map((project) => (
-                      <li key={project}>{project}</li>
-                    ))}
-                  </ul>
-                )}
-                {stack && (
-                  <>
-                    <Label>{copy.expStack}</Label>
-                    {stack.map((line) => (
-                      <p key={line}>{line}</p>
-                    ))}
-                  </>
-                )}
-              </Detail>
-            </Entry>
-          ))}
+              </Entry>
+            ),
+          )}
         </Timeline>
       </Wrap>
     </Section>
@@ -196,4 +209,23 @@ const Label = styled.h4`
   &::first-letter {
     text-transform: uppercase;
   }
+`;
+
+const Part = styled.div`
+  margin-top: 14px;
+  h4 {
+    margin-top: 6px;
+  }
+  & + & {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid ${({ theme }) => theme.colors.line};
+  }
+`;
+
+const PartPeriod = styled.p`
+  font-size: 13px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.tealInk};
+  font-variant-numeric: tabular-nums;
 `;
