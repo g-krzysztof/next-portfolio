@@ -7,14 +7,16 @@ import { CmsInline, Section, SectionTitle, Wrap } from './ui';
 interface AboutStackProps {
   about: AboutContent;
   groups: StackGroup[];
+  // ton naprzemienny z sąsiadami: głęboki papier, gdy wyżej nie ma projektów
+  tone?: 'deep';
 }
 
-const AboutStack = ({ about, groups }: AboutStackProps) => {
+const AboutStack = ({ about, groups, tone }: AboutStackProps) => {
   const { copy } = useLang();
   const [current, ...others] = groups;
 
   return (
-    <Section id="o-mnie" $tone="deep" aria-labelledby="o-mnie-title">
+    <Section id="o-mnie" $tone={tone} aria-labelledby="o-mnie-title">
       <Grid>
         <About>
           <SectionTitle id="o-mnie-title">{copy.aboutTitle}</SectionTitle>

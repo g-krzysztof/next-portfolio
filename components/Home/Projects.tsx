@@ -1,3 +1,4 @@
+import { useId, useState } from 'react';
 import styled, { css } from 'styled-components';
 import type { Project, ProjectsSection } from '../../content/types';
 import EditorDemo from './EditorDemo';
@@ -14,7 +15,7 @@ const Projects = ({ section }: { section: ProjectsSection }) => {
   const rest = items.filter((item) => !item.featured);
 
   return (
-    <Section id="projekty" aria-labelledby="projekty-title">
+    <Section id="projekty" $tone="deep" aria-labelledby="projekty-title">
       <Wrap>
         <SectionTitle id="projekty-title">
           <CmsInline>{section.title}</CmsInline>
@@ -54,8 +55,8 @@ const VISUALS: Record<string, (() => React.JSX.Element) | undefined> = {
   editor: EditorDemo,
 };
 
-// Wyróżniony case study: opis i ilustracja obok siebie (co drugi na odwrót),
-// liczby pod spodem
+// Wyróżniony case study: opis z liczbami obok ilustracji (co drugi na odwrót).
+// Domyślnie widać rolę, problem i pierwszy akapit pracy; resztę rozwija przycisk.
 const Featured = ({ project, flip }: { project: Project; flip: boolean }) => {
   const { copy } = useLang();
   const {
@@ -72,6 +73,10 @@ const Featured = ({ project, flip }: { project: Project; flip: boolean }) => {
     visual,
   } = project;
   const Visual = visual && VISUALS[visual];
+  const [open, setOpen] = useState(false);
+  const moreId = useId();
+  const [firstWork, ...restWork] = text;
+  const hasMore = Boolean(product?.length) || restWork.length > 0;
 
   return (
     <FeaturedItem $flip={flip}>
@@ -87,7 +92,7 @@ const Featured = ({ project, flip }: { project: Project; flip: boolean }) => {
               <p>{problem}</p>
             </>
           )}
-          {product && (
+          {open && product && (
             <>
               <Label>{copy.projectProduct}</Label>
               {product.map((paragraph) => (
@@ -96,17 +101,48 @@ const Featured = ({ project, flip }: { project: Project; flip: boolean }) => {
             </>
           )}
           <Label>{copy.projectWork}</Label>
-          {text.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+          <p>{firstWork}</p>
+          <div id={moreId}>
+            {open &&
+              restWork.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          </div>
           <Label>{copy.expStack}</Label>
           <p>{stack}</p>
         </Detail>
-        {link && (
-          <CaseLink href={link.href} target="_blank" rel="noopener noreferrer">
-            {link.label}
-            <span aria-hidden="true">↗</span>
-          </CaseLink>
+        <Actions>
+          {hasMore && (
+            <More
+              type="button"
+              onClick={() => setOpen(!open)}
+              aria-expanded={open}
+              aria-controls={moreId}
+            >
+              {open ? copy.readLess : copy.projectMore}
+            </More>
+          )}
+          {link && (
+            <CaseLink
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {link.label}
+              <span aria-hidden="true">↗</span>
+            </CaseLink>
+          )}
+        </Actions>
+        {facts && (
+          <FactsWrap>
+            <Facts aria-label={copy.projectFacts}>
+              {facts.map(({ value, label }) => (
+                <Fact key={label}>
+                  <FactValue>{value}</FactValue>
+                  <FactLabel>{label}</FactLabel>
+                </Fact>
+              ))}
+            </Facts>
+            {factsSource && <FactsSource>{factsSource}</FactsSource>}
+          </FactsWrap>
         )}
       </FeaturedText>
 
@@ -114,20 +150,6 @@ const Featured = ({ project, flip }: { project: Project; flip: boolean }) => {
         <FeaturedVisual>
           <Visual />
         </FeaturedVisual>
-      )}
-
-      {facts && (
-        <FactsWrap>
-          <Facts aria-label={copy.projectFacts}>
-            {facts.map(({ value, label }) => (
-              <Fact key={label}>
-                <FactValue>{value}</FactValue>
-                <FactLabel>{label}</FactLabel>
-              </Fact>
-            ))}
-          </Facts>
-          {factsSource && <FactsSource>{factsSource}</FactsSource>}
-        </FactsWrap>
       )}
     </FeaturedItem>
   );
@@ -150,11 +172,6 @@ const Grid = styled.ul`
   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
   }
-`;
-
-const Item = styled.li`
-  border-top: 2px solid ${({ theme }) => theme.colors.field};
-  padding-top: 18px;
 `;
 
 const Name = styled.h3`
@@ -188,17 +205,25 @@ const Label = styled.h4`
   color: ${({ theme }) => theme.colors.tealInk};
 `;
 
+const Item = styled.li`
+  border-top: 2px solid ${({ theme }) => theme.colors.field};
+  padding-top: 18px;
+  ${Detail} {
+    max-width: 68ch;
+  }
+`;
+
 const FeaturedItem = styled.article<{ $flip: boolean }>`
   margin-top: clamp(36px, 5vw, 56px);
   padding-top: 18px;
   border-top: 2px solid ${({ theme }) => theme.colors.field};
   display: grid;
   grid-template-columns: ${({ $flip }) =>
-    $flip ? 'minmax(0, 7fr) minmax(0, 5fr)' : 'minmax(0, 5fr) minmax(0, 7fr)'};
+    $flip ? 'minmax(0, 5fr) minmax(0, 6fr)' : 'minmax(0, 6fr) minmax(0, 5fr)'};
   gap: clamp(28px, 4vw, 64px);
   align-items: start;
   & + & {
-    margin-top: clamp(64px, 8vw, 112px);
+    margin-top: clamp(48px, 6vw, 88px);
   }
   ${({ $flip }) =>
     $flip &&
@@ -219,9 +244,13 @@ const FeaturedItem = styled.article<{ $flip: boolean }>`
 
 const FeaturedText = styled.div`
   ${Name} {
-    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    font-size: clamp(1.6rem, 2.6vw, 2.25rem);
   }
-  ${Detail} p + p {
+  ${Detail} {
+    max-width: 68ch;
+  }
+  ${Detail} p + p,
+  ${Detail} p + div > p {
     margin-top: 10px;
   }
 `;
@@ -230,11 +259,31 @@ const FeaturedVisual = styled.div`
   min-width: 0;
 `;
 
-const CaseLink = styled.a`
-  display: inline-flex;
+// liczby w kolumnie tekstu, obok ilustracji, więc nie dokładają osobnego rzędu
+const FactsWrap = styled.div`
+  margin-top: clamp(24px, 2.5vw, 36px);
+`;
+
+const Actions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
-  margin-top: 22px;
+  gap: 8px 28px;
+  margin-top: 18px;
+`;
+
+const More = styled.button`
+  min-height: 40px;
+  font-weight: 600;
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.tealInk};
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+`;
+
+const CaseLink = styled.a`
+  padding-block: 8px;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.tealInk};
   text-decoration: underline;
@@ -242,6 +291,8 @@ const CaseLink = styled.a`
   text-decoration-thickness: 3px;
   text-underline-offset: 0.3em;
   span {
+    display: inline-block;
+    margin-left: 8px;
     transition: transform 0.25s ${({ theme }) => theme.ease.out};
   }
   @media (hover: hover) {
@@ -251,43 +302,47 @@ const CaseLink = styled.a`
   }
 `;
 
-const FactsWrap = styled.div`
-  grid-column: 1 / -1;
-`;
-
 const FactsSource = styled.p`
-  margin-top: 14px;
+  margin-top: 12px;
   font-size: 13px;
   color: ${({ theme }) => theme.colors.inkMuted};
 `;
 
 const Facts = styled.dl`
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(20px, 3vw, 48px);
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px clamp(20px, 2.5vw, 36px);
 `;
 
 const Fact = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  column-gap: 14px;
   border-top: 1px solid ${({ theme }) => theme.colors.line};
-  padding-top: 14px;
+  padding-top: 12px;
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const FactValue = styled.dt`
   font-family: ${({ theme }) => theme.fonts.display};
   font-weight: 800;
-  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
   color: ${({ theme }) => theme.colors.tealInk};
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 `;
 
 const FactLabel = styled.dd`
-  margin: 8px 0 0;
+  margin: 0;
   font-size: 14px;
-  line-height: 1.45;
+  line-height: 1.4;
   color: ${({ theme }) => theme.colors.inkSoft};
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    margin-top: 6px;
+  }
 `;

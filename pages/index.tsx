@@ -35,7 +35,11 @@ const Home = ({ content, buildYear }: HomeProps) => {
         </Opening>
         <Experience section={experience} />
         {projects && <Projects section={projects} />}
-        <AboutStack about={about} groups={stack} />
+        <AboutStack
+          about={about}
+          groups={stack}
+          tone={projects ? undefined : 'deep'}
+        />
       </main>
       <Contact section={contact} buildYear={buildYear} />
     </>
