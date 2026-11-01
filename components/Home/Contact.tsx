@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
+import type { ContactSection } from '../../content/types';
 import { LangContext } from '../../pages/_app';
 import { CONTACT, cvHref, t } from './copy';
 import { CmsInline, Glyph, MintButton, Wrap } from './ui';
@@ -9,7 +10,7 @@ const Mint = styled.span`
   color: ${({ theme }) => theme.colors.mint};
 `;
 
-const Contact = ({ section }) => {
+const Contact = ({ section }: { section: ContactSection }) => {
   const [lang] = useContext(LangContext);
   const copy = t(lang);
 
@@ -18,7 +19,12 @@ const Contact = ({ section }) => {
       <FloatingSquares count={7} />
       <Wrap>
         <Title id="kontakt-title">
-          <CmsInline overrides={{ secondary: { component: Mint }, primary: { component: Mint } }}>
+          <CmsInline
+            overrides={{
+              secondary: { component: Mint },
+              primary: { component: Mint },
+            }}
+          >
             {section.title}
           </CmsInline>
         </Title>
@@ -31,15 +37,27 @@ const Contact = ({ section }) => {
             <Glyph name="phone" size="18px" />
             {CONTACT.phone}
           </Channel>
-          <Channel href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer">
+          <Channel
+            href={CONTACT.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Glyph name="linkedin" size="18px" />
             LinkedIn
           </Channel>
-          <Channel href={CONTACT.github} target="_blank" rel="noopener noreferrer">
+          <Channel
+            href={CONTACT.github}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Glyph name="github" size="18px" />
             GitHub
           </Channel>
-          <MintButton href={cvHref(lang)} target="_blank" rel="noopener noreferrer">
+          <MintButton
+            href={cvHref(lang)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {copy.downloadCv}
             <Glyph name="download" size="16px" />
           </MintButton>
@@ -99,7 +117,8 @@ const Email = styled.a`
   letter-spacing: -0.035em;
   color: ${({ theme }) => theme.colors.mint};
   overflow-wrap: anywhere;
-  background: linear-gradient(currentColor, currentColor) 0 100% / 0% 3px no-repeat;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0% 3px
+    no-repeat;
   padding-bottom: 6px;
   transition: background-size 0.6s ${({ theme }) => theme.ease.out};
   @media (hover: hover) {

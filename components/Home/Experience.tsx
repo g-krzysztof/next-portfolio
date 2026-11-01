@@ -1,15 +1,16 @@
 import { useContext } from 'react';
 import styled, { css } from 'styled-components';
+import type { ExperienceSection } from '../../content/types';
 import { LangContext } from '../../pages/_app';
 import { t } from './copy';
 import { CmsInline, Section, SectionTitle, Wrap } from './ui';
 import useInView from './useInView';
 
-const Experience = ({ section }) => {
+const Experience = ({ section }: { section: ExperienceSection }) => {
   const [lang] = useContext(LangContext);
   const copy = t(lang);
   const { intro, entries } = section;
-  const [lineRef, inView] = useInView({ threshold: 0.25 });
+  const [lineRef, inView] = useInView<HTMLOListElement>({ threshold: 0.25 });
 
   return (
     <Section id="doswiadczenie" aria-labelledby="doswiadczenie-title">
@@ -70,7 +71,7 @@ const Intro = styled.p`
   color: ${({ theme }) => theme.colors.inkSoft};
 `;
 
-const Timeline = styled.ol`
+const Timeline = styled.ol<{ $in: boolean }>`
   position: relative;
   list-style: none;
   margin-top: clamp(36px, 5vw, 56px);
@@ -125,7 +126,7 @@ const Entry = styled.li`
   }
 `;
 
-const Dot = styled.span`
+const Dot = styled.span<{ $current: boolean }>`
   position: absolute;
   top: 0;
   left: 0;

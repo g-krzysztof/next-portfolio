@@ -6,7 +6,16 @@ import styled, { keyframes } from 'styled-components';
 // klatki, zamiast wyjeżdżać dopiero spod krawędzi.
 // x: pozycja w % szerokości, size: bok w px, o: krycie, d: czas wznoszenia w s,
 // delay: przesunięcie fazy w s, mint: obrys w kolorze mięty
-const SQUARES = [
+interface FloatingSquare {
+  x: number;
+  size: number;
+  o: number;
+  d: number;
+  delay: number;
+  mint?: boolean;
+}
+
+const SQUARES: FloatingSquare[] = [
   { x: 6, size: 220, o: 0.07, d: 46, delay: -8 },
   { x: 15, size: 64, o: 0.12, d: 30, delay: -22 },
   { x: 24, size: 120, o: 0.06, d: 38, delay: -3 },
@@ -21,7 +30,7 @@ const SQUARES = [
   { x: 98, size: 320, o: 0.04, d: 58, delay: -34 },
 ];
 
-const FloatingSquares = ({ count = SQUARES.length }) => (
+const FloatingSquares = ({ count = SQUARES.length }: { count?: number }) => (
   <Layer aria-hidden="true">
     {SQUARES.slice(0, count).map(({ x, size, o, d, delay, mint }) => (
       <Column
@@ -77,7 +86,7 @@ const Column = styled.div`
   }
 `;
 
-const Square = styled.span`
+const Square = styled.span<{ $mint?: boolean }>`
   position: absolute;
   top: 100%;
   left: 0;

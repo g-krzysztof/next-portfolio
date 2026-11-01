@@ -1,12 +1,16 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import type {
+  Recommendation,
+  RecommendationsSection,
+} from '../../content/types';
 import { LangContext } from '../../pages/_app';
-import { t } from './copy';
+import { t, type Copy } from './copy';
 import { CmsInline, Wrap } from './ui';
 import { LineIcon } from './icons';
 import useInView from './useInView';
 
-export const initials = (name = '') =>
+export const initials = (name = ''): string =>
   name
     .split(/\s+/)
     .filter(Boolean)
@@ -23,7 +27,25 @@ const FAN = [
   { r: -1.6, y: 12 },
 ];
 
-const RecCard = ({ item, index, offset, active, near, onPick, copy }) => {
+interface RecCardProps {
+  item: Recommendation;
+  index: number;
+  offset: number;
+  active: boolean;
+  near: boolean;
+  onPick: () => void;
+  copy: Copy;
+}
+
+const RecCard = ({
+  item,
+  index,
+  offset,
+  active,
+  near,
+  onPick,
+  copy,
+}: RecCardProps) => {
   const [open, setOpen] = useState(false);
   const [lead, ...rest] = item.text;
   const fan = FAN[index % FAN.length];
@@ -50,7 +72,7 @@ const RecCard = ({ item, index, offset, active, near, onPick, copy }) => {
         </Role>
       </Who>
       <Quote>
-        <Lead>{lead}</Lead>
+        {typeof lead === 'string' && <Lead>{lead}</Lead>}
         {open &&
           rest.map((block, i) =>
             typeof block === 'string' ? (
@@ -66,7 +88,11 @@ const RecCard = ({ item, index, offset, active, near, onPick, copy }) => {
       </Quote>
       <Foot>
         {rest.length > 0 ? (
-          <More type="button" onClick={() => setOpen(!open)} aria-expanded={open}>
+          <More
+            type="button"
+            onClick={() => setOpen(!open)}
+            aria-expanded={open}
+          >
             {open ? copy.readLess : copy.readMore}
           </More>
         ) : (
@@ -78,23 +104,26 @@ const RecCard = ({ item, index, offset, active, near, onPick, copy }) => {
   );
 };
 
-const Recommendations = ({ section }) => {
+const Recommendations = ({ section }: { section: RecommendationsSection }) => {
   const { items } = section;
   const [lang] = useContext(LangContext);
   const copy = t(lang);
-  const track = useRef(null);
-  const [deckRef, inView] = useInView({ threshold: 0.15 });
+  const track = useRef<HTMLDivElement | null>(null);
+  const [deckRef, inView] = useInView<HTMLDivElement>({ threshold: 0.15 });
   // Start od środka talii, żeby karty wystawały symetrycznie z obu stron
   const start = Math.floor((items.length - 1) / 2);
   const [active, setActive] = useState(start);
 
-  const cardAt = (index) => track.current?.querySelectorAll('article')[index];
+  const cardAt = (index: number) =>
+    track.current?.querySelectorAll('article')[index];
 
-  const centerOn = (index, behavior = 'smooth') => {
+  const centerOn = (index: number, behavior: ScrollBehavior = 'smooth') => {
     const el = track.current;
     const card = cardAt(index);
     if (!el || !card) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
     el.scrollTo({
       left: card.offsetLeft + card.offsetWidth / 2 - el.clientWidth / 2,
       behavior: reduced ? 'auto' : behavior,
@@ -140,7 +169,12 @@ const Recommendations = ({ section }) => {
     <Field id="opinie" aria-labelledby="opinie-title">
       <Head>
         <Title id="opinie-title">
-          <CmsInline overrides={{ secondary: { component: Mint }, primary: { component: Mint } }}>
+          <CmsInline
+            overrides={{
+              secondary: { component: Mint },
+              primary: { component: Mint },
+            }}
+          >
             {section.title}
           </CmsInline>
         </Title>
@@ -284,7 +318,7 @@ const Pick = styled.button`
   }
 `;
 
-const Arrow = styled.button`
+const Arrow = styled.button<{ $flip?: boolean }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -317,14 +351,18 @@ const Arrow = styled.button`
 
 // Tor na pełną szerokość ekranu: aktywna karta stoi na środku,
 // sąsiednie wystają symetrycznie zza obu krawędzi
-const Track = styled.div`
+const Track = styled.div<{ $in: boolean }>`
   --gap: clamp(20px, 2.4vw, 36px);
   --card: clamp(280px, 78vw, 500px);
   /* od laptopa trzy środkowe karty mieszczą się w kontenerze */
   @media (min-width: ${({ theme }) => theme.breakpoints.laptopS}) {
     --card: min(
       500px,
-      (min(100vw, ${({ theme }) => theme.layout.maxWidth}) - 2 * ${({ theme }) => theme.layout.gutter} - 2 * var(--gap)) / 3
+      (
+          min(100vw, ${({ theme }) => theme.layout.maxWidth}) - 2 *
+            ${({ theme }) => theme.layout.gutter} - 2 * var(--gap)
+        ) /
+        3
     );
   }
   position: relative;
@@ -367,7 +405,7 @@ const Track = styled.div`
   }
 `;
 
-const Card = styled.article`
+const Card = styled.article<{ $active: boolean; $near: boolean }>`
   position: relative;
   z-index: var(--z);
   flex: 0 0 var(--card);

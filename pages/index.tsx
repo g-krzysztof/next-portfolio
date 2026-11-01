@@ -1,4 +1,7 @@
 import { useContext } from 'react';
+import type { GetStaticProps } from 'next';
+import type { Content } from '../content/types';
+import type { Lang } from '../components/Home/copy';
 import { LangContext } from './_app';
 import contentPl from '../content/pl.json';
 import contentEn from '../content/en.json';
@@ -11,7 +14,11 @@ import Contact from '../components/Home/Contact';
 import FloatingSquares from '../components/Home/FloatingSquares';
 import styled from 'styled-components';
 
-const Home = ({ content }) => {
+interface HomeProps {
+  content: Record<Lang, Content>;
+}
+
+const Home = ({ content }: HomeProps) => {
   const [lang] = useContext(LangContext);
   const { about, experience, stack, recommendations, contact } = content[lang];
 
@@ -43,8 +50,8 @@ const Opening = styled.div`
 `;
 
 // treść jest w repo, więc strona buduje się statycznie bez zewnętrznych zapytań
-export const getStaticProps = async () => ({
+export const getStaticProps: GetStaticProps<HomeProps> = async () => ({
   props: {
-    content: { pl: contentPl, en: contentEn },
+    content: { pl: contentPl, en: contentEn } satisfies Record<Lang, Content>,
   },
 });

@@ -2,11 +2,11 @@ import { useCallback, useSyncExternalStore } from 'react';
 
 // On the server (and during hydration) the result is unknown, so `null` is
 // returned. Callers can use it to avoid rendering a layout that might be wrong.
-const getServerSnapshot = () => null;
+const getServerSnapshot = (): boolean | null => null;
 
-export default function useMediaQuery(query) {
+export default function useMediaQuery(query: string): boolean | null {
   const subscribe = useCallback(
-    (onChange) => {
+    (onChange: () => void) => {
       const mediaQueryList = window.matchMedia(query);
       mediaQueryList.addEventListener('change', onChange);
       return () => mediaQueryList.removeEventListener('change', onChange);
@@ -14,7 +14,7 @@ export default function useMediaQuery(query) {
     [query],
   );
 
-  const getSnapshot = () => window.matchMedia(query).matches;
+  const getSnapshot = (): boolean | null => window.matchMedia(query).matches;
 
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

@@ -8,7 +8,7 @@ import { SECTIONS, t } from './copy';
 const Nav = () => {
   const [lang, setLang] = useContext(LangContext);
   const [solid, setSolid] = useState(false);
-  const [active, setActive] = useState(null);
+  const [active, setActive] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const copy = t(lang);
@@ -49,7 +49,7 @@ const Nav = () => {
 
   useEffect(() => {
     if (!open) return undefined;
-    const onKey = (e) => e.key === 'Escape' && setOpen(false);
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [open]);
@@ -101,7 +101,7 @@ const Nav = () => {
 
 export default Nav;
 
-const Bar = styled.header`
+const Bar = styled.header<{ $solid: boolean; $scrolled: boolean }>`
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
@@ -164,7 +164,7 @@ const Mark = styled.a`
   }
 `;
 
-const Links = styled.ul`
+const Links = styled.ul<{ $open: boolean }>`
   display: flex;
   gap: clamp(16px, 2.6vw, 36px);
   margin-left: auto;

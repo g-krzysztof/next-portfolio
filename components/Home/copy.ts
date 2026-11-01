@@ -1,6 +1,8 @@
 // Stałe dane i teksty interfejsu. Treść merytoryczna (doświadczenie, stack,
 // opinie) leży w content/{pl,en}.json; tutaj tylko to, co należy do samego layoutu.
 
+export type Lang = 'pl' | 'en';
+
 export const CONTACT = {
   email: 'hello@krzysztofg.pl',
   phone: '+48 535 383 727',
@@ -9,7 +11,7 @@ export const CONTACT = {
   linkedin: 'https://linkedin.com/in/krzysztof-gryc',
 };
 
-export const cvHref = (lang) =>
+export const cvHref = (lang: Lang) =>
   `/utils/krzysztofgryc${lang === 'pl' ? '_pl' : '_en'}.pdf`;
 
 export const SECTIONS = [
@@ -76,4 +78,6 @@ const COPY = {
   },
 };
 
-export const t = (lang) => COPY[lang] || COPY.pl;
+export const t = (lang: Lang) => COPY[lang] || COPY.pl;
+
+export type Copy = ReturnType<typeof t>;

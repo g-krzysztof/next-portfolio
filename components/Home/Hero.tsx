@@ -1,5 +1,12 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type PointerEvent,
+} from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import type { Recommendation, StackGroup } from '../../content/types';
 import { LangContext } from '../../pages/_app';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { useCanHover } from '../../hooks/useDevice';
@@ -17,18 +24,23 @@ const FlipIcon = () => <LineIcon name="flip" size={16} />;
 // Spoczynkowe ustawienie karty (jak na zaakceptowanym szkicu)
 const REST = { rx: 6, ry: -14 };
 
-const Hero = ({ stack, recommendations = [] }) => {
+interface HeroProps {
+  stack: StackGroup[];
+  recommendations?: Recommendation[];
+}
+
+const Hero = ({ stack, recommendations = [] }: HeroProps) => {
   const [lang] = useContext(LangContext);
   const copy = t(lang);
   const [flipped, setFlipped] = useState(false);
   const canHover = useCanHover();
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
-  const tiltRef = useRef(null);
+  const tiltRef = useRef<HTMLDivElement>(null);
   const frame = useRef(0);
 
-  const interactive = canHover && !reducedMotion;
+  const interactive = !!canHover && !reducedMotion;
 
-  const setTilt = (rx, ry, gx = 30, gy = 20) => {
+  const setTilt = (rx: number, ry: number, gx = 30, gy = 20) => {
     const el = tiltRef.current;
     if (!el) return;
     el.style.setProperty('--rx', `${rx}deg`);
@@ -37,7 +49,7 @@ const Hero = ({ stack, recommendations = [] }) => {
     el.style.setProperty('--gy', `${gy}%`);
   };
 
-  const onPointerMove = (e) => {
+  const onPointerMove = (e: PointerEvent<HTMLDivElement>) => {
     if (!interactive) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width - 0.5;
@@ -101,12 +113,27 @@ const Hero = ({ stack, recommendations = [] }) => {
                 <Band aria-hidden="true">
                   <BandLines />
                 </Band>
-                <Avatar src="/images/avatar-kriss.png" alt="" width="132" height="132" />
+                <Avatar
+                  src="/images/avatar-kriss.png"
+                  alt=""
+                  width="132"
+                  height="132"
+                />
                 <Socials>
-                  <SocialLink href={CONTACT.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <SocialLink
+                    href={CONTACT.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                  >
                     <Glyph name="github" size="20px" />
                   </SocialLink>
-                  <SocialLink href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <SocialLink
+                    href={CONTACT.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                  >
                     <Glyph name="linkedin" size="20px" />
                   </SocialLink>
                 </Socials>
@@ -115,7 +142,11 @@ const Hero = ({ stack, recommendations = [] }) => {
                   <CardRole>{copy.role}</CardRole>
                 </Who>
                 <Rows>
-                  <RowPrimary href={cvHref(lang)} target="_blank" rel="noopener noreferrer">
+                  <RowPrimary
+                    href={cvHref(lang)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {copy.downloadCv}
                     <Glyph name="download" size="16px" />
                   </RowPrimary>
@@ -128,7 +159,11 @@ const Hero = ({ stack, recommendations = [] }) => {
                     {CONTACT.email}
                   </Row>
                 </Rows>
-                <FlipCorner type="button" onClick={() => setFlipped(true)} aria-label={copy.flipToBack}>
+                <FlipCorner
+                  type="button"
+                  onClick={() => setFlipped(true)}
+                  aria-label={copy.flipToBack}
+                >
                   Stack
                   <FlipIcon />
                 </FlipCorner>
@@ -145,12 +180,15 @@ const Hero = ({ stack, recommendations = [] }) => {
                 {more.length > 0 && (
                   <div>
                     <BackSub>{copy.cardBackMore}</BackSub>
-                    <MoreList>
-                      {more.join(' · ')}
-                    </MoreList>
+                    <MoreList>{more.join(' · ')}</MoreList>
                   </div>
                 )}
-                <FlipCorner type="button" onClick={() => setFlipped(false)} aria-label={copy.flipToFront} $onBack>
+                <FlipCorner
+                  type="button"
+                  onClick={() => setFlipped(false)}
+                  aria-label={copy.flipToFront}
+                  $onBack
+                >
                   {copy.flipToFront}
                   <FlipIcon />
                 </FlipCorner>
@@ -171,15 +209,16 @@ const HeroField = styled.div`
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding-top: calc(${({ theme }) => theme.layout.navHeight} + clamp(16px, 4vh, 48px));
+  padding-top: calc(
+    ${({ theme }) => theme.layout.navHeight} + clamp(16px, 4vh, 48px)
+  );
   padding-bottom: 0;
   ${({ theme: { colors } }) => css`
-    background:
-      radial-gradient(
-        60% 70% at 74% 56%,
-        rgba(143, 227, 136, 0.16),
-        transparent 70%
-      );
+    background: radial-gradient(
+      60% 70% at 74% 56%,
+      rgba(143, 227, 136, 0.16),
+      transparent 70%
+    );
     color: ${colors.onField};
   `}
 `;
@@ -303,7 +342,7 @@ const FlipHint = styled.button`
   }
 `;
 
-const HintIcon = styled.span`
+const HintIcon = styled.span<{ $flipped: boolean }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -358,7 +397,7 @@ const FloorShadow = styled.div`
   filter: blur(28px);
 `;
 
-const Tilt = styled.div`
+const Tilt = styled.div<{ $interactive: boolean; $flipped: boolean }>`
   --rx: ${REST.rx}deg;
   --ry: ${REST.ry}deg;
   --gx: 30%;
@@ -386,7 +425,11 @@ const Tilt = styled.div`
     position: absolute;
     inset: 4% -3.5% 4% 6%;
     border-radius: ${({ theme }) => theme.radii.card};
-    background: linear-gradient(160deg, #23706f, ${({ theme }) => theme.colors.fieldDeep});
+    background: linear-gradient(
+      160deg,
+      #23706f,
+      ${({ theme }) => theme.colors.fieldDeep}
+    );
     border: 1px solid rgba(143, 227, 136, 0.28);
     transform: translateZ(-36px);
     opacity: ${({ $flipped }) => ($flipped ? 0 : 1)};
@@ -401,7 +444,7 @@ const Tilt = styled.div`
   }
 `;
 
-const Flipper = styled.div`
+const Flipper = styled.div<{ $flipped: boolean }>`
   display: grid;
   transform-style: preserve-3d;
   transition: transform 0.9s ${({ theme }) => theme.ease.out};
@@ -412,7 +455,7 @@ const Flipper = styled.div`
   }
 `;
 
-const face = css`
+const face = css<{ $away: boolean }>`
   grid-area: 1 / 1;
   position: relative;
   border-radius: ${({ theme }) => theme.radii.card};
@@ -432,14 +475,14 @@ const face = css`
     0 30px 60px -20px rgba(3, 18, 17, 0.6);
 `;
 
-const Front = styled.article`
+const Front = styled.article<{ $away: boolean }>`
   ${face};
   background: ${({ theme }) => theme.colors.paper};
   color: ${({ theme }) => theme.colors.ink};
   padding: 0 clamp(22px, 4vw, 44px) clamp(22px, 4vw, 40px);
 `;
 
-const Back = styled.article`
+const Back = styled.article<{ $away: boolean }>`
   ${face};
   transform: rotateY(180deg) translateZ(1px);
   display: flex;
@@ -593,7 +636,7 @@ const RowPrimary = styled.a`
   }
 `;
 
-const Row = styled.a`
+const Row = styled.a<{ $wide?: boolean }>`
   ${rowBase};
   border: 1.5px solid ${({ theme }) => theme.colors.line};
   color: ${({ theme }) => theme.colors.ink};
@@ -609,7 +652,7 @@ const Row = styled.a`
   }
 `;
 
-const FlipCorner = styled.button`
+const FlipCorner = styled.button<{ $onBack?: boolean }>`
   position: absolute;
   top: 16px;
   right: 16px;

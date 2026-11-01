@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 // Jedna rodzina ikon: kontur 1.8 na siatce 24, zaokrąglone końce.
 const shapes = {
   phone: (
@@ -43,9 +45,16 @@ const shapes = {
       <path d="M20 4v4.5h-4.5" />
     </>
   ),
-};
+} satisfies Record<string, ReactNode>;
 
-export const LineIcon = ({ name, size = 18 }) => (
+export type IconName = keyof typeof shapes;
+
+interface LineIconProps {
+  name: IconName;
+  size?: number;
+}
+
+export const LineIcon = ({ name, size = 18 }: LineIconProps) => (
   <svg
     viewBox="0 0 24 24"
     width={size}

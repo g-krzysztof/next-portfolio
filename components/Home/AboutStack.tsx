@@ -1,11 +1,17 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
+import type { About as AboutContent, StackGroup } from '../../content/types';
 import { LangContext } from '../../pages/_app';
 import { t } from './copy';
 import { lineLabel } from './stack';
 import { CmsInline, Section, SectionTitle, Wrap } from './ui';
 
-const AboutStack = ({ about, groups }) => {
+interface AboutStackProps {
+  about: AboutContent;
+  groups: StackGroup[];
+}
+
+const AboutStack = ({ about, groups }: AboutStackProps) => {
   const [lang] = useContext(LangContext);
   const copy = t(lang);
   const [current, ...others] = groups;
@@ -123,7 +129,7 @@ const Words = styled.ul`
   }
 `;
 
-const Word = styled.span`
+const Word = styled.span<{ $strong?: boolean }>`
   font-family: ${({ theme }) => theme.fonts.display};
   line-height: 1.15;
   letter-spacing: -0.03em;

@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
+import type { MarkdownToJSX } from 'markdown-to-jsx';
 import Markdown from '../Markdown/Markdown';
-import { LineIcon } from './icons';
+import { LineIcon, type IconName } from './icons';
 
 // Tagi w treściach: <secondary> to akcent turkusowy, <primary> to podkreślenie miętą.
 const Accent = styled.span`
@@ -16,14 +17,22 @@ const Highlight = styled.span`
   text-decoration-skip-ink: none;
 `;
 
-export const cmsOverrides = {
+export const cmsOverrides: MarkdownToJSX.Overrides = {
   primary: { component: Highlight },
   secondary: { component: Accent },
 };
 
-export const CmsInline = ({ children, overrides = {} }) => (
+interface CmsInlineProps {
+  children?: string;
+  overrides?: MarkdownToJSX.Overrides;
+}
+
+export const CmsInline = ({ children, overrides = {} }: CmsInlineProps) => (
   <Markdown
-    options={{ forceInline: true, overrides: { ...cmsOverrides, ...overrides } }}
+    options={{
+      forceInline: true,
+      overrides: { ...cmsOverrides, ...overrides },
+    }}
   >
     {(children || '').replace(/^#+\s*/, '')}
   </Markdown>
@@ -36,7 +45,7 @@ export const Wrap = styled.div`
   padding-inline: ${({ theme }) => theme.layout.gutter};
 `;
 
-export const Section = styled.section`
+export const Section = styled.section<{ $tone?: 'deep' }>`
   padding-block: clamp(64px, 8vw, 112px);
   ${({ $tone, theme: { colors } }) =>
     $tone === 'deep' &&
@@ -89,6 +98,11 @@ export const MintButton = styled.a`
   `}
 `;
 
-export const Glyph = ({ name, size = '18px' }) => (
+interface GlyphProps {
+  name: IconName;
+  size?: string;
+}
+
+export const Glyph = ({ name, size = '18px' }: GlyphProps) => (
   <LineIcon name={name} size={parseInt(size, 10)} />
 );
