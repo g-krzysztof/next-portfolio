@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { SECTIONS } from './copy';
 import { useLang } from './lang';
@@ -7,7 +8,8 @@ import { theme } from '../../styles/theme';
 // Pasek nad turkusowym hero jest przezroczysty; gdy hero zniknie spod
 // paska, przechodzi w jasny papier. Aktywną sekcję śledzi IntersectionObserver.
 const Nav = () => {
-  const { lang, setLang, copy } = useLang();
+  const { lang, copy } = useLang();
+  const other = lang === 'pl' ? 'en' : 'pl';
   const [solid, setSolid] = useState(false);
   const [active, setActive] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
@@ -79,14 +81,17 @@ const Nav = () => {
           ))}
         </Links>
         <Actions>
-          <LangButton
-            type="button"
-            onClick={() => setLang(lang === 'pl' ? 'en' : 'pl')}
+          {/* zwykły link: przełącza adres (/ ↔ /en) bez zmiany pozycji */}
+          <LangLink
+            href="/"
+            locale={other}
+            scroll={false}
             aria-label={copy.switchLang}
-            lang={lang === 'pl' ? 'en' : 'pl'}
+            hrefLang={other}
+            lang={other}
           >
-            {lang === 'pl' ? 'EN' : 'PL'}
-          </LangButton>
+            {other.toUpperCase()}
+          </LangLink>
           <MenuButton
             type="button"
             aria-expanded={open}
@@ -249,8 +254,10 @@ const pill = css`
     color 0.25s ${({ theme }) => theme.ease.out};
 `;
 
-const LangButton = styled.button`
+const LangLink = styled(Link)`
   ${pill};
+  display: inline-flex;
+  align-items: center;
   color: var(--nav-pill);
   @media (hover: hover) {
     &:hover {

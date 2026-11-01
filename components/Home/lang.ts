@@ -1,17 +1,13 @@
-import {
-  createContext,
-  useContext,
-  type Dispatch,
-  type SetStateAction,
-} from 'react';
-import { t, type Lang } from './copy';
+import { useRouter } from 'next/router';
+import { LOCALES, t, type Lang } from './copy';
 
-export const LangContext = createContext<
-  [Lang, Dispatch<SetStateAction<Lang>>]
->(['pl', () => {}]);
+const isLang = (value?: string): value is Lang =>
+  LOCALES.includes(value as Lang);
 
-// Język i teksty interfejsu w jednym wywołaniu
+// Język wynika z adresu (/ albo /en), więc przeżywa odświeżenie,
+// da się go podlinkować i zaindeksować
 export const useLang = () => {
-  const [lang, setLang] = useContext(LangContext);
-  return { lang, setLang, copy: t(lang) };
+  const { locale } = useRouter();
+  const lang: Lang = isLang(locale) ? locale : 'pl';
+  return { lang, copy: t(lang) };
 };

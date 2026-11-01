@@ -33,9 +33,10 @@ export default class MyDocument extends Document {
       sheet.seal();
     }
   }
+  // lang na <html> ustawia Next z aktywnego locale
   render() {
     return (
-      <Html lang="pl">
+      <Html>
         <Head>
           <link rel="shortcut icon" href="/favicon.svg" />
         </Head>

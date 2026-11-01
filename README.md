@@ -4,7 +4,6 @@
 
 - next
 - styled components
-- styled-system
 - eslint
 - prettier
 - custom hooks

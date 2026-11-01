@@ -5,6 +5,13 @@ const nextConfig: NextConfig = {
   compiler: {
     styledComponents: true,
   },
+  // polski pod /, angielski pod /en; bez przekierowań wg Accept-Language,
+  // żeby roboty i linki zawsze trafiały w wersję z adresu
+  i18n: {
+    locales: ['pl', 'en'],
+    defaultLocale: 'pl',
+    localeDetection: false,
+  },
   // dawne podstrony żyją dziś jako sekcje strony głównej
   async redirects() {
     return [

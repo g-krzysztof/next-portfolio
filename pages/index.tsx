@@ -1,7 +1,6 @@
 import type { GetStaticProps } from 'next';
 import type { Content } from '../content/types';
 import type { Lang } from '../components/Home/copy';
-import { useLang } from '../components/Home/lang';
 import contentPl from '../content/pl.json';
 import contentEn from '../content/en.json';
 import Nav from '../components/Home/Nav';
@@ -14,13 +13,12 @@ import FloatingSquares from '../components/Home/FloatingSquares';
 import styled from 'styled-components';
 
 interface HomeProps {
-  content: Record<Lang, Content>;
+  content: Content;
   buildYear: number;
 }
 
 const Home = ({ content, buildYear }: HomeProps) => {
-  const { lang } = useLang();
-  const { about, experience, stack, recommendations, contact } = content[lang];
+  const { about, experience, stack, recommendations, contact } = content;
 
   return (
     <>
@@ -50,9 +48,17 @@ const Opening = styled.div`
 `;
 
 // treść jest w repo, więc strona buduje się statycznie bez zewnętrznych zapytań
-export const getStaticProps: GetStaticProps<HomeProps> = async () => ({
+// każda wersja językowa dostaje tylko swoją treść
+const CONTENT = { pl: contentPl, en: contentEn } satisfies Record<
+  Lang,
+  Content
+>;
+
+export const getStaticProps: GetStaticProps<HomeProps> = async ({
+  locale,
+}) => ({
   props: {
-    content: { pl: contentPl, en: contentEn } satisfies Record<Lang, Content>,
+    content: CONTENT[locale === 'en' ? 'en' : 'pl'],
     buildYear: new Date().getFullYear(),
   },
 });

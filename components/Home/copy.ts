@@ -1,7 +1,10 @@
 // Stałe dane i teksty interfejsu. Treść merytoryczna (doświadczenie, stack,
 // opinie) leży w content/{pl,en}.json; tutaj tylko to, co należy do samego layoutu.
 
-export type Lang = 'pl' | 'en';
+export const LOCALES = ['pl', 'en'] as const;
+export type Lang = (typeof LOCALES)[number];
+
+export const SITE_URL = 'https://krzysztofg.pl';
 
 export const CONTACT = {
   email: 'hello@krzysztofg.pl',
@@ -27,6 +30,8 @@ const COPY = {
     menu: 'Menu',
     close: 'Zamknij',
     switchLang: 'Switch to English',
+    metaDescription:
+      'Senior React Developer z Tychów. Ponad dziesięć lat w webie, wcześniej grafik DTP.',
     helloA: 'Cześć,',
     helloB: 'tu Krzysiek.',
     lede: 'Senior React Developer z ponad dziesięcioletnim stażem w webie. Zaczynałem jako grafik, dlatego frontend robię okiem projektanta.',
@@ -53,6 +58,8 @@ const COPY = {
     menu: 'Menu',
     close: 'Close',
     switchLang: 'Przełącz na polski',
+    metaDescription:
+      'Senior React Developer based in Tychy, Poland. Over ten years in web, formerly a DTP designer.',
     helloA: 'Hi,',
     helloB: 'I’m Krzysiek.',
     lede: 'Senior React Developer with over ten years in web. I started out as a graphic designer, so I build front ends with a designer’s eye.',
