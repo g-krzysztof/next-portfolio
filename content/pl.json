@@ -24,12 +24,12 @@
           "budowa modułów w CMS opartym na React do zarządzania aplikacjami radiowymi i innymi aplikacjami grupy",
           "wdrożenie text-to-speech opartego na AI: odsłuch artykułów w serwisach",
           "wdrożenia i integracje systemów reklamowych w playerach i serwisach (Google IMA, VAST)",
-          "integracje z backendem; frontend w repozytoriach Python/Django (szablony Django, SASS + BEM)",
+          "integracje z backendem i warstwa frontendowa w projektach opartych na Django",
           "testy E2E w Playwright",
           "development wspierany przez AI: własne skille i instrukcje dla agentów kodujących, kontrola architektury i review generowanego kodu"
         ],
         "stack": [
-          "TypeScript, React, Playwright, Python/Django (templates), SASS/BEM, REST, Google IMA/VAST"
+          "TypeScript, React, Styled Components, Playwright, Vitest, MSW, HLS.js, Video.js, Google IMA / VAST, REST"
         ]
       },
       {
@@ -46,7 +46,7 @@
           "Platforma geoprzestrzenna do analizy złóż surowców: zaprojektowanie architektury (system design) i wdrożenie narzędzia, które nakłada na mapę wiele warstw danych, udostępnia moduły analityczne i zaawansowane wyszukiwanie z filtrowaniem wyników."
         ],
         "stack": [
-          "TypeScript, React, Redux, Redux-Saga, TanStack Query, Next.js, GraphQL (Apollo), REST, Storybook, Styled Components, Cypress, Jest, React Testing Library, NX"
+          "TypeScript, React, Next.js, Node.js (BFF), Redux, Redux-Saga, TanStack Query, GraphQL (Apollo), REST, Storybook, Styled Components, Jest, React Testing Library, Cypress, NX"
         ]
       },
       {
@@ -72,7 +72,7 @@
             "period": "2014 – 2019",
             "role": "Front-end Developer – freelance",
             "text": [
-              "Strony i aplikacje: HTML, Sass, React.js; WordPress, Joomla; projektowanie layoutów i grafiki."
+              "Strony i aplikacje: HTML, Sass, React.js; headless CMS (Strapi), WordPress, Joomla; projektowanie layoutów i grafiki."
             ]
           },
           {
@@ -201,7 +201,7 @@
   },
   "stack": [
     {
-      "title": "Aktualnie pracuję w stacku",
+      "title": "Na co dzień",
       "lines": [
         [
           {
@@ -209,34 +209,20 @@
             "strong": true
           },
           {
-            "name": "Redux"
-          },
-          {
-            "name": "Redux-Saga",
-            "minor": true
-          },
-          {
-            "name": "TanStack Query"
-          }
-        ],
-        [
-          {
             "name": "TypeScript",
             "strong": true
-          },
-          {
-            "name": "JavaScript",
-            "minor": true
           }
         ],
         [
           {
             "name": "Next.js",
+            "detail": "App Router, RSC",
             "strong": true
-          },
+          }
+        ],
+        [
           {
-            "name": "Server-Side Rendering",
-            "minor": true
+            "name": "TanStack Query"
           }
         ],
         [
@@ -245,34 +231,27 @@
             "strong": true
           },
           {
-            "name": "Cypress"
-          },
-          {
-            "name": "Jest"
+            "name": "Vitest"
           },
           {
             "name": "React Testing Library"
           },
           {
-            "name": "Vitest",
-            "minor": true
+            "name": "MSW"
           }
         ],
         [
           {
             "name": "Agenci AI",
+            "detail": "Claude Code",
             "strong": true
-          },
+          }
+        ],
+        [
           {
-            "name": "Claude Code"
-          },
-          {
-            "name": "Cursor",
-            "minor": true
-          },
-          {
-            "name": "GitHub Copilot",
-            "minor": true
+            "name": "playery wideo i audio",
+            "detail": "HLS.js, Video.js, Google IMA / VAST",
+            "strong": true
           }
         ],
         [
@@ -280,117 +259,65 @@
             "name": "Styled Components"
           },
           {
-            "name": "Tailwind"
-          },
-          {
-            "name": "Sass",
-            "detail": "BEM",
-            "minor": true
-          },
-          {
             "name": "Storybook"
-          },
+          }
+        ]
+      ]
+    },
+    {
+      "title": "Znam dobrze",
+      "lines": [
+        [
           {
-            "name": "Framer Motion",
-            "minor": true
+            "name": "Node.js",
+            "detail": "BFF"
+          }
+        ],
+        [
+          {
+            "name": "Strapi"
+          }
+        ],
+        [
+          {
+            "name": "Redux Toolkit"
           }
         ],
         [
           {
             "name": "GraphQL",
             "detail": "Apollo"
+          }
+        ],
+        [
+          {
+            "name": "REST / OpenAPI"
+          }
+        ],
+        [
+          {
+            "name": "React Hook Form"
           },
           {
-            "name": "REST API",
-            "minor": true
+            "name": "Zod"
           }
         ],
         [
           {
-            "name": "playery wideo / audio / radio / podcast"
+            "name": "Tailwind"
           }
         ],
         [
           {
-            "name": "Vite",
-            "minor": true
+            "name": "Framer Motion"
+          }
+        ],
+        [
+          {
+            "name": "Jest"
           },
           {
-            "name": "Webpack",
-            "minor": true
-          },
-          {
-            "name": "Git",
-            "minor": true
-          }
-        ],
-        [
-          {
-            "name": "Python",
-            "minor": true
-          },
-          {
-            "name": "Node.js",
-            "minor": true
-          }
-        ],
-        [
-          {
-            "name": "Figma",
-            "minor": true
-          },
-          {
-            "name": "UI Design Systems",
-            "minor": true
-          },
-          {
-            "name": "mentoring",
-            "minor": true
-          },
-          {
-            "name": "code review",
-            "minor": true
-          }
-        ]
-      ]
-    },
-    {
-      "title": "Pracowałem między innymi z:",
-      "lines": [
-        [
-          {
-            "name": "Google IMA"
-          },
-          {
-            "name": "VAST"
-          }
-        ],
-        [
-          {
-            "name": "Video.js"
-          }
-        ],
-        [
-          {
-            "name": "Text-to-Speech",
-            "detail": "AI"
-          }
-        ],
-        [
-          {
-            "name": "moduły CMS",
-            "detail": "React"
-          }
-        ],
-        [
-          {
-            "name": "Django",
-            "detail": "templates"
-          }
-        ],
-        [
-          {
-            "name": "edytor treści dla redakcji"
+            "name": "Cypress"
           }
         ],
         [
@@ -400,10 +327,73 @@
         ],
         [
           {
-            "name": "Web Performance"
-          },
+            "name": "Vite"
+          }
+        ],
+        [
           {
             "name": "Core Web Vitals"
+          }
+        ],
+        [
+          {
+            "name": "GitLab CI"
+          },
+          {
+            "name": "Sentry"
+          }
+        ]
+      ]
+    },
+    {
+      "title": "Wcześniej",
+      "lines": [
+        [
+          {
+            "name": "Redux-Saga"
+          }
+        ],
+        [
+          {
+            "name": "Django",
+            "detail": "szablony"
+          }
+        ],
+        [
+          {
+            "name": "Sass",
+            "detail": "BEM"
+          }
+        ],
+        [
+          {
+            "name": "React Native",
+            "detail": "Expo"
+          }
+        ],
+        [
+          {
+            "name": "Webpack"
+          }
+        ],
+        [
+          {
+            "name": "Gatsby"
+          }
+        ],
+        [
+          {
+            "name": "Symfony + Twig"
+          }
+        ],
+        [
+          {
+            "name": "WordPress"
+          }
+        ],
+        [
+          {
+            "name": "jQuery"
           }
         ]
       ]

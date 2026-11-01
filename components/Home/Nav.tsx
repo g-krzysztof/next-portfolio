@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
@@ -83,8 +85,7 @@ const Nav = ({ sections = SECTIONS }: { sections?: typeof SECTIONS }) => {
         <Actions>
           {/* zwykły link: przełącza adres (/ ↔ /en) bez zmiany pozycji */}
           <LangLink
-            href="/"
-            locale={other}
+            href={other === 'pl' ? '/' : `/${other}`}
             scroll={false}
             aria-label={copy.switchLang}
             hrefLang={other}

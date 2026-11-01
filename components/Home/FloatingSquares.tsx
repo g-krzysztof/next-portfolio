@@ -1,3 +1,5 @@
+'use client';
+
 import styled, { keyframes } from 'styled-components';
 
 // Następca kwadratów z tła poprzedniej wersji strony: zaokrąglone obrysy

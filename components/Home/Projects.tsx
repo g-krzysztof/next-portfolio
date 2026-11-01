@@ -1,3 +1,5 @@
+'use client';
+
 import { useId, useState } from 'react';
 import styled, { css } from 'styled-components';
 import type { Project, ProjectsSection } from '../../content/types';

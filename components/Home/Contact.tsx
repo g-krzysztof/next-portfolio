@@ -1,3 +1,5 @@
+'use client';
+
 import { useSyncExternalStore } from 'react';
 import styled from 'styled-components';
 import type { ContactSection } from '../../content/types';

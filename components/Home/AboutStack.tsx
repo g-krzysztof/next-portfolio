@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import type { About as AboutContent, StackGroup } from '../../content/types';
 import { useLang } from './lang';

@@ -24,12 +24,12 @@
           "building modules in a React-based CMS for managing the group’s radio apps and other apps",
           "implementing AI-based text-to-speech: audio versions of articles on the websites",
           "implementing and integrating ad systems in players and websites (Google IMA, VAST)",
-          "backend integrations; front end in Python/Django repositories (Django templates, SASS + BEM)",
+          "backend integrations and the front-end layer in Django-based projects",
           "E2E tests in Playwright",
           "AI-assisted development: custom skills and instructions for coding agents, architecture oversight and review of generated code"
         ],
         "stack": [
-          "TypeScript, React, Playwright, Python/Django (templates), SASS/BEM, REST, Google IMA/VAST"
+          "TypeScript, React, Styled Components, Playwright, Vitest, MSW, HLS.js, Video.js, Google IMA / VAST, REST"
         ]
       },
       {
@@ -46,7 +46,7 @@
           "Geospatial platform for mineral deposit analysis: system design and implementation of a tool that overlays multiple data layers on a map, provides analytics modules and advanced search with result filtering."
         ],
         "stack": [
-          "TypeScript, React, Redux, Redux-Saga, TanStack Query, Next.js, GraphQL (Apollo), REST, Storybook, Styled Components, Cypress, Jest, React Testing Library, NX"
+          "TypeScript, React, Next.js, Node.js (BFF), Redux, Redux-Saga, TanStack Query, GraphQL (Apollo), REST, Storybook, Styled Components, Jest, React Testing Library, Cypress, NX"
         ]
       },
       {
@@ -72,7 +72,7 @@
             "period": "2014 – 2019",
             "role": "Front-end Developer – freelance",
             "text": [
-              "Websites and apps: HTML, Sass, React.js; WordPress, Joomla; layout and graphic design."
+              "Websites and apps: HTML, Sass, React.js; headless CMS (Strapi), WordPress, Joomla; layout and graphic design."
             ]
           },
           {
@@ -201,7 +201,7 @@
   },
   "stack": [
     {
-      "title": "My current stack",
+      "title": "Day to day",
       "lines": [
         [
           {
@@ -209,34 +209,20 @@
             "strong": true
           },
           {
-            "name": "Redux"
-          },
-          {
-            "name": "Redux-Saga",
-            "minor": true
-          },
-          {
-            "name": "TanStack Query"
-          }
-        ],
-        [
-          {
             "name": "TypeScript",
             "strong": true
-          },
-          {
-            "name": "JavaScript",
-            "minor": true
           }
         ],
         [
           {
             "name": "Next.js",
+            "detail": "App Router, RSC",
             "strong": true
-          },
+          }
+        ],
+        [
           {
-            "name": "Server-Side Rendering",
-            "minor": true
+            "name": "TanStack Query"
           }
         ],
         [
@@ -245,34 +231,27 @@
             "strong": true
           },
           {
-            "name": "Cypress"
-          },
-          {
-            "name": "Jest"
+            "name": "Vitest"
           },
           {
             "name": "React Testing Library"
           },
           {
-            "name": "Vitest",
-            "minor": true
+            "name": "MSW"
           }
         ],
         [
           {
             "name": "AI agents",
+            "detail": "Claude Code",
             "strong": true
-          },
+          }
+        ],
+        [
           {
-            "name": "Claude Code"
-          },
-          {
-            "name": "Cursor",
-            "minor": true
-          },
-          {
-            "name": "GitHub Copilot",
-            "minor": true
+            "name": "video and audio players",
+            "detail": "HLS.js, Video.js, Google IMA / VAST",
+            "strong": true
           }
         ],
         [
@@ -280,106 +259,98 @@
             "name": "Styled Components"
           },
           {
-            "name": "Tailwind"
-          },
-          {
-            "name": "Sass",
-            "detail": "BEM",
-            "minor": true
-          },
-          {
             "name": "Storybook"
-          },
+          }
+        ]
+      ]
+    },
+    {
+      "title": "Know well",
+      "lines": [
+        [
           {
-            "name": "Framer Motion",
-            "minor": true
+            "name": "Node.js",
+            "detail": "BFF"
+          }
+        ],
+        [
+          {
+            "name": "Strapi"
+          }
+        ],
+        [
+          {
+            "name": "Redux Toolkit"
           }
         ],
         [
           {
             "name": "GraphQL",
             "detail": "Apollo"
-          },
-          {
-            "name": "REST API",
-            "minor": true
           }
         ],
         [
           {
-            "name": "video / audio / radio / podcast players"
+            "name": "REST / OpenAPI"
           }
         ],
         [
           {
-            "name": "Vite",
-            "minor": true
+            "name": "React Hook Form"
           },
           {
-            "name": "Webpack",
-            "minor": true
-          },
-          {
-            "name": "Git",
-            "minor": true
+            "name": "Zod"
           }
         ],
         [
           {
-            "name": "Python",
-            "minor": true
-          },
-          {
-            "name": "Node.js",
-            "minor": true
+            "name": "Tailwind"
           }
         ],
         [
           {
-            "name": "Figma",
-            "minor": true
+            "name": "Framer Motion"
+          }
+        ],
+        [
+          {
+            "name": "Jest"
           },
           {
-            "name": "UI Design Systems",
-            "minor": true
+            "name": "Cypress"
+          }
+        ],
+        [
+          {
+            "name": "Nx Monorepo"
+          }
+        ],
+        [
+          {
+            "name": "Vite"
+          }
+        ],
+        [
+          {
+            "name": "Core Web Vitals"
+          }
+        ],
+        [
+          {
+            "name": "GitLab CI"
           },
           {
-            "name": "mentoring",
-            "minor": true
-          },
-          {
-            "name": "code review",
-            "minor": true
+            "name": "Sentry"
           }
         ]
       ]
     },
     {
-      "title": "I have also worked with, among others:",
+      "title": "Earlier",
       "lines": [
         [
           {
-            "name": "Google IMA"
-          },
-          {
-            "name": "VAST"
-          }
-        ],
-        [
-          {
-            "name": "Video.js"
-          }
-        ],
-        [
-          {
-            "name": "Text-to-Speech",
-            "detail": "AI"
-          }
-        ],
-        [
-          {
-            "name": "CMS modules",
-            "detail": "React"
+            "name": "Redux-Saga"
           }
         ],
         [
@@ -390,20 +361,39 @@
         ],
         [
           {
-            "name": "newsroom content editor"
+            "name": "Sass",
+            "detail": "BEM"
           }
         ],
         [
           {
-            "name": "Nx Monorepo"
+            "name": "React Native",
+            "detail": "Expo"
           }
         ],
         [
           {
-            "name": "Web Performance"
-          },
+            "name": "Webpack"
+          }
+        ],
+        [
           {
-            "name": "Core Web Vitals"
+            "name": "Gatsby"
+          }
+        ],
+        [
+          {
+            "name": "Symfony + Twig"
+          }
+        ],
+        [
+          {
+            "name": "WordPress"
+          }
+        ],
+        [
+          {
+            "name": "jQuery"
           }
         ]
       ]

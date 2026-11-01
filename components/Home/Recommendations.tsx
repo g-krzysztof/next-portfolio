@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import styled, { css } from 'styled-components';
 import type {

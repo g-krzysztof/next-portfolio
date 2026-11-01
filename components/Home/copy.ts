@@ -4,6 +4,9 @@
 export const LOCALES = ['pl', 'en'] as const;
 export type Lang = (typeof LOCALES)[number];
 
+export const isLang = (value?: string): value is Lang =>
+  LOCALES.includes(value as Lang);
+
 export const SITE_URL = 'https://krzysztofg.pl';
 
 export const CONTACT = {
@@ -42,7 +45,6 @@ const COPY = {
     role: 'Senior React Frontend Developer',
     downloadCv: 'Pobierz CV',
     cardBackTitle: 'Na co dzień',
-    cardBackMore: 'Pracowałem też z',
     aboutTitle: 'O mnie',
     recPicker: 'Rekomendacje, przewijane w poziomie',
     recCount: 'rekomendacji od przełożonych i współpracowników',
@@ -192,7 +194,6 @@ const COPY = {
     role: 'Senior React Frontend Developer',
     downloadCv: 'Download CV',
     cardBackTitle: 'Day to day',
-    cardBackMore: 'Also worked with',
     aboutTitle: 'About me',
     recPicker: 'Recommendations, scroll horizontally',
     recCount: 'recommendations from managers and colleagues',

@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import type { Recommendation, StackGroup } from '../../content/types';
@@ -176,7 +178,7 @@ const Hero = ({ stack, recommendations = [] }: HeroProps) => {
                 </StackList>
                 {more.length > 0 && (
                   <div>
-                    <BackSub>{copy.cardBackMore}</BackSub>
+                    <BackSub>{stack[1].title}</BackSub>
                     <MoreList>{more.join(' · ')}</MoreList>
                   </div>
                 )}
