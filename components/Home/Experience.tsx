@@ -21,9 +21,22 @@ const Experience = ({ section }: { section: ExperienceSection }) => {
 
         <Timeline ref={lineRef} $in={inView} style={{ '--n': entries.length }}>
           {entries.map(
-            ({ period, role, text, projects, stack, parts }, index) => (
+            (
+              { period, image, imageAlt, role, text, projects, stack, parts },
+              index,
+            ) => (
               <Entry key={period}>
                 <Dot aria-hidden="true" $current={index === 0} />
+                {image && (
+                  <Sketch
+                    src={image}
+                    alt={imageAlt ?? ''}
+                    width={480}
+                    height={480}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
                 <Period>{period}</Period>
                 {role && <Role>{role}</Role>}
                 <Detail>
@@ -154,6 +167,18 @@ const Dot = styled.span<{ $current: boolean }>`
   @media (max-width: ${({ theme }) => theme.breakpoints.laptopS}) {
     left: -32px;
     top: 6px;
+  }
+`;
+
+const Sketch = styled.img`
+  display: block;
+  width: min(100%, 200px);
+  height: auto;
+  margin: -8px 0 12px -10px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.laptopS}) {
+    width: 140px;
+    margin: 0 0 10px -8px;
   }
 `;
 

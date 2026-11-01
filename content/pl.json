@@ -13,6 +13,8 @@
     "entries": [
       {
         "period": "2024 – obecnie",
+        "image": "/images/experience/2024.webp",
+        "imageAlt": "Szkic: Krzysztof przy monitorze z playerem wideo, w słuchawkach, obok mikrofon",
         "role": "Senior React Frontend Developer – Grupa ZPR Media",
         "text": [
           "Zespół Multimedia: rozwiązania audio i wideo oraz narzędzia redakcyjne w serwisach grupy."
@@ -32,6 +34,8 @@
       },
       {
         "period": "2021 – 2024",
+        "image": "/images/experience/2021.webp",
+        "imageAlt": "Szkic: Krzysztof przy dwóch monitorach z kodem, w zestawie słuchawkowym, robi code review",
         "role": "Senior React Frontend Developer – Autentika (projekt dla Wirtualnej Polski)",
         "text": [
           "Software house. Projektowanie, rozwój i utrzymanie aplikacji webowych w React / TypeScript dla klientów firmy.",
@@ -47,6 +51,8 @@
       },
       {
         "period": "2019 – 2021",
+        "image": "/images/experience/2019.webp",
+        "imageAlt": "Szkic: Krzysztof przy laptopie z logo Reacta, obok smartfon i karteczki",
         "role": "React Developer – KATO Software House (Katowice)",
         "text": ["Tworzenie oraz rozwijanie warstwy front-end projektów:"],
         "projects": [
@@ -59,6 +65,8 @@
       },
       {
         "period": "2007 – 2019",
+        "image": "/images/experience/2007.webp",
+        "imageAlt": "Szkic: młody Krzysztof przy monitorze CRT, z piórkiem tabletu graficznego i odbitką do druku",
         "parts": [
           {
             "period": "2014 – 2019",

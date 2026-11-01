@@ -31,6 +31,9 @@ export interface ExperiencePart {
 
 export interface ExperienceEntry {
   period: string;
+  // szkic z danego okresu, ścieżka od public/
+  image?: string;
+  imageAlt?: string;
   role?: string;
   text?: string[];
   projects?: string[];

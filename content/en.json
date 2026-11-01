@@ -13,6 +13,8 @@
     "entries": [
       {
         "period": "2024 – present",
+        "image": "/images/experience/2024.webp",
+        "imageAlt": "Sketch: Krzysztof at a monitor with a video player, wearing headphones, a microphone nearby",
         "role": "Senior React Frontend Developer – Grupa ZPR Media",
         "text": [
           "Multimedia team: audio and video solutions and editorial tools across the group’s websites."
@@ -32,6 +34,8 @@
       },
       {
         "period": "2021 – 2024",
+        "image": "/images/experience/2021.webp",
+        "imageAlt": "Sketch: Krzysztof at two monitors full of code, wearing a headset, doing a code review",
         "role": "Senior React Frontend Developer – Autentika (project for Wirtualna Polska)",
         "text": [
           "Software house. Design, development and maintenance of web applications in React / TypeScript for the company’s clients.",
@@ -47,6 +51,8 @@
       },
       {
         "period": "2019 – 2021",
+        "image": "/images/experience/2019.webp",
+        "imageAlt": "Sketch: Krzysztof at a laptop with the React logo, a smartphone and sticky notes beside it",
         "role": "React Developer – KATO Software House (Katowice)",
         "text": ["Building and developing the front-end layer of projects:"],
         "projects": [
@@ -59,6 +65,8 @@
       },
       {
         "period": "2007 – 2019",
+        "image": "/images/experience/2007.webp",
+        "imageAlt": "Sketch: young Krzysztof at a CRT monitor, holding a tablet pen next to a print proof",
         "parts": [
           {
             "period": "2014 – 2019",
