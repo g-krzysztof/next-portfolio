@@ -47,7 +47,7 @@ const COPY = {
     readMore: 'Czytaj całość',
     readLess: 'Zwiń',
     contactLead: 'E-mail, telefon albo LinkedIn, jak Ci wygodniej.',
-    footer: 'Zbudowane w Next.js i styled-components.',
+    footer: 'Powered by Next.js',
   },
   en: {
     skip: 'Skip to content',

@@ -392,7 +392,8 @@ const Track = styled.div<{ $in: boolean }>`
   ${({ $in }) =>
     !$in &&
     css`
-      article {
+      /* && przebija specyficzność stanów $near/$active karty */
+      && article {
         transform: translateX(calc(var(--o) * -100%)) rotate(calc(var(--r) * 3))
           translateY(var(--y));
       }

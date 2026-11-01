@@ -35,12 +35,14 @@ const Nav = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
+          if (!entry.isIntersecting) return;
+          // hero nie ma pozycji w menu: powrót na górę czyści podkreślenie
+          setActive(entry.target.id === 'start' ? null : entry.target.id);
         });
       },
       { rootMargin: '-45% 0px -50% 0px' },
     );
-    SECTIONS.forEach(({ id }) => {
+    [{ id: 'start' }, ...SECTIONS].forEach(({ id }) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });

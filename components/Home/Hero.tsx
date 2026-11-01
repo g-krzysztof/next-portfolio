@@ -63,8 +63,12 @@ const Hero = ({ stack, recommendations = [] }: HeroProps) => {
 
   const onPointerLeave = () => {
     cancelAnimationFrame(frame.current);
-    tiltRef.current?.removeAttribute('data-tracking');
-    setTilt(REST.rx, REST.ry);
+    const el = tiltRef.current;
+    if (!el) return;
+    el.removeAttribute('data-tracking');
+    // zdjęcie inline stylów oddaje pozę CSS-owi (spoczynek albo wariant
+    // nieinteraktywny), zamiast wymuszać REST na dotyku/reduced motion
+    ['--rx', '--ry', '--gx', '--gy'].forEach((p) => el.style.removeProperty(p));
   };
 
   useEffect(() => () => cancelAnimationFrame(frame.current), []);

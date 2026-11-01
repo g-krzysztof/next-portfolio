@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useSyncExternalStore } from 'react';
 import styled from 'styled-components';
 import type { ContactSection } from '../../content/types';
 import { LangContext } from '../../pages/_app';
@@ -10,9 +10,23 @@ const Mint = styled.span`
   color: ${({ theme }) => theme.colors.mint};
 `;
 
-const Contact = ({ section }: { section: ContactSection }) => {
+const noSubscribe = () => () => {};
+
+interface ContactProps {
+  section: ContactSection;
+  buildYear: number;
+}
+
+const Contact = ({ section, buildYear }: ContactProps) => {
   const [lang] = useContext(LangContext);
   const copy = t(lang);
+  // HTML niesie rok z builda; React hydratuje z nim, a potem bierze bieżący,
+  // więc stara statyczna strona nie zgłasza błędu hydracji
+  const year = useSyncExternalStore(
+    noSubscribe,
+    () => new Date().getFullYear(),
+    () => buildYear,
+  );
 
   return (
     <Field id="kontakt" aria-labelledby="kontakt-title">
@@ -64,7 +78,7 @@ const Contact = ({ section }: { section: ContactSection }) => {
         </Channels>
 
         <Footer>
-          <span>© {new Date().getFullYear()} Krzysztof Gryc · Tychy</span>
+          <span>© {year} Krzysztof Gryc · Tychy</span>
           <span>{copy.footer}</span>
         </Footer>
       </Wrap>

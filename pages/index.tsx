@@ -16,9 +16,10 @@ import styled from 'styled-components';
 
 interface HomeProps {
   content: Record<Lang, Content>;
+  buildYear: number;
 }
 
-const Home = ({ content }: HomeProps) => {
+const Home = ({ content, buildYear }: HomeProps) => {
   const [lang] = useContext(LangContext);
   const { about, experience, stack, recommendations, contact } = content[lang];
 
@@ -34,7 +35,7 @@ const Home = ({ content }: HomeProps) => {
         <Experience section={experience} />
         <AboutStack about={about} groups={stack} />
       </main>
-      <Contact section={contact} />
+      <Contact section={contact} buildYear={buildYear} />
     </>
   );
 };
@@ -53,5 +54,6 @@ const Opening = styled.div`
 export const getStaticProps: GetStaticProps<HomeProps> = async () => ({
   props: {
     content: { pl: contentPl, en: contentEn } satisfies Record<Lang, Content>,
+    buildYear: new Date().getFullYear(),
   },
 });
