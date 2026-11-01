@@ -106,7 +106,6 @@ export interface ContactSection {
 export interface Content {
   about: About;
   experience: ExperienceSection;
-  // sekcja projektów jest na razie tylko po polsku
   projects?: ProjectsSection;
   stack: StackGroup[];
   recommendations: RecommendationsSection;

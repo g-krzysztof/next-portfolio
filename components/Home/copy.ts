@@ -146,7 +146,7 @@ const COPY = {
     close: 'Close',
     switchLang: 'Przełącz na polski',
     metaDescription:
-      'Senior React Frontend Developer based in Tychy, Poland. Over ten years in web, formerly a DTP designer.',
+      'Krzysztof Gryc – Senior React Frontend Developer. React, TypeScript, Next.js, media products: video and audio players, CMS, editorial tools.',
     helloA: 'Hi,',
     helloB: 'I’m Krzysiek.',
     lede: 'Senior React Frontend Developer with over ten years in web. I started out as a graphic designer, so I build front ends with a designer’s eye.',
@@ -253,7 +253,7 @@ const COPY = {
     readMore: 'Read in full',
     readLess: 'Show less',
     contactLead: 'E-mail, phone or LinkedIn, whichever suits you.',
-    footer: 'Built with Next.js and styled-components.',
+    footer: 'Powered by Next.js',
   },
 };
 
