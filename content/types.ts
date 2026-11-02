@@ -29,6 +29,11 @@ export interface ExperiencePart {
   text: string[];
 }
 
+// Punkt projektu: sam tekst albo tekst z przyciskiem „Więcej” do sekcji projektów
+export type ExperienceProject =
+  | string
+  | { text: string; more?: { href: string; label: string } };
+
 export interface ExperienceEntry {
   period: string;
   // szkic z danego okresu, ścieżka od public/
@@ -36,7 +41,7 @@ export interface ExperienceEntry {
   imageAlt?: string;
   role?: string;
   text?: string[];
-  projects?: string[];
+  projects?: ExperienceProject[];
   stack?: string[];
   parts?: ExperiencePart[];
 }
@@ -78,6 +83,12 @@ export interface ProjectFact {
   label: string;
 }
 
+// Druga karta projektu: pozostałe zadania z tego samego miejsca pracy
+export interface ProjectOtherTasks {
+  tab: string;
+  items: string[];
+}
+
 export interface ProjectLink {
   href: string;
   label: string;
@@ -90,6 +101,11 @@ export interface Project {
   featured?: boolean;
   // ilustracja przy wyróżnionym projekcie: 'map' | 'editor' | 'players' (JSON daje string)
   visual?: string;
+  // etykieta karty z case study; karty włącza otherTasks albo wspólna group
+  tab?: string;
+  // kolejne projekty z tą samą grupą pokazują się jako karty jednego bloku
+  group?: string;
+  otherTasks?: ProjectOtherTasks;
   name: string;
   context: string;
   role: string;

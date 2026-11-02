@@ -16,6 +16,14 @@ const periodYears = (period: string) => {
   return start ? Math.max(end - start, 1) : 1;
 };
 
+// Kotwica ustawiona drugi raz nie wywołuje hashchange, a sekcja projektów
+// na nim przełącza kartę, więc ponowne kliknięcie wysyła zdarzenie ręcznie
+const revealAgain = (href: string) => {
+  if (window.location.hash === href) {
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
+  }
+};
+
 // Oś czasu jako pasek przewijania playera: okresy to rozdziały, szkice to miniatury
 // podglądu nad paskiem; aktywny jest rozdział pod kursorem (domyślnie bieżący).
 const Experience = ({ section }: { section: ExperienceSection }) => {
@@ -45,7 +53,16 @@ const Experience = ({ section }: { section: ExperienceSection }) => {
         >
           {entries.map(
             (
-              { period, image, imageAlt, role, text, projects, stack, parts },
+              {
+                period,
+                image,
+                imageAlt,
+                role,
+                text,
+                projects,
+                stack,
+                parts,
+              },
               index,
             ) => (
               <Entry
@@ -78,9 +95,26 @@ const Experience = ({ section }: { section: ExperienceSection }) => {
                     ))}
                     {projects && (
                       <ul>
-                        {projects.map((project) => (
-                          <li key={project}>{project}</li>
-                        ))}
+                        {projects.map((project) => {
+                          const { text: item, more } =
+                            typeof project === 'string'
+                              ? { text: project, more: undefined }
+                              : project;
+                          return (
+                            <li key={item}>
+                              {item}
+                              {more && (
+                                <MoreLink
+                                  href={more.href}
+                                  onClick={() => revealAgain(more.href)}
+                                >
+                                  {more.label}
+                                  <span aria-hidden="true">↓</span>
+                                </MoreLink>
+                              )}
+                            </li>
+                          );
+                        })}
                       </ul>
                     )}
                     {stack && (
@@ -349,6 +383,41 @@ const Detail = styled.div`
     gap: 6px;
   }
   ${bulletList}
+`;
+
+// przycisk pod punktem: bez kropki listy, tekst od krawędzi punktu
+const MoreLink = styled.a`
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin: 12px 0 6px;
+  padding: 0 20px;
+  border-radius: ${({ theme }) => theme.radii.control};
+  background: ${({ theme }) => theme.colors.field};
+  color: ${({ theme }) => theme.colors.onField};
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition:
+    background-color 0.25s ${({ theme }) => theme.ease.out},
+    color 0.25s ${({ theme }) => theme.ease.out};
+  span {
+    transition: transform 0.25s ${({ theme }) => theme.ease.out};
+  }
+  @media (hover: hover) {
+    &:hover {
+      background: ${({ theme }) => theme.colors.mint};
+      color: ${({ theme }) => theme.colors.ink};
+    }
+    &:hover span {
+      transform: translateY(2px);
+    }
+  }
+  &:active {
+    transform: translateY(1px) scale(0.99);
+  }
 `;
 
 const Label = styled.h4`

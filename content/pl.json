@@ -17,16 +17,17 @@
         "imageAlt": "Szkic: Krzysztof przy monitorze z playerem wideo, w słuchawkach, obok mikrofon",
         "role": "Senior React Frontend Developer – Grupa ZPR Media",
         "text": [
-          "Zespół Multimedia: rozwiązania audio i wideo oraz narzędzia redakcyjne w serwisach grupy."
+          "Zespół Multimedia: playery, narzędzia redakcyjne i integracje w serwisach i stacjach radiowych grupy (Eska, Vox FM, Radio Plus)."
         ],
         "projects": [
-          "refaktoryzacja playerów wideo, audio, radiowych (streaming na żywo) i podcastowych",
-          "budowa modułów w CMS opartym na React do zarządzania aplikacjami radiowymi i innymi aplikacjami grupy",
-          "wdrożenie text-to-speech opartego na AI: odsłuch artykułów w serwisach",
-          "wdrożenia i integracje systemów reklamowych w playerach i serwisach (Google IMA, VAST)",
-          "integracje z backendem i warstwa frontendowa w projektach opartych na Django",
-          "testy E2E w Playwright",
-          "development wspierany przez AI: własne skille i instrukcje dla agentów kodujących, kontrola architektury i review generowanego kodu"
+          {
+            "text": "wydzielenie playerów wideo, audio, radiowych (streaming na żywo) i podcastowych do osobnego repozytorium, refaktoryzacja i wdrożenie na CDN",
+            "more": { "href": "#zpr-media", "label": "Więcej o playerach" }
+          },
+          {
+            "text": "moduły CMS dla aplikacji radiowych, odsłuch artykułów oparty na AI (text-to-speech), integracje reklamowe, frontend w projektach Django, testy E2E i development wspierany przez agentów AI",
+            "more": { "href": "#zpr-media-inne", "label": "Więcej o innych zadaniach" }
+          }
         ],
         "stack": [
           "TypeScript, React, Styled Components, Playwright, Vitest, MSW, HLS.js, Video.js, Google IMA / VAST, REST"
@@ -36,17 +37,22 @@
         "period": "2021 – 2024",
         "image": "/images/experience/2021.webp",
         "imageAlt": "Szkic: Krzysztof przy dwóch monitorach z kodem, w zestawie słuchawkowym, robi code review",
-        "role": "Senior React Frontend Developer – Autentika (projekt dla Wirtualnej Polski)",
+        "role": "Senior React Frontend Developer – Autentika",
         "text": [
-          "Software house. Projektowanie, rozwój i utrzymanie aplikacji webowych w React / TypeScript dla klientów firmy.",
-          "Najważniejsze projekty:"
+          "Software house, aplikacje w React / TypeScript dla klientów. Najważniejsze projekty:"
         ],
         "projects": [
-          "Wirtualna Polska (2022–2024): praca w zespole frontendowym narzędzi back-office WP. Rozwój edytora, w którym redakcje tworzą i publikują treści: implementacja zaawansowanych funkcji narzędzi wydawniczych, ścisła współpraca z backendem i udział w analizie wymagań, optymalizacja wydajności aplikacji, testy jednostkowe i code review, monorepo NX.",
-          "Platforma geoprzestrzenna do analizy złóż surowców: zaprojektowanie architektury (system design) i wdrożenie narzędzia, które nakłada na mapę wiele warstw danych, udostępnia moduły analityczne i zaawansowane wyszukiwanie z filtrowaniem wyników."
+          {
+            "text": "Wirtualna Polska (2022–2024): rozwój edytora, w którym redakcje tworzą i publikują treści",
+            "more": { "href": "#wp-editor", "label": "Więcej o edytorze WP" }
+          },
+          {
+            "text": "platforma geoprzestrzenna do analizy złóż: system design i wdrożenie mapy z warstwami danych i wyszukiwaniem",
+            "more": { "href": "#geo-platform", "label": "Więcej o mapie złóż" }
+          }
         ],
         "stack": [
-          "TypeScript, React, Next.js, Node.js (BFF), Redux, Redux-Saga, TanStack Query, GraphQL (Apollo), REST, Storybook, Styled Components, Jest, React Testing Library, Cypress, NX"
+          "TypeScript, React, Next.js, Redux, TanStack Query, GraphQL (Apollo), Storybook, Jest, Cypress, NX"
         ]
       },
       {
@@ -94,6 +100,18 @@
         "id": "zpr-media",
         "featured": true,
         "visual": "players",
+        "tab": "Playery",
+        "otherTasks": {
+          "tab": "Inne zadania",
+          "items": [
+            "budowa modułów w CMS opartym na React do zarządzania aplikacjami radiowymi i innymi aplikacjami grupy",
+            "wdrożenie text-to-speech opartego na AI: odsłuch artykułów w serwisach",
+            "wdrożenia i integracje systemów reklamowych w playerach i serwisach (Google IMA, VAST)",
+            "integracje z backendem i warstwa frontendowa w projektach opartych na Django",
+            "testy E2E w Playwright",
+            "development wspierany przez AI: własne skille i instrukcje dla agentów kodujących, kontrola architektury i review generowanego kodu"
+          ]
+        },
         "name": "Playery wideo i radia dla serwisów ZPR Media",
         "context": "Grupa ZPR Media · zespół Multimedia · 2024–obecnie",
         "role": "Senior React Frontend Developer: wydzielenie playerów do osobnego repozytorium, refaktoryzacja i wdrożenie",
@@ -126,6 +144,8 @@
         "id": "wp-editor",
         "featured": true,
         "visual": "editor",
+        "group": "autentika",
+        "tab": "Edytor WP",
         "name": "Edytor treści dla redakcji Wirtualnej Polski",
         "context": "Wirtualna Polska · zespół frontendowy narzędzi back-office · 2022–2024",
         "role": "Senior React Frontend Developer w zespole WP (kontrakt przez Autentikę)",
@@ -169,6 +189,8 @@
       {
         "id": "geo-platform",
         "featured": true,
+        "group": "autentika",
+        "tab": "Mapa złóż",
         "name": "Mapa złóż dla geologów",
         "context": "Kadme (Norwegia, branża oil & gas) · przez Autentikę",
         "role": "Senior React Frontend Developer: system design i wdrożenie frontendu",
