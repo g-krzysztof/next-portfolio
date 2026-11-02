@@ -572,6 +572,19 @@
     ]
   },
   "contact": {
-    "title": "<secondary>Contact,</secondary> feel free to get in touch"
+    "title": "<secondary>Contact,</secondary> feel free to get in touch",
+    "practical": {
+      "title": "The practical bits",
+      "items": [
+        { "label": "English", "value": "B2" },
+        { "label": "Work mode", "value": "remote (preferred) or hybrid" },
+        {
+          "label": "Location",
+          "value": "Tychy, Poland; hybrid in the Katowice area"
+        },
+        { "label": "Contract", "value": "B2B or employment contract" },
+        { "label": "Availability", "value": "from January 2027" }
+      ]
+    }
   }
 }

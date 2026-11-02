@@ -321,13 +321,18 @@ const Head = styled(Wrap)`
 `;
 
 const Title = styled.h2`
-  max-width: 22ch;
+  max-width: 36ch;
   font-family: ${({ theme }) => theme.fonts.display};
   font-weight: 800;
   font-size: clamp(2rem, 3.2vw, 4rem);
   line-height: 0.95;
   letter-spacing: -0.04em;
   text-wrap: balance;
+
+  // Akcent w osobnej linii, reszta tytułu w drugiej
+  > span {
+    display: block;
+  }
 `;
 
 const Intro = styled.p`

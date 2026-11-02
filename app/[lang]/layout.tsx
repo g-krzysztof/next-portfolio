@@ -38,12 +38,31 @@ export const generateMetadata = async ({
   params,
 }: LayoutProps<'/[lang]'>): Promise<Metadata> => {
   const { lang } = await params;
-  const copy = t(isLang(lang) ? lang : 'pl');
+  const current = isLang(lang) ? lang : 'pl';
+  const copy = t(current);
+  const title = 'Krzysztof Gryc – Senior React Frontend Developer';
 
+  // podgląd linku na LinkedIn, Slacku i Teams; obrazek daje opengraph-image.tsx
   return {
     metadataBase: new URL(SITE_URL),
-    title: 'Krzysztof Gryc – Senior React Frontend Developer',
+    title,
     description: copy.metaDescription,
+    openGraph: {
+      type: 'profile',
+      title,
+      description: copy.metaDescription,
+      url: pathFor(lang),
+      siteName: 'Krzysztof Gryc',
+      locale: current === 'pl' ? 'pl_PL' : 'en_US',
+      alternateLocale: current === 'pl' ? 'en_US' : 'pl_PL',
+      firstName: 'Krzysztof',
+      lastName: 'Gryc',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: copy.metaDescription,
+    },
     alternates: {
       canonical: pathFor(lang),
       languages: {

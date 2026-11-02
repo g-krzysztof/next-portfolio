@@ -572,6 +572,19 @@
     ]
   },
   "contact": {
-    "title": "<secondary>Kontakt,</secondary> odzywaj się śmiało"
+    "title": "<secondary>Kontakt,</secondary> odzywaj się śmiało",
+    "practical": {
+      "title": "Praktycznie",
+      "items": [
+        { "label": "Angielski", "value": "B2" },
+        { "label": "Tryb pracy", "value": "zdalnie (preferuję) lub hybrydowo" },
+        {
+          "label": "Lokalizacja",
+          "value": "Tychy, hybrydowo w okolicach Katowic"
+        },
+        { "label": "Współpraca", "value": "B2B lub umowa o pracę" },
+        { "label": "Dostępność", "value": "od stycznia 2027" }
+      ]
+    }
   }
 }

@@ -53,6 +53,10 @@ const COPY = {
     flipToFront: 'Wróć do kontaktu',
     role: 'Senior React Frontend Developer',
     downloadCv: 'Pobierz CV',
+    ogTagline:
+      'React, TypeScript, Next.js. Playery wideo i audio, CMS, narzędzia redakcyjne.',
+    avatarAlt:
+      'Krzysztof Gryc, rysunkowy portret: łysy mężczyzna w okularach, z długą siwiejącą brodą, w czarnej koszulce',
     cardBackTitle: 'Na co dzień',
     aboutTitle: 'O mnie',
     recPicker: 'Rekomendacje, przewijane w poziomie',
@@ -148,6 +152,10 @@ const COPY = {
     flipToFront: 'Back to contact',
     role: 'Senior React Frontend Developer',
     downloadCv: 'Download CV',
+    ogTagline:
+      'React, TypeScript, Next.js. Video and audio players, CMS, editorial tools.',
+    avatarAlt:
+      'Krzysztof Gryc, illustrated portrait: a bald man in glasses with a long greying beard, wearing a black T-shirt',
     cardBackTitle: 'Day to day',
     aboutTitle: 'About me',
     recPicker: 'Recommendations, scroll horizontally',

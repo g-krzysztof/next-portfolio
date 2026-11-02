@@ -110,8 +110,18 @@ export interface ProjectsSection {
   items: Project[];
 }
 
+// Blok „Praktycznie”: język, tryb pracy, lokalizacja, forma współpracy, dostępność
+export interface PracticalItem {
+  label: string;
+  value: string;
+}
+
 export interface ContactSection {
   title: string;
+  practical?: {
+    title: string;
+    items: PracticalItem[];
+  };
 }
 
 export interface Content {

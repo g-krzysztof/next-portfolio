@@ -128,7 +128,7 @@ const Hero = ({ stack, recommendations = [], buildYear }: HeroProps) => {
                 </Band>
                 <Avatar
                   src="/images/avatar-kriss.png"
-                  alt=""
+                  alt={copy.avatarAlt}
                   width="132"
                   height="132"
                 />

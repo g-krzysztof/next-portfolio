@@ -68,6 +68,22 @@ const Contact = ({ section, buildYear }: ContactProps) => {
           </MintButton>
         </Channels>
 
+        {section.practical && (
+          <Practical aria-labelledby="praktycznie-title">
+            <PracticalTitle id="praktycznie-title">
+              {section.practical.title}
+            </PracticalTitle>
+            <Facts>
+              {section.practical.items.map(({ label, value }) => (
+                <div key={label}>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </Facts>
+          </Practical>
+        )}
+
         <Footer>
           <span>© {year} Krzysztof Gryc · Tychy</span>
           <span>{copy.footer}</span>
@@ -159,6 +175,37 @@ const Channel = styled.a`
       border-color: ${({ theme }) => theme.colors.mint};
       color: ${({ theme }) => theme.colors.mint};
     }
+  }
+`;
+
+const Practical = styled.section`
+  margin-top: clamp(48px, 6vw, 80px);
+`;
+
+const PracticalTitle = styled.h3`
+  font-family: ${({ theme }) => theme.fonts.display};
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.mint};
+`;
+
+const Facts = styled.dl`
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px 32px;
+
+  dt {
+    font-size: 14px;
+    color: ${({ theme }) => theme.colors.onFieldSoft};
+  }
+
+  dd {
+    margin-top: 4px;
+    font-weight: 600;
+    text-wrap: balance;
   }
 `;
 
