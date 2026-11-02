@@ -2,7 +2,11 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import type { Project, ProjectsSection } from '../../content/types';
+import type {
+  Project,
+  ProjectDetail,
+  ProjectsSection,
+} from '../../content/types';
 import EditorDemo from './EditorDemo';
 import { useLang } from './lang';
 import MapDemo from './MapDemo';
@@ -57,7 +61,7 @@ const Projects = ({ section }: { section: ProjectsSection }) => {
                   <Label>{copy.projectRole}</Label>
                   <p>{role}</p>
                   <Label>{copy.projectWork}</Label>
-                  {text.map((paragraph) => (
+                  {text?.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}
                   <Label>{copy.expStack}</Label>
@@ -79,7 +83,8 @@ const VISUALS: Record<string, (() => React.JSX.Element) | undefined> = {
 };
 
 // Wyróżniony case study: opis z liczbami obok ilustracji (co drugi na odwrót).
-// Domyślnie widać rolę, problem i pierwszy akapit pracy; resztę rozwija przycisk.
+// Domyślnie widać rolę, problem i pierwszy akapit pracy (albo tytuły decyzji);
+// resztę, uzasadnienia decyzji i podsekcje szczegółów rozwija przycisk.
 // `anchored` daje kotwicę #<id> dla przycisków „Więcej” w doświadczeniu;
 // projekt z kartami ma ją na wrapperze kart
 const Featured = ({
@@ -98,7 +103,9 @@ const Featured = ({
     role,
     problem,
     product,
-    text,
+    text = [],
+    decisions,
+    details,
     facts,
     factsSource,
     outcomes,
@@ -111,7 +118,8 @@ const Featured = ({
   const [open, setOpen] = useState(false);
   const moreId = useId();
   const [firstWork, ...restWork] = text;
-  const hasMore = Boolean(product?.length) || restWork.length > 0;
+  const hasMore =
+    Boolean(product?.length) || restWork.length > 0 || Boolean(details?.length);
 
   return (
     <FeaturedItem id={anchored ? project.id : undefined} $flip={flip}>
@@ -136,10 +144,26 @@ const Featured = ({
             </>
           )}
           <Label>{copy.projectWork}</Label>
-          <p>{firstWork}</p>
+          {decisions ? (
+            // zwinięte: same tytuły decyzji; uzasadnienia rozwija „Pokaż szczegóły”
+            <Decisions $compact={!open}>
+              {decisions.map(({ title, text: why }) => (
+                <li key={title}>
+                  <strong>{title}</strong>
+                  {open && <Why>{why}</Why>}
+                </li>
+              ))}
+            </Decisions>
+          ) : (
+            firstWork && <p>{firstWork}</p>
+          )}
           <div id={moreId}>
             {open &&
               restWork.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            {open &&
+              details?.map((detail) => (
+                <DetailPart key={detail.title} detail={detail} />
+              ))}
           </div>
           <Label>{copy.expStack}</Label>
           <p>{stack}</p>
@@ -211,6 +235,53 @@ const Featured = ({
     </FeaturedItem>
   );
 };
+
+// Podsekcja szczegółów: akapity, kroki, lista i obrazy w kolejności z treści
+const DetailPart = ({
+  detail: { title, blocks },
+}: {
+  detail: ProjectDetail;
+}) => (
+  <>
+    <Label>{title}</Label>
+    {blocks.map((block, index) => {
+      if (typeof block === 'string') return <p key={index}>{block}</p>;
+      if ('steps' in block)
+        return (
+          <Steps key={index}>
+            {block.steps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </Steps>
+        );
+      if ('list' in block)
+        return (
+          <Decisions key={index}>
+            {block.list.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </Decisions>
+        );
+      return (
+        <Images key={index}>
+          {block.images.map(({ src, alt, width, height }) => (
+            // obrazy w jednym rzędzie i tej samej wysokości: szerokość z proporcji
+            <PanelImage
+              key={src}
+              src={src}
+              alt={alt}
+              width={width}
+              height={height}
+              loading="lazy"
+              decoding="async"
+              style={{ flex: width / height }}
+            />
+          ))}
+        </Images>
+      );
+    })}
+  </>
+);
 
 interface TabItem {
   // kotwica przycisku „Więcej” z doświadczenia, zarazem klucz karty
@@ -505,9 +576,58 @@ const FeaturedText = styled.div`
     max-width: 68ch;
   }
   ${Detail} p + p,
-  ${Detail} p + div > p {
+  ${Detail} p + div > p,
+  ${Detail} ol + p,
+  ${Detail} ul + p {
     margin-top: 10px;
   }
+`;
+
+const Decisions = styled.ul<{ $compact?: boolean }>`
+  margin-top: 4px;
+  padding-left: 1.1em;
+  list-style: disc;
+  li + li {
+    margin-top: ${({ $compact }) => ($compact ? '2px' : '8px')};
+  }
+  li::marker {
+    color: ${({ theme }) => theme.colors.tealInk};
+  }
+  strong {
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.ink};
+  }
+`;
+
+const Why = styled.span`
+  display: block;
+`;
+
+const Steps = styled.ol`
+  margin-top: 10px;
+  padding-left: 1.4em;
+  li + li {
+    margin-top: 6px;
+  }
+  li::marker {
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.tealInk};
+  }
+`;
+
+const Images = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 14px;
+`;
+
+const PanelImage = styled.img`
+  min-width: 0;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  background: #fff;
 `;
 
 const FeaturedVisual = styled.div`

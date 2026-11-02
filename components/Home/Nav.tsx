@@ -66,7 +66,7 @@ const Nav = ({ sections = SECTIONS }: { sections?: typeof SECTIONS }) => {
     <Bar $solid={dark} $scrolled={scrolled}>
       <SkipLink href="#doswiadczenie">{copy.skip}</SkipLink>
       <Inner>
-        <Mark href="#start" onClick={() => setOpen(false)}>
+        <Mark href="#start" aria-label="krzysztofg.pl" onClick={() => setOpen(false)}>
           krzysztof<b>g</b>.pl
         </Mark>
         <Links id="site-menu" $open={open}>

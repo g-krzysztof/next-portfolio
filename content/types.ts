@@ -31,8 +31,7 @@ export interface ExperiencePart {
 
 // Punkt projektu: sam tekst albo tekst z przyciskiem „Więcej” do sekcji projektów
 export type ExperienceProject =
-  | string
-  | { text: string; more?: { href: string; label: string } };
+  string | { text: string; more?: { href: string; label: string } };
 
 export interface ExperienceEntry {
   period: string;
@@ -114,6 +113,33 @@ export interface ProjectLink {
   label: string;
 }
 
+// Decyzja w „Co zrobiłem”: pogrubiony skrót i jedno-dwa zdania uzasadnienia
+export interface ProjectDecision {
+  title: string;
+  text: string;
+}
+
+// Obraz w panelu szczegółów, w naturalnych proporcjach (ścieżka od public/)
+export interface ProjectImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+// Blok podsekcji szczegółów: akapit, kroki (lista numerowana), lista albo obrazy obok siebie
+export type ProjectDetailBlock =
+  | string
+  | { steps: string[] }
+  | { list: string[] }
+  | { images: ProjectImage[] };
+
+// Podsekcja panelu „Pokaż szczegóły”
+export interface ProjectDetail {
+  title: string;
+  blocks: ProjectDetailBlock[];
+}
+
 // Case study: kontekst, rola, co zrobiłem i stack. Wyróżniony projekt
 // (featured) dostaje szeroki układ z problemem, liczbami i podglądem mapy.
 export interface Project {
@@ -135,7 +161,12 @@ export interface Project {
   problem?: string;
   // opis produktu, gdy praca była przy rozwoju istniejącego narzędzia
   product?: string[];
-  text: string[];
+  // akapity „Co zrobiłem”: pierwszy widać od razu, reszta w szczegółach
+  text?: string[];
+  // zamiast akapitów: lista decyzji, cała widoczna od razu
+  decisions?: ProjectDecision[];
+  // podsekcje panelu „Pokaż szczegóły”, po akapitach pracy
+  details?: ProjectDetail[];
   facts?: ProjectFact[];
   factsSource?: string;
   outcomes?: ProjectOutcome[];

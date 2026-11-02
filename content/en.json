@@ -64,13 +64,7 @@
               "label": "More about the WP editor"
             }
           },
-          {
-            "text": "Kadme (2021–2022): a data search app with a GIS map for the oil & gas industry – an OpenLayers map, layers panel, filters and design system components",
-            "more": {
-              "href": "#geo-platform",
-              "label": "More about the Kadme map"
-            }
-          }
+          "Kadme (2021–2022): a data search app with a GIS map for the oil & gas industry – an OpenLayers map, layers panel, filters and design system components"
         ],
         "stack": [
           "TypeScript, React, Next.js, Redux, TanStack Query, GraphQL (Apollo), Node.js (BFF), Storybook, Jest, Cypress, NX"
@@ -256,21 +250,91 @@
       {
         "id": "dociekai",
         "featured": true,
-        "_todo": "TODO(Moon): wstępna wersja do przejrzenia – sprawdzić problem, rolę i liczby (stan na 2 XI 2026: lekcje z lessons.ts w repo, adresy z sitemap.xml); zrzuty z dociekai.pl, odświeżyć przy większych zmianach wyglądu",
+        "_todo": "TODO(Moon): treść z wsadu z 2 XI 2026 (liczby: lekcje i self-testy zliczone w repo dociekai, Lighthouse z własnego pomiaru). Link „Kod na GitHubie” (https://github.com/g-krzysztof/dociekai, „publiczny wycinek kodu (portfolio)”) wstrzymany: 2 XI 2026 bez logowania zwracał 404 – dodać do links, gdy repo będzie publiczne",
         "name": "dociekai.pl – interactive courses for 4th grade",
-        "context": "Personal project · 2025–present",
-        "role": "Sole author: idea, product design, architecture, front end, integrations and lesson content. I work with AI agents (Claude Code), but the architecture, lesson logic and review of every change are mine.",
-        "problem": "Learning materials for pupils are mostly texts and videos to watch. I wanted courses where a child learns by doing: every task is work done on the page, which the page judges straight away, and the whole thing follows the Polish 4th-grade core curriculum.",
-        "product": [
-          "Four 4th-grade courses: maths, computer science, history and Polish. A lesson is a sequence of blocks with interactions chosen for the topic: building fractions out of pizza slices, training a simple AI model on your own drawings, finger-painting the Nile valley on a map. On top of that: educational games, flashcards, printable materials and a blog.",
-          "Progress works without an account and syncs with the account after sign-up. The learning streak counts school days rather than calendar days: weekends, public holidays and school breaks don’t break it, and two “freezes” a week rescue a missed day."
+        "context": "Personal project · 2025–present · in production",
+        "role": "Sole author: idea, product design, architecture, front end and lesson content. AI agents (Claude Code) write much of the code; I lead them as a tech lead and review every change.",
+        "problem": "Learning materials for pupils are mostly texts and videos. I wanted courses that follow the 4th-grade core curriculum, where a child learns by doing and the page grades every task itself, with no answer key.",
+        "decisions": [
+          {
+            "title": "A shared lesson engine for four courses",
+            "text": "A lesson is a list of blocks on a shared shell that handles progress, completion and the learning streak. A course only supplies its own widgets and grading functions. The same engine runs, among others, a spreadsheet with a formula parser, a Scratch-style editor and stage, historical maps, a timeline and a family tree."
+          },
+          {
+            "title": "Grading as pure functions, covered by self-tests",
+            "text": "The logic that grades a child’s answer lives outside React. 55 self-test suites (esbuild + Node) cover cases you can’t sensibly click through. The family tree doesn’t say “wrong”; it points to the two people who contradict each other."
+          },
+          {
+            "title": "Progress without an account, merged into it after sign-up",
+            "text": "Every lesson works fully without an account. After sign-up, progress from the session is merged into the account. Sync is deferred and doesn’t block learning when the network fails. One implementation serves all four courses."
+          },
+          {
+            "title": "A learning streak counted in school days",
+            "text": "I store only raw “day → lessons”. The streak, the record, freezes and 24 badges are derived by pure functions. Weekends, public holidays and school breaks cost nothing. Merging across devices is a union of day sets, so sync order doesn’t matter and nothing is lost."
+          },
+          {
+            "title": "Static-first, resilient to CMS outages",
+            "text": "Next.js App Router, with data from the Strapi headless CMS fetched at build time. The browser talks only to my own API routes, which return empty data instead of a page error when something fails. Sign-in (email, Google, JWT) goes only through a proxy on the Next.js side."
+          },
+          {
+            "title": "A custom Cloudinary loader instead of Vercel’s optimiser",
+            "text": "I bypassed Vercel’s image optimiser with a custom Cloudinary loader, because per-transformation billing was eating up the quota. Images are addressed by keys with a local fallback, and a pre-commit hook blocks heavy binaries."
+          }
         ],
-        "text": [
-          "Next.js App Router, static-first: lessons and course pages are generated statically, and blog content comes from the Strapi headless CMS through my own API routes, with a fallback in case the CMS goes down. Sign-in (email and Google, JWT) goes only through a proxy on the Next.js side.",
-          "Lesson grading logic is pure functions kept apart from the widgets and checked by self-tests. The learning streak stores only raw days and derives numbers, badges and freezes on every read. Sync is a union of days, so nothing is lost when devices are merged.",
-          "A custom image loader on Cloudinary instead of Vercel’s optimiser, which was eating up the transformation quota. I generate the illustrations with AI models following fixed style rules and publish them with a script.",
-          "SEO: a sitemap, the Google Indexing API after every build, metadata and structured data for the courses. E2E tests in Playwright on desktop and mobile (Chromium, Firefox, WebKit).",
-          "I set up the work with AI agents as a process: separate skills for building each subject’s lessons, progress files, splitting tasks between models, and a mandatory review of the diff, tsc and tests before a change is accepted."
+        "details": [
+          {
+            "title": "One task, from data to lesson",
+            "blocks": [
+              "In a history lesson about family, the child places a made-up family on the shelves of a family tree, one shelf per generation.",
+              {
+                "steps": [
+                  "Data: a list of people with their birth year and parents. There is no answer key.",
+                  "Judge: a pure function derives the correct shelves from two rules (a child stands one shelf above their parents, spouses share a shelf). Instead of giving the answer away, it names the two people who contradict each other and gives their years.",
+                  "Self-test: the judge is tested without React and without a browser.",
+                  "Widget: handles only drawing and interaction, on a shared drag hook with a “tap and place” variant.",
+                  "Lesson: a list of blocks passed to the course shell."
+                ]
+              },
+              "In another lesson the same engine handles the family of the Greek gods. There are no dates there, so the shelves follow from kinship alone.",
+              {
+                "images": [
+                  {
+                    "src": "/images/projects/dociekai/case/drzewo.webp",
+                    "width": 958,
+                    "height": 933,
+                    "alt": "The Lisiecki family tree task on desktop: people to place, shelves from trunk to crown and two messages saying Józef and his children stand two levels apart"
+                  },
+                  {
+                    "src": "/images/projects/dociekai/case/drzewo-mobile.webp",
+                    "width": 390,
+                    "height": 744,
+                    "alt": "The same task on a 390 px wide phone: the tray of people, the tree shelves and the contradiction messages stacked one below another"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "How I work with AI agents",
+            "blocks": [
+              "I decide what gets built and how, and agents get small, bounded tasks with documented conventions, a reference file and a clear definition of done. I hand simple mechanics to cheaper models. I keep architecture, widget and grading logic, the texts for children and review for myself. I check most closely the places where a bug costs most: state that is saved and synced, and the logic that tells a ten-year-old whether they got it right. Nothing goes in without typecheck, lint and self-tests.",
+              "The guardrails are the ones that would let a team scale: strict TypeScript, tested grading functions, Playwright on desktop and mobile, CI on every push, shared lesson shells."
+            ]
+          },
+          {
+            "title": "What I would do next",
+            "blocks": [
+              {
+                "list": [
+                  "Move the JWT from localStorage to an httpOnly cookie. Reading the token already lives in one module, and I sanitise the blog HTML on the server.",
+                  "Some drag widgets aren’t fully keyboard-operable. The fix for the shared hook sits in one place.",
+                  "E2E coverage is thin. Correctness rests mainly on self-tests, and the widgets deserve component tests.",
+                  "A few widgets are close to 1000 lines. To be split into a reducer, a view and content.",
+                  "The new React Compiler rules run as warnings for now (about 200 places that predate them). I’m migrating gradually."
+                ]
+              }
+            ]
+          }
         ],
         "facts": [
           {
@@ -278,50 +342,50 @@
             "label": "4th-grade courses: maths, computer science, history, Polish"
           },
           {
-            "value": "165",
-            "label": "interactive lessons ready, more on the way"
+            "value": "166",
+            "label": "interactive lessons and 16 guides; three courses complete, Polish in progress (18 of 48)"
+          },
+          {
+            "value": "55",
+            "label": "self-test suites for grading, streak and sanitiser logic; run in CI on every push"
           },
           {
             "value": "90+",
             "label": "Lighthouse score in every category, performance included, on desktop and mobile"
-          },
-          {
-            "value": "5",
-            "label": "E2E test configurations: Chromium, Firefox, WebKit, Android and iPhone"
           }
         ],
         "factsSource": "Repository state and a Lighthouse run on the home page, November 2026.",
-        "stack": "TypeScript, React 19, Next.js 16 (App Router), Tailwind CSS, Radix UI, Framer Motion, Strapi, Cloudinary, Playwright, Vercel",
+        "stack": "TypeScript (strict), React 19, Next.js 16 (App Router, RSC), Tailwind CSS 4, Radix UI / shadcn/ui, Framer Motion, Strapi (headless CMS), Cloudinary, Vercel, Playwright, esbuild, GitHub Actions",
         "shots": [
           {
             "src": "/images/projects/dociekai/matematyka.webp",
             "label": "Maths course",
             "alt": "The 4th-grade maths course page: ten units as book spines on a shelf, the open starter unit with its lessons and a progress bar for the year",
-            "caption": "Maths: the whole year as a shelf of units. Clicking a spine opens the unit, and progress is counted from completed lessons."
+            "caption": "The whole year as a shelf of units. Clicking a spine opens the unit, and progress is counted from completed lessons."
           },
           {
             "src": "/images/projects/dociekai/informatyka.webp",
             "label": "Lesson",
             "alt": "A computer science lesson on storage media: an outline of six blocks on the left, an illustration of a floppy disk and a phone, and a slider for guessing the size of a photo",
-            "caption": "A computer science lesson: six blocks from the hook to the reflection, and right at the start the child guesses with a slider how much a photo “weighs”."
+            "caption": "The computer science lesson “Storage media”: a plan of six blocks and a warm-up task where the child guesses with a slider how much one phone photo weighs."
+          },
+          {
+            "src": "/images/projects/dociekai/drzewo.webp",
+            "label": "Grading",
+            "alt": "The family tree task after a wrong move: people on shelves from trunk to crown, Józef and his children in red frames and two contradiction messages with birth years",
+            "caption": "The family tree after a wrong move. The page doesn’t say “wrong”; it points to the two people who contradict each other, with their birth years."
+          },
+          {
+            "src": "/images/projects/dociekai/drzewo-mobile.webp",
+            "label": "Mobile",
+            "alt": "The same family tree task on a phone screen: a tray with four people, the tree shelves and the contradiction messages on one screen",
+            "caption": "The same task on a 390 px phone: the tray of people and the shelves fit on one screen."
           },
           {
             "src": "/images/projects/dociekai/gry.webp",
             "label": "Games",
             "alt": "The educational games page in a dark space theme: a list of missions with illustrations, tags and the player's high score",
-            "caption": "The games galaxy: timed maths missions with difficulty levels and a local high score."
-          },
-          {
-            "src": "/images/projects/dociekai/kodowanie.webp",
-            "label": "Coding course",
-            "alt": "The coding course page for children aged 7 and up: a header with a photo of children at laptops and a lesson carousel",
-            "caption": "A coding course for children aged 7 and up: lessons in a carousel, from the first program to variables and constants."
-          },
-          {
-            "src": "/images/projects/dociekai/blog.webp",
-            "label": "Blog",
-            "alt": "The blog for parents: a cloud of categories with article counts and a grid of cards with illustrations, tags and reading time",
-            "caption": "The blog for parents: articles from Strapi with categories, reading time and illustrations in one style."
+            "caption": "Educational games: timed maths, with the player’s high score saved on the device."
           }
         ],
         "links": [
@@ -585,8 +649,8 @@
           },
           "quotes": [
             {
-              "text": "a reliable and hard-working member of the team",
-              "mark": "hard-working"
+              "text": "His commitment and competence allowed him to impeccably fulfill his duties",
+              "mark": "impeccably"
             },
             {
               "text": "We highly value his culture and positive, yet unobtrusive, attitude.",
@@ -616,12 +680,12 @@
           },
           "quotes": [
             {
-              "text": "an extremely talented and committed programmer",
-              "mark": "extremely talented"
+              "text": "His ability to solve programming problems quickly and effectively",
+              "mark": "quickly and effectively"
             },
             {
-              "text": "can inspire and motivate other team members",
-              "mark": "inspire"
+              "text": "willingly shares his knowledge, which significantly improves the level of work of the entire team",
+              "mark": "improves the level of work of the entire team"
             }
           ],
           "closing": "Krzysztof will be a valuable asset to any company"
@@ -644,8 +708,8 @@
           },
           "quotes": [
             {
-              "text": "showed independence and commitment",
-              "mark": "independence"
+              "text": "He was a long-time member of the team working for a regular client of our company.",
+              "mark": "long-time member of the team"
             },
             {
               "text": "Krzysztof has repeatedly demonstrated his extensive knowledge and experience.",
@@ -673,12 +737,12 @@
           },
           "quotes": [
             {
-              "text": "He is incredibly hard-working, independent and always found solutions to complex problems.",
-              "mark": "always found solutions"
+              "text": "We worked together on an editor to create content for the Wirtualna Polska editorial office.",
+              "mark": "an editor to create content"
             },
             {
-              "text": "Krzysztof is also a great teammate.",
-              "mark": "great teammate"
+              "text": "He is incredibly hard-working, independent and always found solutions to complex problems.",
+              "mark": "always found solutions"
             }
           ],
           "closing": "I definitely recommend Krzysztof as a competent and committed front-end developer."
@@ -711,12 +775,12 @@
           },
           "quotes": [
             {
-              "text": "excellent analytical skills",
-              "mark": "analytical"
+              "text": "He played an important role in requirements analysis, implementation of new solutions, and work related to application performance optimization.",
+              "mark": "application performance optimization"
             },
             {
-              "text": "always willing to help, communicative and creative",
-              "mark": "creative"
+              "text": "ensuring high-quality code by writing unit tests and participating in code reviews",
+              "mark": "unit tests"
             }
           ],
           "closing": "I have no hesitation in recommending Krzysztof as a specialist in his field"

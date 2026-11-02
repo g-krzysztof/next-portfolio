@@ -64,13 +64,7 @@
               "label": "Więcej o edytorze WP"
             }
           },
-          {
-            "text": "Kadme (2021–2022): wyszukiwarka danych z mapą GIS dla branży oil & gas – mapa na OpenLayers, panel warstw, filtry i komponenty design systemu",
-            "more": {
-              "href": "#geo-platform",
-              "label": "Więcej o mapie dla Kadme"
-            }
-          }
+          "Kadme (2021–2022): wyszukiwarka danych z mapą GIS dla branży oil & gas – mapa na OpenLayers, panel warstw, filtry i komponenty design systemu"
         ],
         "stack": [
           "TypeScript, React, Next.js, Redux, TanStack Query, GraphQL (Apollo), Node.js (BFF), Storybook, Jest, Cypress, NX"
@@ -256,21 +250,91 @@
       {
         "id": "dociekai",
         "featured": true,
-        "_todo": "TODO(Moon): wstępna wersja do przejrzenia – sprawdzić problem, rolę i liczby (stan na 2 XI 2026: lekcje z lessons.ts w repo, adresy z sitemap.xml); zrzuty z dociekai.pl, odświeżyć przy większych zmianach wyglądu",
+        "_todo": "TODO(Moon): treść z wsadu z 2 XI 2026 (liczby: lekcje i self-testy zliczone w repo dociekai, Lighthouse z własnego pomiaru). Link „Kod na GitHubie” (https://github.com/g-krzysztof/dociekai, „publiczny wycinek kodu (portfolio)”) wstrzymany: 2 XI 2026 bez logowania zwracał 404 – dodać do links, gdy repo będzie publiczne",
         "name": "dociekai.pl – interaktywne kursy dla klasy 4",
-        "context": "Projekt własny · 2025–obecnie",
-        "role": "Jedyny autor: pomysł, projekt produktu, architektura, frontend, integracje i treść lekcji. Pracuję z agentami AI (Claude Code), ale architekturę, logikę lekcji i review każdej zmiany robię sam.",
-        "problem": "Materiały dla uczniów to głównie teksty i filmy do obejrzenia. Chciałem kursów, w których dziecko uczy się przez działanie: każde zadanie jest pracą wykonaną na stronie, którą strona od razu ocenia, a całość trzyma się podstawy programowej klasy 4.",
-        "product": [
-          "Cztery kursy dla klasy 4: matematyka, informatyka, historia i język polski. Lekcja to ciąg bloków z interakcjami dobranymi do tematu: składanie ułamków z kawałków pizzy, uczenie prostego modelu AI na własnych rysunkach, malowanie palcem doliny Nilu na mapie. Do tego gry edukacyjne, fiszki, materiały do druku i blog.",
-          "Postęp działa bez konta, a po rejestracji synchronizuje się z kontem. Seria nauki liczy dni szkolne zamiast kalendarzowych: weekendy, święta i ferie jej nie przerywają, a dwa „zamrożenia” w tygodniu ratują opuszczony dzień."
+        "context": "Projekt własny · 2025–obecnie · na produkcji",
+        "role": "Jedyny autor: pomysł, projekt produktu, architektura, frontend i treść lekcji. Kod w dużej części piszą agenci AI (Claude Code), a ja prowadzę ich jak tech lead i robię review każdej zmiany.",
+        "problem": "Materiały dla uczniów to głównie teksty i filmy. Chciałem kursów zgodnych z podstawą programową klasy 4, w których dziecko uczy się przez działanie, a strona sama ocenia każde zadanie, bez klucza odpowiedzi.",
+        "decisions": [
+          {
+            "title": "Wspólny silnik lekcji dla czterech kursów",
+            "text": "Lekcja to lista bloków na wspólnej powłoce, która obsługuje postęp, ukończenie i serię nauki. Kurs dostarcza tylko własne widżety i funkcje oceniające. Na tym silniku działają m.in. arkusz kalkulacyjny z parserem formuł, edytor i scena w stylu Scratcha, mapy historyczne, oś czasu i drzewo genealogiczne."
+          },
+          {
+            "title": "Ocenianie jako czyste funkcje, pokryte self-testami",
+            "text": "Logika, która ocenia odpowiedź dziecka, żyje poza Reactem. 55 zestawów self-testów (esbuild + Node) sprawdza przypadki, których nie da się sensownie przeklikać. Drzewo genealogiczne nie mówi „źle”, tylko wskazuje dwie osoby, które sobie przeczą."
+          },
+          {
+            "title": "Postęp bez konta, łączony z kontem po rejestracji",
+            "text": "Każda lekcja działa w pełni bez konta. Po rejestracji postęp z sesji łączy się z kontem. Synchronizacja jest odroczona i nie blokuje nauki, gdy sieć zawodzi. Jedna implementacja obsługuje cztery kursy."
+          },
+          {
+            "title": "Seria nauki liczona w dniach szkolnych",
+            "text": "Przechowuję tylko surowe „dzień → lekcje”. Seria, rekord, zamrożenia i 24 odznaki wyliczają czyste funkcje. Weekendy, święta i ferie nic nie kosztują. Merge między urządzeniami to suma zbiorów dni, więc kolejność synchronizacji nie ma znaczenia i nic nie ginie."
+          },
+          {
+            "title": "Static-first, odporny na awarię CMS",
+            "text": "Next.js App Router, dane z headless Strapi pobierane przy buildzie. Przeglądarka rozmawia tylko z własnymi API routes, które przy awarii zwracają puste dane zamiast błędu strony. Logowanie (e-mail, Google, JWT) idzie wyłącznie przez proxy po stronie Next.js."
+          },
+          {
+            "title": "Własny loader Cloudinary zamiast optymalizatora Vercela",
+            "text": "Ominąłem optymalizator obrazów Vercela własnym loaderem do Cloudinary, bo rozliczenie za transformację zjadało limit. Obrazy są adresowane kluczami z lokalnym fallbackiem, a hook pre-commit blokuje ciężkie binaria."
+          }
         ],
-        "text": [
-          "Next.js App Router w modelu static-first: lekcje i strony kursów generują się statycznie, a treści bloga przychodzą z headless CMS Strapi przez własne API routes, z fallbackiem na wypadek awarii CMS. Logowanie (e-mail i Google, JWT) idzie wyłącznie przez proxy po stronie Next.js.",
-          "Logika ocen w lekcjach to czyste funkcje oddzielone od widżetów, sprawdzane selftestami. Seria nauki przechowuje tylko surowe dni, a liczby, odznaki i zamrożenia wylicza przy każdym odczycie. Synchronizacja to suma zbiorów dni, więc nic nie ginie przy łączeniu urządzeń.",
-          "Własny loader obrazów na Cloudinary zamiast optymalizatora Vercela, który zjadał limit transformacji. Ilustracje generuję modelami AI według stałych reguł stylu i publikuję skryptem.",
-          "SEO: sitemapa, Google Indexing API po każdym buildzie, metadane i dane strukturalne dla kursów. Testy E2E w Playwright na desktopie i mobile (Chromium, Firefox, WebKit).",
-          "Pracę z agentami AI ułożyłem jako proces: osobne skille do budowy lekcji każdego przedmiotu, pliki postępu, podział zadań między modele i obowiązkowy przegląd diffu, tsc i testów przed przyjęciem zmiany."
+        "details": [
+          {
+            "title": "Jedno zadanie od danych do lekcji",
+            "blocks": [
+              "W lekcji historii o rodzinie dziecko układa wymyśloną rodzinę na półkach drzewa genealogicznego, po jednej półce na pokolenie.",
+              {
+                "steps": [
+                  "Dane: lista osób z rokiem urodzenia i rodzicami. Nie ma klucza odpowiedzi.",
+                  "Sędzia: czysta funkcja wyprowadza właściwe półki z dwóch reguł (dziecko stoi półkę nad rodzicami, małżonkowie na jednej półce). Zamiast zdradzać odpowiedź, nazywa dwie osoby, które sobie przeczą, i podaje ich lata.",
+                  "Self-test: sędzia jest testowany bez Reacta i bez przeglądarki.",
+                  "Widżet: odpowiada tylko za rysowanie i interakcję, na wspólnym hooku przeciągania z wariantem „dotknij i połóż”.",
+                  "Lekcja: lista bloków przekazana powłoce kursu."
+                ]
+              },
+              "Ten sam silnik obsługuje w innej lekcji rodzinę bogów greckich. Tam nie ma dat, więc półki wynikają z samego pokrewieństwa.",
+              {
+                "images": [
+                  {
+                    "src": "/images/projects/dociekai/case/drzewo.webp",
+                    "width": 958,
+                    "height": 933,
+                    "alt": "Zadanie z drzewem rodziny Lisieckich na desktopie: osoby do posadzenia, półki od pnia po koronę i dwa komunikaty, że Józef i jego dzieci stoją o dwa piętra od siebie"
+                  },
+                  {
+                    "src": "/images/projects/dociekai/case/drzewo-mobile.webp",
+                    "width": 390,
+                    "height": 744,
+                    "alt": "To samo zadanie na telefonie o szerokości 390 px: tacka z osobami, półki drzewa i komunikaty o sprzeczności jedne pod drugimi"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Jak pracuję z agentami AI",
+            "blocks": [
+              "Decyduję, co i jak powstaje, a agenci dostają małe, ograniczone zadania z opisanymi konwencjami, wzorcowym plikiem i jasnym kryterium „gotowe”. Prostą mechanikę zlecam tańszym modelom. Sobie zostawiam architekturę, logikę widżetów i oceniania, teksty dla dziecka i review. Najdokładniej sprawdzam to, gdzie błąd kosztuje najwięcej: zapisywany i synchronizowany stan oraz logikę, która mówi dziesięciolatkowi, czy ma dobrze. Nic nie wchodzi bez typechecku, lintu i self-testów.",
+              "Bariery są takie, jakie pozwoliłyby skalować zespół: strict TypeScript, testowane funkcje oceniające, Playwright na desktopie i mobile, CI na każdy push, wspólne powłoki lekcji."
+            ]
+          },
+          {
+            "title": "Co zrobiłbym dalej",
+            "blocks": [
+              {
+                "list": [
+                  "JWT z localStorage do cookie httpOnly. Odczyt tokena jest już w jednym module, a HTML bloga sanitizuję po stronie serwera.",
+                  "Część widżetów przeciągania nie jest w pełni obsługiwalna klawiaturą. Poprawka dla wspólnego hooka siedzi w jednym miejscu.",
+                  "E2E jest cienkie. Poprawność trzymają głównie self-testy, a widżety zasługują na testy komponentowe.",
+                  "Kilka widżetów ma blisko 1000 linii. Do podziału na reducer, widok i treść.",
+                  "Nowe reguły React Compilera działają na razie jako ostrzeżenia (ok. 200 miejsc sprzed nich). Migruję stopniowo."
+                ]
+              }
+            ]
+          }
         ],
         "facts": [
           {
@@ -278,50 +342,50 @@
             "label": "kursy dla klasy 4: matematyka, informatyka, historia, język polski"
           },
           {
-            "value": "165",
-            "label": "gotowych interaktywnych lekcji, kolejne w budowie"
+            "value": "166",
+            "label": "interaktywnych lekcji i 16 przewodników; trzy kursy kompletne, polski w budowie (18 z 48)"
+          },
+          {
+            "value": "55",
+            "label": "zestawów self-testów logiki oceniania, serii i sanitizera; w CI przy każdym pushu"
           },
           {
             "value": "90+",
             "label": "punktów w Lighthouse w każdej kategorii, także wydajności, na desktopie i mobile"
-          },
-          {
-            "value": "5",
-            "label": "konfiguracji testów E2E: Chromium, Firefox, WebKit, Android i iPhone"
           }
         ],
         "factsSource": "Stan repozytorium i pomiar Lighthouse strony głównej, listopad 2026.",
-        "stack": "TypeScript, React 19, Next.js 16 (App Router), Tailwind CSS, Radix UI, Framer Motion, Strapi, Cloudinary, Playwright, Vercel",
+        "stack": "TypeScript (strict), React 19, Next.js 16 (App Router, RSC), Tailwind CSS 4, Radix UI / shadcn/ui, Framer Motion, Strapi (headless CMS), Cloudinary, Vercel, Playwright, esbuild, GitHub Actions",
         "shots": [
           {
             "src": "/images/projects/dociekai/matematyka.webp",
             "label": "Kurs matematyki",
             "alt": "Strona kursu matematyki dla klasy 4: dziesięć działów jako grzbiety książek na półce, otwarty dział startowy z lekcjami i pasek postępu w roku",
-            "caption": "Matematyka: cały rok jako półka z działami. Klik w grzbiet otwiera dział, postęp liczy się z ukończonych lekcji."
+            "caption": "Cały rok jako półka z działami. Klik w grzbiet otwiera dział, postęp liczy się z ukończonych lekcji."
           },
           {
             "src": "/images/projects/dociekai/informatyka.webp",
             "label": "Lekcja",
             "alt": "Lekcja informatyki o nośnikach danych: spis sześciu bloków po lewej, ilustracja z dyskietką i telefonem oraz suwak do zgadywania rozmiaru zdjęcia",
-            "caption": "Lekcja informatyki: sześć bloków od haczyka po refleksję, a już na starcie dziecko zgaduje suwakiem, ile „waży” zdjęcie."
+            "caption": "Lekcja informatyki „Nośniki danych”: plan sześciu bloków i zadanie na start, w którym dziecko suwakiem zgaduje, ile waży jedno zdjęcie z telefonu."
+          },
+          {
+            "src": "/images/projects/dociekai/drzewo.webp",
+            "label": "Ocenianie",
+            "alt": "Zadanie z drzewem genealogicznym po błędnym ruchu: osoby na półkach od pnia po koronę, Józef i jego dzieci w czerwonych ramkach i dwa komunikaty o sprzeczności z latami urodzenia",
+            "caption": "Drzewo genealogiczne po błędnym ruchu. Strona nie mówi „źle”, tylko wskazuje dwie osoby, które sobie przeczą, z latami urodzenia."
+          },
+          {
+            "src": "/images/projects/dociekai/drzewo-mobile.webp",
+            "label": "Mobile",
+            "alt": "To samo zadanie z drzewem na ekranie telefonu: tacka z czterema osobami, półki drzewa i komunikaty o sprzeczności na jednym ekranie",
+            "caption": "To samo zadanie na telefonie 390 px: tacka z osobami i półki mieszczą się na jednym ekranie."
           },
           {
             "src": "/images/projects/dociekai/gry.webp",
             "label": "Gry",
             "alt": "Strona gier edukacyjnych w ciemnym, kosmicznym motywie: lista misji z ilustracjami, tagami i rekordem gracza",
-            "caption": "Galaktyka gier: misje z matematyki na czas, z poziomami trudności i lokalnym rekordem wyniku."
-          },
-          {
-            "src": "/images/projects/dociekai/kodowanie.webp",
-            "label": "Kurs kodowania",
-            "alt": "Strona kursu kodowania dla dzieci od 7 lat: nagłówek ze zdjęciem dzieci przy laptopach i karuzela lekcji",
-            "caption": "Kurs kodowania dla dzieci od 7 lat: lekcje w karuzeli, od pierwszego programu po zmienne i stałe."
-          },
-          {
-            "src": "/images/projects/dociekai/blog.webp",
-            "label": "Blog",
-            "alt": "Blog dla rodziców: chmura kategorii z liczbą artykułów i siatka kart z ilustracjami, tagami i czasem czytania",
-            "caption": "Blog dla rodziców: artykuły ze Strapi z kategoriami, czasem czytania i ilustracjami w jednym stylu."
+            "caption": "Gry edukacyjne: matematyka na czas, rekord gracza zapisany na urządzeniu."
           }
         ],
         "links": [
@@ -585,8 +649,8 @@
           },
           "quotes": [
             {
-              "text": "solidny i pracowity członek zespołu",
-              "mark": "pracowity"
+              "text": "Jego zaangażowanie i kompetencje pozwalały nienagannie wywiązywać się z obowiązków",
+              "mark": "nienagannie"
             },
             {
               "text": "Wysoko cenimy jego kulturę i pozytywne, acz nienachalne, nastawienie.",
@@ -616,12 +680,12 @@
           },
           "quotes": [
             {
-              "text": "niezwykle utalentowanym i zaangażowanym programistą",
-              "mark": "niezwykle utalentowanym"
+              "text": "Jego umiejętność szybkiego i skutecznego rozwiązywania problemów programistycznych",
+              "mark": "szybkiego i skutecznego"
             },
             {
-              "text": "potrafi zainspirować i zmotywować innych członków zespołu",
-              "mark": "zainspirować"
+              "text": "chętnie dzieli się swoją wiedzą, co znacząco podnosi poziom pracy całego zespołu",
+              "mark": "podnosi poziom pracy całego zespołu"
             }
           ],
           "closing": "Krzysztof będzie cennym nabytkiem dla każdej firmy"
@@ -644,8 +708,8 @@
           },
           "quotes": [
             {
-              "text": "wykazywał się przy tym samodzielnością i zaangażowaniem",
-              "mark": "samodzielnością"
+              "text": "Był on wieloletnim członkiem zespołu pracującego dla stałego klienta naszej firmy.",
+              "mark": "wieloletnim członkiem zespołu"
             },
             {
               "text": "Krzysztof wielokrotnie udowodnił szeroką wiedzę i doświadczenie.",
@@ -673,12 +737,12 @@
           },
           "quotes": [
             {
-              "text": "Jest niesamowicie pracowity, samodzielny i zawsze znajdował rozwiązania skomplikowanych problemów.",
-              "mark": "zawsze znajdował rozwiązania"
+              "text": "Pracowaliśmy razem nad edytorem do tworzenia treści dla redakcji Wirtualnej Polski.",
+              "mark": "edytorem do tworzenia treści"
             },
             {
-              "text": "Krzysztof to także świetny kolega z zespołu.",
-              "mark": "świetny kolega"
+              "text": "Jest niesamowicie pracowity, samodzielny i zawsze znajdował rozwiązania skomplikowanych problemów.",
+              "mark": "zawsze znajdował rozwiązania"
             }
           ],
           "closing": "Zdecydowanie polecam Krzysztofa jako kompetentnego i zaangażowanego frontendowca."
@@ -711,12 +775,12 @@
           },
           "quotes": [
             {
-              "text": "doskonałymi umiejętnościami analitycznymi",
-              "mark": "analitycznymi"
+              "text": "Odegrał ważną rolę w analizach wymagań, wdrożeniach nowych rozwiązań, czy pracach związanych z optymalizacją wydajności aplikacji.",
+              "mark": "optymalizacją wydajności aplikacji"
             },
             {
-              "text": "zawsze chętną do pomocy, komunikatywną i kreatywną",
-              "mark": "kreatywną"
+              "text": "zapewnienie wysokiej jakości kodu poprzez pisanie testów jednostkowych oraz udział w code review",
+              "mark": "testów jednostkowych"
             }
           ],
           "closing": "Bez wahania rekomenduję Krzysztofa jako specjalistę w swojej dziedzinie"
