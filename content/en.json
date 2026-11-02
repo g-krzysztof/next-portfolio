@@ -36,8 +36,7 @@
             "more": { "href": "#zpr-media", "label": "More about the players" }
           },
           {
-            "text": "CMS modules for radio apps, AI-based article audio (text-to-speech), ad integrations, the front end in Django projects, E2E tests and AI-agent-assisted development",
-            "more": { "href": "#zpr-media-inne", "label": "More about the other work" }
+            "text": "CMS modules for radio apps, AI-based article audio (text-to-speech), ad integrations, the front end in Django projects, E2E tests and AI-agent-assisted development"
           }
         ],
         "stack": [
@@ -105,25 +104,15 @@
   },
   "projects": {
     "title": "Selected <secondary>projects</secondary>",
-    "_todo": "TODO(Moon): projekt własny (np. dociekai.pl) – opis i link; czwarta karta czeka na treść",
+    "_todo": "TODO(Moon): projekt własny dociekai.pl – osobny case study pod kartami (id dociekai, featured, bez group; kotwicę #dociekai ma już link z doświadczenia), opis i link",
     "items": [
       {
         "id": "zpr-media",
         "featured": true,
         "visual": "players",
+        "group": "work",
         "tab": "Players",
-        "otherTasks": {
-          "tab": "Other work",
-          "items": [
-            "building modules in a React-based CMS for managing the group’s radio apps and other apps",
-            "implementing AI-based text-to-speech: audio versions of articles on the websites",
-            "implementing and integrating ad systems in players and websites (Google IMA, VAST)",
-            "backend integrations and the front-end layer in Django-based projects",
-            "E2E tests in Playwright",
-            "AI-assisted development: custom skills and instructions for coding agents, architecture oversight and review of generated code",
-            "leading and coordinating the team’s other developers (full-stack developers specialising in backend) on larger front-end tasks, and cross-team code reviews with front-end developers from the group’s other teams"
-          ]
-        },
+        "tabNote": "ZPR Media",
         "name": "Video and radio players for ZPR Media websites",
         "context": "Grupa ZPR Media · Multimedia team (9 people) · 2024–present",
         "role": "Senior React Frontend Developer, owning the team’s entire front end: moving the players into a dedicated repository, architecture decisions, refactoring and rollout, leading the team’s developers on larger front-end work",
@@ -156,8 +145,9 @@
         "id": "wp-editor",
         "featured": true,
         "visual": "editor",
-        "group": "autentika",
+        "group": "work",
         "tab": "WP editor",
+        "tabNote": "Wirtualna Polska · Autentika",
         "name": "Content editor for the Wirtualna Polska newsroom",
         "context": "Wirtualna Polska · large back-office tools front-end team · 2022–2024",
         "role": "React Frontend Developer in the WP team (contract via Autentika)",
@@ -202,8 +192,9 @@
       {
         "id": "geo-platform",
         "featured": true,
-        "group": "autentika",
+        "group": "work",
         "tab": "Deposit map",
+        "tabNote": "Kadme · Autentika",
         "name": "Deposit map for geologists",
         "context": "Kadme (Norway, oil & gas) · via Autentika",
         "role": "React Frontend Developer: system design and front-end implementation",
@@ -240,6 +231,84 @@
           {
             "href": "https://autentika.com/projects/kadme",
             "label": "Case study on autentika.com"
+          }
+        ]
+      },
+      {
+        "id": "dociekai",
+        "featured": true,
+        "_todo": "TODO(Moon): wstępna wersja do przejrzenia – sprawdzić problem, rolę i liczby (stan na 2 XI 2026: lekcje z lessons.ts w repo, adresy z sitemap.xml); zrzuty z dociekai.pl, odświeżyć przy większych zmianach wyglądu",
+        "name": "dociekai.pl – interactive courses for 4th grade",
+        "context": "Personal project · 2025–present",
+        "role": "Sole author: idea, product design, architecture, front end, integrations and lesson content. I work with AI agents (Claude Code), but the architecture, lesson logic and review of every change are mine.",
+        "problem": "Learning materials for pupils are mostly texts and videos to watch. I wanted courses where a child learns by doing: every task is work done on the page, which the page judges straight away, and the whole thing follows the Polish 4th-grade core curriculum.",
+        "product": [
+          "Four 4th-grade courses: maths, computer science, history and Polish. A lesson is a sequence of blocks with interactions chosen for the topic: building fractions out of pizza slices, training a simple AI model on your own drawings, finger-painting the Nile valley on a map. On top of that: educational games, flashcards, printable materials and a blog.",
+          "Progress works without an account and syncs with the account after sign-up. The learning streak counts school days rather than calendar days: weekends, public holidays and school breaks don’t break it, and two “freezes” a week rescue a missed day."
+        ],
+        "text": [
+          "Next.js App Router, static-first: lessons and course pages are generated statically, and blog content comes from the Strapi headless CMS through my own API routes, with a fallback in case the CMS goes down. Sign-in (email and Google, JWT) goes only through a proxy on the Next.js side.",
+          "Lesson grading logic is pure functions kept apart from the widgets and checked by self-tests. The learning streak stores only raw days and derives numbers, badges and freezes on every read. Sync is a union of days, so nothing is lost when devices are merged.",
+          "A custom image loader on Cloudinary instead of Vercel’s optimiser, which was eating up the transformation quota. I generate the illustrations with AI models following fixed style rules and publish them with a script.",
+          "SEO: a sitemap, the Google Indexing API after every build, metadata and structured data for the courses. E2E tests in Playwright on desktop and mobile (Chromium, Firefox, WebKit).",
+          "I set up the work with AI agents as a process: separate skills for building each subject’s lessons, progress files, splitting tasks between models, and a mandatory review of the diff, tsc and tests before a change is accepted."
+        ],
+        "facts": [
+          {
+            "value": "4",
+            "label": "4th-grade courses: maths, computer science, history, Polish"
+          },
+          {
+            "value": "165",
+            "label": "interactive lessons ready, more on the way"
+          },
+          {
+            "value": "291",
+            "label": "public pages in the sitemap"
+          },
+          {
+            "value": "54",
+            "label": "self-tests of lesson logic and edge cases"
+          }
+        ],
+        "factsSource": "Repository state and sitemap.xml, November 2026.",
+        "stack": "TypeScript, React 19, Next.js 16 (App Router), Tailwind CSS, Radix UI, Framer Motion, Strapi, Cloudinary, Playwright, Vercel",
+        "shots": [
+          {
+            "src": "/images/projects/dociekai/matematyka.webp",
+            "label": "Maths course",
+            "alt": "The 4th-grade maths course page: ten units as book spines on a shelf, the open starter unit with its lessons and a progress bar for the year",
+            "caption": "Maths: the whole year as a shelf of units. Clicking a spine opens the unit, and progress is counted from completed lessons."
+          },
+          {
+            "src": "/images/projects/dociekai/informatyka.webp",
+            "label": "Lesson",
+            "alt": "A computer science lesson on storage media: an outline of six blocks on the left, an illustration of a floppy disk and a phone, and a slider for guessing the size of a photo",
+            "caption": "A computer science lesson: six blocks from the hook to the reflection, and right at the start the child guesses with a slider how much a photo “weighs”."
+          },
+          {
+            "src": "/images/projects/dociekai/gry.webp",
+            "label": "Games",
+            "alt": "The educational games page in a dark space theme: a list of missions with illustrations, tags and the player's high score",
+            "caption": "The games galaxy: timed maths missions with difficulty levels and a local high score."
+          },
+          {
+            "src": "/images/projects/dociekai/kodowanie.webp",
+            "label": "Coding course",
+            "alt": "The coding course page for children aged 7 and up: a header with a photo of children at laptops and a lesson carousel",
+            "caption": "A coding course for children aged 7 and up: lessons in a carousel, from the first program to variables and constants."
+          },
+          {
+            "src": "/images/projects/dociekai/blog.webp",
+            "label": "Blog",
+            "alt": "The blog for parents: a cloud of categories with article counts and a grid of cards with illustrations, tags and reading time",
+            "caption": "The blog for parents: articles from Strapi with categories, reading time and illustrations in one style."
+          }
+        ],
+        "links": [
+          {
+            "href": "https://dociekai.pl",
+            "label": "See dociekai.pl"
           }
         ]
       }
@@ -449,6 +518,36 @@
     "title": "<secondary>Opinions and recommendations</secondary> from employers and colleagues",
     "intro": "I can provide contact details (e-mail / phone number) for each of the people listed below to confirm these references.",
     "items": [
+      {
+        "id": "kamil",
+        "author": "Kamil Kostka",
+        "position": "Product Owner",
+        "company": "Grupa ZPR Media",
+        "date": "02.11.2026",
+        "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
+        "text": [
+          "As a Product Owner at Time S.A., I had the opportunity to work with Krzysztof on many projects. He is a Frontend Developer with vast knowledge of modern technologies who puts great emphasis on code quality, optimization and security.",
+          "Krzysztof is actively involved in project work and proposes well-thought-out solutions. He collaborates very well with the team, and his knowledge and openness to discussion help make the right decisions and deliver projects efficiently.",
+          "I wholeheartedly recommend Krzysztof for a Senior React Developer role. His skills, commitment and approach to collaboration will be a great asset to any team! :)"
+        ],
+        "reel": {
+          "fact": {
+            "value": "many projects",
+            "label": "with the Product Owner, his direct manager"
+          },
+          "quotes": [
+            {
+              "text": "puts great emphasis on code quality, optimization and security",
+              "mark": "quality, optimization and security"
+            },
+            {
+              "text": "is actively involved in project work and proposes well-thought-out solutions",
+              "mark": "well-thought-out solutions"
+            }
+          ],
+          "closing": "I wholeheartedly recommend Krzysztof for a Senior React Developer role."
+        }
+      },
       {
         "id": "michal",
         "author": "Michał Samojlik",

@@ -7,7 +7,8 @@ import EditorDemo from './EditorDemo';
 import { useLang } from './lang';
 import MapDemo from './MapDemo';
 import PlayersGallery from './PlayersGallery';
-import { CmsInline, Section, SectionTitle, Wrap, bulletList } from './ui';
+import ShotsGallery from './ShotsGallery';
+import { CmsInline, Section, SectionTitle, Wrap } from './ui';
 
 // Case study na papierze: bez cieni i ramek, kolumny oddziela linia u góry
 // (jak ściana stacku)
@@ -28,14 +29,24 @@ const Projects = ({ section }: { section: ProjectsSection }) => {
         {toBlocks(featured).map((block, index) => {
           const flip = index % 2 === 1;
           const [first] = block;
-          return block.length > 1 || first.otherTasks ? (
-            <Tabbed key={first.id} tabs={tabsFor(block, flip)} />
-          ) : (
-            <Featured key={first.id} project={first} flip={flip} />
+          const tabbed = block.length > 1;
+          // numer i rodzaj nad linią: bez nich kolejny blok czyta się
+          // jak ciąg dalszy poprzedniego
+          return (
+            <Block key={first.id}>
+              <Kicker>
+                <KickerNo>{String(index + 1).padStart(2, '0')}</KickerNo>
+                {tabbed ? copy.projectTabs : copy.projectOwn}
+              </Kicker>
+              {tabbed ? (
+                <Tabbed tabs={tabsFor(block, flip)} />
+              ) : (
+                <Featured project={first} flip={flip} />
+              )}
+            </Block>
           );
         })}
 
-        {/* TODO(Moon): karta projektu własnego (np. dociekai.pl) – opis i link */}
         {rest.length > 0 && (
           <Grid>
             {rest.map(({ id, name, context, role, text, stack }) => (
@@ -93,6 +104,7 @@ const Featured = ({
     stack,
     links,
     visual,
+    shots,
   } = project;
   const Visual = visual && VISUALS[visual];
   const [open, setOpen] = useState(false);
@@ -169,9 +181,18 @@ const Featured = ({
         )}
       </FeaturedText>
 
-      {Visual && (
+      {(Visual || shots) && (
         <FeaturedVisual>
-          <Visual />
+          {Visual ? (
+            <Visual />
+          ) : (
+            shots && (
+              <ShotsGallery
+                shots={shots}
+                site={links?.[0] && new URL(links[0].href).host}
+              />
+            )
+          )}
         </FeaturedVisual>
       )}
     </FeaturedItem>
@@ -182,11 +203,11 @@ interface TabItem {
   // kotwica przycisku „Więcej” z doświadczenia, zarazem klucz karty
   anchor: string;
   label: string;
+  note?: string;
   content: React.ReactNode;
 }
 
-// Kolejne wyróżnione projekty: z tą samą `group` trafiają do jednego bloku z kartami,
-// projekt z `otherTasks` dostaje drugą kartę z pozostałymi zadaniami.
+// Kolejne wyróżnione projekty: z tą samą `group` trafiają do jednego bloku z kartami.
 // Bez kart zostaje zwykły case study.
 const toBlocks = (featured: Project[]) => {
   const blocks: Project[][] = [];
@@ -199,34 +220,12 @@ const toBlocks = (featured: Project[]) => {
 };
 
 const tabsFor = (projects: Project[], flip: boolean): TabItem[] =>
-  projects.flatMap((project) => [
-    {
-      anchor: project.id,
-      label: project.tab ?? project.name,
-      content: <Featured project={project} flip={flip} anchored={false} />,
-    },
-    ...(project.otherTasks
-      ? [
-          {
-            anchor: `${project.id}-inne`,
-            label: project.otherTasks.tab,
-            content: <OtherTasks project={project} />,
-          },
-        ]
-      : []),
-  ]);
-
-// Pozostałe zadania z tego samego miejsca pracy: kontekst i lista w dwóch kolumnach
-const OtherTasks = ({ project }: { project: Project }) => (
-  <OtherPanel>
-    <Context>{project.context}</Context>
-    <TaskList>
-      {project.otherTasks?.items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </TaskList>
-  </OtherPanel>
-);
+  projects.map((project) => ({
+    anchor: project.id,
+    label: project.tab ?? project.name,
+    note: project.tabNote,
+    content: <Featured project={project} flip={flip} anchored={false} />,
+  }));
 
 // Karty nad linią oddzielającą. Kotwica karty w adresie (przyciski „Więcej”
 // w doświadczeniu) przewija do bloku i otwiera tę kartę.
@@ -264,7 +263,7 @@ const Tabbed = ({ tabs }: { tabs: TabItem[] }) => {
         <Anchor key={anchor} id={anchor} />
       ))}
       <TabList role="tablist" aria-label={copy.projectTabs}>
-        {tabs.map(({ anchor, label }, index) => (
+        {tabs.map(({ anchor, label, note }, index) => (
           <Tab
             key={anchor}
             ref={(node) => {
@@ -280,6 +279,7 @@ const Tabbed = ({ tabs }: { tabs: TabItem[] }) => {
             onKeyDown={onKeyDown}
           >
             {label}
+            {note && <TabNote>{note}</TabNote>}
           </Tab>
         ))}
       </TabList>
@@ -356,9 +356,37 @@ const Item = styled.li`
   }
 `;
 
-const FeaturedItem = styled.article<{ $flip: boolean }>`
+// Wyróżniony blok: pojedynczy case study albo karty z kilkoma
+const Block = styled.div`
   margin-top: clamp(36px, 5vw, 56px);
-  scroll-margin-top: calc(${({ theme }) => theme.layout.navHeight} + 24px);
+  & + & {
+    margin-top: clamp(72px, 9vw, 136px);
+  }
+`;
+
+const Kicker = styled.p`
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: clamp(14px, 1.6vw, 20px);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.tealInk};
+`;
+
+const KickerNo = styled.span`
+  font-family: ${({ theme }) => theme.fonts.display};
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  color: ${({ theme }) => theme.colors.ink};
+`;
+
+const FeaturedItem = styled.article<{ $flip: boolean }>`
+  scroll-margin-top: calc(${({ theme }) => theme.layout.navHeight} + 64px);
   padding-top: 18px;
   border-top: 2px solid ${({ theme }) => theme.colors.field};
   display: grid;
@@ -366,14 +394,6 @@ const FeaturedItem = styled.article<{ $flip: boolean }>`
     $flip ? 'minmax(0, 5fr) minmax(0, 6fr)' : 'minmax(0, 6fr) minmax(0, 5fr)'};
   gap: clamp(28px, 4vw, 64px);
   align-items: start;
-  & + &,
-  ${() => TabbedWrap} + & {
-    margin-top: clamp(48px, 6vw, 88px);
-  }
-  /* w karcie linia jest podstawą zakładek, odstęp daje TabbedWrap */
-  [role='tabpanel'] > & {
-    margin-top: 0;
-  }
   ${({ $flip }) =>
     $flip &&
     css`
@@ -392,18 +412,14 @@ const FeaturedItem = styled.article<{ $flip: boolean }>`
 `;
 
 const TabbedWrap = styled.div`
-  margin-top: clamp(36px, 5vw, 56px);
-  scroll-margin-top: calc(${({ theme }) => theme.layout.navHeight} + 24px);
-  & + & {
-    margin-top: clamp(48px, 6vw, 88px);
-  }
+  scroll-margin-top: calc(${({ theme }) => theme.layout.navHeight} + 64px);
 `;
 
 // zakładki stoją na linii oddzielającej: aktywna pogrubia ją pod sobą
 // kotwice kart: wszystkie na początku bloku, nad zakładkami
 const Anchor = styled.span`
   display: block;
-  scroll-margin-top: calc(${({ theme }) => theme.layout.navHeight} + 24px);
+  scroll-margin-top: calc(${({ theme }) => theme.layout.navHeight} + 64px);
 `;
 
 const TabList = styled.div`
@@ -415,6 +431,10 @@ const TabList = styled.div`
 
 const Tab = styled.button`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
   min-height: 48px;
   padding: 0 2px 10px;
   font-family: ${({ theme }) => theme.fonts.display};
@@ -455,20 +475,13 @@ const Tab = styled.button`
   }
 `;
 
-const OtherPanel = styled.div`
-  padding-top: 18px;
-  border-top: 2px solid ${({ theme }) => theme.colors.field};
-`;
-
-const TaskList = styled.ul`
-  margin-top: 18px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-  gap: 14px clamp(28px, 4vw, 64px);
-  font-size: 16px;
-  line-height: 1.55;
-  color: ${({ theme }) => theme.colors.inkSoft};
-  ${bulletList}
+const TabNote = styled.span`
+  margin-top: 2px;
+  font-family: ${({ theme }) => theme.fonts.body};
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0;
+  color: ${({ theme }) => theme.colors.inkMuted};
 `;
 
 const FeaturedText = styled.div`

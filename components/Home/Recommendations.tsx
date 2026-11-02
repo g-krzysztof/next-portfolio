@@ -134,11 +134,29 @@ const RecCard = ({
         ) : (
           <span />
         )}
-        {item.date && <DateLabel>{item.date}</DateLabel>}
+        <FootMeta item={item} copy={copy} />
       </Foot>
     </Card>
   );
 };
+
+// Data i link do rekomendacji opublikowanej na LinkedIn
+const FootMeta = ({ item, copy }: { item: Recommendation; copy: Copy }) => (
+  <Meta>
+    {item.linkedin && (
+      <Source
+        href={item.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={copy.recLinkedinLabel}
+      >
+        <LineIcon name="linkedin" size={16} />
+        {copy.recLinkedin}
+      </Source>
+    )}
+    {item.date && <DateLabel>{item.date}</DateLabel>}
+  </Meta>
+);
 
 // Wersja do szybkiego czytania: wszystkie karty naraz, bez rolek i ruchu
 const TextCard = ({ item, copy }: { item: Recommendation; copy: Copy }) => {
@@ -183,7 +201,7 @@ const TextCard = ({ item, copy }: { item: Recommendation; copy: Copy }) => {
         ) : (
           <span />
         )}
-        {item.date && <DateLabel>{item.date}</DateLabel>}
+        <FootMeta item={item} copy={copy} />
       </Foot>
     </Plain>
   );
@@ -793,6 +811,29 @@ const More = styled.button`
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-thickness: 1.5px;
+`;
+
+const Meta = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+`;
+
+const Source = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  font-weight: 600;
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.tealInk};
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+
+  svg {
+    flex: none;
+  }
 `;
 
 const DateLabel = styled.span`

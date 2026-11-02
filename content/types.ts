@@ -78,6 +78,8 @@ export interface Recommendation {
   position?: string;
   company: string;
   date?: string;
+  // adres rekomendacji na LinkedIn, gdy jest tam opublikowana
+  linkedin?: string;
   text: RecommendationBlock[];
   reel?: RecommendationReel;
 }
@@ -93,10 +95,12 @@ export interface ProjectFact {
   label: string;
 }
 
-// Druga karta projektu: pozostałe zadania z tego samego miejsca pracy
-export interface ProjectOtherTasks {
-  tab: string;
-  items: string[];
+// Zrzut ekranu projektu: plik 16:9 w public/, podpis na przełączniku galerii
+export interface ProjectShot {
+  src: string;
+  alt: string;
+  label: string;
+  caption?: string;
 }
 
 export interface ProjectLink {
@@ -111,11 +115,14 @@ export interface Project {
   featured?: boolean;
   // ilustracja przy wyróżnionym projekcie: 'map' | 'editor' | 'players' (JSON daje string)
   visual?: string;
-  // etykieta karty z case study; karty włącza otherTasks albo wspólna group
+  // zamiast ilustracji w kodzie: galeria zrzutów ekranu
+  shots?: ProjectShot[];
+  // etykieta karty z case study; karty włącza wspólna group
   tab?: string;
+  // dopisek pod etykietą karty: firma lub klient
+  tabNote?: string;
   // kolejne projekty z tą samą grupą pokazują się jako karty jednego bloku
   group?: string;
-  otherTasks?: ProjectOtherTasks;
   name: string;
   context: string;
   role: string;

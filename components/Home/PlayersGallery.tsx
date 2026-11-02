@@ -88,7 +88,6 @@ const PlayersGallery = () => {
     return reduced ? 1 : Math.min(1, elapsed / shot.duration);
   };
 
-  const { title, text } = copy.playersShots[shot.id];
   const brand = shot.frames[frameOf(shot, index)]?.brand;
 
   return (
@@ -158,12 +157,18 @@ const PlayersGallery = () => {
         ))}
       </Stage>
 
-      <Caption key={index} aria-live={running ? 'off' : 'polite'}>
-        <Name>
-          {title}
-          {brand && <Brand key={brand}>{brand}</Brand>}
-        </Name>
-        <Text>{text}</Text>
+      {/* Wszystkie podpisy w jednej komórce: wysokość bierze się z najdłuższego,
+          więc zmiana slajdu nie przesuwa karty */}
+      <Caption aria-live={running ? 'off' : 'polite'}>
+        {SHOTS.map((s, i) => (
+          <CaptionItem key={s.id} $on={i === index} aria-hidden={i !== index}>
+            <Name>
+              {copy.playersShots[s.id].title}
+              {i === index && brand && <Brand key={brand}>{brand}</Brand>}
+            </Name>
+            <Text>{copy.playersShots[s.id].text}</Text>
+          </CaptionItem>
+        ))}
       </Caption>
 
       <Bottom>
@@ -365,14 +370,23 @@ const Img = styled.img<{ $on: boolean }>`
 `;
 
 const Caption = styled.div`
+  display: grid;
   margin-top: 16px;
-  min-height: 4.6em;
-  > * {
-    animation: ${rise} 0.5s ${({ theme }) => theme.ease.out} both;
-  }
-  > :nth-child(2) {
-    animation-delay: 70ms;
-  }
+`;
+
+const CaptionItem = styled.div<{ $on: boolean }>`
+  grid-area: 1 / 1;
+  visibility: ${({ $on }) => ($on ? 'visible' : 'hidden')};
+  ${({ $on }) =>
+    $on &&
+    css`
+      > * {
+        animation: ${rise} 0.5s ${({ theme }) => theme.ease.out} both;
+      }
+      > :nth-child(2) {
+        animation-delay: 70ms;
+      }
+    `}
 `;
 
 const Name = styled.p`
