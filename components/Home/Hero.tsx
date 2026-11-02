@@ -14,6 +14,8 @@ import { initials } from './Recommendations';
 
 // Rewers karty pokazuje rdzeń stacku; pełna lista jest w sekcji Stack
 const BACK_ITEMS = 6;
+// Awers od razu pokazuje kilka najważniejszych technologii na pasku
+const FRONT_ITEMS = 4;
 
 const FlipIcon = () => <LineIcon name="flip" size={16} />;
 
@@ -72,6 +74,11 @@ const Hero = ({ stack, recommendations = [], buildYear }: HeroProps) => {
 
   const current = (stack[0]?.lines || []).slice(0, BACK_ITEMS).map(lineLabel);
   const more = (stack[1]?.lines || []).map(lineLabel);
+  const core = (stack[0]?.lines || [])
+    .flat()
+    .filter(({ strong }) => strong)
+    .slice(0, FRONT_ITEMS)
+    .map(({ name }) => name);
 
   return (
     <HeroField id="start">
@@ -126,6 +133,13 @@ const Hero = ({ stack, recommendations = [], buildYear }: HeroProps) => {
                 <Band aria-hidden="true">
                   <BandLines />
                 </Band>
+                {core.length > 0 && (
+                  <Core aria-label={copy.coreStack}>
+                    {core.map((name) => (
+                      <li key={name}>{name}</li>
+                    ))}
+                  </Core>
+                )}
                 <Avatar
                   src="/images/avatar-kriss.png"
                   alt={copy.avatarAlt}
@@ -177,7 +191,7 @@ const Hero = ({ stack, recommendations = [], buildYear }: HeroProps) => {
                   onClick={() => setFlipped(true)}
                   aria-label={copy.flipToBack}
                 >
-                  Stack
+                  {copy.flipMore}
                   <FlipIcon />
                 </FlipCorner>
                 <Glare aria-hidden="true" />
@@ -225,7 +239,8 @@ const HeroField = styled.div`
   padding-top: calc(
     ${({ theme }) => theme.layout.navHeight} + clamp(16px, 4vh, 48px)
   );
-  padding-bottom: 0;
+  /* hero kończy turkusowe pole, więc sam trzyma oddech od dołu */
+  padding-bottom: clamp(40px, 6vw, 80px);
   ${({ theme: { colors } }) => css`
     background: radial-gradient(
       60% 70% at 74% 56%,
@@ -635,6 +650,39 @@ const BandLines = styled.span`
   position: absolute;
   inset: 0;
   background: ${bandContours('92% 140%', 22)};
+`;
+
+// Chipy na pasku: jeden rząd, żeby nie wejść pod awatar ani przycisk
+const Core = styled.ul`
+  position: absolute;
+  top: 16px;
+  left: clamp(22px, 4vw, 44px);
+  right: 190px;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-height: 36px;
+  overflow: hidden;
+  li {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 0 12px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.82);
+    color: ${({ theme }) => theme.colors.ink};
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    right: 170px;
+    li {
+      padding: 0 10px;
+      font-size: 12px;
+    }
+  }
 `;
 
 const Avatar = styled.img`

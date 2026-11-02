@@ -428,9 +428,11 @@ const Recommendations = ({ section }: { section: RecommendationsSection }) => {
 
 export default Recommendations;
 
+// Opinie stoją za doświadczeniem, więc mają własne turkusowe pole
 const Field = styled.section`
   position: relative;
-  padding: clamp(24px, 3vw, 40px) 0 clamp(48px, 6vw, 80px);
+  padding-block: clamp(64px, 8vw, 112px);
+  background: ${({ theme }) => theme.colors.field};
   color: ${({ theme }) => theme.colors.onField};
   overflow: hidden;
 `;

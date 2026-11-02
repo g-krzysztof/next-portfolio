@@ -43,9 +43,9 @@ const Home = async ({ params }: PageProps<'/[lang]'>) => {
             recommendations={recommendations.items}
             buildYear={buildYear}
           />
-          <Recommendations section={recommendations} />
         </Opening>
         <Experience section={experience} />
+        <Recommendations section={recommendations} />
         {projects && <Projects section={projects} />}
         <AboutStack
           about={about}

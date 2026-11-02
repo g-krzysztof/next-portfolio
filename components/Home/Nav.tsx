@@ -64,7 +64,7 @@ const Nav = ({ sections = SECTIONS }: { sections?: typeof SECTIONS }) => {
 
   return (
     <Bar $solid={dark} $scrolled={scrolled}>
-      <SkipLink href="#opinie">{copy.skip}</SkipLink>
+      <SkipLink href="#doswiadczenie">{copy.skip}</SkipLink>
       <Inner>
         <Mark href="#start" onClick={() => setOpen(false)}>
           krzysztof<b>g</b>.pl
