@@ -202,15 +202,15 @@
         "id": "geo-platform",
         "featured": true,
         "group": "work",
-        "tab": "Mapa złóż",
+        "tab": "Mapa GIS",
         "tabNote": "Kadme · Autentika",
-        "name": "Lumin – wyszukiwarka danych z mapą GIS dla geologów",
+        "name": "Wyszukiwarka danych z mapą GIS dla geologów",
         "context": "Kadme (Norwegia, branża oil & gas) · 3-osobowy zespół frontendowy · 2021–2022",
         "role": "React Frontend Developer (kontrakt przez Autentikę), 11.2021–05.2022: mapa, panel warstw, filtry i komponenty design systemu",
-        "_todo": "TODO(Moon): treść z historii repo kadme (gałąź development, 24.11.2021–11.05.2022); potwierdzić, że nazwy Lumin i @kadme/components można podawać publicznie",
+        "_todo": "TODO(Moon): treść z historii repo kadme (gałąź development, 24.11.2021–11.05.2022); nazwa produktu (Lumin) celowo pominięta – publicznie potwierdzone jest tylko Kadme (case study Autentiki); potwierdzić, czy @kadme/components można podawać publicznie",
         "problem": "Mapa była centrum aplikacji, ale reactowy wrapper nad OpenLayers (rlayers) nie dawał dostępu do niskopoziomowych funkcji, których wymagał projekt: podkładu terenu w kolorach marki zamiast standardowej palety kafelków oraz własnej obsługi warstw, menu i punktów na mapie.",
         "product": [
-          "Lumin to aplikacja typu „mapplication” dla geologów i specjalistów terenowych: mapa jest jej centrum, a obok niej działa wyszukiwarka nieustrukturyzowanych danych z wielu źródeł, z filtrami, podglądem źródeł i historią wyszukiwań. Wcześniej każde wyszukiwanie zależało od dostępności data managerów.",
+          "Aplikacja Kadme to tzw. „mapplication” dla geologów i specjalistów terenowych: mapa jest jej centrum, a obok niej działa wyszukiwarka nieustrukturyzowanych danych z wielu źródeł, z filtrami, podglądem źródeł i historią wyszukiwań. Wcześniej każde wyszukiwanie zależało od dostępności data managerów.",
           "Na mapę nakładane są warstwy danych, które pokazują tylko to, co dotyczy bieżącego wyszukiwania. Aplikacja działa w biurze i na wzmocnionych tabletach na platformach wiertniczych, a komponenty powstawały w izolacji w Storybooku, równolegle z projektowaniem UI."
         ],
         "text": [
@@ -605,7 +605,7 @@
         "id": "kamil",
         "author": "Kamil Kostka",
         "position": "Product Owner",
-        "company": "Grupa ZPR Media",
+        "company": "Time S.A. (Grupa ZPR Media)",
         "date": "02.11.2026",
         "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
         "text": [

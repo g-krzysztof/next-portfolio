@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { useLang } from './lang';
 import useInView from './useInView';
 
-// Ilustracja mapy z projektu Kadme (Lumin), zbudowana wokół mojej części pracy:
+// Ilustracja mapy z projektu Kadme, zbudowana wokół mojej części pracy:
 // podkład terenu przemalowany na paletę marki przez przestrzeń barw HCL,
 // panel warstw z przełącznikiem i suwakiem krycia oraz klik w odwiert
 // z animowanym zoomem i popupem ze współrzędnymi. Dane są zmyślone.

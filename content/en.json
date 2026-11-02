@@ -202,15 +202,15 @@
         "id": "geo-platform",
         "featured": true,
         "group": "work",
-        "tab": "Deposit map",
+        "tab": "GIS map",
         "tabNote": "Kadme · Autentika",
-        "name": "Lumin – a data search app with a GIS map for geologists",
+        "name": "A data search app with a GIS map for geologists",
         "context": "Kadme (Norway, oil & gas) · 3-person front-end team · 2021–2022",
         "role": "React Frontend Developer (contract via Autentika), 11.2021–05.2022: the map, layers panel, filters and design system components",
-        "_todo": "TODO(Moon): treść z historii repo kadme (gałąź development, 24.11.2021–11.05.2022); potwierdzić, że nazwy Lumin i @kadme/components można podawać publicznie",
+        "_todo": "TODO(Moon): treść z historii repo kadme (gałąź development, 24.11.2021–11.05.2022); nazwa produktu (Lumin) celowo pominięta – publicznie potwierdzone jest tylko Kadme (case study Autentiki); potwierdzić, czy @kadme/components można podawać publicznie",
         "problem": "The map was the heart of the app, but the React wrapper over OpenLayers (rlayers) gave no access to the low-level features the design called for: a terrain basemap in brand colours instead of the standard tile palette, and custom handling of layers, menus and points on the map.",
         "product": [
-          "Lumin is a “mapplication” for geologists and field specialists: the map is at its centre, alongside a search engine for unstructured data from many sources, with filters, source previews and search history. Before, every search depended on data managers being available.",
+          "Kadme’s app is a “mapplication” for geologists and field specialists: the map is at its centre, alongside a search engine for unstructured data from many sources, with filters, source previews and search history. Before, every search depended on data managers being available.",
           "Data layers are overlaid on the map and show only what is relevant to the current search. The app runs in the office and on rugged tablets on drilling platforms, and its components were built in isolation in Storybook, in parallel with the UI design."
         ],
         "text": [
@@ -605,7 +605,7 @@
         "id": "kamil",
         "author": "Kamil Kostka",
         "position": "Product Owner",
-        "company": "Grupa ZPR Media",
+        "company": "Time S.A. (Grupa ZPR Media)",
         "date": "02.11.2026",
         "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
         "text": [
