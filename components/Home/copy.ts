@@ -143,7 +143,6 @@ const COPY = {
     recLinkedin: 'Na LinkedIn',
     recLinkedinLabel: 'Rekomendacja na LinkedIn (nowa karta)',
     contactLead: 'E-mail, telefon albo LinkedIn, jak Ci wygodniej.',
-    footer: 'Powered by Next.js',
   },
   en: {
     skip: 'Skip to content',
@@ -247,7 +246,6 @@ const COPY = {
     recLinkedin: 'On LinkedIn',
     recLinkedinLabel: 'Recommendation on LinkedIn (opens in a new tab)',
     contactLead: 'E-mail, phone or LinkedIn, whichever suits you.',
-    footer: 'Powered by Next.js',
   },
 };
 

@@ -86,7 +86,6 @@ const Contact = ({ section, buildYear }: ContactProps) => {
 
         <Footer>
           <span>© {year} Krzysztof Gryc · Tychy</span>
-          <span>{copy.footer}</span>
         </Footer>
       </Wrap>
     </Field>
