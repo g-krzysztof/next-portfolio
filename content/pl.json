@@ -65,7 +65,11 @@
             }
           },
           {
-            "text": "platforma geoprzestrzenna do analizy złóż: system design i wdrożenie mapy z warstwami danych i wyszukiwaniem"
+            "text": "Kadme (2021–2022): wyszukiwarka danych z mapą GIS dla branży oil & gas – mapa na OpenLayers, panel warstw, filtry i komponenty design systemu",
+            "more": {
+              "href": "#geo-platform",
+              "label": "Więcej o mapie dla Kadme"
+            }
           }
         ],
         "stack": [
@@ -206,38 +210,42 @@
         "group": "work",
         "tab": "Mapa złóż",
         "tabNote": "Kadme · Autentika",
-        "name": "Mapa złóż dla geologów",
-        "context": "Kadme (Norwegia, branża oil & gas) · przez Autentikę",
-        "role": "React Frontend Developer: system design i wdrożenie frontendu",
-        "_todo": "TODO(Moon): biblioteka map (Leaflet / Mapbox / OpenLayers?) i lata projektu – dopisać do stacku",
-        "problem": "Geolodzy i specjaliści terenowi korzystali z narzędzi do danych zaprojektowanych z myślą o analitykach. Złożony interfejs sprawiał, że każde wyszukiwanie zależało od dostępności data managerów, a to spowalniało analizy.",
-        "text": [
-          "Nowa aplikacja typu „mapplication”: mapa jest jej centrum, a obok niej działa wyszukiwarka nieustrukturyzowanych danych z wielu źródeł. Obsługuje zapytania logiczne i quasi-regex, filtry oraz historię wyszukiwań.",
-          "Na mapę nakładane są warstwy danych, które pokazują wyłącznie to, co dotyczy bieżącego wyszukiwania. Do tego moduły analityczne i widok szczegółów wyniku.",
-          "Aplikacja działa na komputerach w biurze i na wzmocnionych tabletach na platformach wiertniczych. Ma motyw ciemny do pracy w słabym świetle i motyw dla osób z deuteranopią i protanopią.",
-          "Komponenty powstawały w izolacji w Storybooku, równolegle z iteracyjnym projektowaniem UI, i dopiero z nich składaliśmy całe widoki."
+        "name": "Lumin – wyszukiwarka danych z mapą GIS dla geologów",
+        "context": "Kadme (Norwegia, branża oil & gas) · 3-osobowy zespół frontendowy · 2021–2022",
+        "role": "React Frontend Developer (kontrakt przez Autentikę), 11.2021–05.2022: mapa, panel warstw, filtry i komponenty design systemu",
+        "_todo": "TODO(Moon): treść z historii repo kadme (gałąź development, 24.11.2021–11.05.2022); potwierdzić, że nazwy Lumin i @kadme/components można podawać publicznie",
+        "problem": "Mapa była centrum aplikacji, ale reactowy wrapper nad OpenLayers (rlayers) nie dawał dostępu do niskopoziomowych funkcji, których wymagał projekt: podkładu terenu w kolorach marki zamiast standardowej palety kafelków oraz własnej obsługi warstw, menu i punktów na mapie.",
+        "product": [
+          "Lumin to aplikacja typu „mapplication” dla geologów i specjalistów terenowych: mapa jest jej centrum, a obok niej działa wyszukiwarka nieustrukturyzowanych danych z wielu źródeł, z filtrami, podglądem źródeł i historią wyszukiwań. Wcześniej każde wyszukiwanie zależało od dostępności data managerów.",
+          "Na mapę nakładane są warstwy danych, które pokazują tylko to, co dotyczy bieżącego wyszukiwania. Aplikacja działa w biurze i na wzmocnionych tabletach na platformach wiertniczych, a komponenty powstawały w izolacji w Storybooku, równolegle z projektowaniem UI."
         ],
-        "facts": [
+        "text": [
+          "Przeniosłem mapę z wrappera rlayers na natywne API OpenLayers 6 we wszystkich jej widokach: głównym, małym i modalnym. Na tej bazie zbudowałem panel warstw i interakcje: interaktywne punkty, menu kontekstowe warstw, popup ze współrzędnymi i animowany zoom.",
+          "Kolorowany podkład terenu: kafelki przechodzą przez RasterSource, który przelicza każdy piksel z RGB do przestrzeni barw HCL i z powrotem, żeby przemalować teren na paletę aplikacji.",
+          "Panel warstw: warstwy z danych GeoJSON (poligony z etykietami i stylami), grupy pól z przełącznikiem widoczności i suwakiem oraz nowe komponenty SwitchField i RangeInput w design systemie.",
+          "Design system @kadme/components: przebudowałem ok. 10 bazowych komponentów pod nowe projekty z Figmy (m.in. Button, Tooltip, Popover, Tile) i dodałem 6 nowych, m.in. Tabs, FAB i SourceBrowser – trójpoziomowe drzewo źródeł danych z własnym scrollbarem, zbudowane od zera. Każdy komponent miał story w Storybooku i przechodził code review.",
+          "W aplikacji: sidebar filtrów z wersją mobilną, połączony z modalem użycia widgetów (w filtrach miałem więcej commitów niż reszta zespołu razem), widoki w layoucie, modal ustawień i zakładki, poprawki renderowania wyników, a po testach akceptacyjnych pakiet poprawek."
+        ],
+        "outcomes": [
           {
-            "value": "10",
-            "label": "dwutygodniowych sprintów projektowych, bez opóźnień i dodatkowych kosztów"
+            "title": "Mapa bez ograniczeń wrappera",
+            "text": "Przejście na natywne OpenLayers odblokowało funkcje, których wymagał projekt, a do których wrapper nie dawał dostępu."
           },
           {
-            "value": "143",
-            "label": "komponenty w Storybooku"
+            "title": "Teren w kolorach marki",
+            "text": "Podkład mapy pasuje do reszty interfejsu, zamiast odstawać standardową paletą kafelków."
           },
           {
-            "value": "2",
-            "label": "środowiska pracy: biuro i tablety na platformach"
+            "title": "Gotowe komponenty dla zespołu",
+            "text": "Design system zgodny z nowymi projektami z Figmy i opisany w Storybooku: kolejne widoki składało się z gotowych komponentów."
           },
           {
-            "value": "3",
-            "label": "motywy: jasny, ciemny, dla daltonistów"
+            "title": "Filtry także na mobile",
+            "text": "Wyszukiwanie zawężają filtry połączone z widgetami, które działają także na mniejszych ekranach."
           }
         ],
-        "stack": "TypeScript, React, Next.js, Storybook",
+        "stack": "TypeScript, React, Next.js, Redux Toolkit, Styled Components, styled-system, OpenLayers, Storybook, NX, Changesets",
         "visual": "map",
-        "factsSource": "Liczby z case study Autentiki, etap projektowania (do lutego 2022).",
         "links": [
           {
             "href": "https://autentika.com/projects/kadme",

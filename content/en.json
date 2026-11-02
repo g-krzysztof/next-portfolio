@@ -65,7 +65,11 @@
             }
           },
           {
-            "text": "geospatial platform for mineral deposit analysis: system design and rollout of a map with data layers and search"
+            "text": "Kadme (2021–2022): a data search app with a GIS map for the oil & gas industry – an OpenLayers map, layers panel, filters and design system components",
+            "more": {
+              "href": "#geo-platform",
+              "label": "More about the Kadme map"
+            }
           }
         ],
         "stack": [
@@ -206,38 +210,42 @@
         "group": "work",
         "tab": "Deposit map",
         "tabNote": "Kadme · Autentika",
-        "name": "Deposit map for geologists",
-        "context": "Kadme (Norway, oil & gas) · via Autentika",
-        "role": "React Frontend Developer: system design and front-end implementation",
-        "_todo": "TODO(Moon): biblioteka map (Leaflet / Mapbox / OpenLayers?) i lata projektu – dopisać do stacku",
-        "problem": "Geologists and field specialists were using data tools designed with analysts in mind. The complex interface meant every search depended on data managers being available, which slowed analysis down.",
-        "text": [
-          "A new “mapplication”: the map is at its centre, alongside a search engine for unstructured data from many sources. It supports boolean and quasi-regex queries, filters and search history.",
-          "Data layers are overlaid on the map and show only what is relevant to the current search. On top of that: analytics modules and a result details view.",
-          "The app runs on office computers and on rugged tablets on drilling platforms. It has a dark theme for low-light work and a theme for people with deuteranopia and protanopia.",
-          "Components were built in isolation in Storybook, in parallel with iterative UI design, and only then assembled into full views."
+        "name": "Lumin – a data search app with a GIS map for geologists",
+        "context": "Kadme (Norway, oil & gas) · 3-person front-end team · 2021–2022",
+        "role": "React Frontend Developer (contract via Autentika), 11.2021–05.2022: the map, layers panel, filters and design system components",
+        "_todo": "TODO(Moon): treść z historii repo kadme (gałąź development, 24.11.2021–11.05.2022); potwierdzić, że nazwy Lumin i @kadme/components można podawać publicznie",
+        "problem": "The map was the heart of the app, but the React wrapper over OpenLayers (rlayers) gave no access to the low-level features the design called for: a terrain basemap in brand colours instead of the standard tile palette, and custom handling of layers, menus and points on the map.",
+        "product": [
+          "Lumin is a “mapplication” for geologists and field specialists: the map is at its centre, alongside a search engine for unstructured data from many sources, with filters, source previews and search history. Before, every search depended on data managers being available.",
+          "Data layers are overlaid on the map and show only what is relevant to the current search. The app runs in the office and on rugged tablets on drilling platforms, and its components were built in isolation in Storybook, in parallel with the UI design."
         ],
-        "facts": [
+        "text": [
+          "I moved the map from the rlayers wrapper to the native OpenLayers 6 API in all of its views: main, mini and modal. On that foundation I built the layers panel and the interactions: interactive points, a layer context menu, a coordinates popup and animated zoom.",
+          "Colourised terrain basemap: tiles go through a RasterSource that converts every pixel from RGB to the HCL colour space and back, repainting the terrain in the app’s palette.",
+          "Layers panel: layers from GeoJSON data (polygons with labels and styles), field groups with a visibility toggle and a slider, plus new SwitchField and RangeInput components in the design system.",
+          "The @kadme/components design system: I rebuilt about 10 base components to match new Figma designs (including Button, Tooltip, Popover and Tile) and added 6 new ones, including Tabs, FAB and SourceBrowser – a three-level data source tree with a custom scrollbar, built from scratch. Every component had a Storybook story and went through code review.",
+          "In the app: a filters sidebar with a mobile version, connected to the widget usage modal (I made more commits to filters than the rest of the team combined), layout views, a settings modal and bookmarks, results rendering fixes, and a batch of fixes after acceptance testing."
+        ],
+        "outcomes": [
           {
-            "value": "10",
-            "label": "two-week design sprints, with no delays or extra costs"
+            "title": "A map free of wrapper limits",
+            "text": "Moving to native OpenLayers unlocked the features the design called for, which the wrapper gave no access to."
           },
           {
-            "value": "143",
-            "label": "components in Storybook"
+            "title": "Terrain in brand colours",
+            "text": "The basemap matches the rest of the interface instead of standing out with the standard tile palette."
           },
           {
-            "value": "2",
-            "label": "work environments: the office and tablets on platforms"
+            "title": "Ready-made components for the team",
+            "text": "A design system aligned with the new Figma designs and documented in Storybook: new views were assembled from ready-made components."
           },
           {
-            "value": "3",
-            "label": "themes: light, dark, colour-blind"
+            "title": "Filters on mobile too",
+            "text": "Search is narrowed by filters connected to the widgets, which also work on smaller screens."
           }
         ],
-        "stack": "TypeScript, React, Next.js, Storybook",
+        "stack": "TypeScript, React, Next.js, Redux Toolkit, Styled Components, styled-system, OpenLayers, Storybook, NX, Changesets",
         "visual": "map",
-        "factsSource": "Figures from Autentika’s case study, design phase (up to February 2022).",
         "links": [
           {
             "href": "https://autentika.com/projects/kadme",

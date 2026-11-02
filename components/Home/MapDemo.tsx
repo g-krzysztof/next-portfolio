@@ -1,17 +1,89 @@
 import { useState } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useLang } from './lang';
 import useInView from './useInView';
 
-// Ilustracja „mapplication” z projektu Kadme: mapa obok wyszukiwarki, warstwy
-// danych i trzy motywy z case study (jasny, ciemny, dla daltonistów).
-// Dane są zmyślone, liczy się sam pomysł interfejsu.
+// Ilustracja mapy z projektu Kadme (Lumin), zbudowana wokół mojej części pracy:
+// podkład terenu przemalowany na paletę marki przez przestrzeń barw HCL,
+// panel warstw z przełącznikiem i suwakiem krycia oraz klik w odwiert
+// z animowanym zoomem i popupem ze współrzędnymi. Dane są zmyślone.
 
-type Mode = 'light' | 'dark' | 'cvd';
 type Layer = 'fields' | 'blocks' | 'wells';
+type Basemap = 'standard' | 'brand';
 
 const W = 640;
 const H = 400;
+const ZOOM = 2;
+
+// --- Kolory: sRGB ↔ HCL (LCh nad CIELab, biel D65) -------------------------
+// Ten sam pomysł co w aplikacji: jasność terenu zostaje, odcień i nasycenie
+// idą z palety marki. Tam liczył to RasterSource na pikselach kafelków,
+// tu wystarczy kilka kolorów pasm wysokości.
+
+const WHITE = [0.95047, 1, 1.08883];
+
+const hexToRgb = (hex: string) =>
+  [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
+
+const toLinear = (c: number) =>
+  c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+const fromLinear = (c: number) =>
+  c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055;
+
+const labF = (t: number) =>
+  t > 0.008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116;
+const labFInv = (t: number) =>
+  t ** 3 > 0.008856 ? t ** 3 : (t - 16 / 116) / 7.787;
+
+const toHcl = (hex: string) => {
+  const [r, g, b] = hexToRgb(hex).map(toLinear);
+  const x = (0.4124 * r + 0.3576 * g + 0.1805 * b) / WHITE[0];
+  const y = (0.2126 * r + 0.7152 * g + 0.0722 * b) / WHITE[1];
+  const z = (0.0193 * r + 0.1192 * g + 0.9505 * b) / WHITE[2];
+  const [fx, fy, fz] = [x, y, z].map(labF);
+  const A = 500 * (fx - fy);
+  const B = 200 * (fy - fz);
+  return { h: Math.atan2(B, A), c: Math.hypot(A, B), l: 116 * fy - 16 };
+};
+
+const fromHcl = ({ h, c, l }: { h: number; c: number; l: number }) => {
+  const fy = (l + 16) / 116;
+  const fx = fy + (c * Math.cos(h)) / 500;
+  const fz = fy - (c * Math.sin(h)) / 200;
+  const [x, y, z] = [fx, fy, fz].map((f, i) => labFInv(f) * WHITE[i]);
+  const rgb = [
+    3.2406 * x - 1.5372 * y - 0.4986 * z,
+    -0.9689 * x + 1.8758 * y + 0.0415 * z,
+    0.0557 * x - 0.204 * y + 1.057 * z,
+  ];
+  return `rgb(${rgb
+    .map((v) => Math.round(Math.min(1, Math.max(0, fromLinear(v))) * 255))
+    .join(' ')})`;
+};
+
+const BRAND_HUE = toHcl('#23706F').h;
+
+const recolor = (hex: string) => {
+  const { c, l } = toHcl(hex);
+  return fromHcl({ h: BRAND_HUE, c: 3 + c * 0.25, l });
+};
+
+// Pasma wysokości w stylu klasycznych kafelków terenu: od nizin po szczyty
+const TERRAIN = [
+  '#CFE0B4',
+  '#BCD49B',
+  '#D5DCA2',
+  '#E6DBA9',
+  '#E1C799',
+  '#D1AE88',
+  '#BD9676',
+];
+const PALETTE: Record<Basemap, string[]> = {
+  standard: TERRAIN,
+  brand: TERRAIN.map(recolor),
+};
+
+// --- Geometria --------------------------------------------------------------
 
 // Deterministyczny „kartofel”: okrąg zaburzony dwiema sinusoidami
 const blob = (cx: number, cy: number, r: number, seed: number, sx = 1) => {
@@ -27,10 +99,16 @@ const blob = (cx: number, cy: number, r: number, seed: number, sx = 1) => {
   return `M${points.join('L')}Z`;
 };
 
-// Warstwice wokół dwóch wyniesień
-const CONTOURS = [
-  ...[1, 2, 3, 4, 5, 6].map((i) => blob(210, 190, 26 * i, 0.6 + i * 0.25, 1.3)),
-  ...[1, 2, 3, 4].map((i) => blob(505, 120, 22 * i, 2.1 + i * 0.3, 1.15)),
+// Pasma wokół dwóch wyniesień, od największego: każde kolejne leży wyżej
+const BANDS = [
+  ...[6, 5, 4, 3, 2, 1].map((i) => ({
+    d: blob(210, 190, 26 * i, 0.6 + i * 0.25, 1.3),
+    level: 7 - i,
+  })),
+  ...[4, 3, 2, 1].map((i) => ({
+    d: blob(505, 120, 22 * i, 2.1 + i * 0.3, 1.15),
+    level: 5 - i,
+  })),
 ];
 
 const FIELDS = [
@@ -39,56 +117,96 @@ const FIELDS = [
   blob(395, 300, 26, 0.3, 1.5),
 ];
 
+const BLOCK_W = 160;
+const BLOCK_H = 134;
+const blockLabel = (x: number, y: number) =>
+  `${7 + Math.floor(y / BLOCK_H)}/${Math.floor(x / BLOCK_W) + 9}`;
+
 const BLOCKS = Array.from({ length: 12 }, (_, i) => ({
-  x: (i % 4) * 160,
-  y: Math.floor(i / 4) * 134,
-  label: `${7 + Math.floor(i / 4)}/${(i % 4) + 9}`,
+  x: (i % 4) * BLOCK_W,
+  y: Math.floor(i / 4) * BLOCK_H,
 }));
 
-const WELLS: [number, number][] = [
-  [180, 178],
-  [214, 228],
-  [262, 186],
-  [238, 160],
-  [292, 222],
-  [452, 128],
-  [488, 156],
-  [470, 104],
-  [382, 296],
-  [410, 312],
-  [120, 300],
-  [560, 260],
-  [330, 90],
+type Well = { name: string; x: number; y: number; status: string };
+
+const WELLS: Well[] = [
+  { name: 'A-7', x: 180, y: 178, status: 'producing' },
+  { name: 'A-9', x: 214, y: 228, status: 'producing' },
+  { name: 'A-12', x: 262, y: 186, status: 'producing' },
+  { name: 'A-14', x: 238, y: 160, status: 'shut-in' },
+  { name: 'A-15', x: 292, y: 222, status: 'producing' },
+  { name: 'B-2', x: 452, y: 128, status: 'producing' },
+  { name: 'B-3', x: 488, y: 156, status: 'producing' },
+  { name: 'B-5', x: 470, y: 104, status: 'shut-in' },
+  { name: 'C-1', x: 382, y: 296, status: 'producing' },
+  { name: 'C-4', x: 410, y: 312, status: 'producing' },
+  { name: 'D-1', x: 120, y: 300, status: 'plugged' },
+  { name: 'E-3', x: 560, y: 260, status: 'shut-in' },
+  { name: 'F-2', x: 330, y: 90, status: 'producing' },
 ];
 
-const SELECTED: [number, number] = [262, 186];
+// Wycinek Morza Północnego, na który rzutujemy układ SVG
+const coords = ({ x, y }: Well, lang: string) => {
+  const fmt = new Intl.NumberFormat(lang, {
+    minimumFractionDigits: 3,
+    maximumFractionDigits: 3,
+  });
+  const lat = 58.8 - (y / H) * 0.8;
+  const lon = 1.8 + (x / W) * 1.4;
+  return `${fmt.format(lat)}° N · ${fmt.format(lon)}° E`;
+};
+
+const clamp = (v: number, min: number, max: number) =>
+  Math.min(max, Math.max(min, v));
+
+// Przesunięcie, które stawia odwiert na środku, ale nie wyjeżdża poza mapę
+const viewFor = (well: Well | null) => {
+  if (!well) return { s: 1, tx: 0, ty: 0 };
+  return {
+    s: ZOOM,
+    tx: clamp(W / 2 - well.x * ZOOM, W - W * ZOOM, 0),
+    ty: clamp(H / 2 - well.y * ZOOM, H - H * ZOOM, 0),
+  };
+};
 
 const MapDemo = () => {
-  const { copy } = useLang();
+  const { lang, copy } = useLang();
   const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.3 });
-  const [mode, setMode] = useState<Mode>('light');
+  const [basemap, setBasemap] = useState<Basemap>('brand');
   const [layers, setLayers] = useState<Record<Layer, boolean>>({
     fields: true,
     blocks: true,
     wells: true,
   });
+  const [opacity, setOpacity] = useState<Record<Layer, number>>({
+    fields: 100,
+    blocks: 70,
+    wells: 100,
+  });
+  const [selected, setSelected] = useState<Well | null>(null);
 
-  const toggle = (layer: Layer) =>
-    setLayers((prev) => ({ ...prev, [layer]: !prev[layer] }));
+  const view = viewFor(selected);
+  const palette = PALETTE[basemap];
 
-  const layerButtons: { id: Layer; label: string }[] = [
+  const layerRows: { id: Layer; label: string }[] = [
     { id: 'fields', label: copy.mapLayerFields },
     { id: 'blocks', label: copy.mapLayerBlocks },
     { id: 'wells', label: copy.mapLayerWells },
   ];
-  const modeButtons: { id: Mode; label: string }[] = [
-    { id: 'light', label: copy.mapThemeLight },
-    { id: 'dark', label: copy.mapThemeDark },
-    { id: 'cvd', label: copy.mapThemeCvd },
+  const basemaps: { id: Basemap; label: string }[] = [
+    { id: 'standard', label: copy.mapBaseStandard },
+    { id: 'brand', label: copy.mapBaseBrand },
   ];
 
+  const layerStyle = (id: Layer) => ({
+    opacity: layers[id] ? opacity[id] / 100 : 0,
+  });
+
+  const select = (well: Well) =>
+    setSelected((prev) => (prev?.name === well.name ? null : well));
+
   return (
-    <Figure ref={ref} $mode={mode} $in={inView}>
+    <Figure ref={ref} $in={inView}>
       <Search aria-hidden="true">
         <SearchIcon viewBox="0 0 20 20">
           <circle cx="8.5" cy="8.5" r="5.5" />
@@ -101,94 +219,176 @@ const MapDemo = () => {
       </Search>
 
       <MapBox>
-        <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={copy.mapDemo}>
-          <rect width={W} height={H} className="base" />
-          <g className="contours">
-            {CONTOURS.map((d, i) => (
-              <path
-                key={d}
-                d={d}
-                pathLength={1}
-                style={{ transitionDelay: `${i * 70}ms` }}
-              />
-            ))}
-          </g>
-
-          <g className={`layer blocks${layers.blocks ? '' : ' off'}`}>
-            {BLOCKS.map(({ x, y, label }) => (
-              <g key={label}>
-                <rect x={x + 4} y={y + 4} width={152} height={126} />
-                <text x={x + 12} y={y + 22}>
-                  {label}
-                </text>
-              </g>
-            ))}
-          </g>
-
-          <g className={`layer fields${layers.fields ? '' : ' off'}`}>
-            {FIELDS.map((d) => (
-              <path key={d} d={d} />
-            ))}
-          </g>
-
-          <g className={`layer wells${layers.wells ? '' : ' off'}`}>
-            {WELLS.map(([x, y]) => (
-              <g key={`${x}-${y}`} transform={`translate(${x} ${y})`}>
-                <circle r="4.5" />
-                <path d="M-8 0H8M0 -8V8" />
-              </g>
-            ))}
-          </g>
-
+        <svg viewBox={`0 0 ${W} ${H}`} role="group" aria-label={copy.mapDemo}>
           <g
-            className="selected"
-            transform={`translate(${SELECTED[0]} ${SELECTED[1]})`}
+            className="view"
+            style={{
+              transform: `translate(${view.tx}px, ${view.ty}px) scale(${view.s})`,
+            }}
           >
-            <circle className="pulse" r="10" />
-            <circle className="dot" r="6" />
-            <path className="leader" d="M-8 -8L-60 -60L-90 -74" />
-            <g transform="translate(-222 -126)">
-              <rect className="card" width="150" height="52" rx="10" />
-              <text className="cardTitle" x="12" y="22">
-                A-12 · producing
-              </text>
-              <text className="cardMeta" x="12" y="40">
-                TD 2 418 m · 7/10
-              </text>
+            <rect
+              width={W}
+              height={H}
+              className="base"
+              style={{ fill: palette[0] }}
+              onClick={() => setSelected(null)}
+            />
+            <g className="terrain">
+              {BANDS.map(({ d, level }, i) => (
+                <path
+                  key={d}
+                  d={d}
+                  style={{
+                    fill: palette[level],
+                    transitionDelay: `${level * 60}ms, ${i * 70}ms`,
+                  }}
+                />
+              ))}
+            </g>
+
+            <g className="layer blocks" style={layerStyle('blocks')}>
+              {BLOCKS.map(({ x, y }) => (
+                <g key={`${x}-${y}`}>
+                  <rect
+                    x={x + 4}
+                    y={y + 4}
+                    width={BLOCK_W - 8}
+                    height={BLOCK_H - 8}
+                  />
+                  <text x={x + 12} y={y + 22}>
+                    {blockLabel(x, y)}
+                  </text>
+                </g>
+              ))}
+            </g>
+
+            <g className="layer fields" style={layerStyle('fields')}>
+              {FIELDS.map((d) => (
+                <path key={d} d={d} />
+              ))}
+            </g>
+
+            <g
+              className="layer wells"
+              style={layerStyle('wells')}
+              aria-hidden={!layers.wells}
+            >
+              {WELLS.map((well) => {
+                const active = selected?.name === well.name;
+                return (
+                  <g
+                    key={well.name}
+                    className={`well${active ? ' active' : ''}`}
+                    transform={`translate(${well.x} ${well.y})`}
+                    role="button"
+                    tabIndex={layers.wells ? 0 : -1}
+                    aria-label={copy.mapWell(well.name)}
+                    aria-pressed={active}
+                    onClick={() => select(well)}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        select(well);
+                      }
+                    }}
+                  >
+                    <circle className="hit" r="16" />
+                    {active && <circle className="pulse" r="10" />}
+                    <circle className="ring" r="4.5" />
+                    <path d="M-8 0H8M0 -8V8" />
+                  </g>
+                );
+              })}
             </g>
           </g>
         </svg>
+
+        {selected && (
+          <Popup
+            key={selected.name}
+            style={{
+              left: `${((selected.x * view.s + view.tx) / W) * 100}%`,
+              top: `${((selected.y * view.s + view.ty) / H) * 100}%`,
+            }}
+            aria-live="polite"
+          >
+            <strong>
+              {selected.name} · {selected.status}
+            </strong>
+            <span>{coords(selected, lang)}</span>
+            <span>{copy.mapBlock(blockLabel(selected.x, selected.y))}</span>
+          </Popup>
+        )}
+
         <Result aria-hidden="true">{copy.mapResult}</Result>
+        {selected ? (
+          <Reset type="button" onClick={() => setSelected(null)}>
+            {copy.mapReset}
+          </Reset>
+        ) : (
+          <Hint aria-hidden="true">{copy.mapHint}</Hint>
+        )}
       </MapBox>
 
       <Controls>
-        <Group role="group" aria-label={copy.mapLayers}>
+        <Panel role="group" aria-label={copy.mapLayers}>
           <GroupLabel>{copy.mapLayers}</GroupLabel>
-          {layerButtons.map(({ id, label }) => (
-            <Chip
-              key={id}
-              type="button"
-              aria-pressed={layers[id]}
-              onClick={() => toggle(id)}
-            >
-              <Swatch $layer={id} aria-hidden="true" />
-              {label}
-            </Chip>
+          {layerRows.map(({ id, label }) => (
+            <Row key={id}>
+              <Switch
+                type="button"
+                role="switch"
+                aria-checked={layers[id]}
+                onClick={() => {
+                  if (id === 'wells' && layers.wells) setSelected(null);
+                  setLayers((prev) => ({ ...prev, [id]: !prev[id] }));
+                }}
+              >
+                <Track aria-hidden="true" />
+                <Swatch $layer={id} aria-hidden="true" />
+                {label}
+              </Switch>
+              <Range
+                type="range"
+                min={20}
+                max={100}
+                step={5}
+                value={opacity[id]}
+                disabled={!layers[id]}
+                aria-label={copy.mapOpacity(label)}
+                aria-valuetext={`${opacity[id]}%`}
+                onChange={(event) =>
+                  setOpacity((prev) => ({
+                    ...prev,
+                    [id]: Number(event.target.value),
+                  }))
+                }
+              />
+            </Row>
           ))}
-        </Group>
-        <Group role="group" aria-label={copy.mapTheme}>
-          <GroupLabel>{copy.mapTheme}</GroupLabel>
-          {modeButtons.map(({ id, label }) => (
-            <Chip
-              key={id}
-              type="button"
-              aria-pressed={mode === id}
-              onClick={() => setMode(id)}
-            >
-              {label}
-            </Chip>
-          ))}
-        </Group>
+        </Panel>
+
+        <Panel role="group" aria-label={copy.mapBasemap}>
+          <GroupLabel>{copy.mapBasemap}</GroupLabel>
+          <Chips>
+            {basemaps.map(({ id, label }) => (
+              <Chip
+                key={id}
+                type="button"
+                aria-pressed={basemap === id}
+                onClick={() => setBasemap(id)}
+              >
+                <Ramp aria-hidden="true">
+                  {PALETTE[id].map((color) => (
+                    <span key={color} style={{ background: color }} />
+                  ))}
+                </Ramp>
+                {label}
+              </Chip>
+            ))}
+          </Chips>
+          <Note>{copy.mapBaseNote}</Note>
+        </Panel>
       </Controls>
       <Caption>{copy.demoCaption}</Caption>
     </Figure>
@@ -197,102 +397,62 @@ const MapDemo = () => {
 
 export default MapDemo;
 
-// Palety motywów. Daltonizm za case study: ciemna mapa bazowa i jasny UI,
-// kolory z osi niebiesko-pomarańczowej zamiast czerwono-zielonej.
-const PALETTES: Record<Mode, Record<string, string>> = {
-  light: {
-    '--ui': '#FFFFFF',
-    '--ui-ink': '#10201F',
-    '--ui-soft': '#4F6965',
-    '--ui-line': '#CFDCD6',
-    '--accent': '#23706F',
-    '--base': '#EEF3EF',
-    '--contour': '#C3D6CE',
-    '--field': 'rgba(80, 163, 162, 0.32)',
-    '--field-line': '#23706F',
-    '--block': '#7D958F',
-    '--well': '#10201F',
-    '--hit': '#8FE388',
-    '--hit-ink': '#10201F',
-  },
-  dark: {
-    '--ui': '#0F3B3A',
-    '--ui-ink': '#F3F6F1',
-    '--ui-soft': '#C6DAD5',
-    '--ui-line': '#1E5250',
-    '--accent': '#8FE388',
-    '--base': '#0A2C2B',
-    '--contour': '#19484A',
-    '--field': 'rgba(80, 163, 162, 0.38)',
-    '--field-line': '#50A3A2',
-    '--block': '#5E8C86',
-    '--well': '#F3F6F1',
-    '--hit': '#8FE388',
-    '--hit-ink': '#0A2C2B',
-  },
-  cvd: {
-    '--ui': '#FFFFFF',
-    '--ui-ink': '#111A2B',
-    '--ui-soft': '#465670',
-    '--ui-line': '#D3DAE6',
-    '--accent': '#1F5FBF',
-    '--base': '#111A2B',
-    '--contour': '#24324D',
-    '--field': 'rgba(76, 155, 232, 0.4)',
-    '--field-line': '#7DB8F2',
-    '--block': '#8291AD',
-    '--well': '#FFFFFF',
-    '--hit': '#FFB000',
-    '--hit-ink': '#111A2B',
-  },
-};
-
 const pulse = keyframes`
   from { transform: scale(0.6); opacity: 0.9; }
   to { transform: scale(2.6); opacity: 0; }
 `;
 
-const Figure = styled.figure<{ $mode: Mode; $in: boolean }>`
-  ${({ $mode }) => PALETTES[$mode]};
+const pop = keyframes`
+  from { opacity: 0; transform: translate(-50%, calc(-100% - 6px)); }
+  to { opacity: 1; transform: translate(-50%, calc(-100% - 16px)); }
+`;
+
+const Figure = styled.figure<{ $in: boolean }>`
+  --ui: #ffffff;
+  --ui-ink: #10201f;
+  --ui-soft: #4f6965;
+  --ui-line: #cfdcd6;
+  --accent: ${({ theme }) => theme.colors.tealInk};
+  --field: rgba(35, 112, 111, 0.34);
+  --field-line: #1b5958;
+  --block: #4f6965;
+  --well: #10201f;
+  --hit: ${({ theme }) => theme.colors.mint};
+
+  container-type: inline-size;
   margin: 0;
   padding: clamp(12px, 1.4vw, 18px);
   border-radius: ${({ theme }) => theme.radii.card};
   background: var(--ui);
   color: var(--ui-ink);
   border: 1px solid var(--ui-line);
-  transition:
-    background-color 0.4s ${({ theme }) => theme.ease.out},
-    color 0.4s ${({ theme }) => theme.ease.out},
-    border-color 0.4s ${({ theme }) => theme.ease.out};
 
-  svg * {
-    transition:
-      fill 0.4s ${({ theme }) => theme.ease.out},
-      stroke 0.4s ${({ theme }) => theme.ease.out},
-      opacity 0.35s ${({ theme }) => theme.ease.out};
+  .view {
+    transform-origin: 0 0;
+    transition: transform 0.7s ${({ theme }) => theme.ease.out};
   }
-
   .base {
-    fill: var(--base);
+    transition: fill 0.5s ${({ theme }) => theme.ease.out};
   }
-  .contours path {
-    fill: none;
-    stroke: var(--contour);
-    stroke-width: 1.2;
-    stroke-dasharray: 1;
-    stroke-dashoffset: ${({ $in }) => ($in ? 0 : 1)};
+  /* pasma przemalowują się od nizin w górę, a na wejściu wyłaniają po kolei */
+  .terrain path {
+    stroke: rgba(16, 32, 31, 0.12);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+    opacity: ${({ $in }) => ($in ? 1 : 0)};
     transition:
-      stroke-dashoffset 1.6s ${({ theme }) => theme.ease.out},
-      stroke 0.4s ${({ theme }) => theme.ease.out};
+      fill 0.5s ${({ theme }) => theme.ease.out},
+      opacity 0.6s ${({ theme }) => theme.ease.out};
   }
-  .layer.off {
-    opacity: 0;
+  .layer {
+    transition: opacity 0.3s ${({ theme }) => theme.ease.out};
   }
   .blocks rect {
     fill: none;
     stroke: var(--block);
     stroke-width: 1;
     stroke-dasharray: 5 5;
+    vector-effect: non-scaling-stroke;
   }
   .blocks text {
     fill: var(--block);
@@ -304,62 +464,50 @@ const Figure = styled.figure<{ $mode: Mode; $in: boolean }>`
     fill: var(--field);
     stroke: var(--field-line);
     stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
   }
-  .wells circle {
-    fill: var(--base);
+  .well {
+    cursor: pointer;
+    outline: none;
+  }
+  .well .hit {
+    fill: transparent;
+  }
+  .well .ring {
+    fill: #ffffff;
     stroke: var(--well);
     stroke-width: 1.6;
+    transition: fill 0.2s ${({ theme }) => theme.ease.out};
   }
-  .wells path {
+  .well path {
     stroke: var(--well);
     stroke-width: 1.2;
+    pointer-events: none;
   }
-  .selected {
-    opacity: ${({ $in }) => ($in ? 1 : 0)};
-    transition: opacity 0.5s ${({ theme }) => theme.ease.out} 1.2s;
+  .well:hover .ring,
+  .well.active .ring {
+    fill: var(--hit);
   }
-  .selected .pulse {
+  .well:focus-visible .hit {
+    stroke: var(--accent);
+    stroke-width: 2;
+  }
+  .well .pulse {
     fill: var(--hit);
     transform-box: fill-box;
     transform-origin: center;
     animation: ${pulse} 2.2s ${({ theme }) => theme.ease.out} infinite;
   }
-  .selected .dot {
-    fill: var(--hit);
-    stroke: var(--hit-ink);
-    stroke-width: 2;
-  }
-  .selected .leader {
-    fill: none;
-    stroke: var(--hit);
-    stroke-width: 1.5;
-  }
-  .selected .card {
-    fill: var(--ui);
-    stroke: var(--hit);
-    stroke-width: 1.5;
-  }
-  .selected .cardTitle {
-    fill: var(--ui-ink);
-    font-size: 13px;
-    font-weight: 700;
-  }
-  .selected .cardMeta {
-    fill: var(--ui-soft);
-    font-size: 11px;
-    font-variant-numeric: tabular-nums;
-  }
 
   @media (prefers-reduced-motion: reduce) {
-    .contours path {
-      stroke-dasharray: none;
+    .view,
+    .terrain path {
       transition: none;
     }
-    .selected {
+    .terrain path {
       opacity: 1;
-      transition: none;
     }
-    .selected .pulse {
+    .well .pulse {
       animation: none;
       opacity: 0;
     }
@@ -417,9 +565,33 @@ const MapBox = styled.div`
   }
 `;
 
-const Result = styled.span`
+const Popup = styled.div`
   position: absolute;
-  left: 12px;
+  display: grid;
+  gap: 2px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--ui);
+  border: 1.5px solid var(--hit);
+  box-shadow: 0 6px 18px rgba(16, 32, 31, 0.14);
+  font-size: 11px;
+  color: var(--ui-soft);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 16px));
+  animation: ${pop} 0.35s ${({ theme }) => theme.ease.out} 0.45s both;
+  strong {
+    font-size: 13px;
+    color: var(--ui-ink);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`;
+
+const overlay = `
+  position: absolute;
   bottom: 12px;
   padding: 6px 10px;
   border-radius: 8px;
@@ -429,26 +601,153 @@ const Result = styled.span`
   font-weight: 600;
 `;
 
+const Result = styled.span`
+  ${overlay};
+  left: 12px;
+`;
+
+const Hint = styled.span`
+  ${overlay};
+  right: 12px;
+  color: var(--ui-soft);
+`;
+
+const Reset = styled.button`
+  ${overlay};
+  right: 12px;
+  border: 1px solid var(--accent);
+  font-family: inherit;
+  cursor: pointer;
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+`;
+
 const Controls = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 12px 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  @container (max-width: 500px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  gap: 16px 28px;
   margin-top: 14px;
 `;
 
-const Group = styled.div`
+const Panel = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
+  flex-direction: column;
+  gap: 4px;
 `;
 
 const GroupLabel = styled.span`
-  margin-right: 4px;
   font-size: 13px;
   font-weight: 600;
   color: var(--ui-soft);
+`;
+
+const Row = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(56px, 84px);
+  align-items: center;
+  gap: 12px;
+`;
+
+const Track = styled.span`
+  position: relative;
+  flex: none;
+  width: 30px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--ui-line);
+  transition: background-color 0.2s ${({ theme }) => theme.ease.out};
+  &::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 1px 2px rgba(16, 32, 31, 0.25);
+    transition: transform 0.2s ${({ theme }) => theme.ease.out};
+  }
+`;
+
+const Switch = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ui-ink);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  &[aria-checked='true'] ${Track} {
+    background: var(--accent);
+  }
+  &[aria-checked='true'] ${Track}::after {
+    transform: translateX(12px);
+  }
+  &[aria-checked='false'] {
+    color: var(--ui-soft);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+`;
+
+const Range = styled.input`
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+`;
+
+const swatch = {
+  fields: `
+    background: var(--field);
+    border: 1.5px solid var(--field-line);
+    border-radius: 50%;
+  `,
+  blocks: `
+    border: 1.5px dashed var(--block);
+    border-radius: 2px;
+  `,
+  wells: `
+    border: 1.5px solid var(--well);
+    border-radius: 50%;
+    width: 9px;
+    height: 9px;
+    margin: 0 1.5px;
+  `,
+};
+
+const Swatch = styled.span<{ $layer: Layer }>`
+  flex: none;
+  width: 12px;
+  height: 12px;
+  ${({ $layer }) => swatch[$layer]};
+  [aria-checked='false'] > & {
+    opacity: 0.4;
+  }
+`;
+
+const Chips = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 `;
 
 const Chip = styled.button`
@@ -465,10 +764,7 @@ const Chip = styled.button`
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition:
-    background-color 0.25s ${({ theme }) => theme.ease.out},
-    border-color 0.25s ${({ theme }) => theme.ease.out},
-    color 0.25s ${({ theme }) => theme.ease.out};
+  transition: border-color 0.25s ${({ theme }) => theme.ease.out};
   &[aria-pressed='false'] {
     color: var(--ui-soft);
   }
@@ -482,31 +778,22 @@ const Chip = styled.button`
   }
 `;
 
-const swatch = {
-  fields: css`
-    background: var(--field);
-    border: 1.5px solid var(--field-line);
-    border-radius: 50%;
-  `,
-  blocks: css`
-    border: 1.5px dashed var(--block);
-    border-radius: 2px;
-  `,
-  wells: css`
-    border: 1.5px solid currentColor;
-    border-radius: 50%;
-    width: 9px;
-    height: 9px;
-  `,
-};
-
-const Swatch = styled.span<{ $layer: Layer }>`
-  width: 12px;
-  height: 12px;
-  ${({ $layer }) => swatch[$layer]};
-  [aria-pressed='false'] > & {
-    opacity: 0.4;
+// próbka pasm terenu: od razu widać, co zmienia przełącznik
+const Ramp = styled.span`
+  display: inline-flex;
+  border-radius: 3px;
+  overflow: hidden;
+  span {
+    width: 5px;
+    height: 14px;
   }
+`;
+
+const Note = styled.p`
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--ui-soft);
 `;
 
 const Caption = styled.figcaption`

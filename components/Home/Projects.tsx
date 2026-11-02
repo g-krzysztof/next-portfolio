@@ -101,6 +101,7 @@ const Featured = ({
     text,
     facts,
     factsSource,
+    outcomes,
     stack,
     links,
     visual,
@@ -177,6 +178,18 @@ const Featured = ({
               ))}
             </Facts>
             {factsSource && <FactsSource>{factsSource}</FactsSource>}
+          </FactsWrap>
+        )}
+        {outcomes && (
+          <FactsWrap>
+            <Facts aria-label={copy.projectOutcomes}>
+              {outcomes.map(({ title, text }) => (
+                <Outcome key={title}>
+                  <OutcomeTitle>{title}</OutcomeTitle>
+                  <FactLabel>{text}</FactLabel>
+                </Outcome>
+              ))}
+            </Facts>
           </FactsWrap>
         )}
       </FeaturedText>
@@ -577,6 +590,22 @@ const FactValue = styled.dt`
   color: ${({ theme }) => theme.colors.tealInk};
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+`;
+
+// korzyść zamiast liczby: tytuł się zawija, więc idzie nad opisem
+const Outcome = styled.div`
+  border-top: 1px solid ${({ theme }) => theme.colors.line};
+  padding-top: 12px;
+`;
+
+const OutcomeTitle = styled.dt`
+  margin-bottom: 6px;
+  font-family: ${({ theme }) => theme.fonts.display};
+  font-weight: 800;
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: ${({ theme }) => theme.colors.tealInk};
 `;
 
 const FactLabel = styled.dd`

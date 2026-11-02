@@ -95,6 +95,12 @@ export interface ProjectFact {
   label: string;
 }
 
+// korzyść dla projektu: krótki tytuł i jedno zdanie, gdy liczby nic nie mówią
+export interface ProjectOutcome {
+  title: string;
+  text: string;
+}
+
 // Zrzut ekranu projektu: plik 16:9 w public/, podpis na przełączniku galerii
 export interface ProjectShot {
   src: string;
@@ -132,6 +138,7 @@ export interface Project {
   text: string[];
   facts?: ProjectFact[];
   factsSource?: string;
+  outcomes?: ProjectOutcome[];
   stack: string;
   // linki do case study albo stron demo
   links?: ProjectLink[];
