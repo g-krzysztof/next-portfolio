@@ -2,7 +2,7 @@
   "about": {
     "lead": "I’m a <primary>Senior React Frontend Developer</primary> based in Tychy, Poland. I have been building web applications for over 10 years, and for the last several years I have specialised in React and TypeScript, mostly in media products.",
     "body": [
-      "Currently, at <secondary>Grupa ZPR Media</secondary> (Multimedia team), I develop video, audio, radio and podcast players, CMS modules for radio apps, ad integrations and text-to-speech solutions. I also work in Python and Django repositories, where I own the front-end layer. Before that, on behalf of Autentika, I spent two years co-building Wirtualna Polska’s publishing tools, namely the editor in which the newsroom creates and publishes content.",
+      "Currently, at <secondary>Grupa ZPR Media</secondary>, I own the entire front end in the 9-person Multimedia team: I run my own JavaScript and TypeScript repositories, make the technical decisions and develop video, audio, radio and podcast players, CMS modules for radio apps, ad integrations and text-to-speech solutions. The front end is mine in the Python and Django repositories too. Before that, Autentika delegated me to client projects where I worked on my own, including two years at Wirtualna Polska on its publishing tools, namely the editor in which the newsroom creates and publishes content.",
       "I treat AI as a tool, not an autopilot. I work with coding agents every day: I write my own skills and instructions for them based on project conventions, while I keep the architecture and code consistent and review everything they generate.",
       "I started out as a graphic designer, so I have an eye for UI and get along well with designers."
     ]
@@ -17,7 +17,7 @@
         "imageAlt": "Sketch: Krzysztof at a monitor with a video player, wearing headphones, a microphone nearby",
         "role": "Senior React Frontend Developer – Grupa ZPR Media",
         "text": [
-          "Multimedia team: players, editorial tools and integrations across the group’s websites and radio stations (Eska, Vox FM, Radio Plus)."
+          "Multimedia team (9 people), where I own the entire front end in JavaScript and TypeScript, with my own repositories: players, editorial tools and integrations across the group’s websites and radio stations (Eska, Vox FM, Radio Plus)."
         ],
         "projects": [
           {
@@ -39,7 +39,7 @@
         "imageAlt": "Sketch: Krzysztof at two monitors full of code, wearing a headset, doing a code review",
         "role": "Senior React Frontend Developer – Autentika",
         "text": [
-          "Software house, React / TypeScript apps for clients. Key projects:"
+          "Software house, React / TypeScript apps for clients. Delegated to projects on my own, working directly with client teams. Key projects:"
         ],
         "projects": [
           {
@@ -113,8 +113,8 @@
           ]
         },
         "name": "Video and radio players for ZPR Media websites",
-        "context": "Grupa ZPR Media · Multimedia team · 2024–present",
-        "role": "Senior React Frontend Developer: moving the players into a separate repository, refactoring and rollout",
+        "context": "Grupa ZPR Media · Multimedia team (9 people) · 2024–present",
+        "role": "Senior React Frontend Developer, owning the team’s entire front end: moving the players into a dedicated repository, architecture decisions, refactoring and rollout",
         "_todo": "TODO(Moon): sprawdzić opis problemu; liczby ZPR (facts) odświeżać raz na jakiś czas; wizualizacje playerów to mockupy w kodzie (VideoPlayerMock), bez zrzutów ze stagingu",
         "problem": "The video and radio players were woven into the code of each of the group’s websites. Every fix meant deployments in many places, and ads, analytics and error handling worked slightly differently on every site.",
         "product": [
