@@ -15,9 +15,9 @@
       "period": "2025 – obecnie",
       "role": "Po godzinach: dociekai.pl",
       "text": [
-        "Własny projekt, który rozwijam samodzielnie od pomysłu po wdrożenie: edukacyjna platforma dla dzieci z kursami matematyki i programowania, quizami, fiszkami i grami. To tu na bieżąco sprawdzam nowe wersje Next.js i Reacta."
+        "Własny projekt, który rozwijam samodzielnie od pomysłu po wdrożenie: edukacyjna platforma z interaktywnymi kursami dla klasy 4 (matematyka, informatyka, historia, język polski), grami, fiszkami i quizami. To tu na bieżąco sprawdzam nowe wersje Next.js i Reacta."
       ],
-      "stack": "Next.js (App Router, RSC), React 19, TypeScript, Redux Toolkit, Tailwind, Strapi, Node.js (API routes), Playwright",
+      "stack": "Next.js (App Router, RSC), React 19, TypeScript, Tailwind, Strapi, Node.js (API routes), Playwright",
       "more": { "href": "#dociekai", "label": "Więcej o dociekai.pl" }
     },
     "entries": [
@@ -27,20 +27,19 @@
         "imageAlt": "Szkic: Krzysztof przy monitorze z playerem wideo, w słuchawkach, obok mikrofon",
         "role": "Senior React Frontend Developer – Grupa ZPR Media",
         "text": [
-          "Zespół Multimedia (9 osób), w którym w całości odpowiadam za frontend w JavaScripcie i TypeScripcie, z własnymi repozytoriami: playery, narzędzia redakcyjne i integracje w serwisach i stacjach radiowych grupy (Eska, Vox FM, Radio Plus).",
-          "Przy większych pracach na froncie prowadzę i koordynuję innych developerów zespołu (fullstacków ze specjalizacją backendową). Z pozostałymi frontendowcami grupy, pracującymi w innych zespołach, robimy międzyzespołowe code review."
+          "Zespół Multimedia (9 osób): odpowiadam za cały frontend i własne repozytoria dla serwisów i stacji radiowych grupy (Eska, Vox FM, Radio Plus). Przy większych pracach na froncie koordynuję developerów zespołu."
         ],
         "projects": [
           {
-            "text": "wydzielenie playerów wideo, audio, radiowych (streaming na żywo) i podcastowych do osobnego repozytorium, refaktoryzacja i wdrożenie na CDN",
+            "text": "playery wideo, radiowe i podcastowe wydzielone do osobnego repozytorium i wdrożone na CDN",
             "more": { "href": "#zpr-media", "label": "Więcej o playerach" }
           },
           {
-            "text": "moduły CMS dla aplikacji radiowych, odsłuch artykułów oparty na AI (text-to-speech), integracje reklamowe, frontend w projektach Django, testy E2E i development wspierany przez agentów AI"
+            "text": "moduły CMS dla aplikacji radiowych, odsłuch artykułów (text-to-speech), integracje reklamowe"
           }
         ],
         "stack": [
-          "TypeScript, React, Styled Components, Playwright, Vitest, MSW, HLS.js, Video.js, Google IMA / VAST, REST, Django (szablony)"
+          "TypeScript, React, HLS.js, Google IMA / VAST, Playwright, Vitest, MSW"
         ]
       },
       {
@@ -53,7 +52,7 @@
         ],
         "projects": [
           {
-            "text": "Wirtualna Polska (2022–2024): duży zespół frontendowy (tech lead, developerzy, juniorzy), rozwój edytora, w którym redakcje tworzą i publikują treści, wspólne projektowanie architektury, code review i wsparcie juniorów",
+            "text": "Wirtualna Polska (2022–2024): edytor, w którym redakcje tworzą i publikują treści; duży zespół frontendowy, wspólne projektowanie architektury, code review i wsparcie juniorów",
             "more": { "href": "#wp-editor", "label": "Więcej o edytorze WP" }
           },
           {
@@ -263,15 +262,15 @@
             "label": "gotowych interaktywnych lekcji, kolejne w budowie"
           },
           {
-            "value": "291",
-            "label": "publicznych stron w mapie witryny"
+            "value": "90+",
+            "label": "punktów w Lighthouse w każdej kategorii, także wydajności, na desktopie i mobile"
           },
           {
-            "value": "54",
-            "label": "selftesty logiki lekcji i przypadków brzegowych"
+            "value": "5",
+            "label": "konfiguracji testów E2E: Chromium, Firefox, WebKit, Android i iPhone"
           }
         ],
-        "factsSource": "Stan repozytorium i sitemap.xml, listopad 2026.",
+        "factsSource": "Stan repozytorium i pomiar Lighthouse strony głównej, listopad 2026.",
         "stack": "TypeScript, React 19, Next.js 16 (App Router), Tailwind CSS, Radix UI, Framer Motion, Strapi, Cloudinary, Playwright, Vercel",
         "shots": [
           {
@@ -331,7 +330,7 @@
         [
           {
             "name": "Next.js",
-            "detail": "App Router, RSC",
+            "detail": "App Router i RSC w dociekai.pl",
             "strong": true
           }
         ],

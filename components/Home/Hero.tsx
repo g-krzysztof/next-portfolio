@@ -113,16 +113,6 @@ const Hero = ({ stack, recommendations = [], buildYear }: HeroProps) => {
               <LineIcon name="arrow" size={18} />
             </Proof>
           )}
-          <FlipHint
-            type="button"
-            onClick={() => setFlipped(!flipped)}
-            aria-controls="business-card"
-          >
-            <HintIcon $flipped={flipped} aria-hidden="true">
-              <FlipIcon />
-            </HintIcon>
-            {flipped ? copy.flipToFront : copy.flipHint}
-          </FlipHint>
         </Intro>
 
         <Stage onPointerMove={onPointerMove} onPointerLeave={onPointerLeave}>
@@ -189,6 +179,7 @@ const Hero = ({ stack, recommendations = [], buildYear }: HeroProps) => {
                 <FlipCorner
                   type="button"
                   onClick={() => setFlipped(true)}
+                  aria-controls="business-card"
                   aria-label={copy.flipToBack}
                 >
                   {copy.flipMore}
@@ -439,42 +430,6 @@ const ProofText = styled.span`
     font-weight: 800;
     font-size: 1.15em;
     color: ${({ theme }) => theme.colors.mint};
-  }
-`;
-
-const FlipHint = styled.button`
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-height: 48px;
-  font-weight: 600;
-  font-size: 15px;
-  color: ${({ theme }) => theme.colors.mint};
-  @media (hover: hover) {
-    &:hover span {
-      background: ${({ theme }) => theme.colors.mint};
-      color: ${({ theme }) => theme.colors.field};
-    }
-  }
-`;
-
-const HintIcon = styled.span<{ $flipped: boolean }>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 1.5px solid ${({ theme }) => theme.colors.mint};
-  transition:
-    background-color 0.25s ${({ theme }) => theme.ease.out},
-    color 0.25s ${({ theme }) => theme.ease.out},
-    transform 0.8s ${({ theme }) => theme.ease.out};
-  transform: rotate(${({ $flipped }) => ($flipped ? '-360deg' : '0deg')});
-  svg {
-    width: 20px;
-    height: 20px;
   }
 `;
 

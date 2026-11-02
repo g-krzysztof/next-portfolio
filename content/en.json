@@ -15,9 +15,9 @@
       "period": "2025 – present",
       "role": "After hours: dociekai.pl",
       "text": [
-        "My own project, which I build on my own from idea to deployment: an educational platform for children with maths and coding courses, quizzes, flashcards and games. This is where I keep trying out new versions of Next.js and React."
+        "My own project, which I build on my own from idea to deployment: an educational platform with interactive 4th-grade courses (maths, computer science, history, Polish), games, flashcards and quizzes. This is where I keep trying out new versions of Next.js and React."
       ],
-      "stack": "Next.js (App Router, RSC), React 19, TypeScript, Redux Toolkit, Tailwind, Strapi, Node.js (API routes), Playwright",
+      "stack": "Next.js (App Router, RSC), React 19, TypeScript, Tailwind, Strapi, Node.js (API routes), Playwright",
       "more": { "href": "#dociekai", "label": "More about dociekai.pl" }
     },
     "entries": [
@@ -27,20 +27,19 @@
         "imageAlt": "Sketch: Krzysztof at a monitor with a video player, wearing headphones, a microphone nearby",
         "role": "Senior React Frontend Developer – Grupa ZPR Media",
         "text": [
-          "Multimedia team (9 people), where I own the entire front end in JavaScript and TypeScript, with my own repositories: players, editorial tools and integrations across the group’s websites and radio stations (Eska, Vox FM, Radio Plus).",
-          "On larger front-end work, I lead and coordinate the team’s other developers (full-stack developers specialising in backend). With the group’s other front-end developers, who work in other teams, we do cross-team code reviews."
+          "Multimedia team (9 people): I own the entire front end and my own repositories for the group’s websites and radio stations (Eska, Vox FM, Radio Plus). On larger front-end work, I coordinate the team’s developers."
         ],
         "projects": [
           {
-            "text": "moving the video, audio, radio (live streaming) and podcast players into a separate repository, refactoring them and rolling them out to a CDN",
+            "text": "video, radio and podcast players moved into a separate repository and rolled out to a CDN",
             "more": { "href": "#zpr-media", "label": "More about the players" }
           },
           {
-            "text": "CMS modules for radio apps, AI-based article audio (text-to-speech), ad integrations, the front end in Django projects, E2E tests and AI-agent-assisted development"
+            "text": "CMS modules for radio apps, article audio (text-to-speech), ad integrations"
           }
         ],
         "stack": [
-          "TypeScript, React, Styled Components, Playwright, Vitest, MSW, HLS.js, Video.js, Google IMA / VAST, REST, Django (templates)"
+          "TypeScript, React, HLS.js, Google IMA / VAST, Playwright, Vitest, MSW"
         ]
       },
       {
@@ -53,7 +52,7 @@
         ],
         "projects": [
           {
-            "text": "Wirtualna Polska (2022–2024): a large front-end team (tech lead, developers, juniors), developing the editor in which newsrooms create and publish content, designing the architecture together, code review and supporting junior developers",
+            "text": "Wirtualna Polska (2022–2024): the editor in which newsrooms create and publish content; a large front-end team, designing the architecture together, code review and supporting junior developers",
             "more": { "href": "#wp-editor", "label": "More about the WP editor" }
           },
           {
@@ -263,15 +262,15 @@
             "label": "interactive lessons ready, more on the way"
           },
           {
-            "value": "291",
-            "label": "public pages in the sitemap"
+            "value": "90+",
+            "label": "Lighthouse score in every category, performance included, on desktop and mobile"
           },
           {
-            "value": "54",
-            "label": "self-tests of lesson logic and edge cases"
+            "value": "5",
+            "label": "E2E test configurations: Chromium, Firefox, WebKit, Android and iPhone"
           }
         ],
-        "factsSource": "Repository state and sitemap.xml, November 2026.",
+        "factsSource": "Repository state and a Lighthouse run on the home page, November 2026.",
         "stack": "TypeScript, React 19, Next.js 16 (App Router), Tailwind CSS, Radix UI, Framer Motion, Strapi, Cloudinary, Playwright, Vercel",
         "shots": [
           {
@@ -331,7 +330,7 @@
         [
           {
             "name": "Next.js",
-            "detail": "App Router, RSC",
+            "detail": "App Router and RSC in dociekai.pl",
             "strong": true
           }
         ],

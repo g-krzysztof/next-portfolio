@@ -396,7 +396,7 @@ const Detail = styled.div<{ $wide?: boolean }>`
     css`
       grid-column: span 2;
     `}
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.55;
   color: ${({ theme }) => theme.colors.inkSoft};
   p + p,
