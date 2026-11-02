@@ -2,9 +2,10 @@
   "about": {
     "lead": "Jestem <primary>Senior React Frontend Developerem</primary> z Tychów. Od ponad 10 lat tworzę aplikacje webowe, a od 2019 roku komercyjnie specjalizuję się w React i TypeScript, głównie w produktach medialnych.",
     "body": [
-      "Obecnie w <secondary>Grupie ZPR Media</secondary> odpowiadam za cały frontend w 9-osobowym zespole Multimedia: prowadzę własne repozytoria w JavaScripcie i TypeScripcie, podejmuję decyzje techniczne i rozwijam playery wideo, audio, radiowe i podcastowe, moduły CMS dla aplikacji radiowych, integracje reklamowe i rozwiązania text-to-speech. Frontend jest po mojej stronie także w repozytoriach opartych na Pythonie i Django. Przy większych pracach frontendowych prowadzę i koordynuję pozostałych developerów zespołu, a z frontendowcami z innych zespołów grupy robimy wzajemne code review. Wcześniej Autentika delegowała mnie do projektów klientów, m.in. na dwa lata do dużego zespołu frontendowego Wirtualnej Polski, gdzie rozwijałem edytor, w którym redakcja tworzy i publikuje treści, współprojektowałem architekturę i wspierałem juniorów.",
+      "Najlepiej pracuje mi się, gdy odpowiadam za kawałek produktu w całości: od rozmowy o wymaganiach, przez decyzje architektoniczne, po wdrożenie i utrzymanie. Lubię prace, które porządkują fundament, np. wydzielenie wspólnego kodu albo scalenie stanu aplikacji, bo dopiero wtedy kolejne funkcje da się dowozić szybko i bez obawy o regresje.",
+      "Pracuję blisko backendu, product ownera, designu i ludzi, którzy na co dzień korzystają z tego, co buduję. Code review traktuję jako rozmowę o rozwiązaniu, a przy większych pracach dzielę zadania w zespole i pomagam mniej doświadczonym developerom.",
       "AI traktuję jako narzędzie, a nie autopilota. Na co dzień pracuję z agentami kodującymi: piszę dla nich własne skille i instrukcje oparte na konwencjach projektu, a sam pilnuję architektury i spójności kodu oraz przeglądam wszystko, co generują.",
-      "Po godzinach sam tworzę i rozwijam [dociekai.pl](https://dociekai.pl), edukacyjną platformę dla dzieci z lekcjami, quizami, fiszkami i grami. Odpowiadam w niej za wszystko, od pomysłu po wdrożenie: Next.js (App Router, RSC), React 19, headless CMS Strapi, warstwa API w Node.js, Tailwind i testy E2E w Playwright. To mój poligon do sprawdzania nowych wersji Next.js i Reacta.",
+      "Nowości z Next.js i Reacta sprawdzam po godzinach we własnym projekcie, [dociekai.pl](https://dociekai.pl), więc o zmianach w ekosystemie mówię z doświadczenia, a nie z changelogów.",
       "Zaczynałem jako grafik, więc mam oko do UI i dobrze dogaduję się z designerami."
     ]
   },
@@ -17,7 +18,10 @@
         "Własny projekt, który rozwijam samodzielnie od pomysłu po wdrożenie: edukacyjna platforma z interaktywnymi kursami dla klasy 4 (matematyka, informatyka, historia, język polski), grami, fiszkami i quizami. To tu na bieżąco sprawdzam nowe wersje Next.js i Reacta."
       ],
       "stack": "Next.js (App Router, RSC), React 19, TypeScript, Tailwind, Strapi, Node.js (API routes), Playwright",
-      "more": { "href": "#dociekai", "label": "Więcej o dociekai.pl" }
+      "more": {
+        "href": "#dociekai",
+        "label": "Więcej o dociekai.pl"
+      }
     },
     "entries": [
       {
@@ -31,7 +35,10 @@
         "projects": [
           {
             "text": "playery wideo, radiowe i podcastowe wydzielone do osobnego repozytorium i wdrożone na CDN",
-            "more": { "href": "#zpr-media", "label": "Więcej o playerach" }
+            "more": {
+              "href": "#zpr-media",
+              "label": "Więcej o playerach"
+            }
           },
           {
             "text": "moduły CMS dla aplikacji radiowych, odsłuch artykułów (text-to-speech), integracje reklamowe"
@@ -51,12 +58,14 @@
         ],
         "projects": [
           {
-            "text": "Wirtualna Polska (2022–2024): edytor, w którym redakcje tworzą i publikują treści; duży zespół frontendowy, wspólne projektowanie architektury, code review i wsparcie juniorów",
-            "more": { "href": "#wp-editor", "label": "Więcej o edytorze WP" }
+            "text": "Wirtualna Polska (2022–2024): edytor, w którym redakcje tworzą i publikują treści. Zbudowałem w nim nowe szablony dla redakcji, w tym najbardziej złożony (drzewiasta struktura treści z kolumnami i zagnieżdżaniem), i scaliłem dwa store'y Redux w jeden, co otworzyło drogę do refaktoru głównej biblioteki tekstowej edytora; duży zespół frontendowy, code review i wsparcie juniorów",
+            "more": {
+              "href": "#wp-editor",
+              "label": "Więcej o edytorze WP"
+            }
           },
           {
-            "text": "platforma geoprzestrzenna do analizy złóż: system design i wdrożenie mapy z warstwami danych i wyszukiwaniem",
-            "more": { "href": "#geo-platform", "label": "Więcej o mapie złóż" }
+            "text": "platforma geoprzestrzenna do analizy złóż: system design i wdrożenie mapy z warstwami danych i wyszukiwaniem"
           }
         ],
         "stack": [
@@ -148,17 +157,21 @@
         "tabNote": "Wirtualna Polska · Autentika",
         "name": "Edytor treści dla redakcji Wirtualnej Polski",
         "context": "Wirtualna Polska · duży zespół frontendowy narzędzi back-office · 2022–2024",
-        "role": "React Frontend Developer w zespole WP (kontrakt przez Autentikę)",
-        "problem": "Przez 25 lat WP zbudowała i przejęła dziesiątki narzędzi back-office. Każde wyglądało i działało inaczej, a procesy redakcyjne były rozproszone po wielu systemach. Utrzymanie było trudne, rozwój powolny, a redaktorzy tracili czas.",
+        "role": "React Frontend Developer w zespole WP (kontrakt przez Autentikę), 09.2022–07.2024: od analizy wymagań po wdrożenie, w ścisłej współpracy z backendem",
+        "_todo": "TODO(Moon): liczby wkładu z historii repo n2cr-frontend (stan 31.07.2024); celowo bez nazw wewnętrznych (Corgi, N2CR, Szwadron) i numerów ticketów; potwierdzić, że Scrollytelling dał redakcji format niemożliwy wcześniej",
+        "problem": "Edytor był zbudowany wokół płaskiej listy bloków treści, a jego stan dzieliły dwa osobne store'y Redux, połączone ręcznymi mostami z middleware'ów i callbacków. Nowe formaty redakcyjne, np. wielokolumnowe historie scrollytellingowe, wymagały zmian w samym fundamencie aplikacji, bez psucia ponad 40 istniejących szablonów.",
         "product": [
-          "Edytor to główne narzędzie dziennikarzy WP, część spójnego ekosystemu aplikacji opartego na wspólnym Design Systemie. Artykuły składa się z gotowych elementów: zdjęć, wideo, galerii, cytatów, tabel, notowań giełdowych, osi czasu czy recenzji.",
-          "Edytor ma szablony pod typy treści i autozapis w local storage. Podpowiada zdjęcia, linki, tagi i kategorie na podstawie treści (AI/ML), ocenia czytelność tekstu i wyłapuje błędy techniczne. Pokazuje podgląd artykułu w layoucie portalu, z makietą mobilną i siatką reklam, a filtrować można listą komend z klawiatury."
+          "Edytor to główne narzędzie dziennikarzy WP, część ekosystemu aplikacji back-office opartego na wspólnym Design Systemie. Redakcje tworzą w nim i publikują artykuły, galerie, liveblogi, testy produktów i materiały specjalne, a każdy typ ma własny szablon i walidację.",
+          "Artykuły składa się z gotowych bloków: zdjęć, wideo, galerii, cytatów, tabel, embedów czy osi czasu. Edytor podpowiada zdjęcia, linki i tagi na podstawie treści (AI/ML), ocenia czytelność i pokazuje podgląd artykułu w layoucie portalu."
         ],
         "text": [
-          "Implementacja zaawansowanych funkcji narzędzi wydawniczych, od analizy wymagań do wdrożenia, w ścisłej współpracy z backendem.",
-          "Optymalizacja wydajności aplikacji, która obsługuje bazę do 4 mln artykułów, tysiące tagów i setki autorów.",
-          "Testy jednostkowe, code review i rozwój komponentów w monorepo NX.",
-          "Zespół z tech leadem, developerami i juniorami, o płaskiej strukturze: wspólnie przeglądaliśmy kod i projektowaliśmy architekturę oraz rozwiązania, a ja pomagałem kolegom z zespołu, zwłaszcza juniorom."
+          "Zaprojektowałem i zbudowałem od zera szablon Scrollytelling, najbardziej złożony w edytorze: drzewiastą strukturę treści (kontenery, sekcje do 4 kolumn, dowolne zagnieżdżanie) w aplikacji zbudowanej dla płaskiej listy bloków. Redakcja dostała dzięki temu wielokolumnowe materiały specjalne, których wcześniej nie dało się złożyć w edytorze, a na tej samej bazie zbudowałem szablon Binder, który łączy kilka historii w jedną publikację. Objęło to model danych, adaptery API (drzewo przy odczycie, płaska lista przy zapisie), logikę edycji w sagach i reducerach, UI, walidację i testy integracyjne.",
+          "Scaliłem dwa niezależne store'y Redux, aplikacji i edytora, w jeden. Zniknęły ręczne mosty między nimi, a aplikacja dostała jedno źródło prawdy. To odblokowało kolejny kamień milowy w rozwoju edytora: refaktor jego głównej biblioteki tekstowej, który wcześniej rozbijał się o podzielony stan. Dla redakcji zmiana była niewidoczna: edytor działał tak samo jak wcześniej.",
+          "Wydajność edytora: wydzieliłem komponenty embedów (social media, Infogram, Typeform), które ładują iframe'y dopiero w viewporcie, i usunąłem layout shift bloków treści przy ładowaniu.",
+          "Kilkanaście nowych szablonów i typów treści, które poszerzyły to, co redakcja może przygotować w edytorze, m.in. testy konsumenckie z wynikiem i walidacją, testy samochodów i bio autora, a także embedy X, Telegrama, Reels i Spotify oraz hotspoty na zdjęciach galerii.",
+          "Integracja edytora z platformą do budowy serwisów WP: uprawnienia według ról i ograniczenia interfejsu oraz proxy do zewnętrznego API jako nowa biblioteka Nx z trasami API w Next.js.",
+          "CI/CD: rozszerzyłem pipeline'y GitLab CI na dwa data center i przepisałem skrypt deploymentu z Pythona na TypeScript (zx, walidacja argumentów w zod).",
+          "Testy jednostkowe, integracyjne i E2E (Jest, React Testing Library, Cypress) oraz code review w monorepo NX. Zespół z tech leadem, developerami i juniorami miał płaską strukturę: wspólnie projektowaliśmy architekturę, a ja pomagałem kolegom, zwłaszcza juniorom."
         ],
         "facts": [
           {
@@ -166,20 +179,20 @@
             "label": "artykułów w bazie, tysiące tagów, setki autorów"
           },
           {
-            "value": "81%",
-            "label": "użytkowników uznaje edytor za intuicyjny od pierwszego kontaktu"
+            "value": "10+",
+            "label": "nowych szablonów i typów treści dla redakcji, w tym wielokolumnowy Scrollytelling"
           },
           {
-            "value": "90%",
-            "label": "komponentów edytora pochodzi z Design Systemu"
+            "value": "2 → 1",
+            "label": "store'y Redux scalone w jeden, co odblokowało refaktor głównej biblioteki tekstowej edytora"
           },
           {
-            "value": "2",
-            "label": "pierwsze nagrody DesignWays 2022: Develop & Deliver i People’s Choice"
+            "value": "40+",
+            "label": "istniejących szablonów działało bez zmian po przebudowie fundamentu"
           }
         ],
-        "factsSource": "Liczby z case study całego projektu, prowadzonego przez WP i Autentikę od 2018 roku.",
-        "stack": "TypeScript, React, Redux, Redux-Saga, TanStack Query, GraphQL (Apollo), Storybook, Jest, React Testing Library, Cypress, NX",
+        "factsSource": "Mój wkład według historii repozytorium (IX 2022 – VII 2024); liczba artykułów z case study projektu WP i Autentiki.",
+        "stack": "TypeScript, React, Next.js, Redux Toolkit, Redux-Saga, TanStack Query, GraphQL (Apollo), Styled Components, Storybook, Jest, React Testing Library, Cypress, NX, GitLab CI",
         "links": [
           {
             "href": "https://autentika.com/projects/wp",
@@ -708,14 +721,26 @@
     "practical": {
       "title": "Praktycznie",
       "items": [
-        { "label": "Angielski", "value": "B2" },
-        { "label": "Tryb pracy", "value": "zdalnie (preferuję) lub hybrydowo" },
+        {
+          "label": "Angielski",
+          "value": "B2"
+        },
+        {
+          "label": "Tryb pracy",
+          "value": "zdalnie (preferuję) lub hybrydowo"
+        },
         {
           "label": "Lokalizacja",
           "value": "Tychy, hybrydowo w okolicach Katowic"
         },
-        { "label": "Współpraca", "value": "B2B lub umowa o pracę" },
-        { "label": "Dostępność", "value": "od lutego 2027" }
+        {
+          "label": "Współpraca",
+          "value": "B2B lub umowa o pracę"
+        },
+        {
+          "label": "Dostępność",
+          "value": "od lutego 2027"
+        }
       ]
     }
   }

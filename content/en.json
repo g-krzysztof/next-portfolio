@@ -2,9 +2,10 @@
   "about": {
     "lead": "I’m a <primary>Senior React Frontend Developer</primary> based in Tychy, Poland. I have been building web applications for over 10 years, and since 2019 I have specialised commercially in React and TypeScript, mostly in media products.",
     "body": [
-      "Currently, at <secondary>Grupa ZPR Media</secondary>, I own the entire front end in the 9-person Multimedia team: I run my own JavaScript and TypeScript repositories, make the technical decisions and develop video, audio, radio and podcast players, CMS modules for radio apps, ad integrations and text-to-speech solutions. The front end is mine in the Python and Django repositories too. On larger front-end work, I lead and coordinate the other developers on the team, and I do cross-team code reviews with front-end developers from the group’s other teams. Before that, Autentika delegated me to client projects, including two years in Wirtualna Polska’s large front-end team, where I developed the editor in which the newsroom creates and publishes content, co-designed the architecture and supported junior developers.",
+      "I work best when I own a piece of the product end to end: from talking through requirements, through architectural decisions, to deployment and maintenance. I like work that cleans up the foundations, such as extracting shared code or merging an app’s state, because only then can new features ship quickly without fear of regressions.",
+      "I work closely with the back end, the product owner, design and the people who use what I build every day. I treat code review as a conversation about the solution, and on larger pieces of work I split tasks across the team and help less experienced developers.",
       "I treat AI as a tool, not an autopilot. I work with coding agents every day: I write my own skills and instructions for them based on project conventions, while I keep the architecture and code consistent and review everything they generate.",
-      "After hours, I build and run [dociekai.pl](https://dociekai.pl) on my own, an educational platform for children with lessons, quizzes, flashcards and games. I handle everything from idea to deployment: Next.js (App Router, RSC), React 19, Strapi as a headless CMS, a Node.js API layer, Tailwind and Playwright E2E tests. It is my testing ground for new versions of Next.js and React.",
+      "I try out what’s new in Next.js and React after hours in my own project, [dociekai.pl](https://dociekai.pl), so I talk about changes in the ecosystem from experience, not from changelogs.",
       "I started out as a graphic designer, so I have an eye for UI and get along well with designers."
     ]
   },
@@ -17,7 +18,10 @@
         "My own project, which I build on my own from idea to deployment: an educational platform with interactive 4th-grade courses (maths, computer science, history, Polish), games, flashcards and quizzes. This is where I keep trying out new versions of Next.js and React."
       ],
       "stack": "Next.js (App Router, RSC), React 19, TypeScript, Tailwind, Strapi, Node.js (API routes), Playwright",
-      "more": { "href": "#dociekai", "label": "More about dociekai.pl" }
+      "more": {
+        "href": "#dociekai",
+        "label": "More about dociekai.pl"
+      }
     },
     "entries": [
       {
@@ -31,7 +35,10 @@
         "projects": [
           {
             "text": "video, radio and podcast players moved into a separate repository and rolled out to a CDN",
-            "more": { "href": "#zpr-media", "label": "More about the players" }
+            "more": {
+              "href": "#zpr-media",
+              "label": "More about the players"
+            }
           },
           {
             "text": "CMS modules for radio apps, article audio (text-to-speech), ad integrations"
@@ -51,12 +58,14 @@
         ],
         "projects": [
           {
-            "text": "Wirtualna Polska (2022–2024): the editor in which newsrooms create and publish content; a large front-end team, designing the architecture together, code review and supporting junior developers",
-            "more": { "href": "#wp-editor", "label": "More about the WP editor" }
+            "text": "Wirtualna Polska (2022–2024): the editor in which newsrooms create and publish content. I built new templates for the newsroom, including the most complex one (a tree-shaped content structure with columns and nesting), and merged two Redux stores into one, which paved the way for refactoring the editor’s core text-editing library; large front-end team, code review and supporting junior developers",
+            "more": {
+              "href": "#wp-editor",
+              "label": "More about the WP editor"
+            }
           },
           {
-            "text": "geospatial platform for mineral deposit analysis: system design and rollout of a map with data layers and search",
-            "more": { "href": "#geo-platform", "label": "More about the deposit map" }
+            "text": "geospatial platform for mineral deposit analysis: system design and rollout of a map with data layers and search"
           }
         ],
         "stack": [
@@ -148,17 +157,21 @@
         "tabNote": "Wirtualna Polska · Autentika",
         "name": "Content editor for the Wirtualna Polska newsroom",
         "context": "Wirtualna Polska · large back-office tools front-end team · 2022–2024",
-        "role": "React Frontend Developer in the WP team (contract via Autentika)",
-        "problem": "Over 25 years, WP built and acquired dozens of back-office tools. Each one looked and worked differently, and editorial processes were scattered across many systems. Maintenance was hard, development was slow, and editors were losing time.",
+        "role": "React Frontend Developer in the WP team (contract via Autentika), 09.2022–07.2024: from requirements analysis to release, in close cooperation with backend",
+        "_todo": "TODO(Moon): liczby wkładu z historii repo n2cr-frontend (stan 31.07.2024); celowo bez nazw wewnętrznych (Corgi, N2CR, Szwadron) i numerów ticketów; potwierdzić, że Scrollytelling dał redakcji format niemożliwy wcześniej",
+        "problem": "The editor was built around a flat list of content blocks, and its state was split between two separate Redux stores, connected by hand-made bridges of middleware and callbacks. New editorial formats, such as multi-column scrollytelling stories, required changes to the very foundation of the app without breaking more than 40 existing templates.",
         "product": [
-          "The editor is WP journalists’ main tool, part of a consistent app ecosystem built on a shared Design System. Articles are assembled from ready-made parts: images, videos, galleries, quotes, tables, market quotes, timelines and reviews.",
-          "The editor has templates for content types and autosave to local storage. It suggests images, links, tags and categories based on the content (AI/ML), scores readability and catches technical errors. It shows a preview of the article in the portal layout, with a mobile mock-up and the ad grid, and you can filter using a keyboard command list."
+          "The editor is WP journalists’ main tool, part of an ecosystem of back-office apps built on a shared Design System. Newsrooms use it to create and publish articles, galleries, liveblogs, product tests and special features, and each type has its own template and validation.",
+          "Articles are assembled from ready-made blocks: images, videos, galleries, quotes, tables, embeds and timelines. The editor suggests images, links and tags based on the content (AI/ML), scores readability and shows a preview of the article in the portal layout."
         ],
         "text": [
-          "Implementing advanced publishing tool features, from requirements analysis to release, in close cooperation with backend.",
-          "Performance optimisation of an application that handles a database of up to 4 million articles, thousands of tags and hundreds of authors.",
-          "Unit tests, code review and component development in an NX monorepo.",
-          "A team with a tech lead, developers and juniors, with a flat structure: we reviewed code and designed the architecture and solutions together, and I helped my teammates, especially junior developers."
+          "I designed and built the Scrollytelling template from scratch, the most complex one in the editor: a tree-shaped content structure (containers, sections with up to 4 columns, nesting at any depth) in an app built for a flat list of blocks. It gave the newsroom multi-column special features that could not be put together in the editor before, and on the same foundation I built the Binder template, which combines several stories into one publication. This covered the data model, API adapters (a tree on read, a flat list on save), editing logic in sagas and reducers, the UI, validation and integration tests.",
+          "I merged two independent Redux stores, the app’s and the editor’s, into one. The hand-made bridges between them are gone, and the app has a single source of truth. This unblocked the next milestone in the editor’s development: refactoring its core text-editing library, which had kept running into the split state. For the newsroom the change was invisible: the editor worked exactly as before.",
+          "Editor performance: I split embeds into separate components (social media, Infogram, Typeform) that load their iframes only once they enter the viewport, and removed layout shift of content blocks on load.",
+          "A dozen or so new templates and content types that widened what the newsroom can prepare in the editor, including consumer tests with results and validation, car tests and author bios, plus X, Telegram, Reels and Spotify embeds and hotspots on gallery images.",
+          "Integrating the editor with WP’s website builder platform: role-based permissions and UI restrictions, and a proxy to an external API as a new Nx library with Next.js API routes.",
+          "CI/CD: I extended the GitLab CI pipelines to two data centres and rewrote the deployment script from Python to TypeScript (zx, argument validation with zod).",
+          "Unit, integration and E2E tests (Jest, React Testing Library, Cypress) and code review in an NX monorepo. The team of a tech lead, developers and juniors had a flat structure: we designed the architecture together, and I helped my teammates, especially junior developers."
         ],
         "facts": [
           {
@@ -166,20 +179,20 @@
             "label": "articles in the database, thousands of tags, hundreds of authors"
           },
           {
-            "value": "81%",
-            "label": "of users find the editor intuitive from first use"
+            "value": "10+",
+            "label": "new templates and content types for the newsroom, including multi-column Scrollytelling"
           },
           {
-            "value": "90%",
-            "label": "of the editor’s components come from the Design System"
+            "value": "2 → 1",
+            "label": "Redux stores merged into one, unblocking the refactor of the editor’s core text-editing library"
           },
           {
-            "value": "2",
-            "label": "first prizes at DesignWays 2022: Develop & Deliver and People’s Choice"
+            "value": "40+",
+            "label": "existing templates kept working unchanged after the foundations were rebuilt"
           }
         ],
-        "factsSource": "Figures from the case study of the whole project, run by WP and Autentika since 2018.",
-        "stack": "TypeScript, React, Redux, Redux-Saga, TanStack Query, GraphQL (Apollo), Storybook, Jest, React Testing Library, Cypress, NX",
+        "factsSource": "My contribution according to the repository history (IX 2022 – VII 2024); the article count comes from the WP and Autentika project case study.",
+        "stack": "TypeScript, React, Next.js, Redux Toolkit, Redux-Saga, TanStack Query, GraphQL (Apollo), Styled Components, Storybook, Jest, React Testing Library, Cypress, NX, GitLab CI",
         "links": [
           {
             "href": "https://autentika.com/projects/wp",
@@ -708,14 +721,26 @@
     "practical": {
       "title": "The practical bits",
       "items": [
-        { "label": "English", "value": "B2" },
-        { "label": "Work mode", "value": "remote (preferred) or hybrid" },
+        {
+          "label": "English",
+          "value": "B2"
+        },
+        {
+          "label": "Work mode",
+          "value": "remote (preferred) or hybrid"
+        },
         {
           "label": "Location",
           "value": "Tychy, Poland; hybrid in the Katowice area"
         },
-        { "label": "Contract", "value": "B2B or employment contract" },
-        { "label": "Availability", "value": "from February 2027" }
+        {
+          "label": "Contract",
+          "value": "B2B or employment contract"
+        },
+        {
+          "label": "Availability",
+          "value": "from February 2027"
+        }
       ]
     }
   }

@@ -1,144 +1,230 @@
 import { useEffect, useRef, useState } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useLang } from './lang';
 
-// Ilustracja edytora WP: artykuł składany z gotowych elementów (content parts),
-// obok czytelność, podpowiedzi AI i walidacja, nad nim autozapis do local storage.
+// Ilustracja szablonu Scrollytelling w edytorze WP: drzewiasta struktura treści
+// (kontener, sekcje do 4 kolumn) w aplikacji zbudowanej dla płaskiej listy bloków.
+// Widok „Zapis do API” pokazuje, jak adapter spłaszcza drzewo przy zapisie.
 // Treść jest zmyślona, liczy się sam pomysł interfejsu.
 
-type Part = 'image' | 'gallery' | 'quote' | 'table' | 'stocks' | 'timeline';
+type Part = 'image' | 'text' | 'quote';
 
-const PARTS: Part[] = [
-  'image',
-  'gallery',
-  'quote',
-  'table',
-  'stocks',
-  'timeline',
-];
-const MAX_BLOCKS = 4;
-
-interface Block {
+interface Section {
   id: number;
-  part: Part;
+  cols: number;
 }
 
-// Im więcej rodzajów elementów, tym lepiej rozłożony rytm tekstu
-const readability = (blocks: Block[]) =>
-  Math.min(94, 58 + new Set(blocks.map(({ part }) => part)).size * 8);
+const COLUMNS = [1, 2, 3, 4];
+const MAX_SECTIONS = 3;
+const PARTS: Part[] = ['image', 'text', 'quote'];
+
+// Stały, ale zróżnicowany układ bloków w kolumnach
+const partAt = (sectionIndex: number, col: number) =>
+  PARTS[(sectionIndex + col) % PARTS.length];
 
 const EditorDemo = () => {
   const { copy } = useLang();
-  const [blocks, setBlocks] = useState<Block[]>([
-    { id: 1, part: 'image' },
-    { id: 2, part: 'quote' },
+  const [sections, setSections] = useState<Section[]>([
+    { id: 1, cols: 2 },
+    { id: 2, cols: 1 },
   ]);
-  const [mobile, setMobile] = useState(false);
+  const [active, setActive] = useState(1);
+  const [flat, setFlat] = useState(false);
   const [saving, setSaving] = useState(false);
   const nextId = useRef(3);
   const saveTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => () => clearTimeout(saveTimer.current), []);
 
-  const add = (part: Part) => {
-    const id = nextId.current;
-    nextId.current += 1;
-    setBlocks((prev) => [...prev, { id, part }].slice(-MAX_BLOCKS));
+  const save = () => {
     setSaving(true);
     clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(() => setSaving(false), 900);
   };
 
-  const score = readability(blocks);
-  const warning = blocks.some(({ part }) => part === 'image');
+  const setCols = (cols: number) => {
+    setSections((prev) =>
+      prev.map((section) =>
+        section.id === active ? { ...section, cols } : section,
+      ),
+    );
+    save();
+  };
+
+  const addSection = () => {
+    const id = nextId.current;
+    nextId.current += 1;
+    setSections((prev) => [...prev, { id, cols: 2 }]);
+    setActive(id);
+    save();
+  };
+
+  const removeSection = () => {
+    const rest = sections.filter(({ id }) => id !== active);
+    setSections(rest);
+    setActive(rest[rest.length - 1].id);
+    save();
+  };
+
+  const current = sections.find(({ id }) => id === active) ?? sections[0];
+  const names = copy.editorNodes;
+  const sectionName = (index: number) => `${names.section} ${index + 1}`;
+
+  // Płaska lista, którą adapter wysyła do API: każdy węzeł zna tylko rodzica
+  const rows = [
+    { id: 'c1', parent: '–', type: names.container },
+    ...sections.flatMap((section, index) => [
+      { id: `s${index + 1}`, parent: 'c1', type: names.section },
+      ...Array.from({ length: section.cols }, (_, col) => ({
+        id: `s${index + 1}.${col + 1}`,
+        parent: `s${index + 1}`,
+        type: names[partAt(index, col)],
+      })),
+    ]),
+  ];
 
   return (
     <Figure>
       <Bar>
-        <Dots aria-hidden="true">
-          <i />
-          <i />
-          <i />
-        </Dots>
+        <Template>
+          {copy.editorTemplate}: <strong>Scrollytelling</strong>
+        </Template>
         <Status role="status" $saving={saving}>
           <span aria-hidden="true" />
           {saving ? copy.editorSaving : copy.editorSaved}
         </Status>
       </Bar>
 
-      <Body role="img" aria-label={copy.editorDemo}>
-        <Canvas $mobile={mobile}>
+      <Body>
+        <Canvas aria-hidden="true">
           <Headline />
           <Headline $short />
-          <Lines $n={3} />
-          {blocks.map(({ id, part }) => (
-            <BlockWrap key={id}>
-              <PartView part={part} />
-            </BlockWrap>
-          ))}
-          <Lines $n={2} />
+          <Container>
+            <NodeTag>{names.container}</NodeTag>
+            {sections.map((section, index) => (
+              <SectionBox
+                key={section.id}
+                $active={section.id === current.id}
+                $cols={section.cols}
+                onClick={() => setActive(section.id)}
+              >
+                <NodeTag>{sectionName(index)}</NodeTag>
+                {Array.from({ length: section.cols }, (_, col) => (
+                  <Column key={`${section.cols}-${col}`}>
+                    <PartView part={partAt(index, col)} />
+                  </Column>
+                ))}
+              </SectionBox>
+            ))}
+          </Container>
         </Canvas>
 
-        <Side aria-hidden="true">
-          <Panel>
-            <PanelTitle>{copy.editorReadability}</PanelTitle>
-            <Score>
-              <svg viewBox="0 0 40 40">
-                <circle className="track" cx="20" cy="20" r="16" />
-                <circle
-                  className="value"
-                  cx="20"
-                  cy="20"
-                  r="16"
-                  pathLength={100}
-                  style={{ strokeDashoffset: 100 - score }}
-                />
-              </svg>
-              <strong>{score}</strong>
-            </Score>
-          </Panel>
-          <Panel>
-            <PanelTitle>{copy.editorSuggestions}</PanelTitle>
-            <Tags>
-              {copy.editorTags.map((tag) => (
-                <li key={tag}>#{tag}</li>
-              ))}
-            </Tags>
-          </Panel>
-          <Panel>
-            <PanelTitle>{copy.editorValidation}</PanelTitle>
-            <Check $warn={warning}>
-              {warning ? copy.editorWarn : copy.editorOk}
-            </Check>
-          </Panel>
+        <Side>
+          <PanelTitle>{flat ? copy.editorFlat : copy.editorTree}</PanelTitle>
+          {flat ? (
+            <>
+              <Flat>
+                <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>parent</th>
+                    <th>{copy.editorType}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.map((row) => (
+                    <tr key={row.id}>
+                      <td>{row.id}</td>
+                      <td>{row.parent}</td>
+                      <td>{row.type}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Flat>
+              <Note>{copy.editorFlatNote}</Note>
+            </>
+          ) : (
+            <Tree>
+              <li>
+                <TreeNode as="span">{names.container}</TreeNode>
+                <ul>
+                  {sections.map((section, index) => (
+                    <li key={section.id}>
+                      <TreeNode
+                        type="button"
+                        aria-pressed={section.id === current.id}
+                        onClick={() => setActive(section.id)}
+                      >
+                        {sectionName(index)}
+                        <small>
+                          {section.cols} {copy.editorColsShort}
+                        </small>
+                      </TreeNode>
+                      <ul>
+                        {Array.from({ length: section.cols }, (_, col) => (
+                          <li key={col}>
+                            <TreeLeaf>{names[partAt(index, col)]}</TreeLeaf>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            </Tree>
+          )}
         </Side>
       </Body>
 
       <Controls>
-        <Group role="group" aria-label={copy.editorAdd}>
-          <GroupLabel>{copy.editorAdd}</GroupLabel>
-          {PARTS.map((part) => (
-            <Chip key={part} type="button" onClick={() => add(part)}>
-              <span aria-hidden="true">+</span>
-              {copy.editorParts[part]}
+        <Group
+          role="group"
+          aria-label={`${copy.editorColumns}: ${sectionName(
+            sections.indexOf(current),
+          )}`}
+        >
+          <GroupLabel>{copy.editorColumns}</GroupLabel>
+          {COLUMNS.map((cols) => (
+            <Chip
+              key={cols}
+              type="button"
+              aria-pressed={current.cols === cols}
+              onClick={() => setCols(cols)}
+            >
+              {cols}
             </Chip>
           ))}
+        </Group>
+        <Group role="group" aria-label={names.section}>
+          <GroupLabel>{names.section}</GroupLabel>
+          <Chip
+            type="button"
+            disabled={sections.length >= MAX_SECTIONS}
+            onClick={addSection}
+          >
+            <span aria-hidden="true">+</span>
+            {copy.editorAdd}
+          </Chip>
+          <Chip
+            type="button"
+            disabled={sections.length <= 1}
+            onClick={removeSection}
+          >
+            <span aria-hidden="true">−</span>
+            {copy.editorRemove}
+          </Chip>
         </Group>
         <Group role="group" aria-label={copy.editorView}>
           <GroupLabel>{copy.editorView}</GroupLabel>
           <Chip
             type="button"
-            aria-pressed={!mobile}
-            onClick={() => setMobile(false)}
+            aria-pressed={!flat}
+            onClick={() => setFlat(false)}
           >
-            {copy.editorEdit}
+            {copy.editorTree}
           </Chip>
-          <Chip
-            type="button"
-            aria-pressed={mobile}
-            onClick={() => setMobile(true)}
-          >
-            {copy.editorMobile}
+          <Chip type="button" aria-pressed={flat} onClick={() => setFlat(true)}>
+            {copy.editorFlat}
           </Chip>
         </Group>
       </Controls>
@@ -149,7 +235,7 @@ const EditorDemo = () => {
 
 export default EditorDemo;
 
-// Schematyczne podglądy elementów artykułu
+// Schematyczne podglądy bloków w kolumnach
 const PartView = ({ part }: { part: Part }) => {
   switch (part) {
     case 'image':
@@ -161,14 +247,6 @@ const PartView = ({ part }: { part: Part }) => {
           </svg>
         </Media>
       );
-    case 'gallery':
-      return (
-        <Gallery>
-          <Media />
-          <Media />
-          <Media />
-        </Gallery>
-      );
     case 'quote':
       return (
         <Quote>
@@ -176,39 +254,13 @@ const PartView = ({ part }: { part: Part }) => {
           <Lines $n={2} />
         </Quote>
       );
-    case 'table':
-      return (
-        <Table>
-          {Array.from({ length: 9 }, (_, i) => (
-            <i key={i} />
-          ))}
-        </Table>
-      );
-    case 'stocks':
-      return (
-        <Stocks>
-          <svg viewBox="0 0 120 36" preserveAspectRatio="none">
-            <path d="M0 28L14 24L26 27L40 16L54 19L68 10L82 14L96 6L120 9" />
-          </svg>
-          <b>+2,4%</b>
-        </Stocks>
-      );
-    case 'timeline':
-      return (
-        <Timeline>
-          <i />
-          <i />
-          <i />
-          <i />
-        </Timeline>
-      );
     default:
-      return null;
+      return <Lines $n={4} />;
   }
 };
 
 const enter = keyframes`
-  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: none; }
 `;
 
@@ -233,14 +285,12 @@ const Bar = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.line};
 `;
 
-const Dots = styled.span`
-  display: flex;
-  gap: 6px;
-  i {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: ${({ theme }) => theme.colors.line};
+const Template = styled.span`
+  font-size: 13px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.inkMuted};
+  strong {
+    color: ${({ theme }) => theme.colors.ink};
   }
 `;
 
@@ -263,7 +313,7 @@ const Status = styled.span<{ $saving: boolean }>`
 
 const Body = styled.div`
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(150px, 0.42fr);
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 0.55fr);
   gap: 12px;
   padding: 12px;
   border-radius: calc(${({ theme }) => theme.radii.card} - 12px);
@@ -273,25 +323,15 @@ const Body = styled.div`
   }
 `;
 
-const Canvas = styled.div<{ $mobile: boolean }>`
+const Canvas = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  justify-self: center;
-  width: 100%;
-  max-width: ${({ $mobile }) => ($mobile ? '230px' : '100%')};
   min-height: 330px;
-  padding: ${({ $mobile }) => ($mobile ? '22px 14px' : '20px')};
-  border-radius: ${({ $mobile }) => ($mobile ? '26px' : '12px')};
+  padding: 18px;
+  border-radius: 12px;
   background: #ffffff;
-  border: ${({ $mobile, theme }) =>
-    $mobile
-      ? `6px solid ${theme.colors.ink}`
-      : `1px solid ${theme.colors.line}`};
-  transition:
-    max-width 0.5s ${({ theme }) => theme.ease.out},
-    padding 0.5s ${({ theme }) => theme.ease.out},
-    border-radius 0.5s ${({ theme }) => theme.ease.out};
+  border: 1px solid ${({ theme }) => theme.colors.line};
 `;
 
 const Headline = styled.span<{ $short?: boolean }>`
@@ -301,28 +341,81 @@ const Headline = styled.span<{ $short?: boolean }>`
   background: ${({ theme }) => theme.colors.ink};
 `;
 
-const Lines = styled.span<{ $n: number }>`
-  display: block;
-  width: 100%;
-  height: ${({ $n }) => $n * 14 - 6}px;
-  background: repeating-linear-gradient(
-    to bottom,
-    ${({ theme }) => theme.colors.line} 0 8px,
-    transparent 8px 14px
-  );
-  mask: linear-gradient(to right, #000 80%, transparent 100%);
+const NodeTag = styled.span`
+  position: absolute;
+  top: -9px;
+  left: 10px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 18px;
+  color: ${({ theme }) => theme.colors.inkMuted};
 `;
 
-const BlockWrap = styled.div`
-  animation: ${enter} 0.45s ${({ theme }) => theme.ease.out} both;
+const Container = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+  padding: 18px 10px 10px;
+  border-radius: 10px;
+  border: 1px dashed ${({ theme }) => theme.colors.line};
+`;
+
+const SectionBox = styled.div<{ $active: boolean; $cols: number }>`
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(${({ $cols }) => $cols}, minmax(0, 1fr));
+  gap: 8px;
+  padding: 16px 8px 8px;
+  border-radius: 8px;
+  border: 1px solid
+    ${({ $active, theme }) => ($active ? theme.colors.tealInk : theme.colors.line)};
+  box-shadow: ${({ $active, theme }) =>
+    $active ? `inset 0 0 0 1px ${theme.colors.tealInk}` : 'none'};
+  cursor: pointer;
+  transition:
+    border-color 0.25s ${({ theme }) => theme.ease.out},
+    box-shadow 0.25s ${({ theme }) => theme.ease.out};
+  animation: ${enter} 0.4s ${({ theme }) => theme.ease.out} both;
+  ${NodeTag} {
+    color: ${({ $active, theme }) =>
+      $active ? theme.colors.tealInk : theme.colors.inkMuted};
+  }
   @media (prefers-reduced-motion: reduce) {
     animation: none;
   }
 `;
 
+const Column = styled.div`
+  min-width: 0;
+  padding: 6px;
+  border-radius: 6px;
+  background: ${({ theme }) => theme.colors.paper};
+  animation: ${enter} 0.4s ${({ theme }) => theme.ease.out} both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`;
+
+const Lines = styled.span<{ $n: number }>`
+  display: block;
+  width: 100%;
+  height: ${({ $n }) => $n * 12 - 5}px;
+  background: repeating-linear-gradient(
+    to bottom,
+    ${({ theme }) => theme.colors.line} 0 7px,
+    transparent 7px 12px
+  );
+  mask: linear-gradient(to right, #000 80%, transparent 100%);
+`;
+
 const Media = styled.div`
   aspect-ratio: 2 / 1;
-  border-radius: 8px;
+  border-radius: 6px;
   background: ${({ theme }) => theme.colors.paperDeep};
   overflow: hidden;
   svg {
@@ -334,99 +427,18 @@ const Media = styled.div`
   }
 `;
 
-const Gallery = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 4px;
-  aspect-ratio: 2 / 1;
-  ${Media} {
-    aspect-ratio: auto;
-  }
-  ${Media}:first-child {
-    grid-row: span 2;
-    background: ${({ theme }) => theme.colors.teal};
-    opacity: 0.45;
-  }
-`;
-
 const Quote = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 6px;
   span {
     font-family: ${({ theme }) => theme.fonts.display};
-    font-size: 40px;
+    font-size: 28px;
     line-height: 0.8;
     color: ${({ theme }) => theme.colors.tealInk};
   }
 `;
 
-const Table = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
-  i {
-    height: 14px;
-    border-radius: 3px;
-    background: ${({ theme }) => theme.colors.paperDeep};
-  }
-  i:nth-child(-n + 3) {
-    background: ${({ theme }) => theme.colors.line};
-  }
-`;
-
-const Stocks = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  svg {
-    flex: 1;
-    height: 36px;
-    fill: none;
-    stroke: ${({ theme }) => theme.colors.tealInk};
-    stroke-width: 2;
-    vector-effect: non-scaling-stroke;
-  }
-  b {
-    font-size: 12px;
-    color: ${({ theme }) => theme.colors.tealInk};
-  }
-`;
-
-const Timeline = styled.div`
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  padding: 6px 0;
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    height: 2px;
-    background: ${({ theme }) => theme.colors.line};
-  }
-  i {
-    position: relative;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid ${({ theme }) => theme.colors.tealInk};
-    background: #ffffff;
-  }
-`;
-
 const Side = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-const Panel = styled.div`
   padding: 12px;
   border-radius: 12px;
   background: #ffffff;
@@ -440,81 +452,88 @@ const PanelTitle = styled.p`
   color: ${({ theme }) => theme.colors.inkMuted};
 `;
 
-const Score = styled.div`
-  position: relative;
-  width: 64px;
-  height: 64px;
-  svg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-  }
-  circle {
-    fill: none;
-    stroke-width: 4;
-  }
-  .track {
-    stroke: ${({ theme }) => theme.colors.paperDeep};
-  }
-  .value {
-    stroke: ${({ theme }) => theme.colors.tealInk};
-    stroke-linecap: round;
-    stroke-dasharray: 100;
-    transition: stroke-dashoffset 0.6s ${({ theme }) => theme.ease.out};
-  }
-  strong {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    font-family: ${({ theme }) => theme.fonts.display};
-    font-size: 20px;
-    font-variant-numeric: tabular-nums;
+const Tree = styled.ul`
+  list-style: none;
+  font-size: 13px;
+  ul {
+    list-style: none;
+    margin-left: 7px;
+    padding-left: 10px;
+    border-left: 1px solid ${({ theme }) => theme.colors.line};
   }
 `;
 
-const Tags = styled.ul`
-  list-style: none;
+const TreeNode = styled.button`
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  li {
-    padding: 3px 8px;
-    border-radius: 999px;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  margin: 2px 0;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.ink};
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  small {
+    font-size: 11px;
+    color: ${({ theme }) => theme.colors.inkMuted};
+  }
+  &:is(span) {
+    cursor: default;
+  }
+  &[aria-pressed='true'] {
     background: ${({ theme }) => theme.colors.paperDeep};
-    font-size: 12px;
-    font-weight: 600;
     color: ${({ theme }) => theme.colors.tealInk};
   }
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.tealInk};
+    outline-offset: 1px;
+  }
 `;
 
-const Check = styled.p<{ $warn: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  &::before {
-    content: '';
-    flex: none;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    ${({ $warn, theme }) =>
-      $warn
-        ? css`
-            background: #e8a33d;
-          `
-        : css`
-            background: ${theme.colors.mint};
-          `}
+const TreeLeaf = styled.span`
+  display: block;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.inkMuted};
+`;
+
+const Flat = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  th {
+    padding: 0 4px 4px;
+    text-align: left;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.inkMuted};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.line};
   }
+  td {
+    padding: 3px 4px;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.paperDeep};
+  }
+  td:first-child {
+    color: ${({ theme }) => theme.colors.tealInk};
+    font-weight: 600;
+  }
+`;
+
+const Note = styled.p`
+  margin-top: 8px;
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.inkMuted};
 `;
 
 const Controls = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 12px 24px;
   margin-top: 14px;
 `;
@@ -536,7 +555,9 @@ const GroupLabel = styled.span`
 const Chip = styled.button`
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+  min-width: 40px;
   min-height: 40px;
   padding: 0 14px;
   border-radius: 999px;
@@ -554,9 +575,13 @@ const Chip = styled.button`
     color: ${({ theme }) => theme.colors.tealInk};
   }
   @media (hover: hover) {
-    &:hover {
+    &:hover:not(:disabled) {
       background: ${({ theme }) => theme.colors.paper};
     }
+  }
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
   }
   &[aria-pressed='false'] {
     color: ${({ theme }) => theme.colors.inkMuted};
