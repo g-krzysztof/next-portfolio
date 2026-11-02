@@ -58,7 +58,7 @@
         ],
         "projects": [
           {
-            "text": "Wirtualna Polska (2022–2024): edytor, w którym redakcje tworzą i publikują treści. Zbudowałem w nim nowe szablony dla redakcji, w tym najbardziej złożony (drzewiasta struktura treści z kolumnami i zagnieżdżaniem), i scaliłem dwa store'y Redux w jeden, co otworzyło drogę do refaktoru głównej biblioteki tekstowej edytora; duży zespół frontendowy, code review i wsparcie juniorów",
+            "text": "Wirtualna Polska (2022–2024): edytor, w którym redakcje tworzą i publikują treści",
             "more": {
               "href": "#wp-editor",
               "label": "Więcej o edytorze WP"

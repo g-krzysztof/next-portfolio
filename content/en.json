@@ -58,7 +58,7 @@
         ],
         "projects": [
           {
-            "text": "Wirtualna Polska (2022–2024): the editor in which newsrooms create and publish content. I built new templates for the newsroom, including the most complex one (a tree-shaped content structure with columns and nesting), and merged two Redux stores into one, which paved the way for refactoring the editor’s core text-editing library; large front-end team, code review and supporting junior developers",
+            "text": "Wirtualna Polska (2022–2024): the editor in which newsrooms create and publish content",
             "more": {
               "href": "#wp-editor",
               "label": "More about the WP editor"
