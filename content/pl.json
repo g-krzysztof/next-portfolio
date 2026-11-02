@@ -1,8 +1,8 @@
 {
   "about": {
-    "lead": "Jestem <primary>Senior React Frontend Developerem</primary> z Tychów. Od ponad 10 lat tworzę aplikacje webowe, a od kilku lat specjalizuję się w React i TypeScript, głównie w produktach medialnych.",
+    "lead": "Jestem <primary>Senior React Frontend Developerem</primary> z Tychów. Od ponad 10 lat tworzę aplikacje webowe, a od 2019 roku komercyjnie specjalizuję się w React i TypeScript, głównie w produktach medialnych.",
     "body": [
-      "Obecnie w <secondary>Grupie ZPR Media</secondary> odpowiadam za cały frontend w 9-osobowym zespole Multimedia: prowadzę własne repozytoria w JavaScripcie i TypeScripcie, podejmuję decyzje techniczne i rozwijam playery wideo, audio, radiowe i podcastowe, moduły CMS dla aplikacji radiowych, integracje reklamowe i rozwiązania text-to-speech. Frontend jest po mojej stronie także w repozytoriach opartych na Pythonie i Django. Wcześniej Autentika delegowała mnie do projektów klientów, w których pracowałem samodzielnie, m.in. przez dwa lata w Wirtualnej Polsce przy narzędziach wydawniczych, czyli edytorze, w którym redakcja tworzy i publikuje treści.",
+      "Obecnie w <secondary>Grupie ZPR Media</secondary> odpowiadam za cały frontend w 9-osobowym zespole Multimedia: prowadzę własne repozytoria w JavaScripcie i TypeScripcie, podejmuję decyzje techniczne i rozwijam playery wideo, audio, radiowe i podcastowe, moduły CMS dla aplikacji radiowych, integracje reklamowe i rozwiązania text-to-speech. Frontend jest po mojej stronie także w repozytoriach opartych na Pythonie i Django. Przy większych pracach frontendowych prowadzę i koordynuję pozostałych developerów zespołu, a z frontendowcami z innych zespołów grupy robimy wzajemne code review. Wcześniej Autentika delegowała mnie do projektów klientów, m.in. na dwa lata do dużego zespołu frontendowego Wirtualnej Polski, gdzie rozwijałem edytor, w którym redakcja tworzy i publikuje treści, współprojektowałem architekturę i wspierałem juniorów.",
       "AI traktuję jako narzędzie, a nie autopilota. Na co dzień pracuję z agentami kodującymi: piszę dla nich własne skille i instrukcje oparte na konwencjach projektu, a sam pilnuję architektury i spójności kodu oraz przeglądam wszystko, co generują.",
       "Po godzinach sam tworzę i rozwijam [dociekai.pl](https://dociekai.pl), edukacyjną platformę dla dzieci z lekcjami, quizami, fiszkami i grami. Odpowiadam w niej za wszystko, od pomysłu po wdrożenie: Next.js (App Router, RSC), React 19, headless CMS Strapi, warstwa API w Node.js, Tailwind i testy E2E w Playwright. To mój poligon do sprawdzania nowych wersji Next.js i Reacta.",
       "Zaczynałem jako grafik, więc mam oko do UI i dobrze dogaduję się z designerami."
@@ -27,7 +27,8 @@
         "imageAlt": "Szkic: Krzysztof przy monitorze z playerem wideo, w słuchawkach, obok mikrofon",
         "role": "Senior React Frontend Developer – Grupa ZPR Media",
         "text": [
-          "Zespół Multimedia (9 osób), w którym w całości odpowiadam za frontend w JavaScripcie i TypeScripcie, z własnymi repozytoriami: playery, narzędzia redakcyjne i integracje w serwisach i stacjach radiowych grupy (Eska, Vox FM, Radio Plus)."
+          "Zespół Multimedia (9 osób), w którym w całości odpowiadam za frontend w JavaScripcie i TypeScripcie, z własnymi repozytoriami: playery, narzędzia redakcyjne i integracje w serwisach i stacjach radiowych grupy (Eska, Vox FM, Radio Plus).",
+          "Przy większych pracach na froncie prowadzę i koordynuję innych developerów zespołu (fullstacków ze specjalizacją backendową). Z pozostałymi frontendowcami grupy, pracującymi w innych zespołach, robimy międzyzespołowe code review."
         ],
         "projects": [
           {
@@ -53,7 +54,7 @@
         ],
         "projects": [
           {
-            "text": "Wirtualna Polska (2022–2024): rozwój edytora, w którym redakcje tworzą i publikują treści",
+            "text": "Wirtualna Polska (2022–2024): duży zespół frontendowy (tech lead, developerzy, juniorzy), rozwój edytora, w którym redakcje tworzą i publikują treści, wspólne projektowanie architektury, code review i wsparcie juniorów",
             "more": { "href": "#wp-editor", "label": "Więcej o edytorze WP" }
           },
           {
@@ -119,12 +120,13 @@
             "wdrożenia i integracje systemów reklamowych w playerach i serwisach (Google IMA, VAST)",
             "integracje z backendem i warstwa frontendowa w projektach opartych na Django",
             "testy E2E w Playwright",
-            "development wspierany przez AI: własne skille i instrukcje dla agentów kodujących, kontrola architektury i review generowanego kodu"
+            "development wspierany przez AI: własne skille i instrukcje dla agentów kodujących, kontrola architektury i review generowanego kodu",
+            "prowadzenie i koordynacja prac innych developerów zespołu (fullstacków ze specjalizacją backendową) przy większych zadaniach frontendowych oraz międzyzespołowe code review z frontendowcami z innych zespołów grupy"
           ]
         },
         "name": "Playery wideo i radia dla serwisów ZPR Media",
         "context": "Grupa ZPR Media · zespół Multimedia (9 osób) · 2024–obecnie",
-        "role": "Senior React Frontend Developer, odpowiedzialny za cały frontend zespołu: wydzielenie playerów do własnego repozytorium, decyzje architektoniczne, refaktoryzacja i wdrożenie",
+        "role": "Senior React Frontend Developer, odpowiedzialny za cały frontend zespołu: wydzielenie playerów do własnego repozytorium, decyzje architektoniczne, refaktoryzacja i wdrożenie, prowadzenie developerów zespołu przy większych pracach frontendowych",
         "_todo": "TODO(Moon): sprawdzić opis problemu; liczby ZPR (facts) odświeżać raz na jakiś czas; wizualizacje playerów to mockupy w kodzie (VideoPlayerMock), bez zrzutów ze stagingu",
         "problem": "Playery wideo i radiowe były wplecione w kod poszczególnych serwisów grupy. Każda poprawka oznaczała wdrożenia w wielu miejscach, a reklamy, statystyki i obsługa błędów działały w każdym serwisie trochę inaczej.",
         "product": [
@@ -157,7 +159,7 @@
         "group": "autentika",
         "tab": "Edytor WP",
         "name": "Edytor treści dla redakcji Wirtualnej Polski",
-        "context": "Wirtualna Polska · zespół frontendowy narzędzi back-office · 2022–2024",
+        "context": "Wirtualna Polska · duży zespół frontendowy narzędzi back-office · 2022–2024",
         "role": "React Frontend Developer w zespole WP (kontrakt przez Autentikę)",
         "problem": "Przez 25 lat WP zbudowała i przejęła dziesiątki narzędzi back-office. Każde wyglądało i działało inaczej, a procesy redakcyjne były rozproszone po wielu systemach. Utrzymanie było trudne, rozwój powolny, a redaktorzy tracili czas.",
         "product": [
@@ -167,7 +169,8 @@
         "text": [
           "Implementacja zaawansowanych funkcji narzędzi wydawniczych, od analizy wymagań do wdrożenia, w ścisłej współpracy z backendem.",
           "Optymalizacja wydajności aplikacji, która obsługuje bazę do 4 mln artykułów, tysiące tagów i setki autorów.",
-          "Testy jednostkowe, code review i rozwój komponentów w monorepo NX."
+          "Testy jednostkowe, code review i rozwój komponentów w monorepo NX.",
+          "Zespół z tech leadem, developerami i juniorami, o płaskiej strukturze: wspólnie przeglądaliśmy kod i projektowaliśmy architekturę oraz rozwiązania, a ja pomagałem kolegom z zespołu, zwłaszcza juniorom."
         ],
         "facts": [
           {
@@ -615,7 +618,7 @@
           "value": "Tychy, hybrydowo w okolicach Katowic"
         },
         { "label": "Współpraca", "value": "B2B lub umowa o pracę" },
-        { "label": "Dostępność", "value": "od stycznia 2027" }
+        { "label": "Dostępność", "value": "od lutego 2027" }
       ]
     }
   }

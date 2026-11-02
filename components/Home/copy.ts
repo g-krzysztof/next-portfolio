@@ -44,7 +44,7 @@ const COPY = {
     switchLang: 'Switch to English',
     metaDescription:
       'Krzysztof Gryc – Senior React Frontend Developer. React, TypeScript, Next.js, produkty medialne: playery wideo i audio, CMS, narzędzia redakcyjne.',
-    openTo: 'Szukam nowych wyzwań w roli Senior React Developera',
+    openTo: 'Szukam roli Senior React Developera: zdalnie, od lutego 2027',
     helloA: 'Cześć,',
     helloB: 'tu Krzysiek.',
     lede: 'Senior React Frontend Developer z ponad dziesięcioletnim stażem w webie. Zaczynałem jako grafik, dlatego frontend robię okiem projektanta.',
@@ -147,7 +147,7 @@ const COPY = {
     switchLang: 'Przełącz na polski',
     metaDescription:
       'Krzysztof Gryc – Senior React Frontend Developer. React, TypeScript, Next.js, media products: video and audio players, CMS, editorial tools.',
-    openTo: 'Looking for new challenges as a Senior React Developer',
+    openTo: 'Looking for a Senior React Developer role: remote, from February 2027',
     helloA: 'Hi,',
     helloB: 'I’m Krzysiek.',
     lede: 'Senior React Frontend Developer with over ten years in web. I started out as a graphic designer, so I build front ends with a designer’s eye.',
