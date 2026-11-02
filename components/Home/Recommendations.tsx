@@ -140,9 +140,56 @@ const RecCard = ({
   );
 };
 
-const Recommendations = ({ section }: { section: RecommendationsSection }) => {
-  const { items } = section;
-  const { copy } = useLang();
+// Wersja do szybkiego czytania: wszystkie karty naraz, bez rolek i ruchu
+const TextCard = ({ item, copy }: { item: Recommendation; copy: Copy }) => {
+  const [open, setOpen] = useState(false);
+  const [lead, ...rest] = item.text;
+
+  return (
+    <Plain>
+      <Band aria-hidden="true" />
+      <Disc aria-hidden="true">{initials(item.author)}</Disc>
+      <Who>
+        <Name>{item.author}</Name>
+        <Role>
+          {item.position && <span>{item.position}</span>}
+          <b>{item.company}</b>
+        </Role>
+      </Who>
+      <Quote $hidden={false}>
+        {typeof lead === 'string' && <Lead>{lead}</Lead>}
+        {open &&
+          rest.map((block, i) =>
+            typeof block === 'string' ? (
+              <Para key={i}>{block}</Para>
+            ) : (
+              <List key={i}>
+                {block.list.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </List>
+            ),
+          )}
+      </Quote>
+      <Foot>
+        {rest.length > 0 ? (
+          <More
+            type="button"
+            onClick={() => setOpen(!open)}
+            aria-expanded={open}
+          >
+            {open ? copy.readLess : copy.readMore}
+          </More>
+        ) : (
+          <span />
+        )}
+        {item.date && <DateLabel>{item.date}</DateLabel>}
+      </Foot>
+    </Plain>
+  );
+};
+
+const Deck = ({ items, copy }: { items: Recommendation[]; copy: Copy }) => {
   const track = useRef<HTMLDivElement | null>(null);
   const [deckRef, inView] = useInView<HTMLDivElement>({ threshold: 0.15 });
   // Start od środka talii, żeby karty wystawały symetrycznie z obu stron
@@ -228,17 +275,8 @@ const Recommendations = ({ section }: { section: RecommendationsSection }) => {
     };
   }, []);
 
-  if (items.length === 0) return null;
-
   return (
-    <Field id="opinie" aria-labelledby="opinie-title">
-      <Head>
-        <Title id="opinie-title">
-          <CmsInline overrides={mintOverrides}>{section.title}</CmsInline>
-        </Title>
-        {section.intro && <Intro>{section.intro}</Intro>}
-      </Head>
-
+    <>
       <Track
         ref={(el) => {
           track.current = el;
@@ -299,6 +337,91 @@ const Recommendations = ({ section }: { section: RecommendationsSection }) => {
           <LineIcon name="arrow" size={20} />
         </Arrow>
       </Controls>
+    </>
+  );
+};
+
+type Mode = 'reel' | 'text';
+const MODE_KEY = 'rec-mode';
+
+// Wybór trybu zapisany w localStorage; bez niego (tryb prywatny) trzymany w pamięci
+let memoryMode: Mode | null = null;
+const modeListeners = new Set<() => void>();
+const subscribeMode = (onChange: () => void) => {
+  modeListeners.add(onChange);
+  window.addEventListener('storage', onChange);
+  return () => {
+    modeListeners.delete(onChange);
+    window.removeEventListener('storage', onChange);
+  };
+};
+const readMode = (): Mode | null => {
+  try {
+    const saved = window.localStorage.getItem(MODE_KEY);
+    if (saved === 'reel' || saved === 'text') return saved;
+  } catch {
+    // brak dostępu do localStorage
+  }
+  return memoryMode;
+};
+const saveMode = (next: Mode) => {
+  memoryMode = next;
+  try {
+    window.localStorage.setItem(MODE_KEY, next);
+  } catch {
+    // brak dostępu do localStorage, zostaje wybór w pamięci
+  }
+  modeListeners.forEach((notify) => notify());
+};
+
+const Recommendations = ({ section }: { section: RecommendationsSection }) => {
+  const { items } = section;
+  const { copy } = useLang();
+  const reduced = useSyncExternalStore(
+    subscribeReduced,
+    () => window.matchMedia(REDUCED).matches,
+    () => false,
+  );
+  // null: brak zapisanego wyboru, przy ograniczonym ruchu od razu tekst
+  const chosen = useSyncExternalStore(subscribeMode, readMode, () => null);
+  const mode: Mode = chosen ?? (reduced ? 'text' : 'reel');
+
+  if (items.length === 0) return null;
+
+  return (
+    <Field id="opinie" aria-labelledby="opinie-title">
+      <Head>
+        <Title id="opinie-title">
+          <CmsInline overrides={mintOverrides}>{section.title}</CmsInline>
+        </Title>
+        {section.intro && <Intro>{section.intro}</Intro>}
+        <Switch role="group" aria-label={copy.recMode}>
+          <SwitchOption
+            type="button"
+            aria-pressed={mode === 'reel'}
+            onClick={() => saveMode('reel')}
+          >
+            {copy.recModeReel}
+          </SwitchOption>
+          <SwitchOption
+            type="button"
+            aria-pressed={mode === 'text'}
+            onClick={() => saveMode('text')}
+          >
+            {copy.recModeText}
+          </SwitchOption>
+        </Switch>
+      </Head>
+
+      {mode === 'reel' ? (
+        <Deck items={items} copy={copy} />
+      ) : (
+        <TextGrid>
+          {items.map((item) => (
+            <TextCard key={item.id} item={item} copy={copy} />
+          ))}
+        </TextGrid>
+      )}
     </Field>
   );
 };
@@ -340,6 +463,54 @@ const Intro = styled.p`
   font-size: 15px;
   color: ${({ theme }) => theme.colors.onFieldSoft};
   text-wrap: balance;
+`;
+
+const Switch = styled.div`
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(243, 246, 241, 0.28);
+`;
+
+const SwitchOption = styled.button`
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.onFieldSoft};
+  transition:
+    background-color 0.25s ${({ theme }) => theme.ease.out},
+    color 0.25s ${({ theme }) => theme.ease.out};
+  @media (hover: hover) {
+    &:hover:not([aria-pressed='true']) {
+      color: ${({ theme }) => theme.colors.mint};
+    }
+  }
+  &[aria-pressed='true'] {
+    background: ${({ theme }) => theme.colors.mint};
+    color: ${({ theme }) => theme.colors.ink};
+  }
+`;
+
+// Kolumny zamiast siatki: karty mają różną wysokość i rosną po rozwinięciu
+const TextGrid = styled(Wrap)`
+  margin-top: clamp(28px, 3.5vw, 44px);
+  columns: 3 300px;
+  column-gap: clamp(20px, 2.4vw, 36px);
+`;
+
+const Plain = styled.article`
+  break-inside: avoid;
+  margin-bottom: clamp(20px, 2.4vw, 36px);
+  display: flex;
+  flex-direction: column;
+  border-radius: ${({ theme }) => theme.radii.card};
+  background: ${({ theme }) => theme.colors.paper};
+  color: ${({ theme }) => theme.colors.ink};
+  padding: 0 28px 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 50px -24px rgba(3, 18, 17, 0.7);
 `;
 
 const Controls = styled.div`
