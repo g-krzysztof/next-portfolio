@@ -28,7 +28,7 @@ const revealAgain = (href: string) => {
 // podglądu nad paskiem; aktywny jest rozdział pod kursorem (domyślnie bieżący).
 const Experience = ({ section }: { section: ExperienceSection }) => {
   const { copy } = useLang();
-  const { intro, entries } = section;
+  const { intro, entries, sideProject } = section;
   const [lineRef, inView] = useInView<HTMLOListElement>({
     rootMargin: '0px 0px -25% 0px',
   });
@@ -53,16 +53,7 @@ const Experience = ({ section }: { section: ExperienceSection }) => {
         >
           {entries.map(
             (
-              {
-                period,
-                image,
-                imageAlt,
-                role,
-                text,
-                projects,
-                stack,
-                parts,
-              },
+              { period, image, imageAlt, role, text, projects, stack, parts },
               index,
             ) => (
               <Entry
@@ -152,6 +143,40 @@ const Experience = ({ section }: { section: ExperienceSection }) => {
             ))}
           </Seek>
         </Timeline>
+
+        {sideProject && (
+          <>
+            <Divider />
+            <Side>
+              <div>
+                <PartPeriod>{sideProject.period}</PartPeriod>
+                <Role>{sideProject.role}</Role>
+              </div>
+              <Detail $wide>
+                {sideProject.text.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </Detail>
+              <Detail>
+                {sideProject.stack && (
+                  <>
+                    <Label>{copy.expStack}</Label>
+                    <p>{sideProject.stack}</p>
+                  </>
+                )}
+                {sideProject.more && (
+                  <QuietLink
+                    href={sideProject.more.href}
+                    onClick={() => revealAgain(sideProject.more!.href)}
+                  >
+                    {sideProject.more.label}
+                    <span aria-hidden="true">↓</span>
+                  </QuietLink>
+                )}
+              </Detail>
+            </Side>
+          </>
+        )}
       </Wrap>
     </Section>
   );
@@ -364,8 +389,13 @@ const Role = styled.h3`
   color: ${({ theme }) => theme.colors.ink};
 `;
 
-const Detail = styled.div`
+const Detail = styled.div<{ $wide?: boolean }>`
   margin-top: 10px;
+  ${({ $wide }) =>
+    $wide &&
+    css`
+      grid-column: span 2;
+    `}
   font-size: 15px;
   line-height: 1.55;
   color: ${({ theme }) => theme.colors.inkSoft};
@@ -420,6 +450,25 @@ const MoreLink = styled.a`
   }
 `;
 
+// spokojniejsza wersja przycisku dla projektu po godzinach: sam obrys,
+// żeby nie konkurował z przyciskami na osi czasu
+const QuietLink = styled(MoreLink)`
+  min-height: 40px;
+  margin-top: 10px;
+  padding: 0 16px;
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  background: transparent;
+  color: ${({ theme }) => theme.colors.tealInk};
+  font-size: 14px;
+  @media (hover: hover) {
+    &:hover {
+      border-color: ${({ theme }) => theme.colors.mint};
+      background: transparent;
+      color: ${({ theme }) => theme.colors.ink};
+    }
+  }
+`;
+
 const Label = styled.h4`
   margin: 14px 0 2px;
   font-size: 13px;
@@ -447,4 +496,40 @@ const PartPeriod = styled.p`
   font-weight: 600;
   color: ${({ theme }) => theme.colors.tealInk};
   font-variant-numeric: tabular-nums;
+`;
+
+// cienka linia między osią czasu a projektem po godzinach
+const Divider = styled.hr`
+  margin: clamp(8px, 2vw, 24px) 0 clamp(28px, 4vw, 44px);
+  border: 0;
+  border-top: 1px solid ${({ theme }) => theme.colors.line};
+`;
+
+// projekt po godzinach na siatce osi czasu: nagłówek, opis na dwie kolumny,
+// stack z linkiem w ostatniej; na mobile jedno pod drugim
+const Side = styled.div`
+  --gap: clamp(20px, 2.6vw, 40px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px var(--gap);
+
+  ${Role} {
+    margin-top: 6px;
+  }
+  ${Detail} {
+    margin-top: 0;
+  }
+  ${Label} {
+    margin-top: 0;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.laptopS}) {
+    display: block;
+    ${Detail} {
+      margin-top: 10px;
+    }
+    ${Label} {
+      margin-top: 14px;
+    }
+  }
 `;

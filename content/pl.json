@@ -4,12 +4,22 @@
     "body": [
       "Obecnie w <secondary>Grupie ZPR Media</secondary> odpowiadam za cały frontend w 9-osobowym zespole Multimedia: prowadzę własne repozytoria w JavaScripcie i TypeScripcie, podejmuję decyzje techniczne i rozwijam playery wideo, audio, radiowe i podcastowe, moduły CMS dla aplikacji radiowych, integracje reklamowe i rozwiązania text-to-speech. Frontend jest po mojej stronie także w repozytoriach opartych na Pythonie i Django. Wcześniej Autentika delegowała mnie do projektów klientów, w których pracowałem samodzielnie, m.in. przez dwa lata w Wirtualnej Polsce przy narzędziach wydawniczych, czyli edytorze, w którym redakcja tworzy i publikuje treści.",
       "AI traktuję jako narzędzie, a nie autopilota. Na co dzień pracuję z agentami kodującymi: piszę dla nich własne skille i instrukcje oparte na konwencjach projektu, a sam pilnuję architektury i spójności kodu oraz przeglądam wszystko, co generują.",
+      "Po godzinach sam tworzę i rozwijam [dociekai.pl](https://dociekai.pl), edukacyjną platformę dla dzieci z lekcjami, quizami, fiszkami i grami. Odpowiadam w niej za wszystko, od pomysłu po wdrożenie: Next.js (App Router, RSC), React 19, headless CMS Strapi, warstwa API w Node.js, Tailwind i testy E2E w Playwright. To mój poligon do sprawdzania nowych wersji Next.js i Reacta.",
       "Zaczynałem jako grafik, więc mam oko do UI i dobrze dogaduję się z designerami."
     ]
   },
   "experience": {
     "title": "<secondary>Doświadczenie</secondary> zawodowe",
     "intro": "Chętnie przedstawię referencje.",
+    "sideProject": {
+      "period": "2025 – obecnie",
+      "role": "Po godzinach: dociekai.pl",
+      "text": [
+        "Własny projekt, który rozwijam samodzielnie od pomysłu po wdrożenie: edukacyjna platforma dla dzieci z kursami matematyki i programowania, quizami, fiszkami i grami. To tu na bieżąco sprawdzam nowe wersje Next.js i Reacta."
+      ],
+      "stack": "Next.js (App Router, RSC), React 19, TypeScript, Redux Toolkit, Tailwind, Strapi, Node.js (API routes), Playwright",
+      "more": { "href": "#dociekai", "label": "Więcej o dociekai.pl" }
+    },
     "entries": [
       {
         "period": "2024 – obecnie",
@@ -30,14 +40,14 @@
           }
         ],
         "stack": [
-          "TypeScript, React, Styled Components, Playwright, Vitest, MSW, HLS.js, Video.js, Google IMA / VAST, REST"
+          "TypeScript, React, Styled Components, Playwright, Vitest, MSW, HLS.js, Video.js, Google IMA / VAST, REST, Django (szablony)"
         ]
       },
       {
         "period": "2021 – 2024",
         "image": "/images/experience/2021.webp",
         "imageAlt": "Szkic: Krzysztof przy dwóch monitorach z kodem, w zestawie słuchawkowym, robi code review",
-        "role": "Senior React Frontend Developer – Autentika",
+        "role": "React Frontend Developer – Autentika",
         "text": [
           "Software house, aplikacje w React / TypeScript dla klientów. Delegowany samodzielnie do projektów, pracowałem bezpośrednio z zespołami klientów. Najważniejsze projekty:"
         ],
@@ -52,7 +62,7 @@
           }
         ],
         "stack": [
-          "TypeScript, React, Next.js, Redux, TanStack Query, GraphQL (Apollo), Storybook, Jest, Cypress, NX"
+          "TypeScript, React, Next.js, Redux, TanStack Query, GraphQL (Apollo), Node.js (BFF), Storybook, Jest, Cypress, NX"
         ]
       },
       {
@@ -148,7 +158,7 @@
         "tab": "Edytor WP",
         "name": "Edytor treści dla redakcji Wirtualnej Polski",
         "context": "Wirtualna Polska · zespół frontendowy narzędzi back-office · 2022–2024",
-        "role": "Senior React Frontend Developer w zespole WP (kontrakt przez Autentikę)",
+        "role": "React Frontend Developer w zespole WP (kontrakt przez Autentikę)",
         "problem": "Przez 25 lat WP zbudowała i przejęła dziesiątki narzędzi back-office. Każde wyglądało i działało inaczej, a procesy redakcyjne były rozproszone po wielu systemach. Utrzymanie było trudne, rozwój powolny, a redaktorzy tracili czas.",
         "product": [
           "Edytor to główne narzędzie dziennikarzy WP, część spójnego ekosystemu aplikacji opartego na wspólnym Design Systemie. Artykuły składa się z gotowych elementów: zdjęć, wideo, galerii, cytatów, tabel, notowań giełdowych, osi czasu czy recenzji.",
@@ -193,7 +203,7 @@
         "tab": "Mapa złóż",
         "name": "Mapa złóż dla geologów",
         "context": "Kadme (Norwegia, branża oil & gas) · przez Autentikę",
-        "role": "Senior React Frontend Developer: system design i wdrożenie frontendu",
+        "role": "React Frontend Developer: system design i wdrożenie frontendu",
         "_todo": "TODO(Moon): biblioteka map (Leaflet / Mapbox / OpenLayers?) i lata projektu – dopisać do stacku",
         "problem": "Geolodzy i specjaliści terenowi korzystali z narzędzi do danych zaprojektowanych z myślą o analitykach. Złożony interfejs sprawiał, że każde wyszukiwanie zależało od dostępności data managerów, a to spowalniało analizy.",
         "text": [
@@ -255,11 +265,6 @@
         ],
         [
           {
-            "name": "TanStack Query"
-          }
-        ],
-        [
-          {
             "name": "Playwright",
             "strong": true
           },
@@ -314,6 +319,17 @@
         [
           {
             "name": "Redux Toolkit"
+          }
+        ],
+        [
+          {
+            "name": "TanStack Query"
+          }
+        ],
+        [
+          {
+            "name": "Django",
+            "detail": "szablony"
           }
         ],
         [
@@ -384,12 +400,6 @@
         [
           {
             "name": "Redux-Saga"
-          }
-        ],
-        [
-          {
-            "name": "Django",
-            "detail": "szablony"
           }
         ],
         [

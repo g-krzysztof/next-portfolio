@@ -46,10 +46,20 @@ export interface ExperienceEntry {
   parts?: ExperiencePart[];
 }
 
+// Projekt po godzinach, pod osią czasu, oddzielony linią
+export interface ExperienceSideProject {
+  period: string;
+  role: string;
+  text: string[];
+  stack?: string;
+  more?: { href: string; label: string };
+}
+
 export interface ExperienceSection {
   title: string;
   intro?: string;
   entries: ExperienceEntry[];
+  sideProject?: ExperienceSideProject;
 }
 
 // Akapit opinii to tekst albo wypunktowanie

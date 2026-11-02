@@ -4,12 +4,22 @@
     "body": [
       "Currently, at <secondary>Grupa ZPR Media</secondary>, I own the entire front end in the 9-person Multimedia team: I run my own JavaScript and TypeScript repositories, make the technical decisions and develop video, audio, radio and podcast players, CMS modules for radio apps, ad integrations and text-to-speech solutions. The front end is mine in the Python and Django repositories too. Before that, Autentika delegated me to client projects where I worked on my own, including two years at Wirtualna Polska on its publishing tools, namely the editor in which the newsroom creates and publishes content.",
       "I treat AI as a tool, not an autopilot. I work with coding agents every day: I write my own skills and instructions for them based on project conventions, while I keep the architecture and code consistent and review everything they generate.",
+      "After hours, I build and run [dociekai.pl](https://dociekai.pl) on my own, an educational platform for children with lessons, quizzes, flashcards and games. I handle everything from idea to deployment: Next.js (App Router, RSC), React 19, Strapi as a headless CMS, a Node.js API layer, Tailwind and Playwright E2E tests. It is my testing ground for new versions of Next.js and React.",
       "I started out as a graphic designer, so I have an eye for UI and get along well with designers."
     ]
   },
   "experience": {
     "title": "<secondary>Professional</secondary> experience",
     "intro": "I will be happy to provide references.",
+    "sideProject": {
+      "period": "2025 – present",
+      "role": "After hours: dociekai.pl",
+      "text": [
+        "My own project, which I build on my own from idea to deployment: an educational platform for children with maths and coding courses, quizzes, flashcards and games. This is where I keep trying out new versions of Next.js and React."
+      ],
+      "stack": "Next.js (App Router, RSC), React 19, TypeScript, Redux Toolkit, Tailwind, Strapi, Node.js (API routes), Playwright",
+      "more": { "href": "#dociekai", "label": "More about dociekai.pl" }
+    },
     "entries": [
       {
         "period": "2024 – present",
@@ -30,14 +40,14 @@
           }
         ],
         "stack": [
-          "TypeScript, React, Styled Components, Playwright, Vitest, MSW, HLS.js, Video.js, Google IMA / VAST, REST"
+          "TypeScript, React, Styled Components, Playwright, Vitest, MSW, HLS.js, Video.js, Google IMA / VAST, REST, Django (templates)"
         ]
       },
       {
         "period": "2021 – 2024",
         "image": "/images/experience/2021.webp",
         "imageAlt": "Sketch: Krzysztof at two monitors full of code, wearing a headset, doing a code review",
-        "role": "Senior React Frontend Developer – Autentika",
+        "role": "React Frontend Developer – Autentika",
         "text": [
           "Software house, React / TypeScript apps for clients. Delegated to projects on my own, working directly with client teams. Key projects:"
         ],
@@ -52,7 +62,7 @@
           }
         ],
         "stack": [
-          "TypeScript, React, Next.js, Redux, TanStack Query, GraphQL (Apollo), Storybook, Jest, Cypress, NX"
+          "TypeScript, React, Next.js, Redux, TanStack Query, GraphQL (Apollo), Node.js (BFF), Storybook, Jest, Cypress, NX"
         ]
       },
       {
@@ -148,7 +158,7 @@
         "tab": "WP editor",
         "name": "Content editor for the Wirtualna Polska newsroom",
         "context": "Wirtualna Polska · back-office tools front-end team · 2022–2024",
-        "role": "Senior React Frontend Developer in the WP team (contract via Autentika)",
+        "role": "React Frontend Developer in the WP team (contract via Autentika)",
         "problem": "Over 25 years, WP built and acquired dozens of back-office tools. Each one looked and worked differently, and editorial processes were scattered across many systems. Maintenance was hard, development was slow, and editors were losing time.",
         "product": [
           "The editor is WP journalists’ main tool, part of a consistent app ecosystem built on a shared Design System. Articles are assembled from ready-made parts: images, videos, galleries, quotes, tables, market quotes, timelines and reviews.",
@@ -193,7 +203,7 @@
         "tab": "Deposit map",
         "name": "Deposit map for geologists",
         "context": "Kadme (Norway, oil & gas) · via Autentika",
-        "role": "Senior React Frontend Developer: system design and front-end implementation",
+        "role": "React Frontend Developer: system design and front-end implementation",
         "_todo": "TODO(Moon): biblioteka map (Leaflet / Mapbox / OpenLayers?) i lata projektu – dopisać do stacku",
         "problem": "Geologists and field specialists were using data tools designed with analysts in mind. The complex interface meant every search depended on data managers being available, which slowed analysis down.",
         "text": [
@@ -255,11 +265,6 @@
         ],
         [
           {
-            "name": "TanStack Query"
-          }
-        ],
-        [
-          {
             "name": "Playwright",
             "strong": true
           },
@@ -314,6 +319,17 @@
         [
           {
             "name": "Redux Toolkit"
+          }
+        ],
+        [
+          {
+            "name": "TanStack Query"
+          }
+        ],
+        [
+          {
+            "name": "Django",
+            "detail": "templates"
           }
         ],
         [
@@ -384,12 +400,6 @@
         [
           {
             "name": "Redux-Saga"
-          }
-        ],
-        [
-          {
-            "name": "Django",
-            "detail": "templates"
           }
         ],
         [
