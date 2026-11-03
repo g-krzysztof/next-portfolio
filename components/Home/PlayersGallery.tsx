@@ -14,6 +14,8 @@ import VideoPlayerMock from './VideoPlayerMock';
 const TICK_MS = 100;
 // Co ile slajd radia zmienia stację
 const FRAME_MS = 1500;
+// Jak długo wisi dymek po kliknięciu w mockup
+const TAP_MS = 1800;
 
 type ShotId = 'player' | 'portrait' | 'radio' | 'radioMobile';
 
@@ -72,6 +74,16 @@ const PlayersGallery = () => {
   const [hold, setHold] = useState(false);
   const reduced = useMediaQuery('(prefers-reduced-motion: reduce)');
   const swipeX = useRef<number | null>(null);
+  // dymek „to tylko mockup” w miejscu kliknięcia; n liczy kliknięcia
+  const [tap, setTap] = useState<{ n: number; x: number; y: number } | null>(
+    null,
+  );
+
+  useEffect(() => {
+    if (!tap) return undefined;
+    const id = setTimeout(() => setTap(null), TAP_MS);
+    return () => clearTimeout(id);
+  }, [tap]);
 
   const shot = SHOTS[index];
   // Najechanie albo fokus zatrzymuje przewijanie slajdów
@@ -154,6 +166,17 @@ const PlayersGallery = () => {
           const dx = event.clientX - swipeX.current;
           swipeX.current = null;
           if (Math.abs(dx) > 40) go(dx < 0 ? index + 1 : index - 1);
+          else if (
+            Math.abs(dx) < 8 &&
+            (event.target as Element).closest('[data-mock]')
+          ) {
+            const box = event.currentTarget.getBoundingClientRect();
+            setTap((prev) => ({
+              n: (prev?.n ?? -1) + 1,
+              x: event.clientX - box.left,
+              y: event.clientY - box.top,
+            }));
+          }
         }}
       >
         {SHOTS.map((s, i) => (
@@ -165,11 +188,36 @@ const PlayersGallery = () => {
             aria-hidden={i !== index}
             $on={i === index}
           >
-            <Screen style={{ '--ratio': s.ratio } as CSSProperties}>
+            <Screen
+              data-mock={s.mock ? '' : undefined}
+              style={{ '--ratio': s.ratio } as CSSProperties}
+            >
               <Media shot={s} frame={frameOf(s, i)} />
             </Screen>
           </Slide>
         ))}
+        {tap && (
+          <Bubble
+            key={tap.n}
+            role="status"
+            style={
+              {
+                '--x': `${tap.x}px`,
+                '--y': `${tap.y}px`,
+              } as CSSProperties
+            }
+          >
+            {copy.playersMockTaps[
+              Math.min(tap.n, copy.playersMockTaps.length - 1)
+            ]}
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" />
+              <circle className="solid" cx="8.5" cy="10" r="1.4" />
+              <path d="M14.5 10h3" />
+              <path d="M7.5 14.5c1.2 1.8 2.7 2.6 4.5 2.6s3.3-.8 4.5-2.6" />
+            </svg>
+          </Bubble>
+        )}
       </Stage>
 
       {/* Wszystkie podpisy w jednej komórce: wysokość bierze się z najdłuższego,
@@ -362,6 +410,58 @@ const Slide = styled.div<{ $on: boolean }>`
     visibility 0.5s;
 `;
 
+// Dymek nad miejscem kliknięcia, dosunięty do krawędzi sceny, żeby się nie ucinał
+const pop = keyframes`
+  0% { opacity: 0; transform: translate(-50%, -100%) translateY(6px) scale(0.85); }
+  12% { opacity: 1; transform: translate(-50%, -100%) scale(1.04); }
+  20% { transform: translate(-50%, -100%) scale(1); }
+  85% { opacity: 1; transform: translate(-50%, -100%); }
+  100% { opacity: 0; transform: translate(-50%, -100%) translateY(-6px); }
+`;
+
+const Bubble = styled.div`
+  position: absolute;
+  left: clamp(110px, var(--x), calc(100% - 110px));
+  top: max(var(--y) - 14px, 56px);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px 9px 14px;
+  border-radius: 14px;
+  background: ${({ theme }) => theme.colors.mint};
+  color: ${({ theme }) => theme.colors.fieldDeep};
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+  animation: ${pop} ${TAP_MS}ms ${({ theme }) => theme.ease.out} both;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 12px;
+    height: 12px;
+    background: inherit;
+    border-radius: 2px;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+  .solid {
+    fill: currentColor;
+    stroke: none;
+  }
+`;
+
 const SCREEN_PAD = '24px';
 
 const Screen = styled.div`
@@ -375,6 +475,9 @@ const Screen = styled.div`
   overflow: hidden;
   background: #000;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  &[data-mock] {
+    cursor: pointer;
+  }
 `;
 
 const mediaBase = css`

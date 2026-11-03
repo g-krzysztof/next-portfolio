@@ -135,6 +135,12 @@ const COPY = {
     playersPause: 'Zatrzymaj przewijanie',
     playersPlay: 'Wznów przewijanie',
     playersSlide: (n: number, total: number) => `${n} z ${total}`,
+    // dymek po kliknięciu w mockup; kolejne kliknięcia idą dalej po liście
+    playersMockTaps: [
+      'To tylko mockup',
+      'Serio, nic tu nie zagra',
+      'Nadal mockup',
+    ],
     playersShots: {
       portrait: {
         title: 'Pionowe wideo',
@@ -261,6 +267,11 @@ const COPY = {
     playersPause: 'Pause',
     playersPlay: 'Resume',
     playersSlide: (n: number, total: number) => `${n} of ${total}`,
+    playersMockTaps: [
+      'It’s just a mockup',
+      'Really, nothing’s going to play',
+      'Still a mockup',
+    ],
     playersShots: {
       portrait: {
         title: 'Vertical video',
