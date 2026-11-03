@@ -139,6 +139,7 @@ a {
 }
 
 .page__number {
+  margin-left: auto;
   white-space: nowrap;
   font-weight: 600;
 }
@@ -217,7 +218,8 @@ a {
 .header {
   background: var(--paper-deep);
   margin: 0 calc(-1 * var(--pad-x)) 4.5mm;
-  padding: 5mm var(--pad-x) 4.5mm;
+  /* pasek wlicza się w odstęp, żeby tekst stał równo z treścią */
+  padding: 5mm var(--pad-x) 4.5mm calc(var(--pad-x) - 1.4mm);
   border-left: 1.4mm solid var(--band-mid);
 }
 
@@ -264,7 +266,7 @@ a {
   color: var(--ink);
   background: var(--paper-deep);
   margin: 0 calc(-1 * var(--pad-x)) 3.2mm;
-  padding: 1.6mm var(--pad-x);
+  padding: 1.6mm var(--pad-x) 1.6mm calc(var(--pad-x) - 1.4mm);
   border-left: 1.4mm solid var(--band-mid);
 }
 
@@ -306,6 +308,17 @@ a {
 
 .job__intro {
   margin-bottom: 1.2mm;
+}
+
+.job__more {
+  margin-top: 1.2mm;
+  font-size: 8pt;
+  color: var(--ink-soft);
+}
+
+.job__more a {
+  color: var(--teal-ink);
+  font-weight: 600;
 }
 
 .job__sub {
@@ -377,8 +390,11 @@ a {
   margin-bottom: 3.5mm;
 }
 
-.ref + .ref {
-  margin-top: 3mm;
+/* dwie kolumny: więcej referencji na tej samej wysokości */
+.refs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3.2mm 6mm;
 }
 
 .ref {

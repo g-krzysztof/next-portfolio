@@ -66,7 +66,7 @@
             <ul>
               <li class="plain">
                 <strong>University of Silesia in Katowice</strong>
-                <span class="muted">MA in Polish Philology, specialisation: editing and textual studies · 2003–2008</span>
+                <span class="muted">MA in Polish Philology, specialisation: editing and textual studies · 2003–2008. Useful for editorial tools: I know working with text from the newsroom side.</span>
               </li>
               <li class="plain">
                 <strong>Technical Secondary School of Electronics and Electrical Engineering, Tychy</strong>
@@ -92,8 +92,8 @@
 
         <div class="lead">
           <p>
-            I have been building web applications for over 10 years, and since 2019 I have specialised commercially in React and
-            TypeScript, mostly in media products: video and audio players, CMSs and editorial tools.
+            I have been building web applications for over 10 years, and since 2019 I have specialised in React and TypeScript in
+            software houses and product teams, mostly in media products: video and audio players, CMSs and editorial tools.
           </p>
           <p>
             I treat AI as a tool, not an autopilot. I work with coding agents every day, including Claude Code: I write skills and
@@ -110,70 +110,54 @@
               <span class="job__period">08.2024 – present</span>
             </div>
             <p class="job__intro">
-              The only front-end developer in the 9-person Multimedia team: I independently own the entire front end of the area,
-              from requirements and architecture to release and maintenance.
+              The only frontend developer in the 9-person Multimedia team: I independently own the entire frontend of the area, from
+              requirements and architecture to release and maintenance. The players run on the group's sites and radio stations
+              (Super Express, Eska, Vox FM, Radio Plus), which reach 9.9 million internet users and 183 million page views a month.
             </p>
             <p class="job__sub">Scope of work</p>
             <ul>
               <li>Architecture, estimates and breaking work into tasks with the PO, backend and QA</li>
               <li>Ad (Google IMA, VAST) and analytics (Gemius) integrations in the players</li>
-              <li>Migrating JS → TS, moving legacy code to a new stack, front end in Django</li>
-              <li>Tests (Playwright, Vitest, RTL, MSW, visual), Core Web Vitals</li>
-              <li>Cross-team code review with three front-end developers from other teams</li>
-              <li>Working with AI: Claude Code, custom skills for agents, review of generated code</li>
+              <li>Migrating JS → TS, moving legacy code to a new stack, frontend in Django templates</li>
+              <li>Tests (Playwright, Vitest, RTL, MSW, visual), demo pages with mocked API failures</li>
+              <li>Cross-team code review with three frontend developers from other teams</li>
             </ul>
             <p class="job__sub">Projects and achievements</p>
             <ul>
-              <li><strong>Video and reels player</strong> from scratch (React, TypeScript): single-element HTML embed, preroll, sticky mode, video match; in production in about six months</li>
-              <li><strong>New radio player</strong>: multiple stations, “now playing”, desktop and mobile, dark mode</li>
-              <li><strong>Partner widgets</strong>: player and radio on other companies' sites, Shadow DOM; 30+ releases</li>
-              <li><strong>Audio and podcast blocks</strong> that work with ad blockers; article audio (TTS, AI)</li>
-              <li><strong>Mobile apps CMS panel</strong>: page editor, Android Auto / CarPlay</li>
+              <li><strong>Video and reels player</strong> from the first commit to production in about six months: one script from a CDN instead of a separate copy on every site; preroll, sticky mode, LIVE</li>
+              <li><strong>Radio player and two partner widgets</strong>: multiple stations and streams, styles isolated with Shadow DOM, 30+ shipped versions of the radio widget</li>
+              <li><strong>Audio and podcast blocks</strong> that work with ad blockers, article audio (TTS, AI), <strong>mobile apps CMS panel</strong> (Android Auto / CarPlay)</li>
             </ul>
-            <p class="stack">
-              <b>Stack:</b> TypeScript, React, Tailwind, Styled Components, Framer Motion, Storybook, Video.js, HLS.js, Google IMA / VAST,
-              Playwright, Vitest, RTL, MSW, Vite, Webpack, Sanity, REST, GitLab CI, Sentry, Claude Code, Django (templates)
-            </p>
+            <p class="job__more">Project details and case studies: <a href="https://krzysztofg.pl/en#projekty">krzysztofg.pl/en#projekty</a></p>
+            <p class="stack"><b>Stack:</b> TypeScript, React, Video.js / HLS.js, Google IMA, Playwright, Vitest</p>
           </article>
+        </section>
+
+        <section class="section">
+          <h2 class="section__title">Own project</h2>
 
           <article class="job">
             <div class="job__head">
-              <h3 class="job__role">
-                React Frontend Developer · <span class="job__company">Autentika (project for Wirtualna Polska)</span>
-              </h3>
-              <span class="job__period">07.2021 – 08.2024</span>
+              <h3 class="job__role"><a href="https://dociekai.pl">dociekai.pl</a> · <span class="job__company">own product, built on my own</span> · <a href="https://github.com/g-krzysztof/dociekai">code on GitHub</a></h3>
+              <span class="job__period">08.2025 – present</span>
             </div>
             <p class="job__intro">
-              Software house. Design, development and maintenance of web and mobile applications in React / TypeScript for the company's
-              clients. Delegated to projects on my own, working directly with client teams.
+              An educational platform for children: 166 interactive lessons in four 4th-grade courses following the national curriculum
+              (maths, computer science, history, Polish), games and quizzes. In production, with a growing user base. AI agents write
+              much of the code, while I lead them like a tech lead and review every change.
             </p>
             <ul>
-              <li>
-                <strong>Wirtualna Polska (09.2022 – 08.2024):</strong> large front-end team for WP's back-office tools, one of Poland's largest
-                media groups. Development of the editor in which newsrooms create and publish content: advanced publishing features, design
-                system development (Storybook), performance optimisation (code splitting, SSR), a Node.js BFF layer, close cooperation with backend, PO and design,
-                requirements analysis, co-designing the architecture, mentoring juniors, tests (Jest, RTL, MSW, Cypress) and code review in an NX monorepo.
-              </li>
-              <li>
-                <strong>Kadme (11.2021 – 05.2022):</strong> a geospatial data search platform for the oil &amp; gas industry. System design and implementation of a tool that overlays
-                multiple data layers on a map, provides analytics modules and advanced search with filters.
-              </li>
+              <li>A shared lesson engine for four courses; answer grading as pure functions outside React, covered by 55 self-test suites</li>
+              <li>Next.js (App Router, RSC), Strapi data fetched at build time, API routes as a backend proxy (JWT), resilient to CMS outages</li>
+              <li>Lighthouse 90+ in every category on desktop and mobile; SEO (sitemap, Google Indexing API), Playwright E2E tests</li>
             </ul>
-            <p class="stack">
-              <b>Stack:</b> TypeScript, React, Next.js, React Native (Expo), Redux (Saga, Toolkit), TanStack Query, GraphQL (Apollo), REST,
-              OpenAPI, React Hook Form, Tailwind, Styled Components, Framer Motion, Storybook, Jest, RTL, MSW, Cypress, NX, Node.js (BFF),
-              Strapi, Sanity, Docker, GitLab CI, Sentry
-            </p>
+            <p class="stack"><b>Stack:</b> Next.js, React 19, TypeScript, Tailwind, Strapi, Playwright</p>
           </article>
         </section>
       </main>
 
       <footer class="page__footer">
-        <p class="rodo">
-          I hereby consent to the processing of my personal data included in this document for the purpose of the recruitment process, in
-          accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 (GDPR).
-        </p>
-        <span class="page__number">1 / 3</span>
+        <span class="page__number">1 / 2</span>
       </footer>
     </section>
 
@@ -187,54 +171,47 @@
 
           <article class="job">
             <div class="job__head">
+              <h3 class="job__role">React Frontend Developer · <span class="job__company">Autentika</span></h3>
+              <span class="job__period">07.2021 – 08.2024</span>
+            </div>
+            <p class="job__intro">
+              Software house. Delegated to client projects on my own, working directly with client teams.
+            </p>
+            <p class="job__sub">Wirtualna Polska · newsroom content editor (4M articles) · 09.2022 – 08.2024</p>
+            <ul>
+              <li><strong>Scrollytelling template</strong> from scratch: tree-shaped content (sections of up to 4 columns) in an editor built for a flat list of blocks; 40+ existing templates kept working unchanged</li>
+              <li><strong>Merging two Redux stores</strong> into a single source of truth, which unblocked the refactor of the editor's core text library</li>
+              <li><strong>Performance</strong>: embeds loaded in the viewport, no layout shift; 10+ new templates and content types</li>
+              <li>CI/CD across two data centres, mentoring juniors, tests (Jest, RTL, Cypress), code review in an NX monorepo</li>
+            </ul>
+            <p class="job__sub">Kadme · geospatial platform for the oil &amp; gas industry · 11.2021 – 05.2022</p>
+            <ul>
+              <li>System design and implementation of a map with multiple data layers, analytics modules and filtered search</li>
+            </ul>
+            <p class="stack"><b>Stack:</b> TypeScript, React, Next.js, Redux Toolkit / Saga, TanStack Query, NX</p>
+          </article>
+
+          <article class="job">
+            <div class="job__head">
               <h3 class="job__role">React Developer · <span class="job__company">KATO Software House, Katowice</span></h3>
               <span class="job__period">11.2019 – 06.2021</span>
             </div>
-            <p class="job__intro">Development of the front-end layer of web and mobile applications.</p>
             <ul>
               <li>Website and admin panel for a parental control app</li>
               <li>Cryptocurrency service with an admin panel: purchasing, investing, investment overview</li>
             </ul>
-            <p class="stack">
-              <b>Stack:</b> React, React Native, JavaScript, Styled Components, Sass/BEM, Cypress, Node.js/Express, Symfony + Twig, Docker,
-              Webpack, Gatsby, Bootstrap, jQuery
-            </p>
+            <p class="stack"><b>Stack:</b> React, React Native, JavaScript, Styled Components, Node.js, Cypress</p>
           </article>
 
           <article class="job job--compact">
             <div class="job__head">
-              <h3 class="job__role">Front-end Developer · <span class="job__company">freelance</span></h3>
-              <span class="job__period">12.2014 – 11.2019</span>
+              <h3 class="job__role">Earlier</h3>
+              <span class="job__period">2007 – 2019</span>
             </div>
-            <p>
-              Websites and apps: React, Gatsby, Sass; headless CMS (Strapi, Sanity), WordPress, Joomla; hosting on Vercel, Heroku; layout and
-              graphic design.
-            </p>
-          </article>
-
-          <article class="job job--compact">
-            <div class="job__head">
-              <h3 class="job__role">Graphic designer (web and DTP) · <span class="job__company">PRYM, Infomax, freelance</span></h3>
-              <span class="job__period">2007 – 2014</span>
-            </div>
-            <p>
-              Print and web design, photo retouching, preparing files for offset printing. This is where my eye for UI and easy cooperation
-              with designers come from.
-            </p>
-          </article>
-        </section>
-
-        <section class="section">
-          <h2 class="section__title">Own project</h2>
-
-          <article class="job job--compact">
-            <div class="job__head">
-              <h3 class="job__role"><a href="https://dociekai.pl">dociekai.pl</a> · <span class="job__company">own product, built on my own</span> · <a href="https://github.com/g-krzysztof/dociekai">code on GitHub</a></h3>
-              <span class="job__period">08.2025 – present</span>
-            </div>
-            <p>
-              An educational platform for children: interactive 4th-grade courses following the national curriculum (maths, computer science, history, Polish), games, flashcards, quizzes and a blog. In production with dozens of visits a day, mostly from organic search, and a growing base of registered users. Built entirely on my own, from idea to deployment: Next.js (App Router, RSC), React 19, TypeScript, Tailwind, Radix UI, Strapi as a headless CMS, Node.js API routes (backend proxy, JWT), SEO (sitemap, Google Indexing API), Playwright E2E tests on desktop and mobile.
-            </p>
+            <ul>
+              <li><strong>Frontend developer, freelance</strong> (2014–2019): websites and apps in React, headless CMS (Strapi, Sanity), WordPress</li>
+              <li><strong>Graphic designer, web and DTP</strong> (PRYM, Infomax, freelance; 2007–2014): where my eye for UI and easy cooperation with designers come from</li>
+            </ul>
           </article>
         </section>
 
@@ -259,7 +236,7 @@
             </div>
             <div class="skills__group">
               <h3>Deploy &amp; hosting</h3>
-              <p>GitLab CI, Vercel, Cloudinary, Heroku</p>
+              <p>GitLab CI, GitHub Actions, Vercel, Cloudinary</p>
             </div>
           </div>
         </section>
@@ -267,28 +244,41 @@
         <section class="section">
           <h2 class="section__title">References</h2>
           <p class="refs__intro">
-            I can provide contact details (e-mail / phone number) for each of the people listed below to confirm these references.
-            Translated from Polish.
+            Excerpts, newest first, translated from Polish. Full texts and more: <a href="https://krzysztofg.pl/en#opinie">krzysztofg.pl/en#opinie</a>.
           </p>
 
-          <article class="ref">
-            <h3 class="ref__author">Aleksandra Rabenda</h3>
-            <p class="ref__meta">Vice President of the Management Board, Time S.A. (Grupa ZPR Media) · 03.11.2026 · <a href="https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/">on LinkedIn</a></p>
-            <p>
-              I had the pleasure of working with Krzysztof Gryc at TIME S.A. (Grupa ZPR Media), where he developed technology
-              solutions in the Multimedia team. Krzysztof is an experienced Frontend Developer who combines very strong
-              technical skills with an understanding of business and product needs. He worked on video and audio players, radio and podcast solutions and apps for our digital products.
-            </p>
-            <p>
-              I particularly value his independence, sense of responsibility and ability to work with complex solutions. He
-              doesn't stop at writing code – he understands why a given product is being built and is able to propose sensible
-              solutions, using AI as a natural part of his work. Krzysztof has solid experience in React and TypeScript, and a good approach to app quality, performance and maintainability.
-            </p>
-            <p>
-              I wholeheartedly recommend him to any organization looking for an experienced, independent developer who can take
-              ownership of the solutions he builds. He is a valuable specialist who is definitely worth having on the team.
-            </p>
-          </article>
+          <div class="refs">
+            <article class="ref">
+              <h3 class="ref__author">Aleksandra Rabenda</h3>
+              <p class="ref__meta">Vice President of the Board, Time S.A. (ZPR Media) · 11.2026</p>
+              <p>“I particularly value his independence, sense of responsibility and ability to work with complex solutions.”</p>
+            </article>
+            <article class="ref">
+              <h3 class="ref__author">Kamil Kostka</h3>
+              <p class="ref__meta">Product Owner, Time S.A. (ZPR Media) · 11.2026</p>
+              <p>“He puts great emphasis on code quality, optimization and security. (…) I wholeheartedly recommend Krzysztof for a Senior React Developer role.”</p>
+            </article>
+            <article class="ref">
+              <h3 class="ref__author">Radosław Przyborowski</h3>
+              <p class="ref__meta">Senior Project Manager, Time S.A. (ZPR Media) · 11.2026</p>
+              <p>“He didn't limit himself to doing his own tasks – he got actively involved in projects, proposed solutions, discussed them and helped make good decisions.”</p>
+            </article>
+            <article class="ref">
+              <h3 class="ref__author">Łukasz Gal</h3>
+              <p class="ref__meta">Software Tester, Grupa ZPR Media · 11.2026</p>
+              <p>“Communication was always smooth and to the point, and the bugs I reported were quickly analyzed and fixed.”</p>
+            </article>
+            <article class="ref">
+              <h3 class="ref__author">Piotr Lasota</h3>
+              <p class="ref__meta">Frontend Tech Lead, Wirtualna Polska Media · 05.2024</p>
+              <p>“He is incredibly hard-working, independent and always found solutions to complex problems.”</p>
+            </article>
+            <article class="ref">
+              <h3 class="ref__author">Michał Samojlik</h3>
+              <p class="ref__meta">Chairman of the Board, Autentika · 05.2024</p>
+              <p>“His commitment and competence allowed him to impeccably fulfill his duties and responsibilities in the projects.”</p>
+            </article>
+          </div>
         </section>
       </main>
 
@@ -297,126 +287,7 @@
           I hereby consent to the processing of my personal data included in this document for the purpose of the recruitment process, in
           accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 (GDPR).
         </p>
-        <span class="page__number">2 / 3</span>
-      </footer>
-    </section>
-
-    <!-- ============================== PAGE 3 ============================== -->
-    <section class="page">
-      <aside class="page__side"></aside>
-
-      <main class="page__main">
-        <section class="section">
-          <h2 class="section__title">References – continued</h2>
-
-          <article class="ref">
-            <h3 class="ref__author">Radosław Przyborowski</h3>
-            <p class="ref__meta">Senior Project Manager, Grupa Radiowa Time S.A. (Grupa ZPR Media) · 03.11.2026 · <a href="https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/">on LinkedIn</a></p>
-            <p>
-              For two years I had the opportunity to work with Krzysztof at Grupa ZPR Media, and I have really good memories of that
-              collaboration. Krzysztof is a very solid Senior Frontend Developer. He has a good grasp of modern technologies (React in
-              particular) and takes care of code quality, optimization and security. It was clear that he wants things to be done properly.
-            </p>
-            <p>
-              What I value most is his approach to teamwork. He didn't limit himself to doing his own tasks – he got actively involved in
-              projects, proposed solutions, discussed them and helped make good decisions. He was easy to get along with and you could rely
-              on him. He was straightforward, open and focused on solving problems.
-            </p>
-            <p>
-              I recommend Krzysztof with a clear conscience. If you're looking for someone who not only codes well, but also collaborates well
-              and genuinely supports the team – he'll be a good choice.
-            </p>
-          </article>
-
-          <article class="ref">
-            <h3 class="ref__author">Kamil Kostka</h3>
-            <p class="ref__meta">Product Owner, Time S.A. (Grupa ZPR Media) · 02.11.2026 · <a href="https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/">on LinkedIn</a></p>
-            <p>
-              As a Product Owner at Time S.A., I had the opportunity to work with Krzysztof on many projects. He is a Frontend Developer with
-              vast knowledge of modern technologies who puts great emphasis on code quality, optimization and security.
-            </p>
-            <p>
-              Krzysztof is actively involved in project work and proposes well-thought-out solutions. He collaborates very well with the
-              team, and his knowledge and openness to discussion help make the right decisions and deliver projects efficiently.
-            </p>
-            <p>
-              I wholeheartedly recommend Krzysztof for a Senior React Developer role. His skills, commitment and approach to collaboration
-              will be a great asset to any team! :)
-            </p>
-          </article>
-
-          <article class="ref">
-            <h3 class="ref__author">Łukasz Gal</h3>
-            <p class="ref__meta">Software Tester, Grupa ZPR Media · 03.11.2026 · <a href="https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/">on LinkedIn</a></p>
-            <p>
-              I worked with Krzysztof as a QA tester. Communication was always smooth and to the point, and the bugs I reported
-              were quickly analyzed and fixed. Krzysztof was happy to help analyze problems together and was always there to
-              help when I needed it. Our collaboration went without a hitch. I recommend him as a colleague with a clear
-              conscience.
-            </p>
-          </article>
-
-          <p class="refs__note">Recommendations from 2024 as selected excerpts, full texts: <a href="https://krzysztofg.pl/en#opinie">krzysztofg.pl/en#opinie</a></p>
-
-          <article class="ref">
-            <h3 class="ref__author">Michał Samojlik</h3>
-            <p class="ref__meta">Chairman of the Board, Autentika Sp. z o.o. · 27.05.2024</p>
-            <p>
-              “Krzysztof was a front-end developer at Autentika for 3 years. […] His commitment and competence allowed him to
-              impeccably fulfill his duties and responsibilities in the projects in which he participated. We highly value his
-              culture and positive, yet unobtrusive, attitude.”
-            </p>
-          </article>
-
-          <article class="ref">
-            <h3 class="ref__author">Mariusz Byrtek</h3>
-            <p class="ref__meta">Team Leader of the front-end team of back-office tools, Wirtualna Polska Media · 27.05.2024</p>
-            <p>
-              “His ability to solve programming problems quickly and effectively contributed significantly to the success of our
-              projects. […] He is open to suggestions and willingly shares his knowledge, which significantly improves the level
-              of work of the entire team. […] He often comes up with proposals for new solutions that not only improve the
-              efficiency but also the quality of implemented projects.”
-            </p>
-          </article>
-
-          <article class="ref">
-            <h3 class="ref__author">Grzegorz Kiersznowski</h3>
-            <p class="ref__meta">Chief Technology Officer, Autentika Sp. z o.o. · 28.05.2024</p>
-            <p>
-              “He conscientiously carried out the assigned tasks and showed independence and commitment to solving them. […]
-              During many years of cooperation, we have implemented joint frontend projects using React/Next.js […]. Here,
-              Krzysztof has repeatedly demonstrated his extensive knowledge and experience.”
-            </p>
-          </article>
-
-          <article class="ref">
-            <h3 class="ref__author">Piotr Lasota</h3>
-            <p class="ref__meta">Frontend Tech Lead, Wirtualna Polska Media · 28.05.2024</p>
-            <p>
-              “Krzysztof has excellent knowledge of technologies such as TypeScript, React, Redux and TanStack Query. He is
-              incredibly hard-working, independent and always found solutions to complex problems. […] I definitely recommend
-              Krzysztof as a competent and committed front-end developer.”
-            </p>
-          </article>
-
-          <article class="ref">
-            <h3 class="ref__author">Daria Neckelius</h3>
-            <p class="ref__meta">Team Leader | Senior IT Project Manager, Wirtualna Polska Media · 29.05.2024</p>
-            <p>
-              “During our cooperation, Krzysztof demonstrated excellent analytical skills. He played an important role in
-              requirements analysis, implementation of new solutions, and work related to application performance optimization.
-              […] I have no hesitation in recommending Krzysztof as a specialist in his field […].”
-            </p>
-          </article>
-        </section>
-      </main>
-
-      <footer class="page__footer">
-        <p class="rodo">
-          I hereby consent to the processing of my personal data included in this document for the purpose of the recruitment process, in
-          accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 (GDPR).
-        </p>
-        <span class="page__number">3 / 3</span>
+        <span class="page__number">2 / 2</span>
       </footer>
     </section>
   </body>

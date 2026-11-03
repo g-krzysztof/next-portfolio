@@ -15,7 +15,7 @@
       "period": "2025 – obecnie",
       "role": "Projekt własny: dociekai.pl",
       "text": [
-        "Własny produkt, który rozwijam samodzielnie od pomysłu po wdrożenie: edukacyjna platforma z interaktywnymi kursami dla klasy 4 (matematyka, informatyka, historia, język polski), grami, fiszkami i quizami. Działa na produkcji: kilkadziesiąt wejść dziennie, głównie z wyników organicznych, i rosnąca grupa zarejestrowanych użytkowników. To tu na bieżąco wdrażam nowe wersje Next.js i Reacta."
+        "Własny produkt, który rozwijam samodzielnie od pomysłu po wdrożenie: edukacyjna platforma z interaktywnymi kursami dla klasy 4 (matematyka, informatyka, historia, język polski), grami, fiszkami i quizami. Działa na produkcji i ma realnych użytkowników, którzy trafiają na nią głównie z wyników organicznych Google. To tu na bieżąco wdrażam nowe wersje Next.js i Reacta."
       ],
       "stack": "Next.js (App Router, RSC), React 19, TypeScript, Tailwind, Strapi, Node.js (API routes), Playwright",
       "more": {
@@ -350,12 +350,12 @@
         ],
         "facts": [
           {
-            "value": "20+",
-            "label": "wejść dziennie, głównie z wyników organicznych Google"
+            "value": "4",
+            "label": "kursy według podstawy programowej, na produkcji, z realnymi użytkownikami i ruchem z Google"
           },
           {
-            "value": "10+",
-            "label": "zarejestrowanych, realnych użytkowników, a liczba rośnie"
+            "value": "55",
+            "label": "zestawów self-testów pilnujących logiki oceniania odpowiedzi"
           },
           {
             "value": "166",
@@ -366,7 +366,7 @@
             "label": "punktów w Lighthouse w każdej kategorii, także wydajności, na desktopie i mobile"
           }
         ],
-        "factsSource": "Stan repozytorium, statystyki ruchu i kont oraz pomiar Lighthouse strony głównej, listopad 2026.",
+        "factsSource": "Stan repozytorium i pomiar Lighthouse strony głównej, listopad 2026.",
         "stack": "TypeScript (strict), React 19, Next.js 16 (App Router, RSC), Tailwind CSS 4, Radix UI / shadcn/ui, Framer Motion, Strapi (headless CMS), Cloudinary, Vercel, Playwright, esbuild, GitHub Actions",
         "shots": [
           {

@@ -39,7 +39,7 @@ Podgląd na żywo: otwórz `cv/pl/index.html` w przeglądarce (Cmd+P pokazuje uk
 
 - Każda `<section class="page">` to jedna strona A4. Strony mają stałą wysokość.
 - Jeśli treść się nie mieści, `build.mjs` wypisze ostrzeżenie „Strona N: treść wychodzi poza stronę” i zakończy się kodem 1. Skróć tekst albo przenieś blok (`<article class="job">`, grupę umiejętności) na kolejną stronę.
-- Klauzula RODO jest w stopce każdej strony (`.rodo`). Jeśli ogłoszenie podaje własną klauzulę, podmień tekst we wszystkich trzech stopkach.
+- Klauzula RODO jest tylko w stopce ostatniej strony (`.rodo`). Jeśli ogłoszenie podaje własną klauzulę, podmień tam tekst.
 - Zmiana treści w jednym języku = ta sama zmiana w drugim (`pl/` i `en/` mają tę samą strukturę).
 - Kolory i rozmiary: zmienne CSS na górze `styles.css`.
 

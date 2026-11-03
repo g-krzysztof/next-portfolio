@@ -15,7 +15,7 @@
       "period": "2025 – present",
       "role": "Own product: dociekai.pl",
       "text": [
-        "My own product, which I build on my own from idea to deployment: an educational platform with interactive 4th-grade courses (maths, computer science, history, Polish), games, flashcards and quizzes. It runs in production with dozens of visits a day, mostly from organic search, and a growing base of registered users. This is where I keep shipping new versions of Next.js and React."
+        "My own product, which I build on my own from idea to deployment: an educational platform with interactive 4th-grade courses (maths, computer science, history, Polish), games, flashcards and quizzes. It runs in production and has real users, who find it mostly through organic Google search. This is where I keep shipping new versions of Next.js and React."
       ],
       "stack": "Next.js (App Router, RSC), React 19, TypeScript, Tailwind, Strapi, Node.js (API routes), Playwright",
       "more": {
@@ -350,12 +350,12 @@
         ],
         "facts": [
           {
-            "value": "20+",
-            "label": "visits a day, mostly from organic Google search"
+            "value": "4",
+            "label": "courses following the national curriculum, in production, with real users and traffic from Google"
           },
           {
-            "value": "10+",
-            "label": "registered, real users, and the number is growing"
+            "value": "55",
+            "label": "self-test suites guarding the answer-grading logic"
           },
           {
             "value": "166",
@@ -366,7 +366,7 @@
             "label": "Lighthouse score in every category, performance included, on desktop and mobile"
           }
         ],
-        "factsSource": "Repository state, traffic and account stats, and a Lighthouse run on the home page, November 2026.",
+        "factsSource": "Repository state and a Lighthouse run on the home page, November 2026.",
         "stack": "TypeScript (strict), React 19, Next.js 16 (App Router, RSC), Tailwind CSS 4, Radix UI / shadcn/ui, Framer Motion, Strapi (headless CMS), Cloudinary, Vercel, Playwright, esbuild, GitHub Actions",
         "shots": [
           {
