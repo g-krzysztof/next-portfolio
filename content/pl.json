@@ -602,6 +602,68 @@
     "intro": "Do każdej z niżej wymienionych osób mogę udostępnić dane kontaktowe (e-mail / numer telefonu) w celu potwierdzenia referencji.",
     "items": [
       {
+        "id": "aleksandra",
+        "author": "Aleksandra Rabenda",
+        "position": "Wiceprezes Zarządu",
+        "company": "Time S.A. (Grupa ZPR Media)",
+        "date": "03.11.2026",
+        "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
+        "text": [
+          "Miałam przyjemność współpracować z Krzysztofem Grycem w TIME S.A. (Grupa ZPR Media), gdzie rozwijał rozwiązania technologiczne w zespole Multimedia.",
+          "Krzysztof to doświadczony Frontend Developer, który łączy bardzo dobre kompetencje techniczne z rozumieniem potrzeb biznesowych i produktowych. Pracował nad rozwojem playerów wideo i audio, rozwiązań radiowych i podcastowych oraz aplikacji wspierających nasze produkty cyfrowe.",
+          "Szczególnie cenię jego samodzielność, odpowiedzialność i umiejętność pracy ze złożonymi rozwiązaniami. Nie ogranicza się do pisania kodu – rozumie, po co powstaje dany produkt, i potrafi proponować sensowne rozwiązania, natywnie korzystając z AI.",
+          "Krzysztof ma solidne doświadczenie w React i TypeScript, a także dobre podejście do jakości, wydajności i utrzymania aplikacji.",
+          "Z przekonaniem polecam go każdej organizacji, która szuka doświadczonego, samodzielnego developera, potrafiącego wziąć odpowiedzialność za rozwijane rozwiązania. To wartościowy specjalista, którego zdecydowanie warto mieć w zespole."
+        ],
+        "reel": {
+          "fact": {
+            "value": "wideo i audio",
+            "label": "playery, radio i podcasty w zespole Multimedia"
+          },
+          "quotes": [
+            {
+              "text": "łączy bardzo dobre kompetencje techniczne z rozumieniem potrzeb biznesowych i produktowych",
+              "mark": "potrzeb biznesowych i produktowych"
+            },
+            {
+              "text": "rozumie, po co powstaje dany produkt, i potrafi proponować sensowne rozwiązania, natywnie korzystając z AI",
+              "mark": "natywnie korzystając z AI"
+            }
+          ],
+          "closing": "To wartościowy specjalista, którego zdecydowanie warto mieć w zespole."
+        }
+      },
+      {
+        "id": "radoslaw",
+        "author": "Radosław Przyborowski",
+        "position": "Senior Project Manager",
+        "company": "Grupa Radiowa Time S.A. (Grupa ZPR Media)",
+        "date": "03.11.2026",
+        "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
+        "text": [
+          "Przez dwa lata miałem okazję pracować z Krzysztofem w Grupie ZPR Media i naprawdę dobrze wspominam tę współpracę. Krzysztof to bardzo solidny Senior Frontend Developer. Dobrze ogarnia nowoczesne technologie (szczególnie React), dba o jakość, optymalizację i bezpieczeństwo kodu. Widać było, że chce, żeby rzeczy były zrobione porządnie.",
+          "Co cenię najbardziej, to jego podejście do pracy zespołowej. Nie ograniczał się do robienia swoich zadań – aktywnie wchodził w projekty, proponował rozwiązania, dyskutował i pomagał podejmować dobre decyzje. Łatwo się z nim dogadywało i można było na nim polegać. Był konkretny, otwarty oraz ukierunkowany na rozwiązywanie problemów.",
+          "Z czystym sumieniem polecam Krzysztofa. Jeśli szukacie kogoś, kto nie tylko dobrze koduje, ale też dobrze współpracuje i realnie wspiera zespół – będzie dobrym wyborem."
+        ],
+        "reel": {
+          "fact": {
+            "value": "2 lata",
+            "label": "w Grupie ZPR Media, z bezpośrednim przełożonym"
+          },
+          "quotes": [
+            {
+              "text": "Nie ograniczał się do robienia swoich zadań – aktywnie wchodził w projekty, proponował rozwiązania",
+              "mark": "aktywnie wchodził w projekty"
+            },
+            {
+              "text": "Łatwo się z nim dogadywało i można było na nim polegać.",
+              "mark": "można było na nim polegać"
+            }
+          ],
+          "closing": "Z czystym sumieniem polecam Krzysztofa."
+        }
+      },
+      {
         "id": "kamil",
         "author": "Kamil Kostka",
         "position": "Product Owner",
@@ -629,6 +691,34 @@
             }
           ],
           "closing": "Z pełnym przekonaniem polecam Krzysztofa do roli Senior React Developera."
+        }
+      },
+      {
+        "id": "lukasz",
+        "author": "Łukasz Gal",
+        "position": "Software Tester",
+        "company": "Grupa ZPR Media",
+        "date": "03.11.2026",
+        "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
+        "text": [
+          "Współpracowałem z Krzysztofem jako tester QA. Komunikacja zawsze była sprawna i konkretna, a zgłaszane przeze mnie błędy były szybko analizowane i poprawiane. Krzysztof chętnie pomagał we wspólnej analizie problemów i zawsze służył pomocą, gdy tego potrzebowałem. Współpraca przebiegała bez zgrzytów. Z czystym sumieniem polecam go jako współpracownika."
+        ],
+        "reel": {
+          "fact": {
+            "value": "ten sam zespół",
+            "label": "z testerem QA, na co dzień przy zgłoszeniach"
+          },
+          "quotes": [
+            {
+              "text": "zgłaszane przeze mnie błędy były szybko analizowane i poprawiane",
+              "mark": "szybko analizowane i poprawiane"
+            },
+            {
+              "text": "Krzysztof chętnie pomagał we wspólnej analizie problemów",
+              "mark": "wspólnej analizie problemów"
+            }
+          ],
+          "closing": "Z czystym sumieniem polecam go jako współpracownika."
         }
       },
       {

@@ -406,3 +406,7 @@ a {
   font-size: 7.9pt;
   line-height: 1.42;
 }
+
+.refs__note {
+  margin: 3.5mm 0 3mm;
+}

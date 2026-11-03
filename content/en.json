@@ -602,6 +602,68 @@
     "intro": "I can provide contact details (e-mail / phone number) for each of the people listed below to confirm these references.",
     "items": [
       {
+        "id": "aleksandra",
+        "author": "Aleksandra Rabenda",
+        "position": "Vice President of the Management Board",
+        "company": "Time S.A. (Grupa ZPR Media)",
+        "date": "03.11.2026",
+        "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
+        "text": [
+          "I had the pleasure of working with Krzysztof Gryc at TIME S.A. (Grupa ZPR Media), where he developed technology solutions in the Multimedia team.",
+          "Krzysztof is an experienced Frontend Developer who combines very strong technical skills with an understanding of business and product needs. He worked on video and audio players, radio and podcast solutions and apps for our digital products.",
+          "I particularly value his independence, sense of responsibility and ability to work with complex solutions. He doesn't stop at writing code – he understands why a given product is being built and is able to propose sensible solutions, using AI as a natural part of his work.",
+          "Krzysztof has solid experience in React and TypeScript, and a good approach to app quality, performance and maintainability.",
+          "I wholeheartedly recommend him to any organization looking for an experienced, independent developer who can take ownership of the solutions he builds. He is a valuable specialist who is definitely worth having on the team."
+        ],
+        "reel": {
+          "fact": {
+            "value": "video and audio",
+            "label": "players, radio and podcasts in the Multimedia team"
+          },
+          "quotes": [
+            {
+              "text": "combines very strong technical skills with an understanding of business and product needs",
+              "mark": "business and product needs"
+            },
+            {
+              "text": "understands why a given product is being built and is able to propose sensible solutions, using AI as a natural part of his work",
+              "mark": "using AI as a natural part of his work"
+            }
+          ],
+          "closing": "He is a valuable specialist who is definitely worth having on the team."
+        }
+      },
+      {
+        "id": "radoslaw",
+        "author": "Radosław Przyborowski",
+        "position": "Senior Project Manager",
+        "company": "Grupa Radiowa Time S.A. (Grupa ZPR Media)",
+        "date": "03.11.2026",
+        "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
+        "text": [
+          "For two years I had the opportunity to work with Krzysztof at Grupa ZPR Media, and I have really good memories of that collaboration. Krzysztof is a very solid Senior Frontend Developer. He has a good grasp of modern technologies (React in particular) and takes care of code quality, optimization and security. It was clear that he wants things to be done properly.",
+          "What I value most is his approach to teamwork. He didn't limit himself to doing his own tasks – he got actively involved in projects, proposed solutions, discussed them and helped make good decisions. He was easy to get along with and you could rely on him. He was straightforward, open and focused on solving problems.",
+          "I recommend Krzysztof with a clear conscience. If you're looking for someone who not only codes well, but also collaborates well and genuinely supports the team – he'll be a good choice."
+        ],
+        "reel": {
+          "fact": {
+            "value": "2 years",
+            "label": "at Grupa ZPR Media, with his direct manager"
+          },
+          "quotes": [
+            {
+              "text": "He didn't limit himself to doing his own tasks – he got actively involved in projects, proposed solutions",
+              "mark": "got actively involved in projects"
+            },
+            {
+              "text": "He was easy to get along with and you could rely on him.",
+              "mark": "you could rely on him"
+            }
+          ],
+          "closing": "I recommend Krzysztof with a clear conscience."
+        }
+      },
+      {
         "id": "kamil",
         "author": "Kamil Kostka",
         "position": "Product Owner",
@@ -629,6 +691,34 @@
             }
           ],
           "closing": "I wholeheartedly recommend Krzysztof for a Senior React Developer role."
+        }
+      },
+      {
+        "id": "lukasz",
+        "author": "Łukasz Gal",
+        "position": "Software Tester",
+        "company": "Grupa ZPR Media",
+        "date": "03.11.2026",
+        "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
+        "text": [
+          "I worked with Krzysztof as a QA tester. Communication was always smooth and to the point, and the bugs I reported were quickly analyzed and fixed. Krzysztof was happy to help analyze problems together and was always there to help when I needed it. Our collaboration went without a hitch. I recommend him as a colleague with a clear conscience."
+        ],
+        "reel": {
+          "fact": {
+            "value": "same team",
+            "label": "with the QA tester, day to day on bug reports"
+          },
+          "quotes": [
+            {
+              "text": "the bugs I reported were quickly analyzed and fixed",
+              "mark": "quickly analyzed and fixed"
+            },
+            {
+              "text": "Krzysztof was happy to help analyze problems together",
+              "mark": "analyze problems together"
+            }
+          ],
+          "closing": "I recommend him as a colleague with a clear conscience."
         }
       },
       {
