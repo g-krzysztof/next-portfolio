@@ -308,6 +308,13 @@ a {
   margin-bottom: 1.2mm;
 }
 
+.job__sub {
+  margin: 1.6mm 0 0.6mm;
+  font-size: 8pt;
+  font-weight: 700;
+  color: var(--teal-ink);
+}
+
 .job ul {
   padding-left: 3.6mm;
   display: grid;

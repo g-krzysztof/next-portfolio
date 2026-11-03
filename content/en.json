@@ -3,7 +3,7 @@
     "lead": "I’m a <primary>Senior React Frontend Developer</primary> based in Tychy, Poland. I have been building web applications for over 10 years, and since 2019 I have specialised commercially in React and TypeScript, mostly in media products.",
     "body": [
       "I work best when I own a piece of the product end to end: from talking through requirements, through architectural decisions, to deployment and maintenance. I like work that cleans up the foundations, such as extracting shared code or merging an app’s state, because only then can new features ship quickly without fear of regressions.",
-      "I work closely with the back end, the product owner, design and the people who use what I build every day. I treat code review as a conversation about the solution, and on larger pieces of work I split tasks across the team and help less experienced developers.",
+      "I work closely with the back end, the product owner, design and the people who use what I build every day. I treat code review as a conversation about the solution: at ZPR I do cross-team reviews with three front-end developers from other teams, and earlier, in larger front-end teams such as the WP editor team, I also helped less experienced developers.",
       "I treat AI as a tool, not an autopilot. I work with coding agents every day: I write my own skills and instructions for them based on project conventions, while I keep the architecture and code consistent and review everything they generate.",
       "I try out what’s new in Next.js and React after hours in my own project, [dociekai.pl](https://dociekai.pl), so I talk about changes in the ecosystem from experience, not from changelogs.",
       "I started out as a graphic designer, so I have an eye for UI and get along well with designers."
@@ -30,22 +30,25 @@
         "imageAlt": "Sketch: Krzysztof at a monitor with a video player, wearing headphones, a microphone nearby",
         "role": "Senior React Frontend Developer – Grupa ZPR Media",
         "text": [
-          "Multimedia team (9 people): I own the entire front end and my own repositories for the group’s websites and radio stations (Eska, Vox FM, Radio Plus). On larger front-end work, I coordinate the team’s developers."
+          "The only front-end developer in the 9-person Multimedia team: I independently own the entire front end of the area across the group’s websites and radio stations (Super Express, Eska, Vox FM, Radio Plus). I run my own repositories and take every topic from requirements through architecture to release and maintenance. I do cross-team code review with three front-end developers from the group’s other teams."
         ],
         "projects": [
           {
-            "text": "video, radio and podcast players moved into a separate repository and rolled out to a CDN",
+            "text": "a video and reels player, a radio player and partner widgets built from the first commit in React and TypeScript, embedded with a single HTML element",
             "more": {
               "href": "#zpr-media",
               "label": "More about the players"
             }
           },
           {
-            "text": "CMS modules for radio apps, article audio (text-to-speech), ad integrations"
+            "text": "audio and podcast blocks with playlists on the websites, article audio (text-to-speech), preroll ads and analytics"
+          },
+          {
+            "text": "a CMS panel for managing the stations’ mobile apps: page editor, permissions, Android Auto / CarPlay"
           }
         ],
         "stack": [
-          "TypeScript, React, HLS.js, Google IMA / VAST, Playwright, Vitest, MSW"
+          "TypeScript, React, HLS.js, Google IMA / VAST, Shadow DOM, TanStack Query, Ant Design, Vitest, Playwright, MSW"
         ]
       },
       {
@@ -118,20 +121,21 @@
         "group": "work",
         "tab": "Players",
         "tabNote": "ZPR Media",
-        "name": "Video and radio players for ZPR Media websites",
+        "name": "Video and radio players for ZPR Media websites and their partners",
         "context": "Grupa ZPR Media · Multimedia team (9 people) · 2024–present",
-        "role": "Senior React Frontend Developer, owning the team’s entire front end: moving the players into a dedicated repository, architecture decisions, refactoring and rollout, leading the team’s developers on larger front-end work",
-        "_todo": "TODO(Moon): sprawdzić opis problemu; liczby ZPR (facts) odświeżać raz na jakiś czas; wizualizacje playerów to mockupy w kodzie (VideoPlayerMock), bez zrzutów ze stagingu",
-        "problem": "The video and radio players were woven into the code of each of the group’s websites. Every fix meant deployments in many places, and ads, analytics and error handling worked slightly differently on every site.",
+        "role": "Senior React Frontend Developer, the only front-end developer in the team: I independently own the entire front end of the multimedia area, from requirements and architecture decisions, through building the players from the first commit, to rollout and maintenance",
+        "_todo": "TODO(Moon): liczby wkładu z GitLaba (stan 3.11.2026; liczby commitów, MR i review celowo pominięte jako mało mówiące o wpływie); celowo bez nazw wewnętrznych (nazwy repozytoriów, panelu CMS, biblioteki playera) i bez linków do GitLaba; liczby zasięgu (facts) odświeżać raz na jakiś czas; wizualizacje playerów to mockupy w kodzie (VideoPlayerMock), bez zrzutów ze stagingu",
+        "problem": "Video and audio players were scattered across the group’s websites as separate scripts. Every fix meant deployments in many places, and ads, analytics and error handling worked slightly differently on every site. On top of that, external partners wanted to embed the group’s radio and video on their own sites, and code running on someone else’s page must not break its styles or slow it down.",
         "product": [
-          "The video player is embedded with a single script and a tag with data-* attributes. It plays HLS streams and supports preroll ads, up-next videos, sticky mode, LIVE broadcasts with a scheduled end, and vertical reels with a feed for the newsroom. AutoMatch mode picks a video to match the article’s content on its own.",
-          "The radio player streams the group’s stations live (Eska, Eska Rock, Vox FM, Radio Plus and more), fetches “now playing” and the current show from the API, and blocks switching stations while an ad is playing. It has separate desktop and mobile variants."
+          "The video player and reels are two independent bundles that a website embeds with a single HTML element with data-* attributes. The player plays HLS and supports preroll ads, up-next videos, sticky mode and LIVE broadcasts, and the video match feature picks a video to match the article’s content on its own. Reels are a vertical carousel with navigation, sound and looping.",
+          "The radio player streams the group’s stations live (Eska, Eska Rock, Vox FM, Radio Plus and more) and dedicated streams, with “now playing” and the current show. Partner widgets bring the player and the radio to sites outside the group."
         ],
         "text": [
-          "I moved the players out of the websites into a separate React and TypeScript repository, with a single build and CDN deployment process. Websites get a ready-made script and embed code instead of their own copies of the player.",
-          "Refactoring of video, audio, radio (live streaming) and podcast players, Google IMA and VAST ad integrations, and Gemius analytics.",
-          "Demo pages for presentations and testing: a settings panel generates embed code for the current configuration, and MSW mocks simulate API errors and missing third-party scripts (IMA, HLS, video.js), so every player state can be checked.",
-          "E2E tests in Playwright. Beyond the players: React CMS modules for managing radio apps, and article audio based on text-to-speech."
+          "I designed and built the video and reels player from the first commit in React and TypeScript: from zero to production in about six months, with preroll ads (Google IMA), sticky mode, Gemius analytics and a data layer. Websites get a ready-made script from a CDN instead of their own copies of the player.",
+          "I built a new radio player (multiple brands and streams, desktop and mobile, dark mode, faster loading) and two widgets for external partners, where Shadow DOM isolates the styles and the bundle is kept as small as possible so it doesn’t slow down other companies’ sites. The radio widget has gone through more than 30 releases.",
+          "On the group’s websites: audio and podcast blocks with playlists that keep playing even with an ad blocker on, article audio based on text-to-speech, and consistent player behaviour on iOS (fullscreen, autoplay).",
+          "I develop the CMS panel where the team manages the stations’ mobile apps (React, Ant Design, TanStack Query): a page editor with drag & drop, permissions, Android Auto / CarPlay and TV apps. I delivered video match end to end across three repositories: the panel, the player and the website.",
+          "Quality: demo pages with an embed code generator and MSW mocks that simulate API failures and missing third-party scripts, Vitest and Playwright tests, ESLint and Husky, releases with changelogs."
         ],
         "facts": [
           {
@@ -141,10 +145,18 @@
           {
             "value": "11.3 million",
             "label": "Poles listen to the group’s radio stations every week"
+          },
+          {
+            "value": "4",
+            "label": "projects built from the first commit: a video and reels player, a radio player and two partner widgets"
+          },
+          {
+            "value": "9",
+            "label": "repositories where I develop the front end: players, widgets, the group’s websites and the CMS panel"
           }
         ],
-        "factsSource": "Mediapanel, Gemius/PBI, January 2026; Radio Track, Kantar, Nov 2025 – Jan 2026.",
-        "stack": "TypeScript, React, Styled Components, HLS.js, video.js, Google IMA / VAST, MSW, Playwright"
+        "factsSource": "Mediapanel, Gemius/PBI, January 2026; Radio Track, Kantar, Nov 2025 – Jan 2026; my contribution according to repository history (Aug 2024 – Nov 2026).",
+        "stack": "TypeScript, React, Styled Components, HLS.js, video.js, Google IMA / VAST, Shadow DOM, Ant Design, TanStack Query, Vitest, Playwright, MSW"
       },
       {
         "id": "wp-editor",
