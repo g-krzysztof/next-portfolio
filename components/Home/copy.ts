@@ -144,6 +144,22 @@ const COPY = {
         title: 'Player Video',
         text: 'Ekran startowy z dużym przyciskiem odtwarzania, udostępnianiem i pełnym ekranem. Głośność rozwija się po najechaniu na ikonę dźwięku.',
       },
+      radio: {
+        title: 'Player radiowy',
+        text: 'Stacja na żywo z „teraz gramy”: okładka, tytuł i wykonawca. Stację zmienia się z listy pod logo.',
+      },
+      radioMobile: {
+        title: 'Player radiowy na telefonie',
+        text: 'Ten sam player w jednej kolumnie: logo i wybór stacji nad kartą z tym, co teraz gra.',
+      },
+    },
+    // neutralne teksty w mockupie playera radiowego
+    radioMock: {
+      radio: 'Nazwa radia',
+      station: 'Nazwa stacji',
+      nowPlaying: 'TERAZ GRAMY',
+      track: 'Tytuł piosenki',
+      artist: 'Wykonawca',
     },
     readMore: 'Czytaj całość',
     readLess: 'Zwiń',
@@ -254,6 +270,21 @@ const COPY = {
         title: 'Video Player',
         text: 'The start screen with a big play button, sharing and full screen. Volume slides out when you hover over the sound icon.',
       },
+      radio: {
+        title: 'Radio player',
+        text: 'A live station with “now playing”: cover art, title and artist. You switch stations from the list under the logo.',
+      },
+      radioMobile: {
+        title: 'Radio player on a phone',
+        text: 'The same player in a single column: the logo and station picker above the “now playing” card.',
+      },
+    },
+    radioMock: {
+      radio: 'Radio name',
+      station: 'Station name',
+      nowPlaying: 'NOW PLAYING',
+      track: 'Song title',
+      artist: 'Artist',
     },
     readMore: 'Read in full',
     readLess: 'Show less',

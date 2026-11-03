@@ -4,9 +4,10 @@ import styled, { css, keyframes } from 'styled-components';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { useLang } from './lang';
 import useInView from './useInView';
+import RadioPlayerMock from './RadioPlayerMock';
 import VideoPlayerMock from './VideoPlayerMock';
 
-// Playery ZPR w karuzeli: mockupy playera wideo (poziom i pion).
+// Playery ZPR w karuzeli: mockupy playera wideo (poziom i pion) i radia.
 // Jedno ujęcie naraz. Slajd z kilkoma klatkami (frames) przełącza je co
 // FRAME_MS – zostaje na przyszłe slajdy radia z motywami stacji.
 
@@ -14,7 +15,7 @@ const TICK_MS = 100;
 // Co ile slajd radia zmienia stację
 const FRAME_MS = 1500;
 
-type ShotId = 'player' | 'portrait';
+type ShotId = 'player' | 'portrait' | 'radio' | 'radioMobile';
 
 interface Frame {
   src: string;
@@ -25,7 +26,7 @@ interface Shot {
   id: ShotId;
   // zamiast zrzutu: mockup UI playera zbudowany w kodzie,
   // z szerokością wzoru, do której skalują się kontrolki
-  mock?: { designWidth: number };
+  mock?: { kind: 'video' | 'radio'; designWidth: number; mobile?: boolean };
   frames: Frame[];
   ratio: number;
   duration: number;
@@ -34,16 +35,30 @@ interface Shot {
 const SHOTS: Shot[] = [
   {
     id: 'player',
-    mock: { designWidth: 932 },
+    mock: { kind: 'video', designWidth: 932 },
     frames: [],
     ratio: 932 / 524,
     duration: 5000,
   },
   {
     id: 'portrait',
-    mock: { designWidth: 360 },
+    mock: { kind: 'video', designWidth: 360 },
     frames: [],
     ratio: 9 / 16,
+    duration: 5000,
+  },
+  {
+    id: 'radio',
+    mock: { kind: 'radio', designWidth: 928 },
+    frames: [],
+    ratio: 928 / 406,
+    duration: 5000,
+  },
+  {
+    id: 'radioMobile',
+    mock: { kind: 'radio', designWidth: 412, mobile: true },
+    frames: [],
+    ratio: 412 / 372,
     duration: 5000,
   },
 ];
@@ -216,6 +231,13 @@ export default PlayersGallery;
 
 // Mockup albo stos klatek, z których widać tylko bieżącą.
 const Media = ({ shot, frame }: { shot: Shot; frame: number }) => {
+  if (shot.mock?.kind === 'radio')
+    return (
+      <RadioPlayerMock
+        designWidth={shot.mock.designWidth}
+        mobile={shot.mock.mobile}
+      />
+    );
   if (shot.mock) return <VideoPlayerMock designWidth={shot.mock.designWidth} />;
 
   return (

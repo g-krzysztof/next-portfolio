@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Bricolage_Grotesque, Inter, Onest } from 'next/font/google';
+import { Bricolage_Grotesque, Inter, Onest, Poppins } from 'next/font/google';
 import '../../styles/globals.css';
 import { theme } from '../../styles/theme';
 import { Providers } from '../../components/Providers';
@@ -23,6 +23,14 @@ const interFont = Inter({
   subsets: ['latin'],
   weight: '700',
   variable: '--font-inter',
+  display: 'swap',
+});
+
+// tylko mockup playera radiowego (wzór używa Poppins)
+const poppinsFont = Poppins({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '600'],
+  variable: '--font-poppins',
   display: 'swap',
 });
 
@@ -85,7 +93,7 @@ const RootLayout = async ({ children, params }: LayoutProps<'/[lang]'>) => {
   return (
     <html
       lang={current}
-      className={`${displayFont.variable} ${bodyFont.variable} ${interFont.variable}`}
+      className={`${displayFont.variable} ${bodyFont.variable} ${interFont.variable} ${poppinsFont.variable}`}
     >
       <body>
         <Providers lang={current}>{children}</Providers>
