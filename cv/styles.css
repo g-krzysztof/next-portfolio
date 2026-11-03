@@ -353,6 +353,10 @@ a {
   gap: 2.6mm 7mm;
 }
 
+.skills__group--wide {
+  grid-column: 1 / -1;
+}
+
 .skills__group h3 {
   font-family: var(--font-display);
   font-size: 9pt;

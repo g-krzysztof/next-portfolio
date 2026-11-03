@@ -31,8 +31,10 @@ export const personJsonLd = (lang: Lang, stack: StackGroup[]) => {
         addressCountry: 'PL',
       },
       knowsLanguage: ['pl', 'en'],
-      // grupa „na co dzień” ze stacku
-      knowsAbout: stack[0]?.lines.flat().map(({ name }) => name) ?? [],
+      // wszystkie grupy stacku
+      knowsAbout: stack.flatMap(({ lines }) =>
+        lines.flat().map(({ name }) => name),
+      ),
       sameAs: [CONTACT.linkedin, CONTACT.github],
     },
   };

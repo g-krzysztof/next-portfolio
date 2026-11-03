@@ -58,7 +58,7 @@ const COPY = {
       'React, TypeScript, Next.js. Playery wideo i audio, CMS, narzędzia redakcyjne.',
     avatarAlt:
       'Krzysztof Gryc, rysunkowy portret: łysy mężczyzna w okularach, z długą siwiejącą brodą, w czarnej koszulce',
-    cardBackTitle: 'Na co dzień',
+    cardBackTitle: 'Mój stack',
     aboutTitle: 'O mnie',
     recPicker: 'Rekomendacje, przewijane w poziomie',
     recCount: 'rekomendacji od przełożonych i współpracowników',
@@ -173,7 +173,7 @@ const COPY = {
       'React, TypeScript, Next.js. Video and audio players, CMS, editorial tools.',
     avatarAlt:
       'Krzysztof Gryc, illustrated portrait: a bald man in glasses with a long greying beard, wearing a black T-shirt',
-    cardBackTitle: 'Day to day',
+    cardBackTitle: 'My stack',
     aboutTitle: 'About me',
     recPicker: 'Recommendations, scroll horizontally',
     recCount: 'recommendations from managers and colleagues',

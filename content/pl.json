@@ -5,7 +5,7 @@
       "Najlepiej pracuje mi się, gdy odpowiadam za kawałek produktu w całości: od rozmowy o wymaganiach, przez decyzje architektoniczne, po wdrożenie i utrzymanie. Lubię prace, które porządkują fundament, np. wydzielenie wspólnego kodu albo scalenie stanu aplikacji, bo dopiero wtedy kolejne funkcje da się dowozić szybko i bez obawy o regresje.",
       "Pracuję blisko backendu, product ownera, designu i ludzi, którzy na co dzień korzystają z tego, co buduję. Code review traktuję jako rozmowę o rozwiązaniu: w ZPR robię je międzyzespołowo z trzema frontend developerami z innych zespołów, a wcześniej, w większych zespołach frontendowych, np. przy edytorze WP, pomagałem też mniej doświadczonym developerom.",
       "AI traktuję jako narzędzie, a nie autopilota. Na co dzień pracuję z agentami kodującymi: piszę dla nich własne skille i instrukcje oparte na konwencjach projektu, a sam pilnuję architektury i spójności kodu oraz przeglądam wszystko, co generują.",
-      "Nowości z Next.js i Reacta sprawdzam po godzinach we własnym projekcie, [dociekai.pl](https://dociekai.pl), więc o zmianach w ekosystemie mówię z doświadczenia, a nie z changelogów.",
+      "Rozwijam własny produkt, [dociekai.pl](https://dociekai.pl): edukacyjną platformę, która ma już realnych użytkowników i ruch z Google. To na nim na bieżąco wdrażam nowości z Next.js i Reacta, więc o zmianach w ekosystemie mówię z doświadczenia, a nie z changelogów.",
       "Zaczynałem jako grafik, więc mam oko do UI i dobrze dogaduję się z designerami."
     ]
   },
@@ -13,9 +13,9 @@
     "title": "<secondary>Doświadczenie</secondary> zawodowe",
     "sideProject": {
       "period": "2025 – obecnie",
-      "role": "Po godzinach: dociekai.pl",
+      "role": "Projekt własny: dociekai.pl",
       "text": [
-        "Własny projekt, który rozwijam samodzielnie od pomysłu po wdrożenie: edukacyjna platforma z interaktywnymi kursami dla klasy 4 (matematyka, informatyka, historia, język polski), grami, fiszkami i quizami. To tu na bieżąco sprawdzam nowe wersje Next.js i Reacta."
+        "Własny produkt, który rozwijam samodzielnie od pomysłu po wdrożenie: edukacyjna platforma z interaktywnymi kursami dla klasy 4 (matematyka, informatyka, historia, język polski), grami, fiszkami i quizami. Działa na produkcji: kilkadziesiąt wejść dziennie, głównie z wyników organicznych, i rosnąca grupa zarejestrowanych użytkowników. To tu na bieżąco wdrażam nowe wersje Next.js i Reacta."
       ],
       "stack": "Next.js (App Router, RSC), React 19, TypeScript, Tailwind, Strapi, Node.js (API routes), Playwright",
       "more": {
@@ -84,7 +84,7 @@
           "serwis kryptowalutowy z panelem administracyjnym: zakup, inwestycje, prezentacja inwestycji"
         ],
         "stack": [
-          "React, React Native, Cypress, HTML (Twig), CSS (Sass, BEM, Styled Components), Symfony, Docker, Bootstrap, jQuery"
+          "React, React Native, Cypress, Twig, CSS (Sass, BEM, Styled Components), Symfony, Docker, Bootstrap, jQuery"
         ]
       },
       {
@@ -264,7 +264,7 @@
         "featured": true,
         "_todo": "TODO(Moon): treść z wsadu z 2 XI 2026 (liczby: lekcje i self-testy zliczone w repo dociekai, Lighthouse z własnego pomiaru).",
         "name": "dociekai.pl – interaktywne kursy dla klasy 4",
-        "context": "Projekt własny · 2025–obecnie · na produkcji",
+        "context": "Produkt własny · 2025–obecnie · na produkcji, z realnymi użytkownikami",
         "role": "Jedyny autor: pomysł, projekt produktu, architektura, frontend i treść lekcji. Kod w dużej części piszą agenci AI (Claude Code), a ja prowadzę ich jak tech lead i robię review każdej zmiany.",
         "problem": "Materiały dla uczniów to głównie teksty i filmy. Chciałem kursów zgodnych z podstawą programową klasy 4, w których dziecko uczy się przez działanie, a strona sama ocenia każde zadanie, bez klucza odpowiedzi.",
         "decisions": [
@@ -350,23 +350,23 @@
         ],
         "facts": [
           {
-            "value": "4",
-            "label": "kursy dla klasy 4: matematyka, informatyka, historia, język polski"
+            "value": "20+",
+            "label": "wejść dziennie, głównie z wyników organicznych Google"
+          },
+          {
+            "value": "10+",
+            "label": "zarejestrowanych, realnych użytkowników, a liczba rośnie"
           },
           {
             "value": "166",
             "label": "interaktywnych lekcji i 16 przewodników; trzy kursy kompletne, polski w budowie (18 z 48)"
           },
           {
-            "value": "55",
-            "label": "zestawów self-testów logiki oceniania, serii i sanitizera; w CI przy każdym pushu"
-          },
-          {
             "value": "90+",
             "label": "punktów w Lighthouse w każdej kategorii, także wydajności, na desktopie i mobile"
           }
         ],
-        "factsSource": "Stan repozytorium i pomiar Lighthouse strony głównej, listopad 2026.",
+        "factsSource": "Stan repozytorium, statystyki ruchu i kont oraz pomiar Lighthouse strony głównej, listopad 2026.",
         "stack": "TypeScript (strict), React 19, Next.js 16 (App Router, RSC), Tailwind CSS 4, Radix UI / shadcn/ui, Framer Motion, Strapi (headless CMS), Cloudinary, Vercel, Playwright, esbuild, GitHub Actions",
         "shots": [
           {
@@ -415,73 +415,78 @@
   },
   "stack": [
     {
-      "title": "Na co dzień",
+      "title": "Rdzeń",
       "lines": [
         [
           {
             "name": "React",
-            "strong": true
-          },
+            "strong": true,
+            "front": 1
+          }
+        ],
+        [
           {
             "name": "TypeScript",
-            "strong": true
+            "strong": true,
+            "front": 2
           }
         ],
         [
           {
             "name": "Next.js",
             "detail": "App Router i RSC w dociekai.pl",
-            "strong": true
+            "strong": true,
+            "front": 3
           }
         ],
         [
           {
-            "name": "Playwright",
-            "strong": true
-          },
-          {
-            "name": "Vitest"
-          },
-          {
-            "name": "React Testing Library"
-          },
-          {
-            "name": "MSW"
+            "name": "Video.js"
           }
         ],
         [
           {
             "name": "Agenci AI",
-            "detail": "Claude Code",
-            "strong": true
-          }
-        ],
-        [
-          {
-            "name": "playery wideo i audio",
-            "detail": "HLS.js, Video.js, Google IMA / VAST",
-            "strong": true
-          }
-        ],
-        [
-          {
-            "name": "Styled Components"
-          },
-          {
-            "name": "Storybook"
+            "detail": "Claude Code, OpenCode",
+            "strong": true,
+            "front": 5
           }
         ]
       ]
     },
     {
-      "title": "Znam dobrze",
+      "title": "UI i design system",
       "lines": [
         [
           {
-            "name": "Node.js",
-            "detail": "BFF"
+            "name": "Styled Components"
           }
         ],
+        [
+          {
+            "name": "Tailwind"
+          }
+        ],
+        [
+          {
+            "name": "Storybook"
+          }
+        ],
+        [
+          {
+            "name": "shadcn/ui"
+          }
+        ],
+        [
+          {
+            "name": "Ant Design"
+          }
+        ]
+      ]
+    },
+    {
+      "title": "Dane i backend",
+      "lines": [
         [
           {
             "name": "Strapi"
@@ -489,18 +494,12 @@
         ],
         [
           {
-            "name": "Redux Toolkit"
+            "name": "Node.js"
           }
         ],
         [
           {
-            "name": "TanStack Query"
-          }
-        ],
-        [
-          {
-            "name": "Django",
-            "detail": "szablony"
+            "name": "BFF"
           }
         ],
         [
@@ -511,103 +510,69 @@
         ],
         [
           {
-            "name": "REST / OpenAPI"
-          }
-        ],
-        [
-          {
-            "name": "React Hook Form"
-          },
-          {
-            "name": "Zod"
-          }
-        ],
-        [
-          {
-            "name": "Tailwind"
-          }
-        ],
-        [
-          {
-            "name": "Framer Motion"
-          }
-        ],
-        [
-          {
-            "name": "Jest"
-          },
-          {
-            "name": "Cypress"
+            "name": "TanStack Query"
           }
         ],
         [
           {
             "name": "Nx Monorepo"
           }
-        ],
+        ]
+      ]
+    },
+    {
+      "title": "Testy i narzędzia",
+      "lines": [
         [
           {
-            "name": "Vite"
+            "name": "Playwright",
+            "strong": true,
+            "front": 4
           }
         ],
         [
           {
-            "name": "Core Web Vitals"
+            "name": "Cypress"
           }
         ],
         [
           {
-            "name": "GitLab CI"
-          },
+            "name": "MSW"
+          }
+        ],
+        [
           {
-            "name": "Sentry"
+            "name": "Vite / Vitest"
+          }
+        ],
+        [
+          {
+            "name": "React Testing Library"
           }
         ]
       ]
     },
     {
-      "title": "Wcześniej",
+      "title": "Wdrożenia i hosting",
       "lines": [
         [
           {
-            "name": "Redux-Saga"
+            "name": "GitLab CI"
           }
         ],
         [
           {
-            "name": "Sass",
-            "detail": "BEM"
+            "name": "Vercel"
           }
         ],
         [
           {
-            "name": "React Native",
-            "detail": "Expo"
+            "name": "Cloudinary"
           }
         ],
         [
           {
-            "name": "Webpack"
-          }
-        ],
-        [
-          {
-            "name": "Gatsby"
-          }
-        ],
-        [
-          {
-            "name": "Symfony + Twig"
-          }
-        ],
-        [
-          {
-            "name": "WordPress"
-          }
-        ],
-        [
-          {
-            "name": "jQuery"
+            "name": "Heroku"
           }
         ]
       ]

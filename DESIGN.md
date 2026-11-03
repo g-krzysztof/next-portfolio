@@ -386,7 +386,7 @@ A fixed 76px bar. It is transparent over the hero, fills with field once scrolle
 
 ### Business Card (signature)
 
-The identity object: about 580px wide, a paper face and a teal-to-mint band with contour arcs. The 132px avatar overlaps the band inside a 6px paper ring. Social tiles sit at the right and the CV, phone and e-mail rows below. It drops in once on load (1.2s, from 64px down, 28deg tilt, 10px blur). On hover-capable devices without reduced motion it tilts with the pointer (±8deg X, ±11deg Y) and shows the glare. It flips 180deg over 0.9s to a field-deep back with the core stack list. Under reduced motion it holds a gentler 3deg/-6deg rest and nothing animates.
+The identity object: about 580px wide, a paper face and a teal-to-mint band with contour arcs. The 132px avatar overlaps the band inside a 6px paper ring. Social tiles sit at the right and the CV, phone and e-mail rows below. It drops in once on load (1.2s, from 64px down, 28deg tilt, 10px blur). On hover-capable devices without reduced motion it tilts with the pointer (±8deg X, ±11deg Y) and shows the glare. It flips 180deg over 0.9s to a field-deep back that shows the stack as a cross-section of five layers (core on top, deploy at the bottom): one full-width slab per group, mint tint fading with depth, the group name in on-field-soft on the left and the words in Bricolage separated by teal dots on the right, the first layer larger, words that also sit on the front band in mint. The layers slide in one after another as the card finishes turning (none under reduced motion). The front band lists the technologies marked with `front` in the content, in that order. Under reduced motion it holds a gentler 3deg/-6deg rest and nothing animates.
 
 ### Line icons
 

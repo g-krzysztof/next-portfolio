@@ -6,6 +6,8 @@ export interface Tech {
   // ważność w chmurze stacku: strong = duże, minor = małe, brak = średnie
   strong?: boolean;
   minor?: boolean;
+  // miejsce na pasku awersu wizytówki (1 = pierwsze); bez pola nie trafia na pasek
+  front?: number;
 }
 
 // Linia stacku to kilka technologii, które w CV stoją obok siebie

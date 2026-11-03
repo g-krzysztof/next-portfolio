@@ -1,21 +1,21 @@
 'use client';
 
-import { useEffect, useRef, useState, type PointerEvent } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type PointerEvent,
+} from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import type { Recommendation, StackGroup } from '../../content/types';
 import { useLang } from './lang';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { useCanHover } from '../../hooks/useDevice';
 import { CONTACT, REACT_SINCE, WORKPLACES, cvHref } from './copy';
-import { lineLabel } from './stack';
 import { Wrap, bandContours, bandFill } from './ui';
 import { LineIcon } from './icons';
 import { initials } from './Recommendations';
-
-// Rewers karty pokazuje rdzeń stacku; pełna lista jest w sekcji Stack
-const BACK_ITEMS = 6;
-// Awers od razu pokazuje kilka najważniejszych technologii na pasku
-const FRONT_ITEMS = 4;
 
 const FlipIcon = () => <LineIcon name="flip" size={16} />;
 
@@ -72,12 +72,11 @@ const Hero = ({ stack, recommendations = [], buildYear }: HeroProps) => {
 
   useEffect(() => () => cancelAnimationFrame(frame.current), []);
 
-  const current = (stack[0]?.lines || []).slice(0, BACK_ITEMS).map(lineLabel);
-  const more = (stack[1]?.lines || []).map(lineLabel);
-  const core = (stack[0]?.lines || [])
-    .flat()
-    .filter(({ strong }) => strong)
-    .slice(0, FRONT_ITEMS)
+  // awers pokazuje na pasku technologie z polem `front`, w jego kolejności
+  const core = stack
+    .flatMap(({ lines }) => lines.flat())
+    .filter(({ front }) => front)
+    .sort((a, b) => (a.front ?? 0) - (b.front ?? 0))
     .map(({ name }) => name);
 
   return (
@@ -189,27 +188,41 @@ const Hero = ({ stack, recommendations = [], buildYear }: HeroProps) => {
               </Front>
 
               <Back inert={!flipped} aria-hidden={!flipped} $away={!flipped}>
-                <BackTitle>{copy.cardBackTitle}</BackTitle>
-                <StackList>
-                  {current.map((item) => (
-                    <li key={item}>{item}</li>
+                <BackHead>
+                  <BackTitle>{copy.cardBackTitle}</BackTitle>
+                  <FlipCorner
+                    type="button"
+                    onClick={() => setFlipped(false)}
+                    aria-label={copy.flipToFront}
+                    $onBack
+                  >
+                    {copy.flipToFront}
+                    <FlipIcon />
+                  </FlipCorner>
+                </BackHead>
+                <Strata $shown={flipped}>
+                  {stack.map(({ title, lines }, index) => (
+                    <Layer
+                      key={title}
+                      style={{ '--i': index } as CSSProperties}
+                    >
+                      <LayerName>{title}</LayerName>
+                      <LayerWords>
+                        <ul>
+                          {lines.flat().map(({ name, strong }) => (
+                            <LayerWord
+                              key={name}
+                              $lead={index === 0}
+                              $strong={strong}
+                            >
+                              {name}
+                            </LayerWord>
+                          ))}
+                        </ul>
+                      </LayerWords>
+                    </Layer>
                   ))}
-                </StackList>
-                {more.length > 0 && (
-                  <div>
-                    <BackSub>{stack[1].title}</BackSub>
-                    <MoreList>{more.join(' · ')}</MoreList>
-                  </div>
-                )}
-                <FlipCorner
-                  type="button"
-                  onClick={() => setFlipped(false)}
-                  aria-label={copy.flipToFront}
-                  $onBack
-                >
-                  {copy.flipToFront}
-                  <FlipIcon />
-                </FlipCorner>
+                </Strata>
                 <Glare aria-hidden="true" />
               </Back>
             </Flipper>
@@ -280,7 +293,9 @@ const OpenTo = styled.a`
   line-height: 1.3;
   color: ${({ theme }) => theme.colors.onField};
   text-decoration: none;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
   &:hover {
     background: rgba(143, 227, 136, 0.18);
     border-color: ${({ theme }) => theme.colors.mint};
@@ -559,9 +574,8 @@ const Back = styled.article<{ $away: boolean }>`
   transform: rotateY(180deg) translateZ(1px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 18px;
-  padding: clamp(26px, 4vw, 44px);
+  gap: clamp(16px, 2.4vw, 24px);
+  padding: clamp(20px, 3.4vw, 36px);
   ${({ theme: { colors } }) => css`
     background:
       radial-gradient(
@@ -802,31 +816,102 @@ const BackTitle = styled.h3`
   color: ${({ theme }) => theme.colors.mint};
 `;
 
-const StackList = styled.ul`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 20px;
-  li {
-    padding: 7px 0;
-    border-bottom: 1px solid rgba(198, 218, 213, 0.18);
-    font-size: 14px;
-    line-height: 1.35;
-    font-weight: 500;
+// Rewers: stack jako przekrój warstw, od rdzenia na górze po wdrożenia na dole
+const BackHead = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+`;
+
+const Strata = styled.ol<{ $shown: boolean }>`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-radius: ${({ theme }) => theme.radii.control};
+  overflow: hidden;
+  /* warstwy wsuwają się po kolei, gdy karta kończy obrót */
+  > li {
+    opacity: ${({ $shown }) => ($shown ? 1 : 0)};
+    transform: ${({ $shown }) => ($shown ? 'none' : 'translateX(18px)')};
+    transition: ${({ $shown, theme }) =>
+      $shown
+        ? `opacity 0.6s ${theme.ease.out} calc(0.3s + var(--i) * 70ms),
+           transform 0.8s ${theme.ease.out} calc(0.3s + var(--i) * 70ms)`
+        : 'none'};
   }
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
-    grid-template-columns: 1fr;
+  @media (prefers-reduced-motion: reduce) {
+    > li {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 `;
 
-const BackSub = styled.p`
+const Layer = styled.li`
+  flex: 1;
+  display: grid;
+  grid-template-columns: clamp(92px, 13vw, 128px) minmax(0, 1fr);
+  align-items: center;
+  column-gap: 16px;
+  padding: 12px 16px;
+  /* im głębiej w stosie, tym słabszy mint */
+  background: rgba(143, 227, 136, calc(0.17 - var(--i) * 0.03));
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 4px;
+    padding: 10px 14px;
+  }
+`;
+
+const LayerName = styled.span`
   font-size: 13px;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.mint};
+  line-height: 1.3;
+  color: ${({ theme }) => theme.colors.onFieldSoft};
 `;
 
-const MoreList = styled.p`
-  margin-top: 4px;
-  font-size: 13px;
-  line-height: 1.5;
-  color: ${({ theme }) => theme.colors.onFieldSoft};
+/* kropka stoi przed każdym słowem; ujemny margines z overflow chowa te,
+   które po zawinięciu wypadają na początku wiersza */
+const LayerWords = styled.div`
+  overflow: hidden;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    row-gap: 2px;
+    margin-left: -17px;
+  }
+`;
+
+const LayerWord = styled.li<{ $lead: boolean; $strong?: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  font-family: ${({ theme }) => theme.fonts.display};
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  ${({ $lead }) =>
+    $lead
+      ? css`
+          font-size: clamp(1.05rem, 1.9vw, 1.4rem);
+          font-weight: 800;
+        `
+      : css`
+          font-size: clamp(0.92rem, 1.35vw, 1rem);
+          font-weight: 600;
+        `}
+  color: ${({ $strong, theme }) =>
+    $strong ? theme.colors.mint : theme.colors.onField};
+  &::before {
+    content: '';
+    flex: none;
+    width: 5px;
+    height: 5px;
+    margin: 0 6px;
+    border-radius: 50%;
+    background: ${({ theme }) => theme.colors.teal};
+  }
 `;

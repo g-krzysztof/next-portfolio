@@ -5,7 +5,7 @@
       "I work best when I own a piece of the product end to end: from talking through requirements, through architectural decisions, to deployment and maintenance. I like work that cleans up the foundations, such as extracting shared code or merging an app’s state, because only then can new features ship quickly without fear of regressions.",
       "I work closely with the back end, the product owner, design and the people who use what I build every day. I treat code review as a conversation about the solution: at ZPR I do cross-team reviews with three front-end developers from other teams, and earlier, in larger front-end teams such as the WP editor team, I also helped less experienced developers.",
       "I treat AI as a tool, not an autopilot. I work with coding agents every day: I write my own skills and instructions for them based on project conventions, while I keep the architecture and code consistent and review everything they generate.",
-      "I try out what’s new in Next.js and React after hours in my own project, [dociekai.pl](https://dociekai.pl), so I talk about changes in the ecosystem from experience, not from changelogs.",
+      "I’m building my own product, [dociekai.pl](https://dociekai.pl): an educational platform that already has real users and traffic from Google. It’s where I keep shipping what’s new in Next.js and React, so I talk about changes in the ecosystem from experience, not from changelogs.",
       "I started out as a graphic designer, so I have an eye for UI and get along well with designers."
     ]
   },
@@ -13,9 +13,9 @@
     "title": "<secondary>Professional</secondary> experience",
     "sideProject": {
       "period": "2025 – present",
-      "role": "After hours: dociekai.pl",
+      "role": "Own product: dociekai.pl",
       "text": [
-        "My own project, which I build on my own from idea to deployment: an educational platform with interactive 4th-grade courses (maths, computer science, history, Polish), games, flashcards and quizzes. This is where I keep trying out new versions of Next.js and React."
+        "My own product, which I build on my own from idea to deployment: an educational platform with interactive 4th-grade courses (maths, computer science, history, Polish), games, flashcards and quizzes. It runs in production with dozens of visits a day, mostly from organic search, and a growing base of registered users. This is where I keep shipping new versions of Next.js and React."
       ],
       "stack": "Next.js (App Router, RSC), React 19, TypeScript, Tailwind, Strapi, Node.js (API routes), Playwright",
       "more": {
@@ -84,7 +84,7 @@
           "cryptocurrency service with an admin panel: purchasing, investing, investment overview"
         ],
         "stack": [
-          "React, React Native, Cypress, HTML (Twig), CSS (Sass, BEM, Styled Components), Symfony, Docker, Bootstrap, jQuery"
+          "React, React Native, Cypress, Twig, CSS (Sass, BEM, Styled Components), Symfony, Docker, Bootstrap, jQuery"
         ]
       },
       {
@@ -264,7 +264,7 @@
         "featured": true,
         "_todo": "TODO(Moon): treść z wsadu z 2 XI 2026 (liczby: lekcje i self-testy zliczone w repo dociekai, Lighthouse z własnego pomiaru).",
         "name": "dociekai.pl – interactive courses for 4th grade",
-        "context": "Personal project · 2025–present · in production",
+        "context": "Own product · 2025–present · in production, with real users",
         "role": "Sole author: idea, product design, architecture, front end and lesson content. AI agents (Claude Code) write much of the code; I lead them as a tech lead and review every change.",
         "problem": "Learning materials for pupils are mostly texts and videos. I wanted courses that follow the 4th-grade core curriculum, where a child learns by doing and the page grades every task itself, with no answer key.",
         "decisions": [
@@ -350,23 +350,23 @@
         ],
         "facts": [
           {
-            "value": "4",
-            "label": "4th-grade courses: maths, computer science, history, Polish"
+            "value": "20+",
+            "label": "visits a day, mostly from organic Google search"
+          },
+          {
+            "value": "10+",
+            "label": "registered, real users, and the number is growing"
           },
           {
             "value": "166",
             "label": "interactive lessons and 16 guides; three courses complete, Polish in progress (18 of 48)"
           },
           {
-            "value": "55",
-            "label": "self-test suites for grading, streak and sanitiser logic; run in CI on every push"
-          },
-          {
             "value": "90+",
             "label": "Lighthouse score in every category, performance included, on desktop and mobile"
           }
         ],
-        "factsSource": "Repository state and a Lighthouse run on the home page, November 2026.",
+        "factsSource": "Repository state, traffic and account stats, and a Lighthouse run on the home page, November 2026.",
         "stack": "TypeScript (strict), React 19, Next.js 16 (App Router, RSC), Tailwind CSS 4, Radix UI / shadcn/ui, Framer Motion, Strapi (headless CMS), Cloudinary, Vercel, Playwright, esbuild, GitHub Actions",
         "shots": [
           {
@@ -415,73 +415,78 @@
   },
   "stack": [
     {
-      "title": "Day to day",
+      "title": "Core",
       "lines": [
         [
           {
             "name": "React",
-            "strong": true
-          },
+            "strong": true,
+            "front": 1
+          }
+        ],
+        [
           {
             "name": "TypeScript",
-            "strong": true
+            "strong": true,
+            "front": 2
           }
         ],
         [
           {
             "name": "Next.js",
             "detail": "App Router and RSC in dociekai.pl",
-            "strong": true
+            "strong": true,
+            "front": 3
           }
         ],
         [
           {
-            "name": "Playwright",
-            "strong": true
-          },
-          {
-            "name": "Vitest"
-          },
-          {
-            "name": "React Testing Library"
-          },
-          {
-            "name": "MSW"
+            "name": "Video.js"
           }
         ],
         [
           {
             "name": "AI agents",
-            "detail": "Claude Code",
-            "strong": true
-          }
-        ],
-        [
-          {
-            "name": "video and audio players",
-            "detail": "HLS.js, Video.js, Google IMA / VAST",
-            "strong": true
-          }
-        ],
-        [
-          {
-            "name": "Styled Components"
-          },
-          {
-            "name": "Storybook"
+            "detail": "Claude Code, OpenCode",
+            "strong": true,
+            "front": 5
           }
         ]
       ]
     },
     {
-      "title": "Know well",
+      "title": "UI & design system",
       "lines": [
         [
           {
-            "name": "Node.js",
-            "detail": "BFF"
+            "name": "Styled Components"
           }
         ],
+        [
+          {
+            "name": "Tailwind"
+          }
+        ],
+        [
+          {
+            "name": "Storybook"
+          }
+        ],
+        [
+          {
+            "name": "shadcn/ui"
+          }
+        ],
+        [
+          {
+            "name": "Ant Design"
+          }
+        ]
+      ]
+    },
+    {
+      "title": "Data & backend",
+      "lines": [
         [
           {
             "name": "Strapi"
@@ -489,18 +494,12 @@
         ],
         [
           {
-            "name": "Redux Toolkit"
+            "name": "Node.js"
           }
         ],
         [
           {
-            "name": "TanStack Query"
-          }
-        ],
-        [
-          {
-            "name": "Django",
-            "detail": "templates"
+            "name": "BFF"
           }
         ],
         [
@@ -511,103 +510,69 @@
         ],
         [
           {
-            "name": "REST / OpenAPI"
-          }
-        ],
-        [
-          {
-            "name": "React Hook Form"
-          },
-          {
-            "name": "Zod"
-          }
-        ],
-        [
-          {
-            "name": "Tailwind"
-          }
-        ],
-        [
-          {
-            "name": "Framer Motion"
-          }
-        ],
-        [
-          {
-            "name": "Jest"
-          },
-          {
-            "name": "Cypress"
+            "name": "TanStack Query"
           }
         ],
         [
           {
             "name": "Nx Monorepo"
           }
-        ],
+        ]
+      ]
+    },
+    {
+      "title": "Testing & tooling",
+      "lines": [
         [
           {
-            "name": "Vite"
+            "name": "Playwright",
+            "strong": true,
+            "front": 4
           }
         ],
         [
           {
-            "name": "Core Web Vitals"
+            "name": "Cypress"
           }
         ],
         [
           {
-            "name": "GitLab CI"
-          },
+            "name": "MSW"
+          }
+        ],
+        [
           {
-            "name": "Sentry"
+            "name": "Vite / Vitest"
+          }
+        ],
+        [
+          {
+            "name": "React Testing Library"
           }
         ]
       ]
     },
     {
-      "title": "Earlier",
+      "title": "Deploy & hosting",
       "lines": [
         [
           {
-            "name": "Redux-Saga"
+            "name": "GitLab CI"
           }
         ],
         [
           {
-            "name": "Sass",
-            "detail": "BEM"
+            "name": "Vercel"
           }
         ],
         [
           {
-            "name": "React Native",
-            "detail": "Expo"
+            "name": "Cloudinary"
           }
         ],
         [
           {
-            "name": "Webpack"
-          }
-        ],
-        [
-          {
-            "name": "Gatsby"
-          }
-        ],
-        [
-          {
-            "name": "Symfony + Twig"
-          }
-        ],
-        [
-          {
-            "name": "WordPress"
-          }
-        ],
-        [
-          {
-            "name": "jQuery"
+            "name": "Heroku"
           }
         ]
       ]
