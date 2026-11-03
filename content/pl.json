@@ -250,7 +250,7 @@
       {
         "id": "dociekai",
         "featured": true,
-        "_todo": "TODO(Moon): treść z wsadu z 2 XI 2026 (liczby: lekcje i self-testy zliczone w repo dociekai, Lighthouse z własnego pomiaru). Link „Kod na GitHubie” (https://github.com/g-krzysztof/dociekai, „publiczny wycinek kodu (portfolio)”) wstrzymany: 2 XI 2026 bez logowania zwracał 404 – dodać do links, gdy repo będzie publiczne",
+        "_todo": "TODO(Moon): treść z wsadu z 2 XI 2026 (liczby: lekcje i self-testy zliczone w repo dociekai, Lighthouse z własnego pomiaru).",
         "name": "dociekai.pl – interaktywne kursy dla klasy 4",
         "context": "Projekt własny · 2025–obecnie · na produkcji",
         "role": "Jedyny autor: pomysł, projekt produktu, architektura, frontend i treść lekcji. Kod w dużej części piszą agenci AI (Claude Code), a ja prowadzę ich jak tech lead i robię review każdej zmiany.",
@@ -392,6 +392,10 @@
           {
             "href": "https://dociekai.pl",
             "label": "Zobacz dociekai.pl"
+          },
+          {
+            "href": "https://github.com/g-krzysztof/dociekai",
+            "label": "Kod na GitHubie (publiczny wycinek)"
           }
         ]
       }
