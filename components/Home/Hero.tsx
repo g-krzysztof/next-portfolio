@@ -15,7 +15,6 @@ import { useCanHover } from '../../hooks/useDevice';
 import { CONTACT, REACT_SINCE, WORKPLACES, cvHref } from './copy';
 import { Wrap, bandContours, bandFill } from './ui';
 import { LineIcon } from './icons';
-import { initials } from './Recommendations';
 
 const FlipIcon = () => <LineIcon name="flip" size={16} />;
 
@@ -101,13 +100,14 @@ const Hero = ({ stack, recommendations = [], buildYear }: HeroProps) => {
           </Worked>
           {recommendations.length > 0 && (
             <Proof href="#opinie">
-              <Discs aria-hidden="true">
-                {recommendations.map(({ id, author }) => (
-                  <span key={id}>{initials(author)}</span>
-                ))}
-              </Discs>
+              <Count>{recommendations.length}</Count>
               <ProofText>
-                <b>{recommendations.length}</b> {copy.recCount}
+                <span>{copy.recCount}</span>
+                <Roles>
+                  {copy.recRoles.map((role) => (
+                    <span key={role}>{role}</span>
+                  ))}
+                </Roles>
               </ProofText>
               <LineIcon name="arrow" size={18} />
             </Proof>
@@ -379,9 +379,9 @@ const Proof = styled.a`
   width: fit-content;
   max-width: 100%;
   align-items: center;
-  gap: 14px;
-  padding: 8px 18px 8px 8px;
-  border-radius: 99px;
+  gap: 16px;
+  padding: 12px 20px 12px 18px;
+  border-radius: 18px;
   background: rgba(143, 227, 136, 0.1);
   border: 1px solid rgba(143, 227, 136, 0.3);
   color: ${({ theme }) => theme.colors.onField};
@@ -404,46 +404,41 @@ const Proof = styled.a`
   }
 `;
 
-const Discs = styled.span`
-  display: flex;
+const Count = styled.span`
   flex-shrink: 0;
-  span {
-    width: 36px;
-    height: 36px;
-    margin-left: -6px;
-    border-radius: 50%;
-    border: 2px solid ${({ theme }) => theme.colors.field};
-    background: ${({ theme }) => theme.colors.paper};
-    color: ${({ theme }) => theme.colors.field};
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-family: ${({ theme }) => theme.fonts.display};
-    font-weight: 800;
-    font-size: 13px;
-    letter-spacing: -0.02em;
-  }
-  span:first-child {
-    margin-left: 0;
-    background: ${({ theme }) => theme.colors.mint};
-  }
-  /* na telefonie trzy kółka, żeby tekst obok nie łamał się co słowo */
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
-    span:nth-child(n + 4) {
-      display: none;
-    }
-  }
+  min-width: 1ch;
+  font-family: ${({ theme }) => theme.fonts.display};
+  font-weight: 800;
+  font-size: 46px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: ${({ theme }) => theme.colors.mint};
 `;
 
 const ProofText = styled.span`
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   font-size: 15px;
   line-height: 1.3;
   font-weight: 500;
-  b {
-    font-family: ${({ theme }) => theme.fonts.display};
-    font-weight: 800;
-    font-size: 1.15em;
+`;
+// stanowiska polecających: mówią więcej niż inicjały
+const Roles = styled.span`
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.onFieldSoft};
+  /* kropka na końcu elementu: przy łamaniu nie zaczyna nowej linii */
+  span {
+    white-space: nowrap;
+  }
+  span:not(:last-child)::after {
+    content: '·';
+    margin-left: 8px;
     color: ${({ theme }) => theme.colors.mint};
   }
 `;

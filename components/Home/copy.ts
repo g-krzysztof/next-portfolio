@@ -62,6 +62,8 @@ const COPY = {
     aboutTitle: 'O mnie',
     recPicker: 'Rekomendacje, przewijane w poziomie',
     recCount: 'rekomendacji od przełożonych i współpracowników',
+    // najwyższe stanowiska wśród polecających, skrócone do etykiet
+    recRoles: ['Prezes zarządu', 'CTO', 'Tech Lead', 'Product Owner'],
     recMode: 'Sposób wyświetlania rekomendacji',
     recModeReel: 'Animacja',
     recModeText: 'Sam tekst',
@@ -199,6 +201,7 @@ const COPY = {
     aboutTitle: 'About me',
     recPicker: 'Recommendations, scroll horizontally',
     recCount: 'recommendations from managers and colleagues',
+    recRoles: ['Chairman of the Board', 'CTO', 'Tech Lead', 'Product Owner'],
     recMode: 'How to show the recommendations',
     recModeReel: 'Animated',
     recModeText: 'Text only',

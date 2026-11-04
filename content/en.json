@@ -1,6 +1,6 @@
 {
   "about": {
-    "lead": "I’m a <primary>Senior React Frontend Developer</primary> based in Tychy, Poland. I have been building web applications for over 10 years, and since 2019 I have specialised commercially in React and TypeScript, mostly in media products.",
+    "lead": "I’m a <primary>Senior React Frontend Developer</primary> based in Tychy, Poland. I have been building web applications for over 10 years, and since 2019 I have specialised commercially in React and TypeScript.",
     "body": [
       "I work best when I own a piece of the product end to end: from talking through requirements, through architectural decisions, to deployment and maintenance. I like work that cleans up the foundations, such as extracting shared code or merging an app’s state, because only then can new features ship quickly without fear of regressions.",
       "I work closely with the back end, the product owner, design and the people who use what I build every day. I treat code review as a conversation about the solution: at ZPR I do cross-team reviews with three front-end developers from other teams, and earlier, in larger front-end teams such as the WP editor team, I also helped less experienced developers.",
@@ -30,7 +30,7 @@
         "imageAlt": "Sketch: Krzysztof at a monitor with a video player, wearing headphones, a microphone nearby",
         "role": "Senior React Frontend Developer – Grupa ZPR Media",
         "text": [
-          "The only front-end developer in the 9-person Multimedia team: I independently own the entire front end of the area across the group’s websites and radio stations (Super Express, Eska, Vox FM, Radio Plus). I run my own repositories and take every topic from requirements through architecture to release and maintenance. I do cross-team code review with three front-end developers from the group’s other teams."
+          "The only front-end developer in the 9-person Multimedia team: I independently own the entire front end of the area across the group’s websites and radio stations (including Super Express, Eska and Vox FM). I run my own repositories and take every topic from requirements through architecture to release and maintenance. I do cross-team code review with three front-end developers from the group’s other teams."
         ],
         "projects": [
           {
@@ -48,7 +48,7 @@
           }
         ],
         "stack": [
-          "TypeScript, React, HLS.js, Google IMA / VAST, Shadow DOM, TanStack Query, Ant Design, Vitest, Playwright, MSW"
+          "TypeScript, React, Shadow DOM, TanStack Query, Ant Design, Vitest, Playwright, MSW, HLS.js, Google IMA / VAST"
         ]
       },
       {
@@ -128,11 +128,11 @@
         "problem": "Video and audio players were scattered across the group’s websites as separate scripts. Every fix meant deployments in many places, and ads, analytics and error handling worked slightly differently on every site. On top of that, external partners wanted to embed the group’s radio and video on their own sites, and code running on someone else’s page must not break its styles or slow it down.",
         "product": [
           "The video player and reels are two independent bundles that a website embeds with a single HTML element with data-* attributes. The player plays HLS and supports preroll ads, up-next videos, sticky mode and LIVE broadcasts, and the video match feature picks a video to match the article’s content on its own. Reels are a vertical carousel with navigation, sound and looping.",
-          "The radio player streams the group’s stations live (Eska, Eska Rock, Vox FM, Radio Plus and more) and dedicated streams, with “now playing” and the current show. Partner widgets bring the player and the radio to sites outside the group."
+          "The radio player streams the group’s stations live (including Eska, Eska Rock and Vox FM) and dedicated streams, with “now playing” and the current show. Partner widgets bring the player and the radio to sites outside the group."
         ],
         "text": [
           "I designed and built the video and reels player from the first commit in React and TypeScript: from zero to production in about six months, with preroll ads (Google IMA), sticky mode, Gemius analytics and a data layer. Websites get a ready-made script from a CDN instead of their own copies of the player.",
-          "I built a new radio player (multiple brands and streams, desktop and mobile, dark mode, faster loading) and two widgets for external partners, where Shadow DOM isolates the styles and the bundle is kept as small as possible so it doesn’t slow down other companies’ sites. The radio widget has gone through more than 30 releases.",
+          "I built a new radio player (multiple brands and streams, desktop and mobile, dark mode, faster loading) and two widgets for external partners, where Shadow DOM isolates the styles.",
           "On the group’s websites: audio and podcast blocks with playlists that keep playing even with an ad blocker on, article audio based on text-to-speech, and consistent player behaviour on iOS (fullscreen, autoplay).",
           "I develop the CMS panel where the team manages the stations’ mobile apps (React, Ant Design, TanStack Query): a page editor with drag & drop, permissions, Android Auto / CarPlay and TV apps. I delivered video match end to end across three repositories: the panel, the player and the website.",
           "Quality: demo pages with an embed code generator and MSW mocks that simulate API failures and missing third-party scripts, Vitest and Playwright tests, ESLint and Husky, releases with changelogs."
@@ -229,7 +229,8 @@
           "I moved the map from the rlayers wrapper to the native OpenLayers 6 API in all of its views: main, mini and modal. On that foundation I built the layers panel and the interactions: interactive points, a layer context menu, a coordinates popup and animated zoom.",
           "Colourised terrain basemap: tiles go through a RasterSource that converts every pixel from RGB to the HCL colour space and back, repainting the terrain in the app’s palette.",
           "Layers panel: layers from GeoJSON data (polygons with labels and styles), field groups with a visibility toggle and a slider, plus new SwitchField and RangeInput components in the design system.",
-          "The @kadme/components design system: I rebuilt about 10 base components to match new Figma designs (including Button, Tooltip, Popover and Tile) and added 6 new ones, including Tabs, FAB and SourceBrowser – a three-level data source tree with a custom scrollbar, built from scratch. Every component had a Storybook story and went through code review.",
+          "The @kadme/components design system: a separate package in the NX monorepo, versioned with Changesets, from which the whole app was assembled. I built a large share of its components: I rebuilt about 10 base ones to match new Figma designs (including Button, Tooltip, Popover and Tile) and added 6 new ones, including Tabs, FAB and SourceBrowser – a three-level data source tree with a custom scrollbar, built from scratch.",
+          "Components were built in Storybook first, in isolation from the app and in parallel with the UI design: each got a story with its variants, so it could be checked against the Figma design before it reached a view. After code review it was ready to use in the app, and I then assembled screens from these building blocks: the layers panel, the filters sidebar, the settings modal and bookmarks.",
           "In the app: a filters sidebar with a mobile version, connected to the widget usage modal (I made more commits to filters than the rest of the team combined), layout views, a settings modal and bookmarks, results rendering fixes, and a batch of fixes after acceptance testing."
         ],
         "outcomes": [
@@ -700,6 +701,34 @@
             }
           ],
           "closing": "I recommend him as a colleague with a clear conscience."
+        }
+      },
+      {
+        "id": "michal-kaliniak",
+        "author": "Michał Kaliniak",
+        "position": "iOS and Android Developer",
+        "company": "Time S.A. (Grupa ZPR Media)",
+        "date": "04.11.2026",
+        "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
+        "text": [
+          "Working with Krzysztof is a real pleasure! Punctual and professional as a developer, and on top of that a fantastic colleague. You can always count on him, both when solving tougher problems and in everyday collaboration. He is great with people, has a big sense of humor and knows how to keep a good atmosphere in the team."
+        ],
+        "reel": {
+          "fact": {
+            "value": "same team",
+            "label": "with the iOS and Android developer"
+          },
+          "quotes": [
+            {
+              "text": "Punctual and professional as a developer, and on top of that a fantastic colleague",
+              "mark": "a fantastic colleague"
+            },
+            {
+              "text": "You can always count on him, both when solving tougher problems and in everyday collaboration",
+              "mark": "You can always count on him"
+            }
+          ],
+          "closing": "He is great with people, has a big sense of humor and knows how to keep a good atmosphere in the team."
         }
       },
       {

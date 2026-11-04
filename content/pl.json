@@ -1,6 +1,6 @@
 {
   "about": {
-    "lead": "Jestem <primary>Senior React Frontend Developerem</primary> z Tychów. Od ponad 10 lat tworzę aplikacje webowe, a od 2019 roku komercyjnie specjalizuję się w React i TypeScript, głównie w produktach medialnych.",
+    "lead": "Jestem <primary>Senior React Frontend Developerem</primary> z Tychów. Od ponad 10 lat tworzę aplikacje webowe, a od 2019 roku komercyjnie specjalizuję się w React i TypeScript.",
     "body": [
       "Najlepiej pracuje mi się, gdy odpowiadam za kawałek produktu w całości: od rozmowy o wymaganiach, przez decyzje architektoniczne, po wdrożenie i utrzymanie. Lubię prace, które porządkują fundament, np. wydzielenie wspólnego kodu albo scalenie stanu aplikacji, bo dopiero wtedy kolejne funkcje da się dowozić szybko i bez obawy o regresje.",
       "Pracuję blisko backendu, product ownera, designu i ludzi, którzy na co dzień korzystają z tego, co buduję. Code review traktuję jako rozmowę o rozwiązaniu: w ZPR robię je międzyzespołowo z trzema frontend developerami z innych zespołów, a wcześniej, w większych zespołach frontendowych, np. przy edytorze WP, pomagałem też mniej doświadczonym developerom.",
@@ -30,7 +30,7 @@
         "imageAlt": "Szkic: Krzysztof przy monitorze z playerem wideo, w słuchawkach, obok mikrofon",
         "role": "Senior React Frontend Developer – Grupa ZPR Media",
         "text": [
-          "Jedyny frontend developer w 9-osobowym zespole Multimedia: samodzielnie odpowiadam za cały frontend obszaru w serwisach i stacjach radiowych grupy (Super Express, Eska, Vox FM, Radio Plus). Prowadzę własne repozytoria i każdy temat od wymagań, przez architekturę, po wdrożenie i utrzymanie. Code review robię międzyzespołowo, z trzema frontend developerami z innych zespołów grupy."
+          "Jedyny frontend developer w 9-osobowym zespole Multimedia: samodzielnie odpowiadam za cały frontend obszaru w serwisach i stacjach radiowych grupy (m.in. Super Express, Eska, Vox FM). Prowadzę własne repozytoria i każdy temat od wymagań, przez architekturę, po wdrożenie i utrzymanie. Code review robię międzyzespołowo, z trzema frontend developerami z innych zespołów grupy."
         ],
         "projects": [
           {
@@ -48,7 +48,7 @@
           }
         ],
         "stack": [
-          "TypeScript, React, HLS.js, Google IMA / VAST, Shadow DOM, TanStack Query, Ant Design, Vitest, Playwright, MSW"
+          "TypeScript, React, Shadow DOM, TanStack Query, Ant Design, Vitest, Playwright, MSW, HLS.js, Google IMA / VAST"
         ]
       },
       {
@@ -128,11 +128,11 @@
         "problem": "Playery wideo i audio były rozproszone po kodzie serwisów grupy jako osobne skrypty. Każda poprawka oznaczała wdrożenia w wielu miejscach, a reklamy, statystyki i obsługa błędów działały w każdym serwisie trochę inaczej. Do tego partnerzy zewnętrzni chcieli osadzać radio i wideo grupy u siebie, a kod na cudzej stronie nie może psuć jej stylów ani spowalniać ładowania.",
         "product": [
           "Player wideo i rolki to dwa niezależne bundle, które serwis osadza jednym elementem HTML z atrybutami data-*. Player odtwarza HLS, obsługuje reklamy preroll, kolejne wideo, tryb sticky i transmisje LIVE, a funkcja video match sama dobiera wideo do treści artykułu. Rolki to pionowa karuzela z nawigacją, dźwiękiem i pętlą.",
-          "Player radiowy gra na żywo stacje grupy (Eska, Eska Rock, Vox FM, Radio Plus i kolejne) i strumienie dedykowane, z „teraz gramy” i bieżącym programem. Widgety dla partnerów przenoszą player i radio na strony spoza grupy."
+          "Player radiowy gra na żywo stacje grupy (m.in. Eska, Eska Rock, Vox FM) i strumienie dedykowane, z „teraz gramy” i bieżącym programem. Widgety dla partnerów przenoszą player i radio na strony spoza grupy."
         ],
         "text": [
           "Zaprojektowałem i zbudowałem od pierwszego commita player wideo i rolek w React i TypeScript: od zera do produkcji w około pół roku, z reklamami preroll (Google IMA), trybem sticky, statystykami Gemius i data layerem. Serwisy dostają gotowy skrypt z CDN zamiast własnych kopii playera.",
-          "Zbudowałem nowy player radiowy (wiele marek i strumieni, desktop i mobile, dark mode, szybsze ładowanie) oraz dwa widgety dla partnerów zewnętrznych, w których style izoluje Shadow DOM, a bundle jest możliwie mały, żeby nie spowalniać cudzych stron. Widget radia przeszedł ponad 30 wydań.",
+          "Zbudowałem nowy player radiowy (wiele marek i strumieni, desktop i mobile, dark mode, szybsze ładowanie) oraz dwa widgety dla partnerów zewnętrznych, w których style izoluje Shadow DOM.",
           "Na portalach grupy: bloki audio i podcastów z playlistami, które grają także przy włączonym adblocku, odsłuch artykułów oparty na text-to-speech i spójne działanie playerów na iOS (fullscreen, autoplay).",
           "Rozwijam panel CMS, w którym zespół zarządza aplikacjami mobilnymi stacji (React, Ant Design, TanStack Query): edytor stron z drag & drop, uprawnienia, Android Auto / CarPlay i aplikacje TV. Video match dowiozłem end-to-end przez trzy repozytoria: panel, player i portal.",
           "Jakość: strony demo z generatorem kodu osadzania i mockami MSW, które symulują awarie API i brak zewnętrznych skryptów, testy Vitest i Playwright, ESLint i Husky, wydania z changelogami."
@@ -229,7 +229,8 @@
           "Przeniosłem mapę z wrappera rlayers na natywne API OpenLayers 6 we wszystkich jej widokach: głównym, małym i modalnym. Na tej bazie zbudowałem panel warstw i interakcje: interaktywne punkty, menu kontekstowe warstw, popup ze współrzędnymi i animowany zoom.",
           "Kolorowany podkład terenu: kafelki przechodzą przez RasterSource, który przelicza każdy piksel z RGB do przestrzeni barw HCL i z powrotem, żeby przemalować teren na paletę aplikacji.",
           "Panel warstw: warstwy z danych GeoJSON (poligony z etykietami i stylami), grupy pól z przełącznikiem widoczności i suwakiem oraz nowe komponenty SwitchField i RangeInput w design systemie.",
-          "Design system @kadme/components: przebudowałem ok. 10 bazowych komponentów pod nowe projekty z Figmy (m.in. Button, Tooltip, Popover, Tile) i dodałem 6 nowych, m.in. Tabs, FAB i SourceBrowser – trójpoziomowe drzewo źródeł danych z własnym scrollbarem, zbudowane od zera. Każdy komponent miał story w Storybooku i przechodził code review.",
+          "Design system @kadme/components: osobny pakiet w monorepo NX, wersjonowany przez Changesets, z którego składała się cała aplikacja. Zbudowałem dużą część jego komponentów: przebudowałem ok. 10 bazowych pod nowe projekty z Figmy (m.in. Button, Tooltip, Popover, Tile) i dodałem 6 nowych, m.in. Tabs, FAB i SourceBrowser – trójpoziomowe drzewo źródeł danych z własnym scrollbarem, zbudowane od zera.",
+          "Komponenty powstawały najpierw w Storybooku, w izolacji od aplikacji i równolegle z projektowaniem UI: każdy dostawał story z wariantami, dzięki któremu można go było sprawdzić z projektem z Figmy, zanim trafił do widoku. Po code review był gotowy do użycia w aplikacji, a z takich klocków składałem potem ekrany: panel warstw, sidebar filtrów, modal ustawień i zakładki.",
           "W aplikacji: sidebar filtrów z wersją mobilną, połączony z modalem użycia widgetów (w filtrach miałem więcej commitów niż reszta zespołu razem), widoki w layoucie, modal ustawień i zakładki, poprawki renderowania wyników, a po testach akceptacyjnych pakiet poprawek."
         ],
         "outcomes": [
@@ -700,6 +701,34 @@
             }
           ],
           "closing": "Z czystym sumieniem polecam go jako współpracownika."
+        }
+      },
+      {
+        "id": "michal-kaliniak",
+        "author": "Michał Kaliniak",
+        "position": "Programista aplikacji iOS i Android",
+        "company": "Time S.A. (Grupa ZPR Media)",
+        "date": "04.11.2026",
+        "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
+        "text": [
+          "Praca z Krzysztofem to sama przyjemność! Terminowy i profesjonalny jako programista, a do tego rewelacyjny jako kolega z pracy. Zawsze można na niego liczyć, zarówno przy rozwiązywaniu trudniejszych problemów, jak i w codziennej współpracy. Ma świetne podejście do ludzi, duże poczucie humoru i potrafi zadbać o dobrą atmosferę w zespole."
+        ],
+        "reel": {
+          "fact": {
+            "value": "ten sam zespół",
+            "label": "z programistą aplikacji iOS i Android"
+          },
+          "quotes": [
+            {
+              "text": "Terminowy i profesjonalny jako programista, a do tego rewelacyjny jako kolega z pracy",
+              "mark": "rewelacyjny jako kolega z pracy"
+            },
+            {
+              "text": "Zawsze można na niego liczyć, zarówno przy rozwiązywaniu trudniejszych problemów, jak i w codziennej współpracy",
+              "mark": "Zawsze można na niego liczyć"
+            }
+          ],
+          "closing": "Ma świetne podejście do ludzi, duże poczucie humoru i potrafi zadbać o dobrą atmosferę w zespole."
         }
       },
       {
