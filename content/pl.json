@@ -616,6 +616,37 @@
         }
       },
       {
+        "id": "jaroslaw",
+        "author": "Jarosław Kulesza",
+        "position": "Szef zespołu programistów",
+        "company": "Time S.A. (Grupa ZPR Media)",
+        "date": "07.11.2026",
+        "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
+        "text": [
+          "Miałem przyjemność kierować pracą Krzysztofa w TIME SA, gdzie pracował jako programista React.js przy serwisach Grupy ZPR. Wiele projektów prowadził w pełni samodzielnie, od zaprojektowania rozwiązania po wdrożenie, i zawsze pilnował jakości, wydajności oraz terminów.",
+          "Zaprojektował i wdrożył moduł CMS do zarządzania aplikacjami mobilnymi, ściśle współpracując z zespołem UX. Stworzył player wideo w React.js zintegrowany z Google Ad Manager, z automatycznym doładowywaniem materiałów i dopasowywaniem wideo do treści artykułów. Przepisał też playery radiowe na React.js i przygotował widgety rolek oraz programu TV.",
+          "Ma bardzo dobrą wiedzę o optymalizacji wydajności, w tym wskaźnikach Core Web Vitals. Jego szacunki czasu były trafne, a zadania kończył zgodnie z harmonogramem sprintów.",
+          "Polecam Krzysztofa każdemu zespołowi, który szuka rzetelnego, doświadczonego i pełnego inicjatywy frontend developera."
+        ],
+        "reel": {
+          "fact": {
+            "value": "CMS, wideo, radio",
+            "label": "od projektu po wdrożenie, z bezpośrednim przełożonym"
+          },
+          "quotes": [
+            {
+              "text": "Wiele projektów prowadził w pełni samodzielnie, od zaprojektowania rozwiązania po wdrożenie",
+              "mark": "w pełni samodzielnie"
+            },
+            {
+              "text": "Jego szacunki czasu były trafne, a zadania kończył zgodnie z harmonogramem sprintów.",
+              "mark": "szacunki czasu były trafne"
+            }
+          ],
+          "closing": "Polecam Krzysztofa każdemu zespołowi, który szuka rzetelnego, doświadczonego i pełnego inicjatywy frontend developera."
+        }
+      },
+      {
         "id": "radoslaw",
         "author": "Radosław Przyborowski",
         "position": "Senior Project Manager",

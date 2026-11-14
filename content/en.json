@@ -616,6 +616,37 @@
         }
       },
       {
+        "id": "jaroslaw",
+        "author": "Jarosław Kulesza",
+        "position": "Development Team Lead",
+        "company": "Time S.A. (Grupa ZPR Media)",
+        "date": "07.11.2026",
+        "linkedin": "https://www.linkedin.com/in/krzysztof-gryc/details/recommendations/",
+        "text": [
+          "I had the pleasure of managing Krzysztof's work at TIME SA, where he worked as a React.js developer on Grupa ZPR websites. He ran many projects entirely on his own, from design to deployment, and always kept an eye on quality, performance and deadlines.",
+          "He designed and implemented a CMS module for managing mobile apps, working closely with the UX team. He built a React.js video player integrated with Google Ad Manager, with automatic loading of further videos and matching videos to article content. He also rewrote the radio players in React.js and built the reels and TV schedule widgets.",
+          "He has a very good knowledge of performance optimization, including Core Web Vitals. His time estimates were accurate, and he completed his tasks in line with the sprint schedule.",
+          "I recommend Krzysztof to any team looking for a reliable, experienced frontend developer full of initiative."
+        ],
+        "reel": {
+          "fact": {
+            "value": "CMS, video, radio",
+            "label": "from design to deployment, with his direct manager"
+          },
+          "quotes": [
+            {
+              "text": "He ran many projects entirely on his own, from design to deployment",
+              "mark": "entirely on his own"
+            },
+            {
+              "text": "His time estimates were accurate, and he completed his tasks in line with the sprint schedule.",
+              "mark": "time estimates were accurate"
+            }
+          ],
+          "closing": "I recommend Krzysztof to any team looking for a reliable, experienced frontend developer full of initiative."
+        }
+      },
+      {
         "id": "radoslaw",
         "author": "Radosław Przyborowski",
         "position": "Senior Project Manager",
